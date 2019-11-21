@@ -17,7 +17,7 @@
     "@formatjs/intl-pluralrules": "^1.2.0",
     "@formatjs/intl-relativetimeformat": "^4.1.0",
     "@svgr/webpack": "^3.1.0",
-    "axios": "^0.16.2",
+    "axios": "^0.18.1",
     "classnames": "^2.2.6",
     "core-js": "^2.6.1",
     "docx": "4.3",
