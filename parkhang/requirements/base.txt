@@ -10,4 +10,4 @@ whitenoise==6.0.0  # https://github.com/evansd/whitenoise
 
 
 # Django REST Framework
-djangorestframework==3.6.2
+djangorestframework==3.11.2
