@@ -1,9 +1,32 @@
+@import 'css/colour.css';
+
 .filter{
-    background-color: #555555;
+    background-color: var(--gray-background);
     display: flex;
     flex:1;
     align-items: center;
     padding-inline: 50px;
     gap:1.3rem;
     color:white;
+}
+.breadCrumbsElement{
+    text-decoration:none;
+    color:white;
+}
+.breadCrumbsElement:hover{
+    text-decoration:none;
+    color:black;
+}
+.breadCrumbs{
+    position:absolute;
+    right:0;
+    margin-right:20px;
+    padding-inline:10px;
+}
+.active{
+    background-color: blueviolet;
+    color:white;
+}
+.spanArrow{
+    background-color: var(--gray-background);;
 }

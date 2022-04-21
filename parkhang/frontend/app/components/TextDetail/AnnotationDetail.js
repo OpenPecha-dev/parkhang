@@ -102,8 +102,9 @@ const AnnotationDetail = (props: Props) => {
                             width={15}
                             height={15}
                         />
-                    </div>
-                )}
+                        </div>
+                  
+                                  )}
                 <h3>{props.annotationData.name}</h3>
                 {props.isLoggedIn &&
                     props.isActive && (
@@ -134,9 +135,6 @@ const AnnotationDetail = (props: Props) => {
             </div>
 
             {desc}
-            
-
-
 
             <Sharebutton props={props}/>
                       
@@ -162,7 +160,7 @@ const Sharebutton=({props})=>{
                 quote={props.annotationData.content}
                 hashtag="#openPecha"
             >
-                <FacebookIcon size={20} round={true} />
+                <FacebookIcon size={16} round={true} />
             </FacebookShareButton>
             <WhatsappShareButton
                 className={styles.whatsappButton}
@@ -174,7 +172,7 @@ const Sharebutton=({props})=>{
                 title="Parkhang"
                 url={`https://parkhang.lopenling.org${window.location.pathname}`}
             >
-                <WhatsappIcon size={20} round={true} />
+                <WhatsappIcon size={16} round={true} />
             </WhatsappShareButton>
                {/* <img onClick={ImageDownload} className={styles.downloadlogo} src="https://img.icons8.com/material-outlined/24/000000/download--v1.png"/>
                 <img onClick={runClick} className={styles.downloadlogo} src="https://img.icons8.com/windows/32/000000/upload.png"/> */}

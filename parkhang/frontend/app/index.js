@@ -96,6 +96,7 @@ let store = createStore(
         applyMiddleware(...middlewares)
     )
 );
+
 if (process.env.NODE_ENV === "development") {
     store = createStore(
         enableBatching(locationRootReducer),

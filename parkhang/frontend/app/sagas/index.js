@@ -247,8 +247,8 @@ function* watchSelectedText(): Saga<void> {
 //FILTER AUTHOR
 
 function* filterText(action: actions.FilterTextAction): Saga<void> {
- let filtered={id: 2, name: 'བཀྲ་ཤིས་ཀྱི་ཚིགས་སུ་བཅད་པ།b'} //dummy data
- 
+ let filtered={id: 2, name: 'ཀླུ་སྒྲུབ་ཀྱི་གླུ'} //dummy data
+ console.log('filtering' + action.data)
 
  action={...action,text:filtered}
     yield put(actions.loadingWitnesses(action.text));
@@ -286,7 +286,6 @@ function* loadInitialTextData(action: actions.TextDataAction) {
                 call(loadAnnotationOperations, workingWitness.id)
             ]);
             // auto-select the working witness
-           
             yield put(
                 actions.selectedTextWitness(action.text.id, workingWitness.id)
             );
@@ -297,6 +296,7 @@ function* loadInitialTextData(action: actions.TextDataAction) {
 }
 
 function* selectedWitness(action: actions.SelectedTextWitnessAction) {
+   
     const witnessId = action.witnessId;
     const hasLoadedAnnotations = yield select(
         reducers.hasLoadedWitnessAnnotations,
@@ -622,18 +622,18 @@ function* loadedTextUrl(action: actions.TextUrlAction) {
     if (action.payload.witnessId) {
         const textId = action.payload.textId;
         const witnessId = action.payload.witnessId;
+        const authorName=action.payload.author;   //fetch authorName from Url
         let textData: api.TextData;
         do {
             textData = yield select(reducers.getText, textId, true);
             if (!textData) yield delay(100);
         } while (textData === null);
-
         const selectedTextAction = actions.selectedText(textData);
         const selectedWitnessAction = actions.selectedTextWitness(
             textId,
             witnessId
         );
-
+        
         yield put(selectedTextAction);
         let textWitnesses: Array<Witness> = [];
         do {

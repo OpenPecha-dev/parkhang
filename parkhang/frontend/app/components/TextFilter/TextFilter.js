@@ -33,11 +33,11 @@ function authorChange(e){
   return (
     <div className={styles.filter}>
       <label>
+           
       <FormattedMessage id="filter.category" />
       </label>
            <select ref={selectRef} className={styles.category} onChange={(e)=>handleChange(e.target.value)}>
-         
-
+      
                 {textData.map(list=>
 
   <option key={list.id} value={list?.name}>  
@@ -49,14 +49,42 @@ function authorChange(e){
 <label>
 <FormattedMessage id="filter.author" />
 </label>
-           <select  onChange={authorChange}>
-                    <option value='kalsang'>  
-                      ༡ རྩོམ་པ་པོ།་
-                    </option>              
-               </select>
+        <input list="browsers" id="myBrowser" name="myBrowser" onChange={authorChange} />
+               <datalist id="browsers">
+                 <option value="༡་རྩོམ་པ་པོ་།་"></option>
+                 <option value="༢་རྩོམ་པ་པོ་།་"></option>
+               </datalist>  
+
+ 
+            <Breadcrumbs/>
+
            </div>
     
   )
 }
+
+
+const Breadcrumbs=()=>{
+  var breadCrumbDetail=[{path:'Home',link:'/',active:false},{path:'Text',link:'/texts/2/witnesses/3',active:true}];
+
+  return (
+    <div className={styles.breadCrumbs}>
+        {breadCrumbDetail.map((bread,i)=>{
+           let className;
+          var len=breadCrumbDetail.length
+         bread.active===true?className=styles.breadCrumbsElement:className=styles.active  ;
+          
+          if(len===1)
+                    return null;
+
+            return <Link to={bread.link} className={className} key={i}>
+              {bread.path} <span className={styles.spanArrow}> {(i!==len-1 ? '   / ' : '')}</span></Link>
+                    })}
+                    {console.log(styles)}
+    </div>
+  )
+}
+
+
 
 export default TextFilter
