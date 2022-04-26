@@ -92,7 +92,7 @@ function filterAuthor(
 ): UIState {
     state = {
         ...state,
-        filterAuthor: action.data
+        selectedText: action.data
     };
     return state;
 }
@@ -372,7 +372,7 @@ function changedAccountOverlay(
 const uiReducers = {};
 uiReducers[actions.LOADED_USER_SETTINGS] = loadedUserSettings;
 uiReducers[actions.SELECTED_TEXT] = selectedText;
-uiReducers[actions.FILTER_TEXT] = filterAuthor;
+uiReducers[actions.FILTERED_TEXT] = filterAuthor;
 uiReducers[actions.SELECTED_WITNESS] = selectedTextWitness;
 uiReducers[actions.CHANGED_SEARCH_VALUE] = changedSearchValue;
 uiReducers[actions.SELECTED_SEARCH_RESULT] = selectedSearchResult;

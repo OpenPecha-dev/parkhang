@@ -71,14 +71,7 @@ const routesMap = {
     HOME: "/",
     [actions.TEXT_URL]: "/texts/:textId/witnesses/:witnessId/:annotation?",
     USER: "/user/:id",
-    FILTER:{ path:'/texts/author/:author',
-                thunk:(dispatch,getState)=>
-                {
-                    const {author} =getState().location.payload;
-                    console.log(author)
-                    dispatch(actions.filterText(author))
-                },
-                  }
+    [actions.FILTER_URL]: "/texts/:textId",
     };
 const routes = connectRoutes(routesMap, {
     initialDispatch: false

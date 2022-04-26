@@ -25,6 +25,7 @@
     "docx": "4.3",
     "file-saver": "^2.0.5",
     "grapheme-splitter": "^1.0.4",
+    "history": "^5.3.0",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "path-to-regexp": "^3",

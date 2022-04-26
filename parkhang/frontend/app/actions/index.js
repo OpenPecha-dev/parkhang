@@ -60,7 +60,7 @@ export const UPDATED_TEMPORARY_ANNOTATION = "text/UPDATED_TEMPORARY_ANNOTATION";
 export const REMOVED_TEMPORARY_ANNOTATION = "text/REMOVED_TEMPORARY_ANNOTATION";
 
 // UI
-export const FILTER_TEXT = "textList/FILTER_TEXT";
+export const FILTERED_TEXT = "textList/FILTERED_TEXT";
 export const SELECTED_TEXT = "textList/SELECTED_TEXT";
 export const CHANGED_SEARCH_VALUE = "textList/CHANGED_SEARCH_VALUE";
 export const SEARCHED_TEXT = "textList/SEARCHED_TEXT";
@@ -100,7 +100,7 @@ export const SELECTED_LOCALE = "i18n/SELECT_LOCALE";
 // URLS
 export const TEXT_URL = "urls/TEXT";
 export const USER_URL = "urls/USER";
-export const FILTER_URL = "urls/FILTER";
+export const FILTER_URL = "urls/AUTHOR";
 
 /** Action creators **/
 
@@ -478,9 +478,9 @@ export function selectedText(text: api.TextData): SelectedTextAction {
 }
 
 export type FilterTextAction = Action & TextDataAction;
-export function filterText(data: string): FilterTextAction {
+export function filterText(data: number): FilterTextAction {
     return {
-        type: FILTER_TEXT,
+        type: FILTERED_TEXT,
         data
     };
 }
@@ -739,8 +739,14 @@ export type TextUrlAction = {
         annotation?: string
     }
 };
+export type FilterUrlAction = {
+    type: string,
+    payload: {
+        author:string
+    }
+};
 
-export function enteredUrl(url: string) {
+export function enteredUrl(url: TextUrlAction) {
     return {
         type: TEXT_URL,
         payload: {}

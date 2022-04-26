@@ -1,9 +1,10 @@
-import React,{useEffect,useRef} from 'react'
+import React,{useEffect,useRef,useState} from 'react'
 import styles from './TextFilter.css'
 import * as api from "api"
 import addTibetanShay from "lib/addTibetanShay";
 import { FormattedMessage, injectIntl } from "react-intl";
 import Link from 'redux-first-router-link'
+import {authorDetails} from 'app_constants/demoAuthorData'
 
 type Props={
     texts:api.TextData[],
@@ -11,6 +12,8 @@ type Props={
     onSelectedText:(text:api.TextData)=>void,
     onAuthorChange:(data:any)=>void,
 }
+
+
 function TextFilter(props:Props) {
   const selectRef=useRef(null);
   useEffect(()=>{
@@ -25,10 +28,8 @@ props.onSelectedText(textData[r])
 }
 
 function authorChange(e){
-    props.onAuthorChange(e.target.value);
- 
-    let url=window.location.origin+"/text?author="+e.target.value;
-    console.log(url)
+ var dataId=e.target.value
+    props.onAuthorChange(dataId);
 }
   return (
     <div className={styles.filter}>
@@ -49,15 +50,12 @@ function authorChange(e){
 <label>
 <FormattedMessage id="filter.author" />
 </label>
-        <input list="browsers" id="myBrowser" name="myBrowser" onChange={authorChange} />
-               <datalist id="browsers">
-                 <option value="༡་རྩོམ་པ་པོ་།་"></option>
-                 <option value="༢་རྩོམ་པ་པོ་།་"></option>
-               </datalist>  
-
- 
+        <select onChange={authorChange} >
+        {authorDetails.map((ls,i)=>{
+          return <option value={ls.id} key={i}>{ls.name}</option>
+        })}
+         </select>
             <Breadcrumbs/>
-
            </div>
     
   )
@@ -65,14 +63,15 @@ function authorChange(e){
 
 
 const Breadcrumbs=()=>{
-  var breadCrumbDetail=[{path:'Home',link:'/',active:false},{path:'Text',link:'/texts/2/witnesses/3',active:true}];
+  var breadCrumbDetail=[{path:'Home',link:'/',active:false}
+  ,{path:'Text',link:'/texts/2/witnesses/3',active:true}];
 
   return (
     <div className={styles.breadCrumbs}>
         {breadCrumbDetail.map((bread,i)=>{
            let className;
           var len=breadCrumbDetail.length
-         bread.active===true?className=styles.breadCrumbsElement:className=styles.active  ;
+         bread.active!==true?className=styles.breadCrumbsElement:className=styles.active  ;
           
           if(len===1)
                     return null;
@@ -80,7 +79,6 @@ const Breadcrumbs=()=>{
             return <Link to={bread.link} className={className} key={i}>
               {bread.path} <span className={styles.spanArrow}> {(i!==len-1 ? '   / ' : '')}</span></Link>
                     })}
-                    {console.log(styles)}
     </div>
   )
 }
