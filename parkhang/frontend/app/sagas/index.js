@@ -780,7 +780,7 @@ function* watchTextUrlActions() {
 }
 
 
-//URL FILTER BY AUTHOR AND LOAD TEXTDATA
+//URL to LOAD TEXTDATA AND AUTO WITNESS 
 function* loadedFilterUrl(action){
     _loadedTextUrl = true;
     
@@ -813,8 +813,9 @@ function* loadedFilterUrl(action){
             textData.id,
             workingWitnessData.id
         );
-        
         yield put(selectedTextAction);
+        yield put(selectedWitnessAction);
+        
 }
 }
 
