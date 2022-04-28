@@ -100,7 +100,7 @@ export const Header = (props: HeaderProps) => {
                 title={toggleTitle}
             />
             <div className={styles.logo}>
-                <img src={image_location} height="40" />
+                <img src={image_location} height="30" />
             </div>
             <LocaleSwitcher />
             {controls}

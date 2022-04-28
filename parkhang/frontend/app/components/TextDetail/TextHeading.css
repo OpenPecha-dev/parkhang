@@ -3,10 +3,12 @@
 
 .headingContainer {
     display: flex;
+    flex:1;
     flex-direction: column;
     border-bottom: 1px solid #ccc;
     flex-shrink: 0;
-    background-color: var(--text-bg);
+    color:var(--dark-text);
+    background-color: var(--gray-background);
 }
 
 .textHeading {
@@ -21,9 +23,11 @@
 
 .topRow {
     display: flex;
+    flex: 1;
     align-content: space-between;
     align-items: center;
     padding: 10px 10px;
+    justify-content: space-between;
 }
 
 .textHeadingloader {
@@ -41,7 +45,6 @@
 
 .controls {
     display: flex;
-    margin-right: 2em;
     align-items: center;
 }
 

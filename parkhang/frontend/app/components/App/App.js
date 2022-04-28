@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import SplitPane from "react-split-pane";
-
+import { withLDConsumer } from "launchdarkly-react-client-sdk";
 import HeaderContainer from "components/Header";
 import TextsSearchContainer from "components/TextsSearch/TextsSearchContainer";
 import TextListContainer from "containers/TextListContainer";
@@ -16,10 +16,10 @@ import * as constants from "app_constants";
 
 import styles from "./App.css";
 import headerStyles from "components/Header/Header.css";
+import filterStyles from "components/TextFilter/TextFilter.css";
 import utilStyles from "css/util.css";
 
 import { handleKeyDown } from "../../shortcuts";
-import TextsFilterContainer from "../TextsSearch/TextsFilterContainer";
 
 type Props = {
     title: string,
@@ -43,15 +43,22 @@ const App = (props: Props) => {
     let minSize = constants.MIN_TEXT_LIST_WIDTH;
     let defaultSize = constants.DEFAULT_TEXT_LIST_WIDTH;
     let size = props.textListWidth;
-    let minFilterHeight=constants.MIN_FILTER_HEIGHT;
     if (props.textListIsVisible) {
         textListClassnames.push(styles.showListContainer);
     } else {
         size = 0;
         textListClassnames.push(styles.hideListContainer);
     }
-    const bodyHeight = "calc(100vh - " + headerStyles.headerHeight + ")";
-    return (
+    let bodyHeight;
+    if(props.flags.showFilterOptionParkhang){
+     bodyHeight = "calc(100vh - "+headerStyles?.headerHeight+" - "+filterStyles?.filterHeight+" )";
+     }
+     else{
+     bodyHeight="calc(100vh - "+headerStyles.headerHeight+")";
+
+     }
+     
+     return (
         <div
             className={classnames(
                 styles.container,
@@ -63,6 +70,8 @@ const App = (props: Props) => {
             }}
         >
             <HeaderContainer />
+            {props.flags.showFilterOptionParkhang && <TextFilterContainer/>}
+      
             <div className={classnames(styles.interface, utilStyles.flex)}>
                 <SplitPane
                     split="vertical"
@@ -91,36 +100,11 @@ const App = (props: Props) => {
                         <TextsSearchContainer />
                         <TextListContainer />
                     </div>
-                    <SplitPane 
-                    split="horizontal"
-                    minSize={minFilterHeight}
-                    defaultSize={defaultSize}
-                    size={minFilterHeight}
-                    paneStyle={{
-                        display: "flex"
-                    }}
-                    style={{
-                        height: bodyHeight
-                    }}
-                    onDragFinished={(width: number) => {
-                        if (width > 0) {
-                            props.onChangedTextWidth(width);
-                            if (!props.textListIsVisible) {
-                                props.onChangedTextListVisible(true);
-                            }
-                        }
-                        window.dispatchEvent(new Event("resize"));
-                    }}
-                    >
-                       <TextFilterContainer />
-                       <TextDetailContainer />
-                    </SplitPane>
-                    
-                   
+                      <TextDetailContainer />
                 </SplitPane>
             </div>
         </div>
     );
 };
 
-export default App;
+export default withLDConsumer()(App);

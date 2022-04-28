@@ -1,7 +1,7 @@
 @import "css/type.css";
 @import "css/colour.css";
 
-@value header-height: 70px;
+@value header-height: 50px;
 
 :root {
     --header-height: header-height;

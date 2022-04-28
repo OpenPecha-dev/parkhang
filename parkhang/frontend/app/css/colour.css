@@ -13,7 +13,8 @@
     --red: #840000;
     --cancel: #aaa;
     --active-button: active-button;
-    --gray-background:#555555;
+    --gray-background:#FFFFFF;
+    --dark-text:#271b1bad;
 }
 
 :export {

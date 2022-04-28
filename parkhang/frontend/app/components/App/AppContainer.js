@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-
+import { withLDProvider } from 'launchdarkly-react-client-sdk';
 import * as reducers from "reducers";
 import * as actions from "actions";
 import App from "components/App";
@@ -28,4 +28,11 @@ const matchDispatchToProps = dispatch => {
 
 const AppContainer = connect(mapStateToProps, matchDispatchToProps)(App);
 
-export default AppContainer;
+export default withLDProvider({
+    clientSideID: '6269293a03fba314f6ecebb5',
+    user: {
+        "key": "tenkus47",
+        "name": "tenkus47",
+        "email": "tenkus@esukhia.org"
+    }
+  })(AppContainer);

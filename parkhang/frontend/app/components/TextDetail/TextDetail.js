@@ -117,7 +117,6 @@ class TextDetail extends React.Component<Props> {
                 )}
                 key={this.key}
             >
-                <TextHeadingContainer text={text} />
                 <Loader loaded={!this.props.loading} />
                 <div
                     className={classnames(
