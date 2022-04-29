@@ -19,7 +19,7 @@ parkhang/static/images/texts
 .vscode
 vendors~docx-dev.js
 vendors~docx-dev.js.map
-
+/.build
 .envs/*
 !.envs/.local/
 /parkhang/frontend/static/bundles/docx-dev.js
