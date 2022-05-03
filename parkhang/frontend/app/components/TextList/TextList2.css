@@ -10,7 +10,6 @@
     height: 100%;
     background-color: var(--text-list-colour);
     display: flex;
-    flex-grow: 1;
 }
 .textList *::-webkit-scrollbar {
     width: 15px;

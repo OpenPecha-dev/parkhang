@@ -21,6 +21,8 @@ import { withLDConsumer } from 'launchdarkly-react-client-sdk';
 
 
 
+
+
 type Props = {
     selectedText: api.TextData,
     texts: api.TextData[],
@@ -53,6 +55,7 @@ class TextList extends React.Component<Props> {
         parent: {},
         style: {}
     }) => React.Element<CellMeasurer>;
+     
 
     constructor(props: Props) {
         super(props);
@@ -62,6 +65,7 @@ class TextList extends React.Component<Props> {
             minHeight: DEFAULT_ROW_HEIGHT
         });
         this.rowRenderer = this.rowRenderer.bind(this);
+
     }
 
     componentDidUpdate(prevProps: Props): void {
@@ -82,7 +86,6 @@ class TextList extends React.Component<Props> {
         style: {}
     }): React.Element<CellMeasurer> {
 
-        let textListUiParkhang =this.props.flags.textListUiParkhang;
         const selectedText = this.props.selectedText;
         const selectedTextId = selectedText ? selectedText.id : -1;
         const selectedSearchResult = this.props.selectedSearchResult;
@@ -91,7 +94,7 @@ class TextList extends React.Component<Props> {
         const onSelectedSearchResult = this.props.onSelectedSearchResult;
         const searchTerm = this.props.searchTerm;
         const searchResults = this.props.searchResults;
-        const styles=textListUiParkhang==='ui1'? styles1: styles2;
+        const styles=this.props?.flags?.textListUiParkhang === 'ui1' ? styles1: styles2;
         let className = styles.textListRow;
 
         const text = texts[index];
@@ -207,7 +210,7 @@ class TextList extends React.Component<Props> {
     render() {
         const texts = this.props.texts;
         let rowCount = texts.length;
-        const styles=this.props.flags.textListUiParkhang==='ui1'? styles1: styles2;
+        const styles=this.props?.flags?.textListUiParkhang === 'ui1' ? styles1: styles2;
         return (
             <div className={styles.textList}>
                 {this.props.texts && this.props.texts.length > 0 ? (

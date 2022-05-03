@@ -94,11 +94,11 @@ export const Header = (props: HeaderProps) => {
     const image_location =lopenlingLogo
     return (
         <header className={styles.header}>
-            <NavigationButton
+            {/* <NavigationButton
                 onClick={props.navigationButtonClicked}
                 className={styles.navigationButton}
                 title={toggleTitle}
-            />
+            /> */}
             <div className={styles.logo}>
                 <img src={image_location} height="30" />
             </div>

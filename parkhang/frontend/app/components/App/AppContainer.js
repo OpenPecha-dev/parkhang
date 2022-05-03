@@ -1,14 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withLDProvider } from 'launchdarkly-react-client-sdk';
 import * as reducers from "reducers";
 import * as actions from "actions";
 import App from "components/App";
+import { withLDProvider } from 'launchdarkly-react-client-sdk';
+
+let user;
 
 const mapStateToProps = state => {
+    if(!state.user.userId===-1){
+        user=state.user
+    }
     return {
         title: reducers.getTranslation(state, "header.title"),
         textListIsVisible: reducers.getTextListVisible(state),
+        menuListIsVisible: reducers.getMenuListVisible(state),
         textListWidth: reducers.getTextListWidth(state),
         state: state
     };
@@ -27,12 +33,15 @@ const matchDispatchToProps = dispatch => {
 };
 
 const AppContainer = connect(mapStateToProps, matchDispatchToProps)(App);
-let clientId=process.env.NODE_ENV==='development'?'6269293a03fba314f6ecebb5':'6269293a03fba314f6ecebb6';
+
+const environmentID= process.env.NODE_ENV==='development'?'6269293a03fba314f6ecebb5':'6269293a03fba314f6ecebb6';
+     
+
 export default withLDProvider({
-    clientSideID: clientId,
+    clientSideID:environmentID,
     user: {
-        "key": "tenkus47",
-        "name": "tenkus47",
-        "email": "tenkus@esukhia.org"
+        "key": "example_user",
+        "name": "Example user",
+        "email": "User@example.com"
     }
   })(AppContainer);

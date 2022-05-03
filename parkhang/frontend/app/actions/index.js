@@ -79,6 +79,7 @@ export const CHANGED_ACTIVE_TEXT_ANNOTATION =
     "text/CHANGED_ACTIVE_TEXT_ANNOTATION";
 
 export const CHANGED_TEXT_LIST_VISIBLE = "textList/CHANGED_TEXT_LIST_VISIBLE";
+export const CHANGED_MENU_LIST_VISIBLE = "textList/CHANGED_MENU_LIST_VISIBLE";
 export const CHANGED_TEXT_LIST_WIDTH = "textList/CHANGED_TEXT_LIST_WIDTH";
 
 export const CHANGED_WITNESS_SCROLL_POSITION =
@@ -651,6 +652,17 @@ export function changedTextListVisible(
 ): ChangedTextListVisibleAction {
     return {
         type: CHANGED_TEXT_LIST_VISIBLE,
+        isVisible
+    };
+}
+export type ChangedMenuListVisibleAction = Action & {
+    isVisible: boolean
+};
+export function changedMenuListVisible(
+    isVisible: boolean
+): ChangedMenuListVisibleAction {
+    return {
+        type: CHANGED_MENU_LIST_VISIBLE,
         isVisible
     };
 }

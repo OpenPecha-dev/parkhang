@@ -31,6 +31,7 @@ const TextsSearch = (props: Props) => {
             <div className={styles.textsSearch}>
                 <form onSubmit={initiateSearch}>
                     <input
+                        style={{outline:'none'}}
                         type="text"
                         id="textSearchInput"
                         placeholder={props.intl.formatMessage({

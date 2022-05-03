@@ -2,17 +2,15 @@
 
 
 .textDetail {
-    flex-grow: 1;
     background-color: var(--text-bg);
     position: relative;
-    min-width: 0;
+    flex-grow: 1;
 
 }
 
 .textContainer {
     flex-grow: 1;
     border-radius: 10px;
-    margin:10px 10px 0px 10px ;
 }
 
 :global(.loader) {

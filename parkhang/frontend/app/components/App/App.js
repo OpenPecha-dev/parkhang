@@ -2,8 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import classnames from "classnames";
-import SplitPane from "react-split-pane";
-import { withLDConsumer } from "launchdarkly-react-client-sdk";
+import SplitPane,{ Pane } from "react-split-pane";
 import HeaderContainer from "components/Header";
 import TextsSearchContainer from "components/TextsSearch/TextsSearchContainer";
 import TextListContainer from "containers/TextListContainer";
@@ -20,10 +19,13 @@ import filterStyles from "components/TextFilter/TextFilter.css";
 import utilStyles from "css/util.css";
 
 import { handleKeyDown } from "../../shortcuts";
+import SideMenuContainer from "../SideMenu/SideMenuContainer";
+import { withLDConsumer } from 'launchdarkly-react-client-sdk';
 
 type Props = {
     title: string,
     textListIsVisible: boolean,
+    menuListIsVisible: Boolean,
     textListWidth: number,
     state: AppState,
     dispatch: (action: actions.Action) => void,
@@ -57,8 +59,9 @@ const App = (props: Props) => {
      bodyHeight="calc(100vh - "+headerStyles.headerHeight+")";
 
      }
-     
+    
      return (
+       
         <div
             className={classnames(
                 styles.container,
@@ -70,7 +73,7 @@ const App = (props: Props) => {
             }}
         >
             <HeaderContainer />
-            {props.flags.showFilterOptionParkhang && <TextFilterContainer/>}
+            {props.flags.showFilterOptionParkhang &&   <TextFilterContainer/>}
       
             <div className={classnames(styles.interface, utilStyles.flex)}>
                 <SplitPane
@@ -100,7 +103,20 @@ const App = (props: Props) => {
                         <TextsSearchContainer />
                         <TextListContainer />
                     </div>
-                      <TextDetailContainer />
+                    <SplitPane split="vertical"
+                     minSize={'70vw'} 
+                     maxSize={'100vw'} 
+                     defaultSize={props.menuListIsVisible?'93%':'100%'}
+                     paneStyle={{
+                        display: "flex"
+                    }} 
+                    onDragFinished={(width:number)=>{
+                        console.log(width)
+                    }}
+                     >
+                    <TextDetailContainer />
+                    <SideMenuContainer/>
+                   </SplitPane>
                 </SplitPane>
             </div>
         </div>

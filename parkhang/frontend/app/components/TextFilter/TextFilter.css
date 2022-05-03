@@ -9,7 +9,7 @@
     filterHeight: filter-height;
 }
 .filter_section{
-    background-color: var(--gray-background);
+    background-color: var(--text-bg);
     display: flex;
     align-items: center;
     gap:1.3rem;

@@ -45,6 +45,7 @@ export const initialUIState = {
     activeAnnotations: {},
     activeTextAnnotations: {},
     textListVisible: true,
+    menuListVisible: true,
     textListWidth: 240,
     temporaryAnnotations: {},
     scrollPositions: {},
@@ -248,6 +249,16 @@ function textListVisibleChanged(
     };
 }
 
+function menuListVisibleChanged(
+    state: UIState,
+    action: actions.ChangedTextListVisibleAction
+): UIState {
+    return {
+        ...state,
+        menuListVisible: action.isVisible
+    };
+}
+
 function textListWidthChanged(
     state: UIState,
     action: actions.ChangedTextListWidth
@@ -384,6 +395,7 @@ uiReducers[
     actions.CHANGED_ACTIVE_TEXT_ANNOTATION
 ] = changedActiveTextAnnotation;
 uiReducers[actions.CHANGED_TEXT_LIST_VISIBLE] = textListVisibleChanged;
+uiReducers[actions.CHANGED_MENU_LIST_VISIBLE] = menuListVisibleChanged;
 uiReducers[actions.CHANGED_TEXT_LIST_WIDTH] = textListWidthChanged;
 uiReducers[actions.ADDED_TEMPORARY_ANNOTATION] = addedTemporaryAnnotation;
 uiReducers[actions.REMOVED_TEMPORARY_ANNOTATION] = removedTemporaryAnnotation;
@@ -446,7 +458,9 @@ export const getActiveTextAnnotation = (
 export const getTextListVisible = (state: UIState): boolean => {
     return state.textListVisible;
 };
-
+export const getMenuListVisible = (state: UIState): boolean => {
+    return state.menuListVisible;
+};
 export const getTextListWidth = (state: UIState): number => {
     return state.textListWidth;
 };

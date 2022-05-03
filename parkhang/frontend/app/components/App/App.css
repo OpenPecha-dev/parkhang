@@ -35,6 +35,12 @@ body {
     transition: width 0.25s ease-in-out;
     position: relative;
 }
+.showListContainer{
+    width:100%;
+}
+.hideListContainer{
+    width:0%;
+}
 
 :global(.Resizer.vertical) {
     width: 10px;

@@ -20,7 +20,7 @@
         "annotation.cancel": "Cancel",
         "annotations.login": "Login",
         "annotations.loginLink": "login",
-        "annotations.loginMessage": "Please {loginLink} to make changes.",
+        "annotations.loginMessage": "{loginLink} to make changes.",
         "annotations.variantsHeading": "Variants",
         "annotation.notesHeading": "Notes",
         "annotation.addNoteHelp": "Add a new note",

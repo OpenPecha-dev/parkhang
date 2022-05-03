@@ -2,7 +2,6 @@
 import React from "react";
 import classnames from "classnames";
 
-import TextHeadingContainer from "./TextHeadingContainer";
 import SplitTextComponent from "components/TextDetail/SplitText";
 import Loader from "react-loader";
 import AnnotationControlsContainer from "./AnnotationControlsContainer";
@@ -17,6 +16,7 @@ import styles from "./TextDetail.css";
 import utilStyles from "css/util.css";
 import type { TextData } from "api";
 import TextSegment from "lib/TextSegment";
+import TextDetailHeadingContainer from "./TextDetailHeadingContainer";
 
 export type Props = {
     paginated: boolean,
@@ -109,14 +109,16 @@ class TextDetail extends React.Component<Props> {
         let textComponents = [textComponent];
 
         return (
-            <div
+            <div 
+            style={{height:'100vh'}}
                 className={classnames(
                     styles.textDetail,
                     utilStyles.flex,
                     utilStyles.flexColumn
                 )}
                 key={this.key}
-            >
+            >   
+                 <TextDetailHeadingContainer/>
                 <Loader loaded={!this.props.loading} />
                 <div
                     className={classnames(

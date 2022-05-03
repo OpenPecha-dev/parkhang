@@ -20,6 +20,8 @@ import PageBreakIcon from "images/page_break_icon.svg";
 import { List } from "react-virtualized/dist/es/List";
 import AnnotationControlsHeader from "./AnnotationControlsHeader";
 import Question from "lib/Question";
+import { withLDConsumer } from 'launchdarkly-react-client-sdk';
+
 
 import type { AnnotationUniqueId } from "lib/Annotation";
 
@@ -76,10 +78,12 @@ const anchorPoints = {
     right: 4
 };
 
-export default class AnnotationControls extends React.Component<Props> {
+ class AnnotationControls extends React.Component<Props> {
     controls: HTMLDivElement | null;
     arrow: HTMLDivElement | null;
     arrowDs: HTMLDivElement | null;
+
+
 
     constructor(props: Props) {
         super(props);
@@ -87,6 +91,9 @@ export default class AnnotationControls extends React.Component<Props> {
         this.controls = null;
         this.arrow = null;
         this.arrowDs = null;
+
+       
+         
     }
 
     componentDidMount() {
@@ -217,8 +224,7 @@ export default class AnnotationControls extends React.Component<Props> {
                 // right-side of selection
                 arrow.className = styles.arrowLeft;
                 arrow.style.left = -arrow.offsetWidth + "px";
-                controls.style.left =
-                    selectedLeft + selectedWidth + arrow.offsetWidth + "px";
+                controls.style.left = selectedLeft + selectedWidth + arrow.offsetWidth + "px";
             }
 
             arrow.style.top =
@@ -404,10 +410,10 @@ export default class AnnotationControls extends React.Component<Props> {
                     annotations.push(annotationDetail);
                 }
             }, this);
-
-            if (!props.user.isLoggedIn) {
+            if (!this.props.flags.fakeLoginParkhang===!props.user.isLoggedIn) {
                 // NOTE: FormattedMessage cannot take a child when using
                 // the values option, so need to wrap it in a div
+                
                 anonymousUserMessage = (
                     <div className={styles.anonymousMessage}>
                         <FormattedMessage
@@ -612,6 +618,7 @@ export default class AnnotationControls extends React.Component<Props> {
         let showHeader = true;
         if (anonymousUserMessage || breakSelected) showHeader = false;
 
+
         return (
             <div
                 className={classnames(...classes)}
@@ -654,3 +661,6 @@ export default class AnnotationControls extends React.Component<Props> {
         );
     }
 }
+
+
+export default withLDConsumer()(AnnotationControls);

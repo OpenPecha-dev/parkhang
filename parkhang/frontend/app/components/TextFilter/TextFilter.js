@@ -6,7 +6,8 @@ import { FormattedMessage, injectIntl } from "react-intl";
 import Link from "redux-first-router-link";
 import { authorDetails } from "app_constants/demoAuthorData";
 import TextHeadingContainer from "../TextDetail/TextHeadingContainer";
-import classname from "classnames";
+import { withLDConsumer } from 'launchdarkly-react-client-sdk';
+
 
 type Props = {
     texts: api.TextData[],
@@ -16,11 +17,14 @@ type Props = {
 };
 
 function TextFilter(props: Props) {
+    
+
     const selectRef = useRef(null);
     useEffect(() => {
       if(selectRef?.current?.value){
          selectRef.current.value = props.selectedText?.name;
         }
+
     }, [props.selectedText]);
 
     const textData: string[] = props.texts;
@@ -35,7 +39,7 @@ function TextFilter(props: Props) {
         props.onAuthorChange(dataId);
     }
     
-        return (
+  return (
             <div className={styles.filter_section}>
                 <label>
                     <FormattedMessage id="filter.category" />
@@ -64,39 +68,10 @@ function TextFilter(props: Props) {
                     })}
                 </select>
                 <TextHeadingContainer text={text}/>
-                {/* <Breadcrumbs text={props.selectedText} /> */}
             </div>
-        )
+  )
+       
 }
 
-const Breadcrumbs = ({ text }) => {
-    var breadCrumbDetail = [
-        { path: "Home", link: "/", active: false },
-        { path: text?.name, link: `/texts/${text?.id}`, active: true },
-    ];
-
-    return (
-        <div className={styles.breadCrumbs}>
-            {breadCrumbDetail.map((bread, i) => {
-                var len = breadCrumbDetail.length;
-                if (len === 1) return null;
-
-                return (
-                    <Link
-                        to={bread.link}
-                        className={classname(styles.breadLink)}
-                        key={i}
-                    >
-                        {bread.path}{" "}
-                        <span className={styles.spanArrow}>
-                            {" "}
-                            {i !== len - 1 ? "   / " : ""}
-                        </span>
-                    </Link>
-                );
-            })}
-        </div>
-    );
-};
 
 export default TextFilter;

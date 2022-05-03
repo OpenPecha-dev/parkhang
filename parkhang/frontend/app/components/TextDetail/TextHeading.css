@@ -8,7 +8,7 @@
     border-bottom: 1px solid #ccc;
     flex-shrink: 0;
     color:var(--dark-text);
-    background-color: var(--gray-background);
+    background-color: var(--text-bg);
 }
 
 .textHeading {
