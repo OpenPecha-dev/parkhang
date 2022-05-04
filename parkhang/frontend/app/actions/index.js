@@ -81,6 +81,8 @@ export const CHANGED_ACTIVE_TEXT_ANNOTATION =
 export const CHANGED_TEXT_LIST_VISIBLE = "textList/CHANGED_TEXT_LIST_VISIBLE";
 export const CHANGED_MENU_LIST_VISIBLE = "textList/CHANGED_MENU_LIST_VISIBLE";
 export const CHANGED_TEXT_LIST_WIDTH = "textList/CHANGED_TEXT_LIST_WIDTH";
+export const CHANGED_MENU_LIST_WIDTH = "textList/CHANGED_MENU_LIST_WIDTH";
+
 
 export const CHANGED_WITNESS_SCROLL_POSITION =
     "text/CHANGED_WITNESS_SCROLL_POSITION";
@@ -556,6 +558,16 @@ export function changedTextListWidth(width: number): ChangedTextListWidth {
     };
 }
 
+export type ChangedMenuListWidth = Action & {
+    width: number
+};
+export function changedMenuListWidth(width: number): ChangedMenuListWidth {
+    return {
+        type: CHANGED_MENU_LIST_WIDTH,
+        width
+    };
+}
+
 export type ChangedShowPageImagesAction = Action & {
     showPageImages: boolean
 };
@@ -655,6 +667,8 @@ export function changedTextListVisible(
         isVisible
     };
 }
+
+
 export type ChangedMenuListVisibleAction = Action & {
     isVisible: boolean
 };

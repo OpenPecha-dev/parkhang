@@ -6,256 +6,44 @@
       "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\8967124136190c7842d863e4a862a528.png",
       "publicPath": "/static/bundles/8967124136190c7842d863e4a862a528.png"
     },
-    "styles-a000029407629c0aeb01.css": {
-      "name": "styles-a000029407629c0aeb01.css",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-a000029407629c0aeb01.css",
-      "publicPath": "/static/bundles/styles-a000029407629c0aeb01.css"
+    "styles-fc74fefb54827d84cfe8.css": {
+      "name": "styles-fc74fefb54827d84cfe8.css",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-fc74fefb54827d84cfe8.css",
+      "publicPath": "/static/bundles/styles-fc74fefb54827d84cfe8.css"
     },
-    "parkhang-a000029407629c0aeb01.js": {
-      "name": "parkhang-a000029407629c0aeb01.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-a000029407629c0aeb01.js",
-      "publicPath": "/static/bundles/parkhang-a000029407629c0aeb01.js"
+    "parkhang-fc74fefb54827d84cfe8.js": {
+      "name": "parkhang-fc74fefb54827d84cfe8.js",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-fc74fefb54827d84cfe8.js",
+      "publicPath": "/static/bundles/parkhang-fc74fefb54827d84cfe8.js"
     },
-    "vendors~docx-a000029407629c0aeb01.js": {
-      "name": "vendors~docx-a000029407629c0aeb01.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-a000029407629c0aeb01.js",
-      "publicPath": "/static/bundles/vendors~docx-a000029407629c0aeb01.js"
+    "vendors~docx-fc74fefb54827d84cfe8.js": {
+      "name": "vendors~docx-fc74fefb54827d84cfe8.js",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-fc74fefb54827d84cfe8.js",
+      "publicPath": "/static/bundles/vendors~docx-fc74fefb54827d84cfe8.js"
     },
-    "styles-a000029407629c0aeb01.css.map": {
-      "name": "styles-a000029407629c0aeb01.css.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-a000029407629c0aeb01.css.map",
-      "publicPath": "/static/bundles/styles-a000029407629c0aeb01.css.map"
+    "styles-fc74fefb54827d84cfe8.css.map": {
+      "name": "styles-fc74fefb54827d84cfe8.css.map",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-fc74fefb54827d84cfe8.css.map",
+      "publicPath": "/static/bundles/styles-fc74fefb54827d84cfe8.css.map"
     },
-    "parkhang-a000029407629c0aeb01.js.map": {
-      "name": "parkhang-a000029407629c0aeb01.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-a000029407629c0aeb01.js.map",
-      "publicPath": "/static/bundles/parkhang-a000029407629c0aeb01.js.map"
+    "parkhang-fc74fefb54827d84cfe8.js.map": {
+      "name": "parkhang-fc74fefb54827d84cfe8.js.map",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-fc74fefb54827d84cfe8.js.map",
+      "publicPath": "/static/bundles/parkhang-fc74fefb54827d84cfe8.js.map"
     },
-    "vendors~docx-a000029407629c0aeb01.js.map": {
-      "name": "vendors~docx-a000029407629c0aeb01.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-a000029407629c0aeb01.js.map",
-      "publicPath": "/static/bundles/vendors~docx-a000029407629c0aeb01.js.map"
-    },
-    "styles-c2bf15906e38f0bcccee.css": {
-      "name": "styles-c2bf15906e38f0bcccee.css",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-c2bf15906e38f0bcccee.css",
-      "publicPath": "/static/bundles/styles-c2bf15906e38f0bcccee.css"
-    },
-    "parkhang-c2bf15906e38f0bcccee.js": {
-      "name": "parkhang-c2bf15906e38f0bcccee.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-c2bf15906e38f0bcccee.js",
-      "publicPath": "/static/bundles/parkhang-c2bf15906e38f0bcccee.js"
-    },
-    "vendors~docx-c2bf15906e38f0bcccee.js": {
-      "name": "vendors~docx-c2bf15906e38f0bcccee.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-c2bf15906e38f0bcccee.js",
-      "publicPath": "/static/bundles/vendors~docx-c2bf15906e38f0bcccee.js"
-    },
-    "styles-c2bf15906e38f0bcccee.css.map": {
-      "name": "styles-c2bf15906e38f0bcccee.css.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-c2bf15906e38f0bcccee.css.map",
-      "publicPath": "/static/bundles/styles-c2bf15906e38f0bcccee.css.map"
-    },
-    "parkhang-c2bf15906e38f0bcccee.js.map": {
-      "name": "parkhang-c2bf15906e38f0bcccee.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-c2bf15906e38f0bcccee.js.map",
-      "publicPath": "/static/bundles/parkhang-c2bf15906e38f0bcccee.js.map"
-    },
-    "vendors~docx-c2bf15906e38f0bcccee.js.map": {
-      "name": "vendors~docx-c2bf15906e38f0bcccee.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-c2bf15906e38f0bcccee.js.map",
-      "publicPath": "/static/bundles/vendors~docx-c2bf15906e38f0bcccee.js.map"
-    },
-    "styles-4c00067c36fc491e4a1e.css": {
-      "name": "styles-4c00067c36fc491e4a1e.css",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-4c00067c36fc491e4a1e.css",
-      "publicPath": "/static/bundles/styles-4c00067c36fc491e4a1e.css"
-    },
-    "parkhang-4c00067c36fc491e4a1e.js": {
-      "name": "parkhang-4c00067c36fc491e4a1e.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-4c00067c36fc491e4a1e.js",
-      "publicPath": "/static/bundles/parkhang-4c00067c36fc491e4a1e.js"
-    },
-    "vendors~docx-4c00067c36fc491e4a1e.js": {
-      "name": "vendors~docx-4c00067c36fc491e4a1e.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-4c00067c36fc491e4a1e.js",
-      "publicPath": "/static/bundles/vendors~docx-4c00067c36fc491e4a1e.js"
-    },
-    "styles-4c00067c36fc491e4a1e.css.map": {
-      "name": "styles-4c00067c36fc491e4a1e.css.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-4c00067c36fc491e4a1e.css.map",
-      "publicPath": "/static/bundles/styles-4c00067c36fc491e4a1e.css.map"
-    },
-    "parkhang-4c00067c36fc491e4a1e.js.map": {
-      "name": "parkhang-4c00067c36fc491e4a1e.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-4c00067c36fc491e4a1e.js.map",
-      "publicPath": "/static/bundles/parkhang-4c00067c36fc491e4a1e.js.map"
-    },
-    "vendors~docx-4c00067c36fc491e4a1e.js.map": {
-      "name": "vendors~docx-4c00067c36fc491e4a1e.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-4c00067c36fc491e4a1e.js.map",
-      "publicPath": "/static/bundles/vendors~docx-4c00067c36fc491e4a1e.js.map"
-    },
-    "styles-ea27b86b48f0e7b17d2f.css": {
-      "name": "styles-ea27b86b48f0e7b17d2f.css",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-ea27b86b48f0e7b17d2f.css",
-      "publicPath": "/static/bundles/styles-ea27b86b48f0e7b17d2f.css"
-    },
-    "parkhang-ea27b86b48f0e7b17d2f.js": {
-      "name": "parkhang-ea27b86b48f0e7b17d2f.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-ea27b86b48f0e7b17d2f.js",
-      "publicPath": "/static/bundles/parkhang-ea27b86b48f0e7b17d2f.js"
-    },
-    "vendors~docx-ea27b86b48f0e7b17d2f.js": {
-      "name": "vendors~docx-ea27b86b48f0e7b17d2f.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-ea27b86b48f0e7b17d2f.js",
-      "publicPath": "/static/bundles/vendors~docx-ea27b86b48f0e7b17d2f.js"
-    },
-    "styles-ea27b86b48f0e7b17d2f.css.map": {
-      "name": "styles-ea27b86b48f0e7b17d2f.css.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-ea27b86b48f0e7b17d2f.css.map",
-      "publicPath": "/static/bundles/styles-ea27b86b48f0e7b17d2f.css.map"
-    },
-    "parkhang-ea27b86b48f0e7b17d2f.js.map": {
-      "name": "parkhang-ea27b86b48f0e7b17d2f.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-ea27b86b48f0e7b17d2f.js.map",
-      "publicPath": "/static/bundles/parkhang-ea27b86b48f0e7b17d2f.js.map"
-    },
-    "vendors~docx-ea27b86b48f0e7b17d2f.js.map": {
-      "name": "vendors~docx-ea27b86b48f0e7b17d2f.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-ea27b86b48f0e7b17d2f.js.map",
-      "publicPath": "/static/bundles/vendors~docx-ea27b86b48f0e7b17d2f.js.map"
-    },
-    "styles-51608b6e53cd6f965145.css": {
-      "name": "styles-51608b6e53cd6f965145.css",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-51608b6e53cd6f965145.css",
-      "publicPath": "/static/bundles/styles-51608b6e53cd6f965145.css"
-    },
-    "parkhang-51608b6e53cd6f965145.js": {
-      "name": "parkhang-51608b6e53cd6f965145.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-51608b6e53cd6f965145.js",
-      "publicPath": "/static/bundles/parkhang-51608b6e53cd6f965145.js"
-    },
-    "vendors~docx-51608b6e53cd6f965145.js": {
-      "name": "vendors~docx-51608b6e53cd6f965145.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-51608b6e53cd6f965145.js",
-      "publicPath": "/static/bundles/vendors~docx-51608b6e53cd6f965145.js"
-    },
-    "styles-51608b6e53cd6f965145.css.map": {
-      "name": "styles-51608b6e53cd6f965145.css.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-51608b6e53cd6f965145.css.map",
-      "publicPath": "/static/bundles/styles-51608b6e53cd6f965145.css.map"
-    },
-    "parkhang-51608b6e53cd6f965145.js.map": {
-      "name": "parkhang-51608b6e53cd6f965145.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-51608b6e53cd6f965145.js.map",
-      "publicPath": "/static/bundles/parkhang-51608b6e53cd6f965145.js.map"
-    },
-    "vendors~docx-51608b6e53cd6f965145.js.map": {
-      "name": "vendors~docx-51608b6e53cd6f965145.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-51608b6e53cd6f965145.js.map",
-      "publicPath": "/static/bundles/vendors~docx-51608b6e53cd6f965145.js.map"
-    },
-    "styles-46d580875d13fb7d1b35.css": {
-      "name": "styles-46d580875d13fb7d1b35.css",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-46d580875d13fb7d1b35.css",
-      "publicPath": "/static/bundles/styles-46d580875d13fb7d1b35.css"
-    },
-    "parkhang-46d580875d13fb7d1b35.js": {
-      "name": "parkhang-46d580875d13fb7d1b35.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-46d580875d13fb7d1b35.js",
-      "publicPath": "/static/bundles/parkhang-46d580875d13fb7d1b35.js"
-    },
-    "vendors~docx-46d580875d13fb7d1b35.js": {
-      "name": "vendors~docx-46d580875d13fb7d1b35.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-46d580875d13fb7d1b35.js",
-      "publicPath": "/static/bundles/vendors~docx-46d580875d13fb7d1b35.js"
-    },
-    "styles-46d580875d13fb7d1b35.css.map": {
-      "name": "styles-46d580875d13fb7d1b35.css.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-46d580875d13fb7d1b35.css.map",
-      "publicPath": "/static/bundles/styles-46d580875d13fb7d1b35.css.map"
-    },
-    "parkhang-46d580875d13fb7d1b35.js.map": {
-      "name": "parkhang-46d580875d13fb7d1b35.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-46d580875d13fb7d1b35.js.map",
-      "publicPath": "/static/bundles/parkhang-46d580875d13fb7d1b35.js.map"
-    },
-    "vendors~docx-46d580875d13fb7d1b35.js.map": {
-      "name": "vendors~docx-46d580875d13fb7d1b35.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-46d580875d13fb7d1b35.js.map",
-      "publicPath": "/static/bundles/vendors~docx-46d580875d13fb7d1b35.js.map"
-    },
-    "styles-c3166dfe48bacaf86520.css": {
-      "name": "styles-c3166dfe48bacaf86520.css",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-c3166dfe48bacaf86520.css",
-      "publicPath": "/static/bundles/styles-c3166dfe48bacaf86520.css"
-    },
-    "parkhang-c3166dfe48bacaf86520.js": {
-      "name": "parkhang-c3166dfe48bacaf86520.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-c3166dfe48bacaf86520.js",
-      "publicPath": "/static/bundles/parkhang-c3166dfe48bacaf86520.js"
-    },
-    "vendors~docx-c3166dfe48bacaf86520.js": {
-      "name": "vendors~docx-c3166dfe48bacaf86520.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-c3166dfe48bacaf86520.js",
-      "publicPath": "/static/bundles/vendors~docx-c3166dfe48bacaf86520.js"
-    },
-    "styles-c3166dfe48bacaf86520.css.map": {
-      "name": "styles-c3166dfe48bacaf86520.css.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-c3166dfe48bacaf86520.css.map",
-      "publicPath": "/static/bundles/styles-c3166dfe48bacaf86520.css.map"
-    },
-    "parkhang-c3166dfe48bacaf86520.js.map": {
-      "name": "parkhang-c3166dfe48bacaf86520.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-c3166dfe48bacaf86520.js.map",
-      "publicPath": "/static/bundles/parkhang-c3166dfe48bacaf86520.js.map"
-    },
-    "vendors~docx-c3166dfe48bacaf86520.js.map": {
-      "name": "vendors~docx-c3166dfe48bacaf86520.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-c3166dfe48bacaf86520.js.map",
-      "publicPath": "/static/bundles/vendors~docx-c3166dfe48bacaf86520.js.map"
-    },
-    "styles-cb810196a8a7ead2316d.css": {
-      "name": "styles-cb810196a8a7ead2316d.css",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-cb810196a8a7ead2316d.css",
-      "publicPath": "/static/bundles/styles-cb810196a8a7ead2316d.css"
-    },
-    "parkhang-cb810196a8a7ead2316d.js": {
-      "name": "parkhang-cb810196a8a7ead2316d.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-cb810196a8a7ead2316d.js",
-      "publicPath": "/static/bundles/parkhang-cb810196a8a7ead2316d.js"
-    },
-    "vendors~docx-cb810196a8a7ead2316d.js": {
-      "name": "vendors~docx-cb810196a8a7ead2316d.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-cb810196a8a7ead2316d.js",
-      "publicPath": "/static/bundles/vendors~docx-cb810196a8a7ead2316d.js"
-    },
-    "styles-cb810196a8a7ead2316d.css.map": {
-      "name": "styles-cb810196a8a7ead2316d.css.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-cb810196a8a7ead2316d.css.map",
-      "publicPath": "/static/bundles/styles-cb810196a8a7ead2316d.css.map"
-    },
-    "parkhang-cb810196a8a7ead2316d.js.map": {
-      "name": "parkhang-cb810196a8a7ead2316d.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-cb810196a8a7ead2316d.js.map",
-      "publicPath": "/static/bundles/parkhang-cb810196a8a7ead2316d.js.map"
-    },
-    "vendors~docx-cb810196a8a7ead2316d.js.map": {
-      "name": "vendors~docx-cb810196a8a7ead2316d.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-cb810196a8a7ead2316d.js.map",
-      "publicPath": "/static/bundles/vendors~docx-cb810196a8a7ead2316d.js.map"
+    "vendors~docx-fc74fefb54827d84cfe8.js.map": {
+      "name": "vendors~docx-fc74fefb54827d84cfe8.js.map",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-fc74fefb54827d84cfe8.js.map",
+      "publicPath": "/static/bundles/vendors~docx-fc74fefb54827d84cfe8.js.map"
     }
   },
   "chunks": {
     "parkhang": [
-      "styles-cb810196a8a7ead2316d.css",
-      "parkhang-cb810196a8a7ead2316d.js",
-      "styles-cb810196a8a7ead2316d.css.map",
-      "parkhang-cb810196a8a7ead2316d.js.map"
+      "styles-fc74fefb54827d84cfe8.css",
+      "parkhang-fc74fefb54827d84cfe8.js",
+      "styles-fc74fefb54827d84cfe8.css.map",
+      "parkhang-fc74fefb54827d84cfe8.js.map"
     ]
   },
-  "publicPath": "/static/bundles/",
-  "error": "ModuleBuildError",
-  "message": "Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\git Project work\\parkhang\\parkhang\\frontend\\app\\components\\TextDetail\\AnnotationDetail.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (107:24)\n\n  105 |                         </div>\n  106 |                         \n> 107 |                         <ShareIcon    \n      |                         ^\n  108 |                             style={{ fill: colours.activeButton }}\n  109 |                             width={15}\n  110 |                             height={15}\n    at instantiate (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:72:32)\n    at constructor (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:358:12)\n    at Object.raise (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:3335:19)\n    at Object.jsxParseElementAt (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:8003:18)\n    at Object.jsxParseElement (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:8015:17)\n    at Object.parseExprAtom (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:8029:19)\n    at Object.parseExprSubscripts (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12540:23)\n    at Object.parseUpdate (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12519:21)\n    at Object.parseMaybeUnary (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12490:23)\n    at Object.parseMaybeUnaryOrPrivate (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12284:61)\n    at Object.parseExprOps (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12291:23)\n    at Object.parseMaybeConditional (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12261:23)\n    at Object.parseMaybeAssign (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12214:21)\n    at D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:6596:39\n    at Object.tryParse (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:4011:20)\n    at Object.parseMaybeAssign (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:6596:18)\n    at D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12172:39\n    at Object.allowInAnd (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:14242:12)\n    at Object.parseMaybeAssignAllowIn (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12172:17)\n    at Object.parseParenAndDistinguishExpression (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:13297:28)\n    at Object.parseParenAndDistinguishExpression (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:6714:18)\n    at Object.parseExprAtom (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12868:23)\n    at Object.parseExprAtom (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:8034:20)\n    at Object.parseExprSubscripts (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12540:23)\n    at Object.parseUpdate (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12519:21)\n    at Object.parseMaybeUnary (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12490:23)\n    at Object.parseMaybeUnaryOrPrivate (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12284:61)\n    at Object.parseExprOpBaseRightExpr (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12406:34)\n    at Object.parseExprOpRightExpr (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12399:21)\n    at Object.parseExprOp (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12352:27)\n    at Object.parseExprOps (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12297:17)\n    at Object.parseMaybeConditional (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12261:23)\n    at Object.parseMaybeAssign (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12214:21)\n    at Object.parseMaybeAssign (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:6662:18)\n    at Object.parseExpressionBase (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12150:23)\n    at D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12144:39\n    at Object.allowInAnd (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:14242:12)\n    at Object.parseExpression (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:12144:17)\n    at Object.jsxParseExpressionContainer (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:7862:31)\n    at Object.jsxParseElementAt (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:7962:36)\n    at Object.jsxParseElementAt (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:7946:32)\n    at Object.jsxParseElement (D:\\git Project work\\parkhang\\parkhang\\frontend\\node_modules\\@babel\\core\\node_modules\\@babel\\parser\\lib\\index.js:8015:17)"
+  "publicPath": "/static/bundles/"
 }

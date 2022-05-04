@@ -18,6 +18,7 @@ import type { TextData } from "api";
 import TextSegment from "lib/TextSegment";
 import TextDetailHeadingContainer from "./TextDetailHeadingContainer";
 
+
 export type Props = {
     paginated: boolean,
     pageImagesVisible: boolean,
@@ -38,10 +39,10 @@ export type Props = {
     selectedSearchResult: {
         textId: number,
         start: number,
-        length: number
+        length: number,
     } | null,
     searchValue: string | null,
-    fontSize: number
+    fontSize: number,
 };
 
 let textDetailId = 0;
@@ -57,7 +58,7 @@ class TextDetail extends React.Component<Props> {
 
     render() {
         let text = {
-            name: ""
+            name: "",
         };
         if (this.props.text) {
             text = this.props.text;
@@ -67,7 +68,11 @@ class TextDetail extends React.Component<Props> {
         let textComponent = null;
         let splitText = null;
 
-        if (!this.props.annotatedText || !this.props.text || this.props.loading) {
+        if (
+            !this.props.annotatedText ||
+            !this.props.text ||
+            this.props.loading
+        ) {
             textComponent = <div key={this.key} />;
         } else {
             let limitWidth = false;
@@ -101,24 +106,23 @@ class TextDetail extends React.Component<Props> {
                     selectedSearchResult={this.props.selectedSearchResult}
                     searchValue={this.props.searchValue}
                     fontSize={this.props.fontSize}
-                >
-                </SplitTextComponent>
+                ></SplitTextComponent>
             );
         }
 
         let textComponents = [textComponent];
 
         return (
-            <div 
-            style={{height:'100vh'}}
+            <div
+                style={{ height: "100vh" }}
                 className={classnames(
                     styles.textDetail,
                     utilStyles.flex,
                     utilStyles.flexColumn
                 )}
                 key={this.key}
-            >   
-                 <TextDetailHeadingContainer/>
+            >
+                <TextDetailHeadingContainer />
                 <Loader loaded={!this.props.loading} />
                 <div
                     className={classnames(
@@ -127,7 +131,7 @@ class TextDetail extends React.Component<Props> {
                     )}
                 >
                     {!this.props.loading ? textComponents : <div />}
-                </div>
+                </div>        
             </div>
         );
     }

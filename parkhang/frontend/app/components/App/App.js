@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import classnames from "classnames";
-import SplitPane,{ Pane } from "react-split-pane";
+import SplitPane, { Pane } from "react-split-pane";
 import HeaderContainer from "components/Header";
 import TextsSearchContainer from "components/TextsSearch/TextsSearchContainer";
 import TextListContainer from "containers/TextListContainer";
@@ -12,6 +12,7 @@ import TextListTabContainer from "components/TextList/TextListTabContainer";
 import type { AppState } from "reducers";
 import * as actions from "actions";
 import * as constants from "app_constants";
+import lopenlingLogo from "images/lopenling_logo.png";
 
 import styles from "./App.css";
 import headerStyles from "components/Header/Header.css";
@@ -20,17 +21,20 @@ import utilStyles from "css/util.css";
 
 import { handleKeyDown } from "../../shortcuts";
 import SideMenuContainer from "../SideMenu/SideMenuContainer";
-import { withLDConsumer } from 'launchdarkly-react-client-sdk';
+import { withLDConsumer } from "launchdarkly-react-client-sdk";
 
 type Props = {
     title: string,
     textListIsVisible: boolean,
     menuListIsVisible: Boolean,
     textListWidth: number,
+    menuListWidth: Number,
     state: AppState,
     dispatch: (action: actions.Action) => void,
     onChangedTextWidth: (width: number) => void,
-    onChangedTextListVisible: (isVisible: boolean) => void
+    onChangedTextListVisible: (isVisible: boolean) => void,
+    onChangedMenuWidth: (width: number) => void,
+    onChangedMenuListVisible: (isVisible: boolean) => void,
 };
 
 function setTitle(title: string) {
@@ -52,16 +56,22 @@ const App = (props: Props) => {
         textListClassnames.push(styles.hideListContainer);
     }
     let bodyHeight;
-    if(props.flags.showFilterOptionParkhang){
-     bodyHeight = "calc(100vh - "+headerStyles?.headerHeight+" - "+filterStyles?.filterHeight+" )";
-     }
-     else{
-     bodyHeight="calc(100vh - "+headerStyles.headerHeight+")";
+    if (props.flags.showFilterOptionParkhang) {
+        bodyHeight =
+            "calc(100vh - " +
+            headerStyles?.headerHeight +
+            " - " +
+            filterStyles?.filterHeight +
+            " )";
+    }
+    if (!props.flags.NavbarParkhang) {
+        bodyHeight = "calc(100vh)";
+    } else {
+        bodyHeight = "calc(100vh - " + headerStyles.headerHeight + ")";
+    }
+    const image_location = lopenlingLogo;
 
-     }
-    
-     return (
-       
+    return (
         <div
             className={classnames(
                 styles.container,
@@ -72,9 +82,9 @@ const App = (props: Props) => {
                 handleKeyDown(e, props.state, props.dispatch);
             }}
         >
-            <HeaderContainer />
-            {props.flags.showFilterOptionParkhang &&   <TextFilterContainer/>}
-      
+            {props.flags.navbarParkhang && <HeaderContainer />}
+            {props.flags.showFilterOptionParkhang && <TextFilterContainer />}
+
             <div className={classnames(styles.interface, utilStyles.flex)}>
                 <SplitPane
                     split="vertical"
@@ -82,10 +92,10 @@ const App = (props: Props) => {
                     defaultSize={defaultSize}
                     size={size}
                     paneStyle={{
-                        display: "flex"
+                        display: "flex",
                     }}
                     style={{
-                        height: bodyHeight
+                        height: bodyHeight,
                     }}
                     onDragFinished={(width: number) => {
                         if (width > 0) {
@@ -97,26 +107,43 @@ const App = (props: Props) => {
                         window.dispatchEvent(new Event("resize"));
                     }}
                 >
-                     
-
                     <div className={classnames(...textListClassnames)}>
+                        {props.flags.headerLogoTextListParkhang && (
+                            <div
+                                className={styles.logo}
+                                style={{
+                                    marginLeft: 20,
+                                    marginBottom: 30,
+                                }}
+                            >
+                                <img src={image_location} height="30" />
+                            </div>
+                        )}
                         <TextsSearchContainer />
                         <TextListContainer />
                     </div>
-                    <SplitPane split="vertical"
-                     minSize={'70vw'} 
-                     maxSize={'100vw'} 
-                     defaultSize={props.menuListIsVisible?'93%':'100%'}
-                     paneStyle={{
-                        display: "flex"
-                    }} 
-                    onDragFinished={(width:number)=>{
-                        console.log(width)
-                    }}
-                     >
-                    <TextDetailContainer />
-                    <SideMenuContainer/>
-                   </SplitPane>
+                    <SplitPane
+                        split="vertical"
+                        resizerClassName={classnames(styles.resizer)}
+                        minSize={"80vw"}
+                        maxSize={"100vw"}
+                        defaultSize={props.menuListIsVisible ? "96%" : "100%"}
+                        paneStyle={{
+                            display: "flex",
+                        }}
+                        onDragFinished={(width: number) => {
+                            if (width > 0) {
+                                props.onChangedMenuWidth(width);
+                                if (!props.textListIsVisible) {
+                                    props.onChangedMenuListVisible(true);
+                                }
+                            }
+                            window.dispatchEvent(new Event("resize"));
+                        }}
+                    >
+                        <TextDetailContainer />
+                        <SideMenuContainer />
+                    </SplitPane>
                 </SplitPane>
             </div>
         </div>

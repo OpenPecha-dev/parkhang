@@ -7,14 +7,38 @@ import type { AppState } from "reducers";
 import { getTextListVisible, getAccountOverlayVisible , getMenuListVisible } from "reducers";
 import * as actions from "actions";
 import SideMenu from "./SideMenu";
+import * as reducers from "reducers";
 
 const mapStateToProps = (state: AppState): { user: User } => {
+    const selectedText = reducers.getSelectedText(state);
     const user = getUser(state);
     const activeLocale = getActiveLocale(state);
     const successRedirect = document.location.pathname;
     // TODO: move global CSRF_TOKEN into redux
     const csrfToken = CSRF_TOKEN;
-
+    let exportingWitness = false;
+    let witnesses = [];
+    let textFontSize = reducers.getTextFontSize(state);
+    let selectedWitness;
+    if (selectedText) {
+        witnesses = reducers.getTextWitnesses(state, selectedText.id);
+        const selectedWitnessId = reducers.getSelectedTextWitnessId(
+            state,
+            selectedText.id
+        );
+        if (selectedWitnessId) {
+            selectedWitness = reducers.getWitness(state, selectedWitnessId);
+            exportingWitness = reducers.getExportingWitness(
+                state,
+                selectedWitnessId
+            );
+        } else {
+            selectedWitness = reducers.getWorkingWitness(
+                state,
+                selectedText.id
+            );
+        }
+    }
     return {
         user: user,
         activeLocale: activeLocale,
@@ -22,11 +46,18 @@ const mapStateToProps = (state: AppState): { user: User } => {
         menuListIsVisible: getMenuListVisible(state),
         accountOverlayVisible: getAccountOverlayVisible(state),
         successRedirect: successRedirect,
-        csrfToken: csrfToken
+        csrfToken: csrfToken,
+        exportingWitness,
+        witnesses,
+        selectedText,
+        selectedWitness,
+        textFontSize
+
     };
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    const { dispatch } = dispatchProps;
     return {
         ...ownProps,
         ...stateProps,
@@ -39,7 +70,20 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
             dispatchProps.dispatch(
                 actions.changedAccountOverlay(!stateProps.accountOverlayVisible)
             );
+        },
+        
+        onExport: () => {
+            dispatch(actions.exportWitness(stateProps.selectedWitness.id, "docx"));
+        },
+        onChangedFontSize: (fontSize: number) => {
+            dispatch(actions.changedTextFontSize(fontSize));
+        },
+        accountButtonClicked: () => {
+            dispatchProps.dispatch(
+                actions.changedAccountOverlay(!stateProps.accountOverlayVisible)
+            );
         }
+
     };
 };
 

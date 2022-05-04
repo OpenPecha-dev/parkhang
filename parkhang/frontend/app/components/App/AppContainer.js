@@ -16,6 +16,7 @@ const mapStateToProps = state => {
         textListIsVisible: reducers.getTextListVisible(state),
         menuListIsVisible: reducers.getMenuListVisible(state),
         textListWidth: reducers.getTextListWidth(state),
+        menuListWidth: reducers.getMenuListWidth(state),
         state: state
     };
 };
@@ -27,6 +28,12 @@ const matchDispatchToProps = dispatch => {
         },
         onChangedTextListVisible: (isVisible: boolean) => {
             dispatch(actions.changedTextListVisible(isVisible));
+        },
+        onChangedMenuWidth: (width: number) => {
+            dispatch(actions.changedMenuListWidth(width));
+        },
+        onChangedMenuListVisible: (isVisible: boolean) => {
+            dispatch(actions.changedMenuListVisible(isVisible));
         },
         dispatch
     };

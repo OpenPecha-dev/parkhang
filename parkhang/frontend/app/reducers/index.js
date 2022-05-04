@@ -152,6 +152,9 @@ export const getMenuListVisible = (state: AppState): boolean => {
 export const getTextListWidth = (state: AppState): number => {
     return ui.getTextListWidth(state.ui);
 };
+export const getMenuListWidth = (state: UIState): number => {
+    return  ui.getMenuListWidth(state.ui);;
+};
 
 export const getTemporaryAnnotations = (
     state: AppState,
