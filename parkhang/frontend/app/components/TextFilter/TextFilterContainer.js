@@ -23,6 +23,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onSelectedText: (text: api.TextData) => {
             dispatch(actions.selectedText(text));
+        },
+        onAuthorChange: (filterId: api.TextData)=>{
+            dispatch(actions.filterText(filterId));
         }
     };
 };

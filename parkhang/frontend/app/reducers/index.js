@@ -145,9 +145,15 @@ export const getActiveTextAnnotation = (
 export const getTextListVisible = (state: AppState): boolean => {
     return ui.getTextListVisible(state.ui);
 };
+export const getMenuListVisible = (state: AppState): boolean => {
+    return ui.getMenuListVisible(state.ui);
+};
 
 export const getTextListWidth = (state: AppState): number => {
     return ui.getTextListWidth(state.ui);
+};
+export const getMenuListWidth = (state: UIState): number => {
+    return  ui.getMenuListWidth(state.ui);;
 };
 
 export const getTemporaryAnnotations = (

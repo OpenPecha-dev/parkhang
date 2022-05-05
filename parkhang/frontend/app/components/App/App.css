@@ -12,7 +12,9 @@ body {
     padding: 0;
     margin: 0;
     font-family: var(--fonts);
+    overflow: hidden;
 }
+
 
 .container {
     padding: 0;
@@ -26,12 +28,19 @@ body {
 }
 
 .listContainer {
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     flex-shrink: 1;
     transition: width 0.25s ease-in-out;
     position: relative;
+}
+.showListContainer{
+    width:100%;
+}
+.hideListContainer{
+    width:0%;
 }
 
 :global(.Resizer.vertical) {

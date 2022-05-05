@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Cookies from "js-cookie";
 import AppContainer from "components/App/AppContainer";
-
+import flagsmith from 'flagsmith'
+import {FlagsmithProvider} from 'flagsmith/react'
 // For dev only
 import { composeWithDevTools } from "redux-devtools-extension";
 
@@ -71,7 +72,7 @@ const routesMap = {
     HOME: "/",
     [actions.TEXT_URL]: "/texts/:textId/witnesses/:witnessId/:annotation?",
     USER: "/user/:id",
-    [actions.TEXTID_ONLY_URL]: "/texts/:textId"
+    [actions.TEXTID_ONLY_URL]: "/texts/:textId",
     };
 const routes = connectRoutes(routesMap, {
     initialDispatch: false
@@ -89,6 +90,7 @@ let store = createStore(
         applyMiddleware(...middlewares)
     )
 );
+
 if (process.env.NODE_ENV === "development") {
     store = createStore(
         enableBatching(locationRootReducer),
@@ -136,10 +138,19 @@ function intlSelector(state) {
     };
 }
 
+
+const environmentID= process.env.NODE_ENV==='development'?'3Dt7CemgqtVS5RUzFovjx9':'YrffVXdfn7BzSFVmLBFdrv';
+
 ReactDOM.render(
     <Provider store={store}>
         <IntlProvider textComponent={Fragment} intlSelector={intlSelector}>
+        <FlagsmithProvider
+       options={{
+             environmentID,
+           }}
+           flagsmith={flagsmith}>
             <AppContainer />
+            </FlagsmithProvider>
         </IntlProvider>
     </Provider>,
     document.getElementById("app")

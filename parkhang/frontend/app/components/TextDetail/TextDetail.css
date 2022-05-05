@@ -2,15 +2,15 @@
 
 
 .textDetail {
-    flex-grow: 1;
     background-color: var(--text-bg);
-    border-left: 1px solid #ccc;
     position: relative;
-    min-width: 0;
+    flex-grow: 1;
+
 }
 
 .textContainer {
     flex-grow: 1;
+    border-radius: 10px;
 }
 
 :global(.loader) {
@@ -21,3 +21,18 @@
     background-color: rgba(1,1,1,0.1);
     border-radius: 5px;
 }
+
+.textContainer *::-webkit-scrollbar {
+    width: 5px;
+  }
+  .textContainer *::-webkit-scrollbar-track {
+    background:var(--text-list-colour);
+  }
+  .textContainer *::-webkit-scrollbar-thumb {
+    background: var(--text-bg);
+    border-radius: 2px
+  }
+  .textContainer *::-webkit-scrollbar-thumb:hover {
+    background: darkgray;
+    border-radius: 5px;
+  }

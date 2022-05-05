@@ -1,0 +1,35 @@
+.textDetailHeading{
+    font-weight: bold;
+    align-items: center;
+    background-color: white;
+    padding:10px 0px;
+}
+.textHeadingTitle{
+text-align: center;
+
+margin-left:40px;
+}
+.textDetailHeading span{
+    height: 16px;
+    overflow: hidden;
+    width: 16px;
+    justify-content: center;
+    align-items: center;
+    transition: .3s ease 0ms;
+}
+.leftLogo svg:hover, .rightLogo svg:hover{
+    background-color: darkgray;
+    cursor: pointer;
+}
+.leftLogo svg, .rightLogo svg{
+    height: 100%;
+    width: 100%;
+
+}
+.leftLogo{
+    float:left;
+}
+.rightLogo{
+    transform: rotate(180deg);
+    float:right;
+}

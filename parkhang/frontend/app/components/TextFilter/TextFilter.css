@@ -1,9 +1,35 @@
-.filter{
-    background-color: #555555;
+@import 'css/colour.css';
+@value filter-height: 60px;
+
+:root {
+    --filter-height: filter-height;
+}
+
+:export {
+    filterHeight: filter-height;
+}
+.filter_section{
+    background-color: var(--text-bg);
     display: flex;
-    flex:1;
     align-items: center;
-    padding-inline: 50px;
     gap:1.3rem;
+    color:var(--dark-text);
+    padding: 20px 50px;
+    height:var(--filter-height);
+}
+
+.breadCrumbs{
+    position:absolute;
+    right:0;
+    margin-right:20px;
+    padding-inline:10px;
+    max-width: 40%;
+}
+.spanArrow{
+    background-color: var(--gray-background);;
+}
+.breadLink{
+    letter-spacing: 2px;
     color:white;
+    text-decoration: none;
 }

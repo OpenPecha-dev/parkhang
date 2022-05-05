@@ -11,6 +11,8 @@ import {
     all,
     delay
 } from "redux-saga/effects";
+import {authorDetails} from 'app_constants/demoAuthorData'
+
 import FileSaver from "file-saver";
 import * as actions from "actions";
 import * as reducers from "reducers";
@@ -235,7 +237,7 @@ export function* watchLoadInitialData(): any {
 // SELECTED TEXT
 
 function* selectedText(action: actions.SelectedTextAction): Saga<void> {
-    
+    // console.log('selected')
     yield put(actions.loadingWitnesses(action.text));
     yield all([call(loadInitialTextData, action)]);
 }
@@ -244,20 +246,57 @@ function* watchSelectedText(): Saga<void> {
     yield takeEvery(actions.SELECTED_TEXT, selectedText);
 }
 
-//FILTER AUTHOR
+//FILTER TEXT
+function* filteredText(action: actions.SelectedTextAction): Saga<void> {
+ try{
+    if(authorDetails.length>1){
+    for (var i=0;i<authorDetails?.length;i++){
+       if(authorDetails[i].id == action.data){
+           var text=authorDetails[i];
+       }
+         }
+ }  
+    yield put(actions.loadingWitnesses(text));
+    console.log(text)
+    const witnesses = yield call(api.fetchTextWitnesses,text);
+    yield put(actions.loadedWitnesses(text, witnesses));
+    for (const witness of witnesses) {
+        if (witness.is_working) {
+          var  workingWitnessData = witness;
+        }
+        if (witness.is_base) {
+          var  baseWitnessData = witness;
+        }
+    }
 
-function* filterText(action: actions.FilterTextAction): Saga<void> {
- let filtered={id: 2, name: 'བཀྲ་ཤིས་ཀྱི་ཚིགས་སུ་བཅད་པ།b'} //dummy data
- 
+    if (workingWitnessData) {
+        const workingWitness= yield (select(
+            reducers.getWitness,
+            workingWitnessData.id
+        ): any);
+        console.log(workingWitness)
+        const selectedWitnessAction = actions.selectedTextWitness(
+            text.id,
+            workingWitness.id
+         );
+         console.log(workingWitness.id)
+        
 
- action={...action,text:filtered}
-    yield put(actions.loadingWitnesses(action.text));
-    yield all([call(loadInitialTextData, action)]);
+   
+    yield put(
+        actions.selectedTextWitness(text.id, workingWitnessData.id)
+    );
+    }
+} catch (e) {
+    console.log("FAILED Filtering %o", e);
+}
 }
 
-function* watchFilterText(): Saga<void> {
-    yield takeEvery(actions.FILTER_TEXT, filterText);
+function* watchFilteredText(): Saga<void> {
+    yield takeEvery(actions.FILTERED_TEXT, filteredText);
 }
+
+
 
 // WITNESSES
 
@@ -286,7 +325,6 @@ function* loadInitialTextData(action: actions.TextDataAction) {
                 call(loadAnnotationOperations, workingWitness.id)
             ]);
             // auto-select the working witness
-           
             yield put(
                 actions.selectedTextWitness(action.text.id, workingWitness.id)
             );
@@ -297,6 +335,7 @@ function* loadInitialTextData(action: actions.TextDataAction) {
 }
 
 function* selectedWitness(action: actions.SelectedTextWitnessAction) {
+   
     const witnessId = action.witnessId;
     const hasLoadedAnnotations = yield select(
         reducers.hasLoadedWitnessAnnotations,
@@ -622,18 +661,18 @@ function* loadedTextUrl(action: actions.TextUrlAction) {
     if (action.payload.witnessId) {
         const textId = action.payload.textId;
         const witnessId = action.payload.witnessId;
+          
         let textData: api.TextData;
         do {
             textData = yield select(reducers.getText, textId, true);
             if (!textData) yield delay(100);
         } while (textData === null);
-
         const selectedTextAction = actions.selectedText(textData);
         const selectedWitnessAction = actions.selectedTextWitness(
             textId,
             witnessId
         );
-
+        
         yield put(selectedTextAction);
         let textWitnesses: Array<Witness> = [];
         do {
@@ -736,11 +775,9 @@ function* loadedTextUrl(action: actions.TextUrlAction) {
         }
     }
 }
-
 function* watchTextUrlActions() {
     yield takeEvery(actions.TEXT_URL, loadedTextUrl);
 }
-
 
 
 //URL to LOAD TEXTDATA AND AUTO WITNESS 
@@ -786,8 +823,6 @@ function* watchFilterUrlActions() {
     yield takeEvery(actions.TEXTID_ONLY_URL, loadedFilterUrl);
 }
 
-
-
 /**
  * Stores functions by action type.
  * Used primarily to allow batched actions to be handled
@@ -808,6 +843,7 @@ const typeCalls: { [string]: (any) => Saga<void> } = {
     [actions.SELECTED_WITNESS]: reqAction(selectedWitness),
     [actions.CHANGED_ACTIVE_TEXT_ANNOTATION]: changeActiveAnnotation,
     [actions.SELECTED_TEXT]: selectedText,
+    [actions.FILTERED_TEXT]: filteredText,
     [actions.SELECTED_LOCALE]: selectLocale,
     [actions.CHANGED_TEXT_LIST_WIDTH]: changedTextListWidth,
     [actions.CHANGED_SHOW_PAGE_IMAGES]: changedShowPageImages,
@@ -824,8 +860,8 @@ const typeCalls: { [string]: (any) => Saga<void> } = {
 export default function* rootSaga(): Saga<void> {
     yield all([
         call(watchLoadInitialData),
-        call(watchFilterText),
         call(watchSelectedText),
+        call(watchFilteredText),
         call(watchLoadAnnotations),
         call(watchBatchedActions),
         call(watchAppliedAnnotation),

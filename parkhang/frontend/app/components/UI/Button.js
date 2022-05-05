@@ -23,6 +23,7 @@ export default class Button extends React.Component<Props> {
     render() {
         let color = this.props.color || "#ffffff";
         let bgColour = this.props.backgroundColor || colours.mainTint;
+        let fontSize =this.props.fontSize || '14px'
         let classNames = this.props.noBezel
             ? [styles.buttonNoBezel]
             : [styles.button];
@@ -31,6 +32,7 @@ export default class Button extends React.Component<Props> {
         const className = classnames(...classNames);
 
         let style = {
+            fontSize,
             color: color,
             backgroundColor: bgColour
         };
@@ -46,7 +48,10 @@ export default class Button extends React.Component<Props> {
                 {this.props.icon && (
                     <div className={styles.icon}>{this.props.icon}</div>
                 )}
+               {this.props.title &&(
                 <span className={styles.title}>{this.props.title}</span>
+               )
+               } 
                 {this.props.accessoryType && (
                     <Accessory type={this.props.accessoryType} />
                 )}

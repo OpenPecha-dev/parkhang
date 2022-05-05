@@ -60,7 +60,7 @@ export const UPDATED_TEMPORARY_ANNOTATION = "text/UPDATED_TEMPORARY_ANNOTATION";
 export const REMOVED_TEMPORARY_ANNOTATION = "text/REMOVED_TEMPORARY_ANNOTATION";
 
 // UI
-export const FILTER_TEXT = "textList/FILTER_TEXT";
+export const FILTERED_TEXT = "textList/FILTERED_TEXT";
 export const SELECTED_TEXT = "textList/SELECTED_TEXT";
 export const CHANGED_SEARCH_VALUE = "textList/CHANGED_SEARCH_VALUE";
 export const SEARCHED_TEXT = "textList/SEARCHED_TEXT";
@@ -79,7 +79,10 @@ export const CHANGED_ACTIVE_TEXT_ANNOTATION =
     "text/CHANGED_ACTIVE_TEXT_ANNOTATION";
 
 export const CHANGED_TEXT_LIST_VISIBLE = "textList/CHANGED_TEXT_LIST_VISIBLE";
+export const CHANGED_MENU_LIST_VISIBLE = "textList/CHANGED_MENU_LIST_VISIBLE";
 export const CHANGED_TEXT_LIST_WIDTH = "textList/CHANGED_TEXT_LIST_WIDTH";
+export const CHANGED_MENU_LIST_WIDTH = "textList/CHANGED_MENU_LIST_WIDTH";
+
 
 export const CHANGED_WITNESS_SCROLL_POSITION =
     "text/CHANGED_WITNESS_SCROLL_POSITION";
@@ -478,9 +481,9 @@ export function selectedText(text: api.TextData): SelectedTextAction {
 }
 
 export type FilterTextAction = Action & TextDataAction;
-export function filterText(data: string): FilterTextAction {
+export function filterText(data: number): FilterTextAction {
     return {
-        type: FILTER_TEXT,
+        type: FILTERED_TEXT,
         data
     };
 }
@@ -551,6 +554,16 @@ export type ChangedTextListWidth = Action & {
 export function changedTextListWidth(width: number): ChangedTextListWidth {
     return {
         type: CHANGED_TEXT_LIST_WIDTH,
+        width
+    };
+}
+
+export type ChangedMenuListWidth = Action & {
+    width: number
+};
+export function changedMenuListWidth(width: number): ChangedMenuListWidth {
+    return {
+        type: CHANGED_MENU_LIST_WIDTH,
         width
     };
 }
@@ -655,6 +668,19 @@ export function changedTextListVisible(
     };
 }
 
+
+export type ChangedMenuListVisibleAction = Action & {
+    isVisible: boolean
+};
+export function changedMenuListVisible(
+    isVisible: boolean
+): ChangedMenuListVisibleAction {
+    return {
+        type: CHANGED_MENU_LIST_VISIBLE,
+        isVisible
+    };
+}
+
 export type ChangedWitnessScrollPositionAction = Action & {
     witnessId: number,
     scrollPosition: number
@@ -739,8 +765,14 @@ export type TextUrlAction = {
         annotation?: string
     }
 };
+export type FilterUrlAction = {
+    type: string,
+    payload: {
+        author:string
+    }
+};
 
-export function enteredUrl(url: string) {
+export function enteredUrl(url: TextUrlAction) {
     return {
         type: TEXT_URL,
         payload: {}
