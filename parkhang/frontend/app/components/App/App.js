@@ -46,11 +46,13 @@ function setTitle(title: string) {
 
 const App = (props: Props) => {
     setTitle(props.title);
-    const flags = useFlags(['toggle_filter','navbar_parkhang','header_logo']);
+    const flags = useFlags(['toggle_filter','navbar_parkhang','header_logo','show_sidemenu']);
 
     const toggle_filter = flags.toggle_filter.enabled
     const navbar_parkhang = flags.navbar_parkhang.enabled
     const header_logo=flags.header_logo.enabled
+    const show_sidemenu=flags.show_sidemenu.enabled
+console.log(show_sidemenu)
     let textListClassnames = [styles.listContainer];
 
     let minSize = constants.MIN_TEXT_LIST_WIDTH;
@@ -129,7 +131,7 @@ const App = (props: Props) => {
                         <TextsSearchContainer />
                         <TextListContainer />
                     </div>
-                    <SplitPane
+               {show_sidemenu ? <SplitPane
                         split="vertical"
                         resizerClassName={classnames(styles.resizer)}
                         minSize={"80vw"}
@@ -150,7 +152,7 @@ const App = (props: Props) => {
                     >
                         <TextDetailContainer />
                         <SideMenuContainer />
-                    </SplitPane>
+                    </SplitPane>: <TextDetailContainer />}
                 </SplitPane>
             </div>
         </div>
