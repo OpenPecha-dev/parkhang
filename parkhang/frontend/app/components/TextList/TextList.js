@@ -10,15 +10,11 @@ import "react-virtualized/styles.css"; // only needs to be imported once
 import { List } from "react-virtualized/dist/es/List";
 import * as api from "api";
 import addTibetanShay from "lib/addTibetanShay";
-import styles1 from "./TextList.css"
-import styles2 from "./TextList2.css"
+import styles from "./TextList.css"
 import Loader from "react-loader";
 import HighlightedString from "./HighlightedString";
 import ResultCount from "./ResultCount";
 import LoadMore from "./LoadMore";
-import { withLDConsumer } from 'launchdarkly-react-client-sdk';
-
-
 
 
 
@@ -46,6 +42,7 @@ type Props = {
 
 const DEFAULT_ROW_HEIGHT = 60;
 
+
 class TextList extends React.Component<Props> {
     list: List | null;
     cache: CellMeasurerCache;
@@ -65,14 +62,14 @@ class TextList extends React.Component<Props> {
             minHeight: DEFAULT_ROW_HEIGHT
         });
         this.rowRenderer = this.rowRenderer.bind(this);
-
     }
 
     componentDidUpdate(prevProps: Props): void {
         this.cache.clearAll();
         if (this.list) this.list.forceUpdateGrid();
     }
-    
+    componentDidMount(){
+    }
     
     rowRenderer({
         key,
@@ -94,7 +91,6 @@ class TextList extends React.Component<Props> {
         const onSelectedSearchResult = this.props.onSelectedSearchResult;
         const searchTerm = this.props.searchTerm;
         const searchResults = this.props.searchResults;
-        const styles=this.props?.flags?.textListUiParkhang === 'ui1' ? styles1: styles2;
         let className = styles.textListRow;
 
         const text = texts[index];
@@ -210,7 +206,6 @@ class TextList extends React.Component<Props> {
     render() {
         const texts = this.props.texts;
         let rowCount = texts.length;
-        const styles=this.props?.flags?.textListUiParkhang === 'ui1' ? styles1: styles2;
         return (
             <div className={styles.textList}>
                 {this.props.texts && this.props.texts.length > 0 ? (
@@ -243,4 +238,4 @@ class TextList extends React.Component<Props> {
     }
 }
 
-export default withLDConsumer()(TextList);
+export default TextList;

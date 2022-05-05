@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./Sidemenu.css";
 import ApplyTooltip from '../UI/ApplyTooltip';
-import { withLDConsumer } from 'launchdarkly-react-client-sdk';
 import headerStyles from "components/Header/Header.css";
 import filterStyles from "components/TextFilter/TextFilter.css";
 import classnames from "classnames";
@@ -11,7 +10,7 @@ import User from "lib/User";
 import { FormattedMessage, injectIntl } from "react-intl";
 import UserIcon from "images/discourse_user.svg";
 import LocaleSwitcher from 'components/LocaleSwitcher/LocaleSwitcher2'
-
+import flagsmith from "flagsmith";
 
 export type Props = {
     user: User,
@@ -98,7 +97,7 @@ if (props.user.isLoggedIn) {
                 ;
 }
 
-    if(props.flags.showFilterOptionParkhang){
+    if(flagsmith.hasFeature('toggle_filter')){
      MenuHeight = "calc(100vh - "+headerStyles?.headerHeight+" - "+filterStyles?.filterHeight+" )";
         }
 
@@ -189,4 +188,4 @@ if (props.user.isLoggedIn) {
 }
 
 
-export default withLDConsumer()(SideMenu);
+export default SideMenu;

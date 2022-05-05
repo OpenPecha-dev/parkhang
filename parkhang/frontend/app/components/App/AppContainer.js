@@ -41,14 +41,6 @@ const matchDispatchToProps = dispatch => {
 
 const AppContainer = connect(mapStateToProps, matchDispatchToProps)(App);
 
-const environmentID= process.env.NODE_ENV==='development'?'6269293a03fba314f6ecebb5':'6269293a03fba314f6ecebb6';
      
 
-export default withLDProvider({
-    clientSideID:environmentID,
-    user: {
-        "key": "example_user",
-        "name": "Example user",
-        "email": "User@example.com"
-    }
-  })(AppContainer);
+export default AppContainer;

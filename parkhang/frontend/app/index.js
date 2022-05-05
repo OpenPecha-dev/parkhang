@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Cookies from "js-cookie";
 import AppContainer from "components/App/AppContainer";
-
+import flagsmith from 'flagsmith'
+import {FlagsmithProvider} from 'flagsmith/react'
 // For dev only
 import { composeWithDevTools } from "redux-devtools-extension";
 
@@ -137,10 +138,19 @@ function intlSelector(state) {
     };
 }
 
+
+const environmentID= process.env.NODE_ENV==='development'?'3Dt7CemgqtVS5RUzFovjx9':'YrffVXdfn7BzSFVmLBFdrv';
+
 ReactDOM.render(
     <Provider store={store}>
         <IntlProvider textComponent={Fragment} intlSelector={intlSelector}>
+        <FlagsmithProvider
+       options={{
+             environmentID,
+           }}
+           flagsmith={flagsmith}>
             <AppContainer />
+            </FlagsmithProvider>
         </IntlProvider>
     </Provider>,
     document.getElementById("app")

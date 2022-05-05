@@ -24,6 +24,7 @@
     "core-js": "^3.22.0",
     "docx": "4.3",
     "file-saver": "^2.0.5",
+    "flagsmith": "^2.0.9",
     "grapheme-splitter": "^1.0.4",
     "history": "^5.3.0",
     "js-cookie": "^2.2.0",

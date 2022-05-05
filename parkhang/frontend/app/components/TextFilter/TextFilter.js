@@ -6,7 +6,6 @@ import { FormattedMessage, injectIntl } from "react-intl";
 import Link from "redux-first-router-link";
 import { authorDetails } from "app_constants/demoAuthorData";
 import TextHeadingContainer from "../TextDetail/TextHeadingContainer";
-import { withLDConsumer } from 'launchdarkly-react-client-sdk';
 
 
 type Props = {

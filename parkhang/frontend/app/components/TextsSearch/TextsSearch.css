@@ -10,7 +10,7 @@
 .textsSearch {
     padding: 10px;
     display: flex;
-    background-color: #345B63;
+    background-color: white;
     flex-grow: 1;
 }
 
@@ -18,20 +18,25 @@
     display: flex;
     flex-grow: 1;
 }
-
+.textsSearch input :focus{
+    outline: none;
+    border:0;
+}
 .textsSearch input {
     font-size: 1em;
     margin-right: 10px;
     flex-grow: 1;
     min-height: var(--inputHeight);
     padding: 0 5px;
-    border: 0;
+    border:0;
+    border-bottom: 2px solid gray;
     border-radius: 4px;
 }
 
 .textsSearch button {
     min-width: var(--searchButtonMinWidth);
     text-align: center;
+    border-radius: 3px;
 }
 
 .textsSearch select {

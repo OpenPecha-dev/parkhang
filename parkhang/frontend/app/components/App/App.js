@@ -21,7 +21,10 @@ import utilStyles from "css/util.css";
 
 import { handleKeyDown } from "../../shortcuts";
 import SideMenuContainer from "../SideMenu/SideMenuContainer";
-import { withLDConsumer } from "launchdarkly-react-client-sdk";
+
+
+import flagsmith from 'flagsmith';
+import { useFlags, useFlagsmith } from 'flagsmith/react';
 
 type Props = {
     title: string,
@@ -43,7 +46,11 @@ function setTitle(title: string) {
 
 const App = (props: Props) => {
     setTitle(props.title);
+    const flags = useFlags(['toggle_filter','navbar_parkhang','header_logo']);
 
+    const toggle_filter = flags.toggle_filter.enabled
+    const navbar_parkhang = flags.navbar_parkhang.enabled
+    const header_logo=flags.header_logo.enabled
     let textListClassnames = [styles.listContainer];
 
     let minSize = constants.MIN_TEXT_LIST_WIDTH;
@@ -56,7 +63,7 @@ const App = (props: Props) => {
         textListClassnames.push(styles.hideListContainer);
     }
     let bodyHeight;
-    if (props.flags.showFilterOptionParkhang) {
+    if (toggle_filter) {
         bodyHeight =
             "calc(100vh - " +
             headerStyles?.headerHeight +
@@ -64,7 +71,7 @@ const App = (props: Props) => {
             filterStyles?.filterHeight +
             " )";
     }
-    if (!props.flags.NavbarParkhang) {
+    if (!navbar_parkhang) {
         bodyHeight = "calc(100vh)";
     } else {
         bodyHeight = "calc(100vh - " + headerStyles.headerHeight + ")";
@@ -82,8 +89,8 @@ const App = (props: Props) => {
                 handleKeyDown(e, props.state, props.dispatch);
             }}
         >
-            {props.flags.navbarParkhang && <HeaderContainer />}
-            {props.flags.showFilterOptionParkhang && <TextFilterContainer />}
+            {navbar_parkhang && <HeaderContainer />}
+            {toggle_filter && <TextFilterContainer />}
 
             <div className={classnames(styles.interface, utilStyles.flex)}>
                 <SplitPane
@@ -108,7 +115,7 @@ const App = (props: Props) => {
                     }}
                 >
                     <div className={classnames(...textListClassnames)}>
-                        {props.flags.headerLogoTextListParkhang && (
+                        {header_logo && (
                             <div
                                 className={styles.logo}
                                 style={{
@@ -150,4 +157,4 @@ const App = (props: Props) => {
     );
 };
 
-export default withLDConsumer()(App);
+export default App;

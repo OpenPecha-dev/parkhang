@@ -20,8 +20,7 @@ import PageBreakIcon from "images/page_break_icon.svg";
 import { List } from "react-virtualized/dist/es/List";
 import AnnotationControlsHeader from "./AnnotationControlsHeader";
 import Question from "lib/Question";
-import { withLDConsumer } from 'launchdarkly-react-client-sdk';
-
+import flagsmith from "flagsmith";
 
 import type { AnnotationUniqueId } from "lib/Annotation";
 
@@ -82,7 +81,7 @@ const anchorPoints = {
     controls: HTMLDivElement | null;
     arrow: HTMLDivElement | null;
     arrowDs: HTMLDivElement | null;
-
+    fake_login_toggle: null;
 
 
     constructor(props: Props) {
@@ -98,6 +97,7 @@ const anchorPoints = {
 
     componentDidMount() {
         this.updatePosition();
+        this.fake_login_toggle=flagsmith.hasFeature('fake_login_toggle');
     }
 
     componentDidUpdate() {
@@ -410,7 +410,7 @@ const anchorPoints = {
                     annotations.push(annotationDetail);
                 }
             }, this);
-            if (!this.props.flags.fakeLoginParkhang===!props.user.isLoggedIn) {
+            if (!this.fake_login_toggle===!props.user.isLoggedIn) {
                 // NOTE: FormattedMessage cannot take a child when using
                 // the values option, so need to wrap it in a div
                 
@@ -663,4 +663,4 @@ const anchorPoints = {
 }
 
 
-export default withLDConsumer()(AnnotationControls);
+export default AnnotationControls;
