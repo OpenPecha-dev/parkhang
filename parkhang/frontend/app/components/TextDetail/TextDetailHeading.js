@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from './textDetailHeading.css'
 import Left from 'images/left.svg'
-import { transform } from 'lodash';
+import Tick from 'images/Tick.svg'
+import ApplyTooltip from '../UI/ApplyTooltip';
 
 
 
@@ -21,7 +22,12 @@ function TextDetailHeading(props:HeaderProps) {
   return (
     <div className={styles.textDetailHeading}>
         <span className={styles.leftLogo} style={{transform:!textListIsVisible?'rotate(180deg)':null}}  onClick={props.navigationButtonClicked}><Left/> </span>
-        <span className={styles.textHeadingTitle}>{selectedText?.name}</span> 
+       
+       <div> <span className={styles.textHeadingTitle}>{selectedText?.name}</span> 
+       <ApplyTooltip tooltipName={'online'}>
+       <span className={styles.tick}><Tick/></span>
+         </ApplyTooltip>
+       </div> 
         <span className={styles.rightLogo}   style={{transform:!menuListIsVisible?'rotate(0deg)':'rotate(180deg)',marginRight:10}} onClick={props.menuButtonClicked}><Left/> </span>
 
         </div>

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import * as reducers from "reducers";
 import * as actions from "actions";
 import App from "components/App";
-import { withLDProvider } from 'launchdarkly-react-client-sdk';
 
 let user;
 

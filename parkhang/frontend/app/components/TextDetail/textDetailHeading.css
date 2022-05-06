@@ -33,3 +33,15 @@ margin-left:40px;
     transform: rotate(180deg);
     float:right;
 }
+.tick>svg{
+    position:relative;
+    top:5px;
+    left:20px;
+    height:15px;
+    width: 15px;
+    border:1px solid green;
+    border-radius: 50%;
+}
+.tick>svg path{
+    fill :green;
+}

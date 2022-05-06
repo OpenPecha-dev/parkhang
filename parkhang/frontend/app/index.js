@@ -145,7 +145,7 @@ ReactDOM.render(
     <Provider store={store}>
         <IntlProvider textComponent={Fragment} intlSelector={intlSelector}>
         <FlagsmithProvider
-       options={{
+           options={{
              environmentID,
            }}
            flagsmith={flagsmith}>

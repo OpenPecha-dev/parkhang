@@ -37,7 +37,7 @@ class AnnotationControlsHeader extends React.Component<Props> {
                     backgroundColor='transparent'
                     accessoryType={this.props.addNote ? "ADD" : null}
                     onClick={this.props.addNote}
-                    disabled={this.props.addNote ? false : true}
+                    // disabled={this.props.addNote ? false : true}
                    align='center'
                 /></TooltipCustom>
                 <TooltipCustom toolname={'Questions'}>
@@ -53,7 +53,7 @@ class AnnotationControlsHeader extends React.Component<Props> {
                     }
                     accessoryType={this.props.addQuestion ? "ADD" : null}
                     onClick={this.props.addQuestion}
-                    disabled={this.props.addQuestion ? false : true}
+                    // disabled={this.props.addQuestion ? false : true}
                     align="left"
                     backgroundColor='transparent'
 
@@ -69,7 +69,7 @@ class AnnotationControlsHeader extends React.Component<Props> {
                     icon="&#182;"
                     accessoryType={allowLineBreak ? "ADD" : null}
                     onClick={this.props.addLineBreak}
-                    disabled={!allowLineBreak}
+                    // disabled={!allowLineBreak}
                     align="left"
                     backgroundColor='transparent'
 
@@ -84,7 +84,7 @@ class AnnotationControlsHeader extends React.Component<Props> {
                     height={21} style={{fill:'darkgray'}} />}
                     accessoryType={allowPageBreak ? "ADD" : null}
                     onClick={this.props.addPageBreak}
-                    disabled={!allowPageBreak}
+                    // disabled={!allowPageBreak}
                     align="left"
                     backgroundColor='transparent'
 

@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import SplitPane, { Pane } from "react-split-pane";
@@ -22,10 +22,9 @@ import utilStyles from "css/util.css";
 import { handleKeyDown } from "../../shortcuts";
 import SideMenuContainer from "../SideMenu/SideMenuContainer";
 
-
 import flagsmith from 'flagsmith';
 import { useFlags, useFlagsmith } from 'flagsmith/react';
-
+import isOnline from 'helper/checkOnlineStatus'
 type Props = {
     title: string,
     textListIsVisible: boolean,
@@ -48,14 +47,33 @@ function setTitle(title: string) {
 
 const App = (props: Props) => {
     setTitle(props.title);
+    const [online,setOnline]=useState(true);
+    useEffect(()=>{
+window.addEventListener('online',()=>{
+    setOnline(true);
+});
 
-
+window.addEventListener('offline',()=>{
+    setOnline(false);
+});
+   return ()=>{
+    window.removeEventListener('online')
+    window.removeEventListener('offline ')
+}
+    },[])
+    // isOnline().then(data=>setOnline(true)).catch(err=>setOnline(false));
     const flags = useFlags(['toggle_filter','navbar_parkhang','header_logo','show_sidemenu']);
-    const toggle_filter = flags.toggle_filter.enabled
-    const navbar_parkhang = flags.navbar_parkhang.enabled
-    const header_logo=flags.header_logo.enabled
-    const show_sidemenu=flags.show_sidemenu.enabled
 
+   let toggle_filter = flags.toggle_filter.enabled
+   let navbar_parkhang = flags.navbar_parkhang.enabled
+   let header_logo=flags.header_logo.enabled
+   let show_sidemenu=flags.show_sidemenu.enabled
+    if(!online){
+         toggle_filter = true;
+         navbar_parkhang = true;
+         header_logo=true;
+         show_sidemenu=true;    
+     }
     let textListClassnames = [styles.listContainer];
 
     let minSize = constants.MIN_TEXT_LIST_WIDTH;
@@ -95,6 +113,7 @@ const App = (props: Props) => {
             }}
         >
             {navbar_parkhang && <HeaderContainer />}
+            {/* {online?<p>online</p> : <p>offline</p>} */}
             {toggle_filter && <TextFilterContainer />}
 
             <div className={classnames(styles.interface, utilStyles.flex)}>
