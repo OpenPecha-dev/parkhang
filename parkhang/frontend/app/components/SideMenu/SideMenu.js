@@ -50,15 +50,15 @@ type LoginProps = {
     csrfToken: string
 };
 export const LoginControls = (props: LoginProps) => (
-    <div className={classnames(styles.notLoggedIn, styles.controls)} style={{display:"flex"
-              ,flexDirection:'column',alignItems:'center',justifyContent:'flex-start',gap:10}}>
-        <div className={classnames(styles.signUp, styles.buttonLink)}>
+    <div className={classnames(styles.notLoggedIn)} >
+     
         <ApplyTooltip tooltipName='Sign up' format="header.signUp">    
-            <a href={SSO_SIGNUP_URL} className={styles.logo}>
+           <span>  <a href={SSO_SIGNUP_URL} className={styles.logo}>
             <img src="https://pics.freeicons.io/uploads/icons/png/14636963901644666501-512.png" />
             </a>
+            </span>
             </ApplyTooltip>
-        </div>
+        
 
         <form method="post" action="/discourse/login_redirect/">
         <ApplyTooltip tooltipName='login' format="header.login">   

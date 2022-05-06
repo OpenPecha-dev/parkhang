@@ -44,15 +44,18 @@ function setTitle(title: string) {
     document.title = title;
 }
 
+
+
 const App = (props: Props) => {
     setTitle(props.title);
-    const flags = useFlags(['toggle_filter','navbar_parkhang','header_logo','show_sidemenu']);
 
+
+    const flags = useFlags(['toggle_filter','navbar_parkhang','header_logo','show_sidemenu']);
     const toggle_filter = flags.toggle_filter.enabled
     const navbar_parkhang = flags.navbar_parkhang.enabled
     const header_logo=flags.header_logo.enabled
     const show_sidemenu=flags.show_sidemenu.enabled
-console.log(show_sidemenu)
+
     let textListClassnames = [styles.listContainer];
 
     let minSize = constants.MIN_TEXT_LIST_WIDTH;

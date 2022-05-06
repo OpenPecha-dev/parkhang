@@ -1,4 +1,4 @@
-.Sidemenu{
+ .Sidemenu{
     display: flex;
     flex-direction:column;
     width: 100%;
@@ -10,10 +10,9 @@
     border-left:1px solid gray;
     z-index: 100;
 }
-
-.Sidemenu .editor>a,
-.Sidemenu .profile>a,
-.Sidemenu .settings>a{
+.Sidemenu .editor a,
+.Sidemenu .profile a,
+.Sidemenu .settings a{
     width: 100%;
 }
 
@@ -24,7 +23,6 @@
     width: 100%;
     align-items: center;
 }
-
 .editor{
     flex-basis: 200px;
     display: flex;
@@ -32,15 +30,13 @@
     justify-content: flex-start;
     gap:20px;
 }
-.editor>div{
-    flex:1;
-}
 hr{
     width:100%;
     height:1px;
     border:none;
     background-color: gray;
 }
+
 .Sidemenu img{
     object-fit: contain;
     width:22px;
@@ -57,9 +53,21 @@ hr{
 .Sidemenu .logo:hover{
     background-color: lightgray;
 }
-
 .Sidemenu .settings{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
+.notLoggedIn{
+    display:flex;
+    width:100%;
+   flex-direction:column;
+   align-items:center;
+   justify-content:flex-start;
+   gap:10;
+
+}
+ 
+.notLoggedIn>a{
+    width:100%
+} 

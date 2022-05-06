@@ -5,8 +5,7 @@ import styles from "./AnnotationControlsHeader.css";
 import PageBreakIcon from "images/page_break_icon.svg";
 import NoteIcon from "images/note.svg";
 import QuestionIcon from "images/question_answer.svg";
-import ReactTooltip from 'react-tooltip'
-import ApplyTooltip from '../UI/ApplyTooltip';
+import TooltipCustom from '../UI/TooltipCustom';
 
 type Props = {
     addPageBreak: null | (() => void),
@@ -25,7 +24,7 @@ class AnnotationControlsHeader extends React.Component<Props> {
         const allowLineBreak = this.props.addLineBreak != null;
         return (
             <div className={styles.header}>
-                <ApplyTooltip tooltipName='Note'>
+                <TooltipCustom toolname={'Note'}>
                 <Button
                     noBezel={true}
                     icon={
@@ -40,8 +39,9 @@ class AnnotationControlsHeader extends React.Component<Props> {
                     onClick={this.props.addNote}
                     disabled={this.props.addNote ? false : true}
                    align='center'
-                /></ApplyTooltip>
-                <ApplyTooltip tooltipName='Question'>
+                /></TooltipCustom>
+                <TooltipCustom toolname={'Questions'}>
+
                 <Button
                     noBezel={true}
                     icon={
@@ -58,12 +58,14 @@ class AnnotationControlsHeader extends React.Component<Props> {
                     backgroundColor='transparent'
 
                 />
-                </ApplyTooltip>
-                <ApplyTooltip tooltipName='LineBreak'>
+                </TooltipCustom>
+
+                <TooltipCustom toolname={'Line Break'}>
+
                 <Button
                     noBezel={true}
                     color='#1E8E3E'
-                    fontSize='21px'
+                    fontSize='18px'
                     icon="&#182;"
                     accessoryType={allowLineBreak ? "ADD" : null}
                     onClick={this.props.addLineBreak}
@@ -72,9 +74,10 @@ class AnnotationControlsHeader extends React.Component<Props> {
                     backgroundColor='transparent'
 
                 />
-                </ApplyTooltip>
+                </TooltipCustom>
+
+                <TooltipCustom toolname={'Page Break'}>
               
-                <ApplyTooltip tooltipName='Page Break'>
                 <Button
                     noBezel={true}
                     icon={<PageBreakIcon width={21}
@@ -86,7 +89,8 @@ class AnnotationControlsHeader extends React.Component<Props> {
                     backgroundColor='transparent'
 
                 />
-                </ApplyTooltip>
+                </TooltipCustom>
+
             </div>
         );
     }

@@ -3,21 +3,24 @@ import ReactTooltip from 'react-tooltip'
 import { FormattedMessage, injectIntl } from "react-intl";
 
 
-function ApplyTooltip({children,tooltipName,format=null}) {
+function ApplyTooltip({children,tooltipName,format=null,effect='solid'}) {
 
 
 
 
   return (
     <>
-     <div data-tip data-for={tooltipName} >
+     <a  data-tip data-for={tooltipName}  >
      {children}
-     </div>
-              <ReactTooltip id={tooltipName}  type="dark" effect="solid">
+     </a>
+              <ReactTooltip
+               id={tooltipName}  type="dark" effect={effect}>
                  {format?<FormattedMessage id={format} />:<span>{tooltipName}</span>}
                 </ReactTooltip>
     </>
   )
 }
+
+
 
 export default ApplyTooltip

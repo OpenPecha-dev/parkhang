@@ -13,6 +13,7 @@
     --red: #840000;
     --cancel: #aaa;
     --active-button: active-button;
+    --white:white;
 }
 
 :export {
