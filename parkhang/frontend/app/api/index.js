@@ -104,6 +104,13 @@ export function setUserSettings(
 
 // GET DATA
 
+export function fetchChapterDetail(){
+  const  url="https://api.npoint.io/bf0ceeb6cdae14e09a17"
+    return request(GET, url);
+}
+
+
+
 export type SourceData = {
     id: number,
     name: string,

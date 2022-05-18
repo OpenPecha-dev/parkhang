@@ -50,6 +50,7 @@ let _searchResultsCache: {
 
 export type Props = {
     textListVisible: boolean,
+    editMenuVisible:Boolean,
     imagesBaseUrl: string,
     splitText: SplitText,
     didSelectSegmentIds: (segmentIds: string[]) => void,
@@ -68,7 +69,7 @@ export type Props = {
         length: number
     } | null,
     searchValue: string | null,
-    fontSize: number
+    fontSize: number,
 };
 
 export default class SplitTextComponent extends React.PureComponent<Props> {
@@ -84,6 +85,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     resizeHandler: () => void;
     selectionHandler: (e: Event) => void;
     textListVisible: boolean;
+    editMenuVisible:Boolean;
     activeSelection: Selection | null;
     selectedNodes: Node[] | null;
     // Whether the mouse button is down
@@ -112,6 +114,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         });
         this.rowRenderer = this.rowRenderer.bind(this);
         this.textListVisible = props.textListVisible;
+        this.editMenuVisible =props.editMenuVisible;
         this.activeSelection = null;
         this.selectedNodes = null;
         this._mouseDown = false;
@@ -522,12 +525,16 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             this.selectedElementId = controlsMeasurements.selectedElementId;
             this.selectedElementIds = controlsMeasurements.selectedElementIds;
         }
-
-        if (props.textListVisible !== this.textListVisible) {
+   
+       
+        if ((props.textListVisible !== this.textListVisible) || (props.editMenuVisible !== this.editMenuVisible)) {
             setTimeout(() => {
                 this.textListVisible = props.textListVisible;
+                this.editMenuVisible = props.editMenuVisible;
                 this.updateList(true);
             }, 500);
+
+        
         } else {
             if (changedWitness) {
                 this.updateList(true);
@@ -618,11 +625,6 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         this.componentDidUpdate();
     }
 
-    componentWillUnmount() {
-        document.removeEventListener("mousedown", this);
-        document.removeEventListener("mouseup", this);
-    }
-
     componentDidUpdate() {
         if (this.selectedNodes && this.selectedNodes.length > 0) {
             const selectedNodes = this.selectedNodes;
@@ -681,6 +683,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     }
 
     componentWillUnmount() {
+        document.removeEventListener("mousedown", this);
+        document.removeEventListener("mouseup", this);
         window.removeEventListener("resize", this.resizeHandler);
         document.removeEventListener("selectionchange", this.selectionHandler);
     }
@@ -764,7 +768,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             width={width}
                             overscanRowCount={3}
                             deferredMeasurementCache={cache}
-                        />
+                        >
+                        </List>
                     )}
                 </AutoSizer>
             </div>
@@ -872,6 +877,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     }): React.Element<CellMeasurer> {
         const props = this.props;
         const cache = this.cache;
+        // const menuVisible=this.props.menuListIsVisible
         const component = this;
         const pechaImageClass = props.showImages ? styles.pechaImage : null;
         let imageUrl = index;
@@ -960,6 +966,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             }
                             searchStringPositions={searchStringPositions}
                             fontSize={props.fontSize}
+                            // menuVisible={props.menuVisible}
                         />
                     </div>
                     {this.selectedTextIndex === index &&

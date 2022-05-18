@@ -60,8 +60,8 @@ export const UPDATED_TEMPORARY_ANNOTATION = "text/UPDATED_TEMPORARY_ANNOTATION";
 export const REMOVED_TEMPORARY_ANNOTATION = "text/REMOVED_TEMPORARY_ANNOTATION";
 
 // UI
-export const FILTER_TEXT = "textList/FILTER_TEXT";
 export const SELECTED_TEXT = "textList/SELECTED_TEXT";
+export const NO_SELECTED_TEXT="textList/NO_SELECTED_TEXT";
 export const CHANGED_SEARCH_VALUE = "textList/CHANGED_SEARCH_VALUE";
 export const SEARCHED_TEXT = "textList/SEARCHED_TEXT";
 export const UPDATED_SEARCH_RESULTS = "textList/UPDATED_SEARCH_RESULTS";
@@ -79,7 +79,10 @@ export const CHANGED_ACTIVE_TEXT_ANNOTATION =
     "text/CHANGED_ACTIVE_TEXT_ANNOTATION";
 
 export const CHANGED_TEXT_LIST_VISIBLE = "textList/CHANGED_TEXT_LIST_VISIBLE";
+export const CHANGED_MENU_LIST_VISIBLE = "textList/CHANGED_MENU_LIST_VISIBLE";
 export const CHANGED_TEXT_LIST_WIDTH = "textList/CHANGED_TEXT_LIST_WIDTH";
+export const CHANGED_MENU_LIST_WIDTH = "textList/CHANGED_MENU_LIST_WIDTH";
+
 
 export const CHANGED_WITNESS_SCROLL_POSITION =
     "text/CHANGED_WITNESS_SCROLL_POSITION";
@@ -97,10 +100,23 @@ export const LOADED_USER_SETTINGS = "user/LOADED_USER_SETTINGS";
 export const UPDATE_LOCALES = "i18n/UPDATE_LOCALES";
 export const SELECTED_LOCALE = "i18n/SELECT_LOCALE";
 
+// HOMEPAGE
+export const SELECT_TEXTTITLE = "title/SELECT_TEXTTITLE";
+export const CHANGE_LANGUAGE = "title/CHANGE_LANGUAGE";
+export const SELECT_CATEGORY ="title/SELECT_CATEGORY";
+export const SELECT_CHAPTER ="title/SELECT_CHAPTER";
+export const SET_TEXTDATA="title/SET_TEXTDATA";
+export const IS_LOADED="title/IS_LOADED"
+
 // URLS
+export const TEXTS = "urls/textSelection";
 export const TEXT_URL = "urls/TEXT";
 export const USER_URL = "urls/USER";
 export const TEXTID_ONLY_URL = "urls/TEXTID";
+export const TEXT_TITLE ="urls/title/TEXT";
+export const TEXT_CATEGORY = "urls/title/category";
+export const TEXT_CHAPTER= "urls/title/category/chapter";
+export const EDITOR="urls/editor";
 
 /** Action creators **/
 
@@ -468,6 +484,14 @@ export function loadedUserSettings(
 }
 
 /* UI */
+export type noSelectedTextAction = Action & TextDataAction;
+export function noSelectedText(data: api.TextData): noSelectedTextAction {
+    return {
+        type: NO_SELECTED_TEXT,
+        data
+    };
+}
+
 
 export type SelectedTextAction = Action & TextDataAction;
 export function selectedText(text: api.TextData): SelectedTextAction {
@@ -478,9 +502,9 @@ export function selectedText(text: api.TextData): SelectedTextAction {
 }
 
 export type FilterTextAction = Action & TextDataAction;
-export function filterText(data: string): FilterTextAction {
+export function filterText(data: number): FilterTextAction {
     return {
-        type: FILTER_TEXT,
+        type: FILTERED_TEXT,
         data
     };
 }
@@ -551,6 +575,16 @@ export type ChangedTextListWidth = Action & {
 export function changedTextListWidth(width: number): ChangedTextListWidth {
     return {
         type: CHANGED_TEXT_LIST_WIDTH,
+        width
+    };
+}
+
+export type ChangedMenuListWidth = Action & {
+    width: number
+};
+export function changedMenuListWidth(width: number): ChangedMenuListWidth {
+    return {
+        type: CHANGED_MENU_LIST_WIDTH,
         width
     };
 }
@@ -655,6 +689,19 @@ export function changedTextListVisible(
     };
 }
 
+
+export type ChangedMenuListVisibleAction = Action & {
+    isVisible: boolean
+};
+export function changedMenuListVisible(
+    isVisible: boolean
+): ChangedMenuListVisibleAction {
+    return {
+        type: CHANGED_MENU_LIST_VISIBLE,
+        isVisible
+    };
+}
+
 export type ChangedWitnessScrollPositionAction = Action & {
     witnessId: number,
     scrollPosition: number
@@ -739,10 +786,60 @@ export type TextUrlAction = {
         annotation?: string
     }
 };
+export type FilterUrlAction = {
+    type: string,
+    payload: {
+        author:string
+    }
+};
 
-export function enteredUrl(url: string) {
+export function enteredUrl(url: TextUrlAction) {
     return {
         type: TEXT_URL,
         payload: {}
     };
+}
+
+export function selectTextTitle(textTitle:string){
+   
+    return {
+        type:SELECT_TEXTTITLE,
+        payload:textTitle
+    }
+}
+
+export function selectActiveCategory(selectedCategory){
+  
+    return {
+        type:SELECT_CATEGORY,
+        payload:selectedCategory
+    }
+}
+
+export function selectActiveChapter(selectedChapter){
+    return {
+        type:SELECT_CHAPTER,
+        payload:selectedChapter
+    }
+}
+
+export function changeLanguage(selectedLanguage){
+    return {
+        type:CHANGE_LANGUAGE,
+        payload:selectedLanguage
+    }
+}
+
+export function setTextData(originData){
+    return {
+        type:SET_TEXTDATA,
+        payload:originData
+    }
+}
+
+export function changeIsLoaded(loaded){
+    return {
+        type:IS_LOADED,
+        payload:loaded
+    }
 }

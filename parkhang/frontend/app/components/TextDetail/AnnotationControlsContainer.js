@@ -25,6 +25,7 @@ import ReactDOMServer from "react-dom/server";
 import Question from "lib/Question";
 import type { QuestionData } from "./AnnotationControls";
 import {getTextFontSize} from 'reducers'
+
 const TEMPORARY_ANNOTATION_ID = -3;
 const BASE_NAME = "Working";
 
@@ -814,3 +815,4 @@ const AnnotationControlsContainer = connect(
 )(AnnotationControls);
 
 export default AnnotationControlsContainer;
+

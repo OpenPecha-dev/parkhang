@@ -15,7 +15,8 @@ import { getTextListVisible, getAccountOverlayVisible } from "reducers";
 import * as actions from "actions";
 import lopenlingLogo from "images/lopenling_logo.png";
 import UserIcon from "images/discourse_user.svg";
-
+import Link from 'redux-first-router-link'
+import Search from 'components/search'
 type LoginProps = {
     successRedirect: string,
     csrfToken: string
@@ -94,15 +95,29 @@ export const Header = (props: HeaderProps) => {
     const image_location =lopenlingLogo
     return (
         <header className={styles.header}>
-            <NavigationButton
+            {/* <NavigationButton
                 onClick={props.navigationButtonClicked}
                 className={styles.navigationButton}
                 title={toggleTitle}
-            />
-            <div className={styles.logo}>
-                <img src={image_location} height="40" />
+            /> */}
+           <Link to='/'>
+           <div  className={styles.logo}>
+                <img src={image_location} height="30" />
             </div>
+            
+           </Link> 
+             <div className={styles.navlinks}>
+                 <ul>
+                     <li><Link to='/textSelection'>Texts</Link></li>
+                     <li><Link to='/editor'>Editor</Link></li>
+                     <li><Link to='/#'>Topics</Link></li>
+                     <li><Link to='/#'>Community</Link></li>
+
+
+                 </ul>
+             </div>
             <LocaleSwitcher />
+            <Search/>
             {controls}
         </header>
     );

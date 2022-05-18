@@ -7,7 +7,7 @@ import * as actions from "actions";
 import { LocalesList } from "reducers/locales";
 import type { AppState } from "reducers";
 import styles from "./LocaleSwitcher.css";
-
+import Globe from 'images/globe.svg';
 type Props = {
     locales: LocalesList,
     selectLocale: (locale: string) => void
@@ -17,26 +17,39 @@ class LocaleSwitcher extends React.Component<Props> {
 
  
     render() {
- 
+        const activeLocale=this.props.activeLocale
         const locales = this.props.locales.map(localeData => {
-            return (
+           let isActive=localeData.locale===activeLocale
+           let classname=[styles.localeOption]
+           if(isActive){
+               classname.push(styles.activeLocale)
+           } 
+           return (
                 <div
                     key={localeData.locale}
-                    className={styles.localeOption}
+                    className={classnames(classname)}
                     onClick={() => this.props.selectLocale(localeData.locale)}
                 >
                     {localeData.displayName}
                 </div>
             );
         });
-        return <div className={styles.localeOptions}>{locales}</div>;
+        return <div className={styles.locale} onClick={this.handleLocaleClick}>
+        <div className={styles.Globe}><Globe/>
+        <div>{activeLocale}</div>
+        </div>
+          <div className={styles.localeOptions}> {locales}
+          </div>
+        </div>;
     }
 }
 
 function mapStateToProps(state: AppState) {
     const locales = reducers.getLocales(state);
+    const activeLocale= reducers.getActiveLocale(state);
     return {
-        locales: locales
+        locales: locales,
+        activeLocale
     };
 }
 
@@ -45,6 +58,7 @@ function mapDispatchToProps(dispatch) {
         selectLocale: (locale: string) => {
             dispatch(actions.selectedLocale(locale));
         }
+     
     };
 }
 

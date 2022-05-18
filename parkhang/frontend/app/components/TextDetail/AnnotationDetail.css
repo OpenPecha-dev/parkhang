@@ -18,7 +18,7 @@
     flex-direction: column;
     width: 100%;
     margin: 5px 10px 0px 0;
-    padding: 0 0 10px 0;
+    padding: 0 0 0 0;
     background-color: #ddd;
     position: relative;
     box-shadow: 0px 2px 1px rgba(0,0,0,0.2);
@@ -52,6 +52,7 @@
 .annotationHeader {
     display: flex;
     align-items: flex-start;
+    background-color: #aebcc7;
 }
 
 .annotationDetail.active h3 {
@@ -86,11 +87,12 @@
 .edit {
     @apply --button;
     display: flex;
-    margin: 5px;
+    margin: 5px auto;
     color: white;
     background-color: var(--main-tint);
     padding: 5px 8px 5px 5px;
     flex-shrink: 0;
+    margin-right: 10px;
 }
 
 .edit svg {
@@ -111,57 +113,4 @@
     color: white;
     background-color: var(--cancel);
     @apply --button;
-}
-.shareContainer{
-    position: absolute;
-    right:3px;
-    bottom:2px;
-    display: flex;
-    overflow: hidden;
-    cursor: pointer;
-    font-size: 14px;
-    transition: .3s linear;
-    padding-inline:8px;
-}
-.shareContainer:hover{
-    transform: scale(1.1);
-}
-.shareButton{
-position:absolute;
-height: 100%;
-width: 100%;
-display: flex;
-justify-content: space-around;
-color:var(--main-tint);
-text-align: center;
-line-height: 20px;
-z-index: 444;
-transition: .6s linear;
-}
-.shareContainer:hover .shareButton{
-    transform: translateY(-100%);
-    transition-delay: .3s;
-
-}
-.facebookButton ,.whatsappButton{
-    
-    transform: translateY(-100%);
-    opacity: 0;
-    transition: .3s linear; 
-    padding-inline:5px;
-
-}
-.shareContainer:hover .facebookButton,
-.shareContainer:hover .whatsappButton{
-    opacity: 1;
-    transform: translateY(0);
-}
-.shareContainer:hover .facebookButton{
-    transition-delay: 0.3s;
-}
-.shareContainer:hover .whatsappButton{
-    transition-delay: 0.5s;
-}
-.facebookButton{
-    margin-right: 5px;
 }

@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import dataReducers, * as data from "./data";
 import uiReducers, * as ui from "./ui";
 import userReducers, * as user from "./user";
+import categoryReducers,* as category from './category';
 import * as actions from "actions";
 import * as api from "api";
 import Annotation, {
@@ -44,13 +45,15 @@ export const localesReducer = createReducer(
     locales.initialLocalesState,
     localesReducers
 );
+export const categoryReducer =createReducer(category.initialCategoryState,categoryReducers);
 
 export type AppState = {
     data: data.DataState,
     ui: ui.UIState,
     user: user.UserState,
     intl: { locale: string, messages: { [string]: string } },
-    locales: locales.LocaleState
+    locales: locales.LocaleState,
+    category: any
 };
 
 /* Selectors */
@@ -145,9 +148,15 @@ export const getActiveTextAnnotation = (
 export const getTextListVisible = (state: AppState): boolean => {
     return ui.getTextListVisible(state.ui);
 };
+export const getMenuListVisible = (state: AppState): boolean => {
+    return ui.getMenuListVisible(state.ui);
+};
 
 export const getTextListWidth = (state: AppState): number => {
     return ui.getTextListWidth(state.ui);
+};
+export const getMenuListWidth = (state: UIState): number => {
+    return  ui.getMenuListWidth(state.ui);;
 };
 
 export const getTemporaryAnnotations = (
@@ -392,6 +401,15 @@ export const getQuestions = (
 ): Question[] | null => {
     return data.getQuestions(state.data, questionId);
 }
+// get selectedTextTitle
+
+
+export const getTextTitle = (
+    state: AppState
+): any | null => {
+    return category.getTextTitleData(state.category);
+}
+
 
 // Root
 
@@ -400,7 +418,8 @@ export const allReducers = {
     ui: uiReducer,
     user: userReducer,
     intl: intlReducer,
-    locales: localesReducer
+    locales: localesReducer,
+    category: categoryReducer
 };
 
 const rootReducer = combineReducers(allReducers);

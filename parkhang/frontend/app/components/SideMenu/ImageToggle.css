@@ -1,0 +1,13 @@
+.imageToggle {
+    display: flex;
+    margin:0 auto;
+    justify-content: center;
+}
+.imageToggleclicked svg{
+    margin:0 auto;
+    width: 20px;
+    object-fit: contain;
+}
+.clicked svg path{
+    fill:gray;
+}

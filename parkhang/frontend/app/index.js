@@ -2,9 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Cookies from "js-cookie";
 import AppContainer from "components/App/AppContainer";
-
+import flagsmith from 'flagsmith'
+import {FlagsmithProvider} from 'flagsmith/react'
 // For dev only
 import { composeWithDevTools } from "redux-devtools-extension";
+import * as api from "api";
 
 // Redux
 import { createStore, applyMiddleware, compose } from "redux";
@@ -71,8 +73,13 @@ const routesMap = {
     HOME: "/",
     [actions.TEXT_URL]: "/texts/:textId/witnesses/:witnessId/:annotation?",
     USER: "/user/:id",
-    [actions.TEXTID_ONLY_URL]: "/texts/:textId"
-    };
+    [actions.TEXTID_ONLY_URL]: "/texts/:textId",
+    [actions.TEXTS]:"/textSelection",
+    [actions.TEXT_TITLE]: "/title/:title",
+    [actions.TEXT_CATEGORY]: "/title/:title/category/:category",
+    [actions.TEXT_CHAPTER]: "/title/:title/category/:category/chapter/:chapter", 
+    [actions.EDITOR]:"/editor"
+};
 const routes = connectRoutes(routesMap, {
     initialDispatch: false
 });
@@ -89,6 +96,7 @@ let store = createStore(
         applyMiddleware(...middlewares)
     )
 );
+
 if (process.env.NODE_ENV === "development") {
     store = createStore(
         enableBatching(locationRootReducer),
@@ -136,10 +144,19 @@ function intlSelector(state) {
     };
 }
 
+
+const environmentID= process.env.NODE_ENV==='development'?'3Dt7CemgqtVS5RUzFovjx9':'YrffVXdfn7BzSFVmLBFdrv';
+
 ReactDOM.render(
     <Provider store={store}>
         <IntlProvider textComponent={Fragment} intlSelector={intlSelector}>
+        <FlagsmithProvider
+           options={{
+             environmentID,
+           }}
+           flagsmith={flagsmith}>
             <AppContainer />
+            </FlagsmithProvider>
         </IntlProvider>
     </Provider>,
     document.getElementById("app")

@@ -44,7 +44,8 @@ import {
     getScrollPosition,
     getSelectedSearchResult,
     getSearchValue,
-    getTextFontSize
+    getTextFontSize,
+    getMenuListVisible
 } from "reducers";
 import _ from "lodash";
 
@@ -293,6 +294,7 @@ const mapStateToProps = state => {
     }
 
     _selectedWitness = selectedWitness;
+    let menuListIsVisible= getMenuListVisible(state)
 
     return {
         text: selectedText,
@@ -315,7 +317,8 @@ const mapStateToProps = state => {
         selectedWitness,
         selectedSearchResult,
         searchValue,
-        fontSize
+        fontSize,
+        menuListIsVisible
     };
 };
 

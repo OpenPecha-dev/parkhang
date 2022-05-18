@@ -6,6 +6,7 @@
     flex-grow: 1;
     min-width: 0;
     font-size: 24px;
+    padding:10px;
 }
 
 .splitText *:focus {
@@ -15,7 +16,6 @@
 .splitTextRowContent {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
 }
 
 .splitTextRow {

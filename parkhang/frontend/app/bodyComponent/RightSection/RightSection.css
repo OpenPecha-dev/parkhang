@@ -1,0 +1,37 @@
+.RightSection{
+    width: 420px;
+    background-color: #FBFBFA;
+    border-top: 80px solid #FBFBFA;
+    border-bottom: 120px solid #FBFBFA;
+    margin: -80px 0 0 0;
+}
+.RightTitle{
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 34px;
+   
+}
+.RightModule{
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 34px;
+    padding: 0 44px;
+}
+.RightModule a{
+    color: inherit;
+    text-decoration: underline;
+    margin-inline-start: 5px;
+}
+.RightTitle  h3{
+    margin: 0 0 20px;
+    font-size: 22px;
+    border-bottom: 1px solid #666;
+    padding-bottom: 14px;
+    font-weight: 500;
+    height: auto;
+    text-transform: uppercase;
+}
+.Discription{
+    color: #666;
+    text-decoration: none
+}

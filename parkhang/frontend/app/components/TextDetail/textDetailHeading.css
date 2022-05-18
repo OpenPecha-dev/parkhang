@@ -1,0 +1,50 @@
+.textDetailHeading{
+    font-weight: bold;
+    align-items: center;
+    background-color: white;
+    padding:10px 0px;
+  display: flex;
+}
+.textHeadingTitle{
+text-align: center;
+margin-left:40px;
+}
+.textDetailHeading span{
+    height: 16px;
+    overflow: hidden;
+    width: 16px;
+    justify-content: center;
+    align-items: center;
+    transition: .3s ease 0ms;
+}
+.leftLogo svg:hover, .rightLogo svg:hover{
+    background-color: darkgray;
+    cursor: pointer;
+}
+.leftLogo svg, .rightLogo svg{
+    height: 100%;
+    width: 100%;
+
+}
+.leftLogo{
+    float:left;
+}
+.rightLogo{
+    transform: rotate(180deg);
+    float:right;
+}
+.tick>svg{
+    position:relative;
+    top:5px;
+    left:20px;
+    height:15px;
+    width: 15px;
+    border:1px solid green;
+    border-radius: 50%;
+}
+.tick>svg path{
+    fill :green;
+}
+.selectVersion{
+    flex:1
+}

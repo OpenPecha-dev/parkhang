@@ -1,49 +1,6 @@
 {
-  "status": "done",
-  "assets": {
-    "8967124136190c7842d863e4a862a528.png": {
-      "name": "8967124136190c7842d863e4a862a528.png",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\8967124136190c7842d863e4a862a528.png",
-      "publicPath": "/static/bundles/8967124136190c7842d863e4a862a528.png"
-    },
-    "styles-89c03b7f2b93c7855f4b.css": {
-      "name": "styles-89c03b7f2b93c7855f4b.css",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-89c03b7f2b93c7855f4b.css",
-      "publicPath": "/static/bundles/styles-89c03b7f2b93c7855f4b.css"
-    },
-    "parkhang-89c03b7f2b93c7855f4b.js": {
-      "name": "parkhang-89c03b7f2b93c7855f4b.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-89c03b7f2b93c7855f4b.js",
-      "publicPath": "/static/bundles/parkhang-89c03b7f2b93c7855f4b.js"
-    },
-    "vendors~docx-89c03b7f2b93c7855f4b.js": {
-      "name": "vendors~docx-89c03b7f2b93c7855f4b.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-89c03b7f2b93c7855f4b.js",
-      "publicPath": "/static/bundles/vendors~docx-89c03b7f2b93c7855f4b.js"
-    },
-    "styles-89c03b7f2b93c7855f4b.css.map": {
-      "name": "styles-89c03b7f2b93c7855f4b.css.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-89c03b7f2b93c7855f4b.css.map",
-      "publicPath": "/static/bundles/styles-89c03b7f2b93c7855f4b.css.map"
-    },
-    "parkhang-89c03b7f2b93c7855f4b.js.map": {
-      "name": "parkhang-89c03b7f2b93c7855f4b.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-89c03b7f2b93c7855f4b.js.map",
-      "publicPath": "/static/bundles/parkhang-89c03b7f2b93c7855f4b.js.map"
-    },
-    "vendors~docx-89c03b7f2b93c7855f4b.js.map": {
-      "name": "vendors~docx-89c03b7f2b93c7855f4b.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-89c03b7f2b93c7855f4b.js.map",
-      "publicPath": "/static/bundles/vendors~docx-89c03b7f2b93c7855f4b.js.map"
-    }
-  },
-  "chunks": {
-    "parkhang": [
-      "styles-89c03b7f2b93c7855f4b.css",
-      "parkhang-89c03b7f2b93c7855f4b.js",
-      "styles-89c03b7f2b93c7855f4b.css.map",
-      "parkhang-89c03b7f2b93c7855f4b.js.map"
-    ]
-  },
+  "status": "compile",
+  "assets": {},
+  "chunks": {},
   "publicPath": "/static/bundles/"
 }
