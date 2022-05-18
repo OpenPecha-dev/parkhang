@@ -10,11 +10,14 @@ import "react-virtualized/styles.css"; // only needs to be imported once
 import { List } from "react-virtualized/dist/es/List";
 import * as api from "api";
 import addTibetanShay from "lib/addTibetanShay";
-import styles from "./TextList.css";
+import styles from "./TextList.css"
 import Loader from "react-loader";
 import HighlightedString from "./HighlightedString";
 import ResultCount from "./ResultCount";
 import LoadMore from "./LoadMore";
+
+
+
 
 type Props = {
     selectedText: api.TextData,
@@ -39,6 +42,7 @@ type Props = {
 
 const DEFAULT_ROW_HEIGHT = 60;
 
+
 class TextList extends React.Component<Props> {
     list: List | null;
     cache: CellMeasurerCache;
@@ -48,6 +52,7 @@ class TextList extends React.Component<Props> {
         parent: {},
         style: {}
     }) => React.Element<CellMeasurer>;
+     
 
     constructor(props: Props) {
         super(props);
@@ -63,7 +68,9 @@ class TextList extends React.Component<Props> {
         this.cache.clearAll();
         if (this.list) this.list.forceUpdateGrid();
     }
-
+    componentDidMount(){
+    }
+    
     rowRenderer({
         key,
         index,
@@ -75,6 +82,7 @@ class TextList extends React.Component<Props> {
         parent: {},
         style: {}
     }): React.Element<CellMeasurer> {
+
         const selectedText = this.props.selectedText;
         const selectedTextId = selectedText ? selectedText.id : -1;
         const selectedSearchResult = this.props.selectedSearchResult;
@@ -83,8 +91,8 @@ class TextList extends React.Component<Props> {
         const onSelectedSearchResult = this.props.onSelectedSearchResult;
         const searchTerm = this.props.searchTerm;
         const searchResults = this.props.searchResults;
-
         let className = styles.textListRow;
+
         const text = texts[index];
         if (text.id === selectedTextId) {
             className = classnames(className, styles.selectedRow);
@@ -160,7 +168,7 @@ class TextList extends React.Component<Props> {
         const searchText = () => {
             this.props.onSearchText(text, searchTerm);
         };
-
+         
         return (
             <CellMeasurer
                 columnIndex={0}
@@ -192,26 +200,28 @@ class TextList extends React.Component<Props> {
             </CellMeasurer>
         );
     }
-
+   findRowHeight({searchTerm}){
+    return searchTerm ? null: 40;
+  }
     render() {
         const texts = this.props.texts;
         let rowCount = texts.length;
-
         return (
             <div className={styles.textList}>
                 {this.props.texts && this.props.texts.length > 0 ? (
                     <AutoSizer>
                         {({ height, width }) => (
+                           
                             <List
                                 ref={list => (this.list = list)}
                                 height={height}
                                 rowCount={rowCount}
-                                rowHeight={this.cache.rowHeight}
+                                rowHeight={this.findRowHeight(this.props)||this.cache.rowHeight}
                                 rowRenderer={this.rowRenderer}
                                 width={width}
                                 overscanRowCount={3}
                                 deferredMeasurementCache={this.cache}
-                            />
+                           />
                           
                         )}
                     </AutoSizer>

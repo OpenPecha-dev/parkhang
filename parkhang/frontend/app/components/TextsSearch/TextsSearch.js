@@ -1,8 +1,10 @@
 // @flow
 import React from "react";
 import styles from "./TextsSearch.css";
+
 import { injectIntl } from "react-intl";
 import Button from "components/UI/Button";
+import SearchIcon from "images/search.svg";
 
 type Props = {
     searchValue: string,
@@ -26,6 +28,7 @@ const TextsSearch = (props: Props) => {
             <div className={styles.textsSearch}>
                 <form onSubmit={initiateSearch}>
                     <input
+                        style={{outline:'none'}}
                         type="text"
                         id="textSearchInput"
                         placeholder={props.intl.formatMessage({
@@ -34,7 +37,8 @@ const TextsSearch = (props: Props) => {
                         ref={textInput}
                     />
                     <Button
-                        onClick={initiateSearch}
+                    backgroundColor='#35BF5C'
+                        onClick={initiateSearch}                    
                         title={props.intl.formatMessage({
                             id: "leftbar.search"
                         })}

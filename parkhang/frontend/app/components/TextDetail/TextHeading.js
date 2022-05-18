@@ -32,9 +32,13 @@ const TextHeading = (props: Props) => {
 
     return (
         <div className={styles.headingContainer}>
+          
             <div className={styles.topRow}>
-                <h2 className={styles.textHeading}>{name}</h2>
-
+            <TabBar
+                witnesses={props.witnesses}
+                activeWitness={props.selectedWitness}
+                onSelectedWitness={props.onSelectedWitness}
+            />
                 {props.selectedWitness && (
                     <div className={styles.controls}>
                         {!props.selectedWitness.isWorking && (
@@ -50,17 +54,12 @@ const TextHeading = (props: Props) => {
                         {!props.exportingWitness && (
                             <ExportControl onClick={props.onExport} />
                         )}
+                         {/* <div className={styles.textHeadingloader}>
+                            <Loader loaded={!props.exportingWitness} scale={0.5} />
+                       </div> */}
                     </div>
-                )}
-                <div className={styles.textHeadingloader}>
-                    <Loader loaded={!props.exportingWitness} scale={0.5} />
-                </div>
+                )}            
             </div>
-            <TabBar
-                witnesses={props.witnesses}
-                activeWitness={props.selectedWitness}
-                onSelectedWitness={props.onSelectedWitness}
-            />
         </div>
     );
 };

@@ -1,0 +1,23 @@
+
+.langSelection span{
+    text-align: center;
+    color: #ccc;
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 22px;
+    flex-direction: row;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}

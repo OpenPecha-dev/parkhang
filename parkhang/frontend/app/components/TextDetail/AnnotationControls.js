@@ -20,6 +20,7 @@ import PageBreakIcon from "images/page_break_icon.svg";
 import { List } from "react-virtualized/dist/es/List";
 import AnnotationControlsHeader from "./AnnotationControlsHeader";
 import Question from "lib/Question";
+import flagsmith from "flagsmith";
 
 import type { AnnotationUniqueId } from "lib/Annotation";
 
@@ -76,10 +77,12 @@ const anchorPoints = {
     right: 4
 };
 
-export default class AnnotationControls extends React.Component<Props> {
+ class AnnotationControls extends React.Component<Props> {
     controls: HTMLDivElement | null;
     arrow: HTMLDivElement | null;
     arrowDs: HTMLDivElement | null;
+    fake_login_toggle: null;
+
 
     constructor(props: Props) {
         super(props);
@@ -87,10 +90,14 @@ export default class AnnotationControls extends React.Component<Props> {
         this.controls = null;
         this.arrow = null;
         this.arrowDs = null;
+
+       
+         
     }
 
     componentDidMount() {
         this.updatePosition();
+        this.fake_login_toggle=flagsmith.hasFeature('fake_login_toggle');
     }
 
     componentDidUpdate() {
@@ -217,8 +224,7 @@ export default class AnnotationControls extends React.Component<Props> {
                 // right-side of selection
                 arrow.className = styles.arrowLeft;
                 arrow.style.left = -arrow.offsetWidth + "px";
-                controls.style.left =
-                    selectedLeft + selectedWidth + arrow.offsetWidth + "px";
+                controls.style.left = selectedLeft + selectedWidth + arrow.offsetWidth + "px";
             }
 
             arrow.style.top =
@@ -338,6 +344,7 @@ export default class AnnotationControls extends React.Component<Props> {
             breakSelected = true;
         }
         // the selected word/sentence is props.anotationsData
+        
         if (props.annotationsData) {
             props.annotationsData.map(annotationData => {
                
@@ -378,8 +385,41 @@ export default class AnnotationControls extends React.Component<Props> {
                     );
                     temporaryAnnotations.push(annotationDetail);
                 } else {
-                    let annotationDetail = (
+                    if(annotationData.name===' Working; སྡེ་དགེ'||annotationData.name===' མཉམ་འབྲེལ་པར་མ།། སྡེ་དགེ'){
+                       if(!isEditing){
+                        let annotationDetail = (
+
+                            <AnnotationDetail
+                                isWorkingSection={true}
+                                fontSize={props.fontSize}
+                                annotationData={annotationData}
+                                key={annotationData.annotation.uniqueId}
+                                isActive={isActive}
+                                selectAnnotationHandler={() => {
+                                    if (isLoggedIn && !isEditing) {
+                                        props.didSelectAnnotation(
+                                            annotationData.annotation
+                                        );
+                                    }
+                                }}
+                                editAnnotationHandler={() => {
+                                    if (isLoggedIn && !isEditing) {
+                                        props.editAnnotation(
+                                            annotationData.annotation
+                                        );
+                                    }
+                                }}
+                                isLoggedIn={isLoggedIn}
+                            />
+                        );
+                        annotations.push(annotationDetail);
+                            }
+                    }
+                    else {
+                      let annotationDetail = (
+
                         <AnnotationDetail
+                            isWorkingSection={false}
                             fontSize={props.fontSize}
                             annotationData={annotationData}
                             key={annotationData.annotation.uniqueId}
@@ -402,12 +442,13 @@ export default class AnnotationControls extends React.Component<Props> {
                         />
                     );
                     annotations.push(annotationDetail);
+                        }
                 }
             }, this);
-
-            if (!props.user.isLoggedIn) {
+            if (!this.fake_login_toggle===!props.user.isLoggedIn) {
                 // NOTE: FormattedMessage cannot take a child when using
                 // the values option, so need to wrap it in a div
+                
                 anonymousUserMessage = (
                     <div className={styles.anonymousMessage}>
                         <FormattedMessage
@@ -542,6 +583,7 @@ export default class AnnotationControls extends React.Component<Props> {
                 (question: Annotation) => {
                     tempQuestionIds[question.uniqueId] = question.uniqueId;
                     let key = "QUESTION_" + question.uniqueId;
+                    
                     return (
                         <QuestionEditor
                             question={question}
@@ -612,6 +654,7 @@ export default class AnnotationControls extends React.Component<Props> {
         let showHeader = true;
         if (anonymousUserMessage || breakSelected) showHeader = false;
 
+
         return (
             <div
                 className={classnames(...classes)}
@@ -654,3 +697,6 @@ export default class AnnotationControls extends React.Component<Props> {
         );
     }
 }
+
+
+export default AnnotationControls;

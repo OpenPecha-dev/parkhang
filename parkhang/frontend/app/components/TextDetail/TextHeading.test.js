@@ -5,8 +5,6 @@ import TextHeading from "./TextHeading";
 import Source from "lib/Source";
 import User from "lib/User";
 import Witness from "lib/Witness";
-import Text from "lib/Text";
-
 
 configure({ adapter: new Adapter() });
 

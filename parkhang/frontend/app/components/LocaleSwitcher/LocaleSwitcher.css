@@ -1,26 +1,40 @@
-.localeOptions {
+.locale {
     margin-right: 40px;
     display: flex;
-    align-items: center;
+    position: relative;
+   font-size: 14px;
+   align-items: center;
+   justify-content: center;
 }
 
-.localeOption {
+.localeOptions {
     font-size: 15px;
     padding: 0 10px;
     cursor: pointer;
-}
-.localeOption:hover {
-    font-size: 17px;
-    padding: 0 10px;
-    cursor: pointer;
-    background-color: #aaa;
-    color:white;
+    position : absolute;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width:max-content;
+    opacity: 0;
+    transition: 0.3s all linear;
+    left:-60px;
+    top:-200px;
+    background-color: rgba(12,32,12,0.1);
     border-radius: 10px;
+    padding:4px;
 }
-.selected {
-    font-weight: bold;
+.locale:hover .localeOptions{
+ opacity:1;
+ top:0;
 }
-
-.localeOption:not(:nth-child(1)) {
-    border-left: 1px solid white;
+.activeLocale{
+    font-weight: 600;
+    color:black;
+}
+.Globe{
+    display: flex;
+    flex-direction: column;
+    gap:0;
+    margin-top: 10px;
 }

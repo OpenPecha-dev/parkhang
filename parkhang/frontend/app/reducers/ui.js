@@ -19,6 +19,8 @@ export type UIState = {
     activeTextAnnotations: { [textId: number]: Annotation },
     textListVisible: boolean,
     textListWidth: number,
+    menuListVisible: boolean,
+    menuListWidth: number,
     temporaryAnnotations: {
         [witnessId: number]: {
             [tempAnnotationKey: string]: TemporaryAnnotation[]
@@ -45,6 +47,7 @@ export const initialUIState = {
     activeAnnotations: {},
     activeTextAnnotations: {},
     textListVisible: true,
+    menuListVisible: true,
     textListWidth: 240,
     temporaryAnnotations: {},
     scrollPositions: {},
@@ -86,13 +89,24 @@ function selectedText(
     return state;
 }
 
+function noSelectedText(
+    state: UIState,
+    action: actions.SelectedTextAction
+): UIState {
+    state = {
+        ...state,
+        selectedText: action.data
+    };
+    return state;
+}
+
 function filterAuthor(
     state: UIState,
     action: actions.SelectedTextAction
 ): UIState {
     state = {
         ...state,
-        filterAuthor: action.data
+        selectedText: action.data
     };
     return state;
 }
@@ -248,6 +262,16 @@ function textListVisibleChanged(
     };
 }
 
+function menuListVisibleChanged(
+    state: UIState,
+    action: actions.ChangedTextListVisibleAction
+): UIState {
+    return {
+        ...state,
+        menuListVisible: action.isVisible
+    };
+}
+
 function textListWidthChanged(
     state: UIState,
     action: actions.ChangedTextListWidth
@@ -255,6 +279,16 @@ function textListWidthChanged(
     return {
         ...state,
         textListWidth: action.width
+    };
+}
+
+function menuListWidthChanged(
+    state: UIState,
+    action: actions.ChangedTextListWidth
+): UIState {
+    return {
+        ...state,
+        menuListWidth: action.width
     };
 }
 
@@ -372,7 +406,8 @@ function changedAccountOverlay(
 const uiReducers = {};
 uiReducers[actions.LOADED_USER_SETTINGS] = loadedUserSettings;
 uiReducers[actions.SELECTED_TEXT] = selectedText;
-uiReducers[actions.FILTER_TEXT] = filterAuthor;
+uiReducers[actions.FILTERED_TEXT] = filterAuthor;
+uiReducers[actions.NO_SELECTED_TEXT] = noSelectedText;
 uiReducers[actions.SELECTED_WITNESS] = selectedTextWitness;
 uiReducers[actions.CHANGED_SEARCH_VALUE] = changedSearchValue;
 uiReducers[actions.SELECTED_SEARCH_RESULT] = selectedSearchResult;
@@ -384,7 +419,9 @@ uiReducers[
     actions.CHANGED_ACTIVE_TEXT_ANNOTATION
 ] = changedActiveTextAnnotation;
 uiReducers[actions.CHANGED_TEXT_LIST_VISIBLE] = textListVisibleChanged;
+uiReducers[actions.CHANGED_MENU_LIST_VISIBLE] = menuListVisibleChanged;
 uiReducers[actions.CHANGED_TEXT_LIST_WIDTH] = textListWidthChanged;
+uiReducers[actions.CHANGED_MENU_LIST_WIDTH] = menuListWidthChanged;
 uiReducers[actions.ADDED_TEMPORARY_ANNOTATION] = addedTemporaryAnnotation;
 uiReducers[actions.REMOVED_TEMPORARY_ANNOTATION] = removedTemporaryAnnotation;
 uiReducers[actions.CHANGED_WITNESS_SCROLL_POSITION] = changedScrollPosition;
@@ -446,9 +483,14 @@ export const getActiveTextAnnotation = (
 export const getTextListVisible = (state: UIState): boolean => {
     return state.textListVisible;
 };
-
+export const getMenuListVisible = (state: UIState): boolean => {
+    return state.menuListVisible;
+};
 export const getTextListWidth = (state: UIState): number => {
     return state.textListWidth;
+};
+export const getMenuListWidth = (state: UIState): number => {
+    return state.menuListWidth;
 };
 
 export const getTemporaryAnnotations = (

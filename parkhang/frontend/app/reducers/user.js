@@ -3,7 +3,6 @@ import * as actions from "actions";
 import User, { getAnonymousUser, DEFAULT_LOCALE } from "lib/User";
 
 const anonymousUser = getAnonymousUser();
-
 export type UserState = {
     userId: number,
     userName: string,
@@ -17,6 +16,7 @@ export const initialUserState: UserState = {
 };
 
 function userLoggedIn(state: UserState, action: actions.UserAction): UserState {
+
     return {
         ...state,
         userId: action.userId,

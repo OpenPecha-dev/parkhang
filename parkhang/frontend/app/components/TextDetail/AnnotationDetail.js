@@ -6,11 +6,7 @@ import styles from "./AnnotationDetail.css";
 import type { AnnotationData } from "api";
 import CheckIcon from "images/check_circle.svg";
 import colours from "css/colour.css";
-import ShareIcon from 'images/share.svg';
-import {FacebookShareButton,
-    WhatsappShareButton,
-    FacebookIcon,
-    WhatsappIcon} from 'react-share'
+import ShareButton from "../UI/ShareButton";
     
 
 
@@ -20,9 +16,9 @@ export type Props = {
     selectAnnotationHandler: () => void,
     isLoggedIn: boolean,
     editAnnotationHandler: () => void,
-    fontSize: Number
+    fontSize: Number,
+    isWorkingSection:boolean
    }; 
-
 const MAXIMUM_TEXT_LENGTH = 250;
 
 const AnnotationDetail = (props: Props) => {
@@ -102,11 +98,12 @@ const AnnotationDetail = (props: Props) => {
                             width={15}
                             height={15}
                         />
-                    </div>
-                )}
+                        </div>
+                  
+                                  )}
                 <h3>{props.annotationData.name}</h3>
                 {props.isLoggedIn &&
-                    props.isActive && (
+                   props.isActive && (
                         <button
                             className={styles.edit}
                             onClick={props.editAnnotationHandler}
@@ -133,12 +130,9 @@ const AnnotationDetail = (props: Props) => {
                     )}
             </div>
 
-            {desc}
-            
-
-
-
-            <Sharebutton props={props}/>
+           {!props.isWorkingSection && desc}
+         
+         {props.isWorkingSection  && <ShareButton props={props}/>}
                       
         </div>
     );
@@ -146,43 +140,6 @@ const AnnotationDetail = (props: Props) => {
 
 
 
-
-
-const Sharebutton=({props})=>{
-    return (
-        <div className={styles.shareContainer}>
-            <div className={styles.shareButton}>
-                 <FormattedMessage id="annotation.share" />
-              
-                 </div>
-            <FacebookShareButton
-            className={styles.facebookButton}
-                id="sharebutton"
-                url={`https://parkhang.lopenling.org${window.location.pathname}`}
-                quote={props.annotationData.content}
-                hashtag="#openPecha"
-            >
-                <FacebookIcon size={20} round={true} />
-            </FacebookShareButton>
-            <WhatsappShareButton
-                className={styles.whatsappButton}
-                onClick={() =>
-                    console.log(
-                        `https://parkhang.lopenling.org${window.location.pathname}`
-                    )
-                }
-                title="Parkhang"
-                url={`https://parkhang.lopenling.org${window.location.pathname}`}
-            >
-                <WhatsappIcon size={20} round={true} />
-            </WhatsappShareButton>
-               {/* <img onClick={ImageDownload} className={styles.downloadlogo} src="https://img.icons8.com/material-outlined/24/000000/download--v1.png"/>
-                <img onClick={runClick} className={styles.downloadlogo} src="https://img.icons8.com/windows/32/000000/upload.png"/> */}
-    
-           
-             </div>
-    );
-}
 
 
 export default AnnotationDetail;
