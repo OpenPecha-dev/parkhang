@@ -1,0 +1,40 @@
+.Search{
+    /* overflow: hidden; */
+    display: flex;
+    align-items: center;
+    padding: 0;
+    text-align: inherit;
+    background: #EDEDEC;
+    border-radius: 100px;
+    height: 30px;
+    margin-right:20px;
+}
+.Search input{
+background-color: transparent;
+outline: none;
+border:none ;
+}
+.Search input:focus {
+width: 250px;
+}
+.submit{
+    margin-top:6px;
+   padding-left:10px;
+    opacity: 0.4;
+    object-fit: contain;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.reset{
+    border:none;
+    outline:none;
+    cursor: pointer;
+    margin-right:4px;
+    color:red;
+    opacity: 0;
+    transition: 0.3s all linear;
+}
+.reset.active{
+    opacity: 1;
+}

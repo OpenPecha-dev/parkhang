@@ -11,7 +11,6 @@ import {
     all,
     delay
 } from "redux-saga/effects";
-import {authorDetails} from 'app_constants/demoAuthorData'
 
 import FileSaver from "file-saver";
 import * as actions from "actions";
@@ -247,55 +246,6 @@ function* watchSelectedText(): Saga<void> {
     yield takeEvery(actions.SELECTED_TEXT, selectedText);
 }
 
-//FILTER TEXT
-function* filteredText(action: actions.SelectedTextAction): Saga<void> {
- try{
-    if(authorDetails.length>1){
-    for (var i=0;i<authorDetails?.length;i++){
-       if(authorDetails[i].id == action.data){
-           var text=authorDetails[i];
-       }
-         }
- }  
-    yield put(actions.loadingWitnesses(text));
-    console.log(text)
-    const witnesses = yield call(api.fetchTextWitnesses,text);
-    yield put(actions.loadedWitnesses(text, witnesses));
-    for (const witness of witnesses) {
-        if (witness.is_working) {
-          var  workingWitnessData = witness;
-        }
-        if (witness.is_base) {
-          var  baseWitnessData = witness;
-        }
-    }
-
-    if (workingWitnessData) {
-        const workingWitness= yield (select(
-            reducers.getWitness,
-            workingWitnessData.id
-        ): any);
-        console.log(workingWitness)
-        const selectedWitnessAction = actions.selectedTextWitness(
-            text.id,
-            workingWitness.id
-         );
-         console.log(workingWitness.id)
-        
-
-   
-    yield put(
-        actions.selectedTextWitness(text.id, workingWitnessData.id)
-    );
-    }
-} catch (e) {
-    console.log("FAILED Filtering %o", e);
-}
-}
-
-function* watchFilteredText(): Saga<void> {
-    yield takeEvery(actions.FILTERED_TEXT, filteredText);
-}
 
 
 
@@ -891,25 +841,30 @@ function* loadTextChapter(action){
 
 
 function* selectTextUrl(action){
-
-    console.log('textSelection')
-    const texts = yield call(api.fetchChapterDetail);
-    const setTextData=actions.setTextData(texts.data);
-    yield put(setTextData);
-
     _loadedTextUrl = false;
+    const falseLoaded = actions.changeIsLoaded(false);
+    yield put(falseLoaded);
+    const noSelectedTextAction = actions.noSelectedText(null);
+    yield put(noSelectedTextAction);
+   
+  
     
-        const noSelectedTextAction = actions.noSelectedText(null);
+    
+    
         const noTitleSelected=actions.selectTextTitle(null);
         const noCategorySelected=actions.selectActiveCategory(null);
         const noChapterSelected=actions.selectActiveChapter(null);
         yield put(noCategorySelected)
         yield put(noChapterSelected)
-        yield put(noSelectedTextAction);
         yield put(noTitleSelected);
-
-      
-
+        yield delay(2000)
+        const texts = yield call(api.fetchChapterDetail);
+        const setTextData=actions.setTextData(texts.data);
+        yield put(setTextData);
+  
+    const trueLoaded = actions.changeIsLoaded(true);
+    yield put(trueLoaded);
+ 
 // }
 }
 
@@ -924,7 +879,6 @@ function* watchSelectTextUrlActions() {
 function* editorUrl(action){
     _loadedTextUrl = true;
     
-console.log('editor')
     if (action.payload) {
     // const textId = action.payload.textId; 
     const textId=2;
@@ -983,7 +937,6 @@ const typeCalls: { [string]: (any) => Saga<void> } = {
     [actions.SELECTED_WITNESS]: reqAction(selectedWitness),
     [actions.CHANGED_ACTIVE_TEXT_ANNOTATION]: changeActiveAnnotation,
     [actions.SELECTED_TEXT]: selectedText,
-    [actions.FILTERED_TEXT]: filteredText,
     [actions.SELECTED_LOCALE]: selectLocale,
     [actions.CHANGED_TEXT_LIST_WIDTH]: changedTextListWidth,
     [actions.CHANGED_SHOW_PAGE_IMAGES]: changedShowPageImages,
@@ -1003,7 +956,6 @@ export default function* rootSaga(): Saga<void> {
     yield all([
         call(watchLoadInitialData),
         call(watchSelectedText),
-        call(watchFilteredText),
         call(watchLoadAnnotations),
         call(watchBatchedActions),
         call(watchAppliedAnnotation),

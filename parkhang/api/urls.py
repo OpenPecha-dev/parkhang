@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'texts/[0-9]+/witnesses/(?P<witness_id>[0-9]+)/applied_annotations/(?P<annotation_unique_id>.+)$', UserAnnotationOperationDetail.as_view()),
     url(r'texts/[0-9]+/witnesses/(?P<witness_id>[0-9]+)/user_annotation_operations/$', UserAnnotationOperations.as_view()),
     url(r'texts/[0-9]+/witnesses/(?P<witness_id>[0-9]+)/user_annotation_operations/(?P<annotation_unique_id>.+)$', UserAnnotationOperationDetail.as_view())
-]
+    
+    ]
 

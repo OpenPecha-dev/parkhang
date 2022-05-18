@@ -146,5 +146,5 @@ text-decoration: underline;
      transition: 0.3s all linear;
    }
    .versionImage img:hover{
-    transform: scale(10);
+    transform: scale(2);
    }

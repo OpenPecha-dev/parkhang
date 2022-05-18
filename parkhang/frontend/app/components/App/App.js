@@ -24,7 +24,7 @@ import { useFlags } from 'flagsmith/react';
 
 import Main from 'bodyComponent/Main'
 import isOnline from 'helper/checkOnlineStatus'
-
+import Resources from 'components/Resources'
 
 type Props = {
     title: string,
@@ -65,8 +65,8 @@ const App = (props: Props) => {
    let navbar_parkhang;
    let toggle_mainpage;
     if(online){
-         navbar_parkhang = flags.navbar_parkhang.enabled
-         toggle_mainpage=flags.toggle_mainpage.enabled
+         navbar_parkhang = flags?.navbar_parkhang?.enabled
+         toggle_mainpage=flags?.toggle_mainpage?.enabled
      }
      else{
         navbar_parkhang = true
@@ -87,9 +87,8 @@ const App = (props: Props) => {
         >
 
             <HeaderContainer />
-          {(SelectedText !==null ) ? <Editor props={props}/> : toggle_mainpage?<Main/> :<Editor props={props}/>} 
-       
-     
+          {(SelectedText !== null)  ? <Editor props={props}/> : toggle_mainpage?<Main/> :<Editor props={props}/>} 
+
         </div>
     );
 };
@@ -98,13 +97,11 @@ const App = (props: Props) => {
 const Editor=({props})=>{
     const [online,setOnline]=useState(false);
     isOnline().then(data=>setOnline(true)).catch(err=>setOnline(false));
-    const flags = useFlags(['navbar_parkhang','header_logo']);
+    const flags = useFlags(['navbar_parkhang']);
    
    let navbar_parkhang = true;
-   let header_logo=true;
    if(online){
-    navbar_parkhang = flags.navbar_parkhang.enabled
-    header_logo=flags.header_logo.enabled
+    navbar_parkhang = flags?.navbar_parkhang?.enabled
 }
     let textListClassnames = [styles.listContainer];
     let bodyHeight;
@@ -147,8 +144,10 @@ const Editor=({props})=>{
             }}
         >
             <div className={classnames(...textListClassnames)}>             
+             
+                <Resources/>
                 <TextsSearchContainer />
-                <TextListContainer />
+                <TextListContainer /> 
             </div>
        <SplitPane
                 split="vertical"

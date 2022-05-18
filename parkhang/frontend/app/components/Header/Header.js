@@ -16,7 +16,7 @@ import * as actions from "actions";
 import lopenlingLogo from "images/lopenling_logo.png";
 import UserIcon from "images/discourse_user.svg";
 import Link from 'redux-first-router-link'
-
+import Search from 'components/search'
 type LoginProps = {
     successRedirect: string,
     csrfToken: string
@@ -117,6 +117,7 @@ export const Header = (props: HeaderProps) => {
                  </ul>
              </div>
             <LocaleSwitcher />
+            <Search/>
             {controls}
         </header>
     );

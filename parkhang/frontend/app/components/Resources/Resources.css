@@ -1,0 +1,21 @@
+.Resources{
+
+}
+.ResourcesHeader{
+    background-color: #EDEDED;
+    padding:10px;
+    text-transform: uppercase;
+}
+.ResourcesBody ul {
+list-style: none;
+}
+.ResourcesBody ul>li{
+    cursor: pointer;
+    display: flex;
+    gap:5px;
+    padding:9px;
+    font-family: "Roboto", "Helvetica Neue", "Helvetica", sans-serif;
+}
+.ResourcesBody ul>li:hover{
+    color:hsl(0, 0%, 59%);
+}
