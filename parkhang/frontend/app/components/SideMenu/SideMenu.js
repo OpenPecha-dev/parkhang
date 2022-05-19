@@ -10,6 +10,8 @@ import { FormattedMessage, injectIntl } from "react-intl";
 import UserIcon from "images/discourse_user.svg";
 import flagsmith from "flagsmith";
 import ImageToggle from "./ImageToggle";
+
+
 import {
     FacebookShareButton,
     WhatsappShareButton,
@@ -91,6 +93,8 @@ export const LoginControls = (props: LoginProps) => (
     </div>
 );
 
+
+
 function SideMenu(props: Props) {
     const [viewShare, setViewShare] = useState(false);
     let MenuHeight;
@@ -145,7 +149,6 @@ function SideMenu(props: Props) {
     if (props.selectedText === null) {
         classes.push(styles.hideSideMenu);
     }
-
     return (
         <div
             className={classnames(classes)}
@@ -252,6 +255,8 @@ function SideMenu(props: Props) {
                     />
                 )}
             </div>
+            <div>
+                           </div>
         </div>
     );
 }

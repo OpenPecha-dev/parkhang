@@ -1,6 +1,5 @@
-import React,{useEffect, useState} from "react";
+import React from "react";
 import styles from "./LeftSection.css";
-import randomColor from 'randomcolor'
 import Link from 'redux-first-router-link'
 import SelectedText from "./SelectedText";
 import TranslateButton from "../utility/TranslateButton";
@@ -26,9 +25,9 @@ if(activeText===null){
     <div className={styles.readerNavCategories}>
     {
         Textdata?.detail?.map(pechalist=>{
-           var color = randomColor();
+
            return (
-           <div className={styles.gridBoxItem} key={pechalist.id} style={{borderTop:`5px solid ${color}`}}>
+           <div className={styles.gridBoxItem} key={pechalist.id} style={{borderTop:`5px solid gray`}}>
            <Link
                to={`/title/${pechalist?.texttitle}`}
                className={styles.navBlockTitle}

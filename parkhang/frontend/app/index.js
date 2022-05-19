@@ -78,7 +78,11 @@ const routesMap = {
     [actions.TEXT_TITLE]: "/title/:title",
     [actions.TEXT_CATEGORY]: "/title/:title/category/:category",
     [actions.TEXT_CHAPTER]: "/title/:title/category/:category/chapter/:chapter", 
-    [actions.EDITOR]:"/editor"
+    [actions.EDITOR]:"/editor",
+    [actions.SEARCH]:{
+        path:"/search/:search",
+        
+    }
 };
 const routes = connectRoutes(routesMap, {
     initialDispatch: false

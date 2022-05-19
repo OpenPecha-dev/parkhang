@@ -1,6 +1,49 @@
 {
-  "status": "compile",
-  "assets": {},
-  "chunks": {},
+  "status": "done",
+  "assets": {
+    "8967124136190c7842d863e4a862a528.png": {
+      "name": "8967124136190c7842d863e4a862a528.png",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\8967124136190c7842d863e4a862a528.png",
+      "publicPath": "/static/bundles/8967124136190c7842d863e4a862a528.png"
+    },
+    "styles-fa88ab2d8d4a49b8e58e.css": {
+      "name": "styles-fa88ab2d8d4a49b8e58e.css",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-fa88ab2d8d4a49b8e58e.css",
+      "publicPath": "/static/bundles/styles-fa88ab2d8d4a49b8e58e.css"
+    },
+    "parkhang-fa88ab2d8d4a49b8e58e.js": {
+      "name": "parkhang-fa88ab2d8d4a49b8e58e.js",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-fa88ab2d8d4a49b8e58e.js",
+      "publicPath": "/static/bundles/parkhang-fa88ab2d8d4a49b8e58e.js"
+    },
+    "vendors~docx-fa88ab2d8d4a49b8e58e.js": {
+      "name": "vendors~docx-fa88ab2d8d4a49b8e58e.js",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-fa88ab2d8d4a49b8e58e.js",
+      "publicPath": "/static/bundles/vendors~docx-fa88ab2d8d4a49b8e58e.js"
+    },
+    "styles-fa88ab2d8d4a49b8e58e.css.map": {
+      "name": "styles-fa88ab2d8d4a49b8e58e.css.map",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-fa88ab2d8d4a49b8e58e.css.map",
+      "publicPath": "/static/bundles/styles-fa88ab2d8d4a49b8e58e.css.map"
+    },
+    "parkhang-fa88ab2d8d4a49b8e58e.js.map": {
+      "name": "parkhang-fa88ab2d8d4a49b8e58e.js.map",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-fa88ab2d8d4a49b8e58e.js.map",
+      "publicPath": "/static/bundles/parkhang-fa88ab2d8d4a49b8e58e.js.map"
+    },
+    "vendors~docx-fa88ab2d8d4a49b8e58e.js.map": {
+      "name": "vendors~docx-fa88ab2d8d4a49b8e58e.js.map",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-fa88ab2d8d4a49b8e58e.js.map",
+      "publicPath": "/static/bundles/vendors~docx-fa88ab2d8d4a49b8e58e.js.map"
+    }
+  },
+  "chunks": {
+    "parkhang": [
+      "styles-fa88ab2d8d4a49b8e58e.css",
+      "parkhang-fa88ab2d8d4a49b8e58e.js",
+      "styles-fa88ab2d8d4a49b8e58e.css.map",
+      "parkhang-fa88ab2d8d4a49b8e58e.js.map"
+    ]
+  },
   "publicPath": "/static/bundles/"
 }

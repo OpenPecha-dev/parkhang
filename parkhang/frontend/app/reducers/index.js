@@ -187,6 +187,10 @@ export const getSearchValue = (state: AppState): string => {
     return ui.getSearchValue(state.ui);
 };
 
+export const getSearchTerm = (state: AppState): string => {
+    return ui.getSearchTerm(state.ui);
+};
+
 export const getSelectedSearchResult = (
     state: AppState
 ): null | { textId: number, start: number, length: number } => {

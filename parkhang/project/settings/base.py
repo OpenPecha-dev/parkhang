@@ -212,7 +212,7 @@ WEBPACK_LOADER = {
         'POLL_INTERVAL': 0.1,
         'TIMEOUT': None,
         'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
-        'STATS_FILE': str(ROOT_DIR / 'frontend/webpack-stats.json'),
+        'STATS_FILE': str(ROOT_DIR / 'frontend/webpack-stats-dev.json'),
     }
 }
 

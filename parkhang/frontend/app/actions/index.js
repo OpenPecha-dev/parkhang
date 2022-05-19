@@ -8,6 +8,7 @@ import type { LocalesData } from "i18n";
 /** Actions types **/
 
 // Data
+export const SEARCH_TERM="SEARCH_TERM"; 
 
 export const LOAD_INITIAL_DATA = "LOAD_INITIAL_DATA";
 export const LOADING_INITIAL_DATA = "LOADING_INITIAL_DATA";
@@ -63,6 +64,7 @@ export const REMOVED_TEMPORARY_ANNOTATION = "text/REMOVED_TEMPORARY_ANNOTATION";
 export const SELECTED_TEXT = "textList/SELECTED_TEXT";
 export const NO_SELECTED_TEXT="textList/NO_SELECTED_TEXT";
 export const CHANGED_SEARCH_VALUE = "textList/CHANGED_SEARCH_VALUE";
+export const CHANGED_SEARCH_TERM = "textList/CHANGED_SEARCH_TERM";
 export const SEARCHED_TEXT = "textList/SEARCHED_TEXT";
 export const UPDATED_SEARCH_RESULTS = "textList/UPDATED_SEARCH_RESULTS";
 export const SELECTED_SEARCH_RESULT = "textList/SELECTED_SEARCH_RESULT";
@@ -117,7 +119,7 @@ export const TEXT_TITLE ="urls/title/TEXT";
 export const TEXT_CATEGORY = "urls/title/category";
 export const TEXT_CHAPTER= "urls/title/category/chapter";
 export const EDITOR="urls/editor";
-
+export const SEARCH="urls/search";
 /** Action creators **/
 
 export type Action = {
@@ -521,6 +523,18 @@ export function changedSearchValue(
     };
 }
 
+export type ChangedSearchTermAction = Action & {
+    searchTerm: string
+};
+export function changedSearchTerm(
+    searchTerm: string
+): ChangedSearchTermAction {
+    return {
+        type: CHANGED_SEARCH_TERM,
+        searchTerm
+    };
+}
+
 export type SearchedTextAction = Action & {
     textId: number,
     searchValue: string
@@ -800,6 +814,7 @@ export function enteredUrl(url: TextUrlAction) {
     };
 }
 
+
 export function selectTextTitle(textTitle:string){
    
     return {
@@ -841,5 +856,12 @@ export function changeIsLoaded(loaded){
     return {
         type:IS_LOADED,
         payload:loaded
+    }
+}
+
+export function searchTerm(data){
+    return {
+      type:SEARCH_TERM,
+      payload:data
     }
 }

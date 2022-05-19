@@ -15,7 +15,7 @@ import { getTextListVisible, getAccountOverlayVisible } from "reducers";
 import * as actions from "actions";
 import lopenlingLogo from "images/lopenling_logo.png";
 import UserIcon from "images/discourse_user.svg";
-import Link from 'redux-first-router-link'
+import {NavLink} from 'redux-first-router-link'
 import Search from 'components/search'
 type LoginProps = {
     successRedirect: string,
@@ -100,18 +100,18 @@ export const Header = (props: HeaderProps) => {
                 className={styles.navigationButton}
                 title={toggleTitle}
             /> */}
-           <Link to='/'>
+           <NavLink to='/'>
            <div  className={styles.logo}>
                 <img src={image_location} height="30" />
             </div>
             
-           </Link> 
+           </NavLink> 
              <div className={styles.navlinks}>
                  <ul>
-                     <li><Link to='/textSelection'>Texts</Link></li>
-                     <li><Link to='/editor'>Editor</Link></li>
-                     <li><Link to='/#'>Topics</Link></li>
-                     <li><Link to='/#'>Community</Link></li>
+                     <li><NavLink to='/textSelection'>Texts</NavLink></li>
+                     <li><NavLink to='/editor'>Editor</NavLink></li>
+                     <li><NavLink to='/#'>Topics</NavLink></li>
+                     <li><NavLink to='/#'>Community</NavLink></li>
 
 
                  </ul>

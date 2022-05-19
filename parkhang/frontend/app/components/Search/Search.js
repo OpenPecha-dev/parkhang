@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import styles from "./Search.css";
 import Magnifier from "images/magnifier.svg";
 import classnames from "classnames";
 import { injectIntl } from "react-intl";
+import * as reduxroute from 'redux-first-router'
 
 function Search(props) {
-    const [input, setInput] = useState("");
+    const input=useRef();
+    const history=reduxroute.history()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(input);
-        setInput("");
+        props.changeSearchTerm(input.current.value)
+        history.push(`/search/${input.current.value}`);
+        input.current.value=''
+
+
     };
     const handleReset = (e) => {
-        setInput("");
+        input.current.value=''
     };
     let classes = [styles.reset];
     if (input !== "") {
@@ -26,13 +31,12 @@ function Search(props) {
             </button>
             <input
                 type="text"
-                value={input}
+                ref={input}
                 placeholder={
                     props.intl.formatMessage({id: "leftbar.search" })
                 }
-                onChange={(e) => setInput(e.target.value)}
             />
-            <button className={classnames(classes)} onClick={handleReset}>
+            <button type='reset' className={classnames(classes)} onClick={handleReset}>
                 x
             </button>
         </form>

@@ -1,7 +1,5 @@
 // @flow
 import React,{useState,useEffect} from "react";
-import { connect } from "react-redux";
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import classnames from "classnames";
 import SplitPane, { Pane } from "react-split-pane";
 import HeaderContainer from "components/Header";
@@ -25,6 +23,10 @@ import { useFlags } from 'flagsmith/react';
 import Main from 'bodyComponent/Main'
 import isOnline from 'helper/checkOnlineStatus'
 import Resources from 'components/Resources'
+import {useActive} from '../UI/activeHook'
+import { history as his} from 'redux-first-router'
+import Search from 'bodyComponent/Search'
+
 
 type Props = {
     title: string,
@@ -49,7 +51,10 @@ function setTitle(title: string) {
 const App = (props: Props) => {
     setTitle(props.title);
     const [online,setOnline]=useState(false);
-
+    const isActive=useActive(3000)
+    const history=his();
+    const path=history.location.pathname;
+    const isSearchActive=path.includes('/search/');
     useEffect(()=>{
         isOnline().then(data=>setOnline(true)).catch(err=>setOnline(false))
     },[])
@@ -60,11 +65,11 @@ const App = (props: Props) => {
          setTitle('Parkhang')
      }
    
-    const flags = useFlags(['navbar_parkhang','toggle_mainpage']);
-  
+    const  flags = useFlags(['navbar_parkhang','toggle_mainpage']);
    let navbar_parkhang;
    let toggle_mainpage;
     if(online){
+        
          navbar_parkhang = flags?.navbar_parkhang?.enabled
          toggle_mainpage=flags?.toggle_mainpage?.enabled
      }
@@ -72,7 +77,6 @@ const App = (props: Props) => {
         navbar_parkhang = true
         toggle_mainpage=true
      }
-      
 
     return (
         <div
@@ -85,10 +89,9 @@ const App = (props: Props) => {
                 handleKeyDown(e, props.state, props.dispatch);
             }}
         >
-
+              
             <HeaderContainer />
-          {(SelectedText !== null)  ? <Editor props={props}/> : toggle_mainpage?<Main/> :<Editor props={props}/>} 
-
+          {isSearchActive ? <Search/> : (SelectedText !== null) ? <Editor props={props}/> : <Main/>} 
         </div>
     );
 };

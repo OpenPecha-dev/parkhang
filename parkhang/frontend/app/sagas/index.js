@@ -472,6 +472,7 @@ function* watchSelectedLocale() {
     yield takeEvery(actions.SELECTED_LOCALE, selectLocale);
 }
 
+
 // EXPORT
 
 function* exportWitness(action: actions.ExportWitnessAction) {
@@ -523,6 +524,17 @@ function* searchTexts(action: actions.ChangedSearchValueAction) {
 function* watchChangedSearchValue() {
     yield takeLatest(actions.CHANGED_SEARCH_VALUE, searchTexts);
 }
+
+function* searchTerm(action: actions.ChangedSearchValueAction) {
+const searchTerm=action.searchTerm
+
+}
+
+function* watchChangedSearchTerm() {
+    yield takeLatest(actions.CHANGED_SEARCH_TERM, searchTerm);
+}
+
+
 
 function* searchedText(action: actions.SearchedTextAction) {
     const results = yield call(
@@ -846,7 +858,6 @@ function* selectTextUrl(action){
     yield put(falseLoaded);
     const noSelectedTextAction = actions.noSelectedText(null);
     yield put(noSelectedTextAction);
-   
   
     
     
@@ -878,7 +889,7 @@ function* watchSelectTextUrlActions() {
 
 function* editorUrl(action){
     _loadedTextUrl = true;
-    
+     
     if (action.payload) {
     // const textId = action.payload.textId; 
     const textId=2;
@@ -917,6 +928,19 @@ function* editorUrl(action){
 function* watchEditorUrl(){
     yield takeEvery(actions.EDITOR,editorUrl);
 }
+
+
+//search
+
+function* searchUrl(action){
+    const search=action.payload.search
+    yield put(actions.changedSearchTerm(search))
+}
+
+
+function* watchSearchUrl(){
+    yield takeEvery(actions.SEARCH,searchUrl)
+}
 /**
  * Stores functions by action type.
  * Used primarily to allow batched actions to be handled
@@ -947,7 +971,8 @@ const typeCalls: { [string]: (any) => Saga<void> } = {
     [actions.TEXTS]:selectTextUrl,
     [actions.CREATED_QUESTION]: reqAction(createQuestion),
     [actions.LOAD_QUESTION]: loadQuestion,
-    [actions.EDITOR]:editorUrl
+    [actions.EDITOR]:editorUrl,
+    [actions.SEARCH]:searchUrl
 };
 
 /** Root **/
@@ -970,6 +995,7 @@ export default function* rootSaga(): Saga<void> {
         call(watchSelectedLocale),
         call(watchExportWitness),
         call(watchChangedSearchValue),
+        call(watchChangedSearchTerm),
         call(watchSearchedText),
         call(watchChangedTextListWidth),
         call(watchChangedShowPageImages),
@@ -984,6 +1010,7 @@ export default function* rootSaga(): Saga<void> {
         call(watchTextTitleUrlAction),
         call(watchTextCategoryUrlAction),
         call(watchTextChapterUrlAction),
-        call(watchEditorUrl)
+        call(watchEditorUrl),
+        call(watchSearchUrl)
     ]);
 }

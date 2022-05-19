@@ -14,6 +14,7 @@ export type UIState = {
         length: number
     } | null,
     searchValue: string,
+    searchTerm:String,
     showPageImages: boolean,
     activeAnnotations: { [witnessId: number]: Annotation },
     activeTextAnnotations: { [textId: number]: Annotation },
@@ -43,6 +44,7 @@ export const initialUIState = {
     selectedTextWitness: {},
     selectedSearchResult: null,
     searchValue: "",
+    searchTerm:"",
     showPageImages: true,
     activeAnnotations: {},
     activeTextAnnotations: {},
@@ -136,6 +138,20 @@ function changedSearchValue(
     return {
         ...state,
         searchValue: searchValue
+    };
+}
+
+function changedSearchTerm(
+    state: UIState,
+    action: actions.ChangedSearchTermAction
+): UIState {
+    let searchTerm = action.searchTerm;
+    if (!searchTerm) {
+        searchTerm = "";
+    }
+    return {
+        ...state,
+        searchTerm: searchTerm
     };
 }
 
@@ -410,6 +426,7 @@ uiReducers[actions.FILTERED_TEXT] = filterAuthor;
 uiReducers[actions.NO_SELECTED_TEXT] = noSelectedText;
 uiReducers[actions.SELECTED_WITNESS] = selectedTextWitness;
 uiReducers[actions.CHANGED_SEARCH_VALUE] = changedSearchValue;
+uiReducers[actions.CHANGED_SEARCH_TERM] = changedSearchTerm;
 uiReducers[actions.SELECTED_SEARCH_RESULT] = selectedSearchResult;
 uiReducers[actions.CHANGED_SHOW_PAGE_IMAGES] = changedShowPageImages;
 uiReducers[actions.CHANGED_TEXT_FONT_SIZE] = changedTextFontSize;
@@ -531,6 +548,10 @@ export const getExportingWitness = (
 export const getSearchValue = (state: UIState): string => {
     return state.searchValue;
 };
+
+export const getSearchTerm =(state:UIState): string =>{
+    return state.searchTerm;
+}
 
 export const getSelectedSearchResult = (
     state: UIState

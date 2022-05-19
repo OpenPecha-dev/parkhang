@@ -1,12 +1,21 @@
 import React from "react";
-import ReactLoading from "react-loading";
-
+import styles from './loading.css'
 
 const Loading=(props)=>{
   let visible:boolean
   visible=props.visible
 
-    return visible ? <ReactLoading type='cubes'color='gray'/>:null
+    return visible ?<div className={styles.flex}>
+    <div className={styles.shimmer}/>
+    <div className={styles.shimmer}/>
+    <div className={styles.shimmer}/>
+    <div className={styles.shimmer}/>
+    <div className={styles.shimmer}/>
+    <div className={styles.shimmer}/>
+    <div className={styles.shimmer}/>
+
+
+    </div>:null
 
 
 }

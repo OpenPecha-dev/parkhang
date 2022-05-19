@@ -3,7 +3,6 @@ import Link from "redux-first-router-link";
 import styles from "./SelectedText.css";
 import TranslateButton from "../../utility/TranslateButton";
 import SelectedCategory from "../SelectedCategory";
-import Loading from "react-loading";
 
 function SelectedText(props) {
     const { Textdata, onChangedTextTitle } = props;
