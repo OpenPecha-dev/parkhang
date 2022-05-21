@@ -1,0 +1,32 @@
+
+.notificationWrapper{
+    height:50px;
+    width:300px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    padding:0 30px;
+    right:20px;
+    bottom:100px;
+    transition: all 0.5s ease-in-out;
+    transform:translateX(120%);
+
+}
+.notificationDisc{
+    font-size: 14px;
+
+}
+.notificationWrapper:hover{
+    background-color: rgb(200, 115, 115);
+}
+.closeButton{
+    color:gray;
+}
+.closeButton:hover{
+    color:black;
+}
+.notificationWrapper.show{
+    transform:translateX(0);
+}

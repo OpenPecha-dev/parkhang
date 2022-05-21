@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+
+
 :root {
     --fonts: "Overpass", "arial", "sans-serif";
     --tibetan-fonts: "Tibetan", "Himalaya", "Kokonor";
+    --Macondo :Macondo;
 }
 
 @font-face {

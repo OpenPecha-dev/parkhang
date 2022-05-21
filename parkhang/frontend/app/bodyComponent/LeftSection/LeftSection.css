@@ -9,6 +9,7 @@
     padding-bottom: 70px;
     padding-inline-start: 30px;
     padding-inline-end: 30px;
+    font-family:macondo;
 }
 .Title{
     display: flex;
@@ -47,11 +48,11 @@ flex-direction: column;
     line-height: 18px;
     color: #666;
     margin-inline-end: 20px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     display: flex;
     overflow: hidden;
     flex-wrap: wrap;
     width: 100%;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 
@@ -62,7 +63,7 @@ color: #000;
     margin-top: 10px;
     text-decoration: none;
     font-size: larger;
-    font-family: "HebrewInEnglish Serif Font", adobe-garamond-pro, "Crimson Text", Georgia, "Times New Roman", serif;;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .navBlockTitle:hover{
     color:#666;

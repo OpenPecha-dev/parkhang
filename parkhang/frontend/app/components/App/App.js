@@ -26,7 +26,7 @@ import Resources from 'components/Resources'
 import {useActive} from '../UI/activeHook'
 import { history as his} from 'redux-first-router'
 import Search from 'bodyComponent/Search'
-
+import Notification from 'bodyComponent/utility/Notification'
 
 type Props = {
     title: string,
@@ -40,6 +40,7 @@ type Props = {
     onChangedTextListVisible: (isVisible: boolean) => void,
     onChangedMenuWidth: (width: number) => void,
     onChangedMenuListVisible: (isVisible: boolean) => void,
+    onChangedNotification:(data:Object)=>void
 };
 
 function setTitle(title: string) {
@@ -55,10 +56,19 @@ const App = (props: Props) => {
     const history=his();
     const path=history.location.pathname;
     const isSearchActive=path.includes('/search/');
+    
+
     useEffect(()=>{
         isOnline().then(data=>setOnline(true)).catch(err=>setOnline(false))
     },[])
-
+  
+    useEffect(()=>{
+       if(isActive===false) props.onChangedNotification({
+            message:'YOU ARE NOT ACTIVE FOR SOME TIME NOW, CAN WE HELP YOU',
+            time:4000,
+            type:'warning'
+        })
+    },[isActive])
     let SelectedText=   props.state?.ui?.selectedText
    
     if(!SelectedText){
@@ -92,6 +102,8 @@ const App = (props: Props) => {
               
             <HeaderContainer />
           {isSearchActive ? <Search/> : (SelectedText !== null) ? <Editor props={props}/> : <Main/>} 
+             <Notification/>
+   
         </div>
     );
 };

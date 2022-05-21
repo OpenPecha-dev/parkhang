@@ -1,3 +1,6 @@
+.searchContainer{
+    position:relative;
+}
 .Search{
     /* overflow: hidden; */
     display: flex;
@@ -14,6 +17,9 @@ background-color: transparent;
 outline: none;
 border:none ;
 }
+.Search:hover input {
+    width: 250px;
+    }
 .Search input:focus {
 width: 250px;
 }
@@ -26,7 +32,7 @@ width: 250px;
     border: none;
     cursor: pointer;
 }
-.reset{
+.resetButton{
     border:none;
     outline:none;
     cursor: pointer;
@@ -35,6 +41,18 @@ width: 250px;
     opacity: 0;
     transition: 0.3s all linear;
 }
-.reset.active{
+.active{
     opacity: 1;
+}
+
+.ShortcutSearch{
+    position: absolute;
+    display: none;
+    background-color: #EDEDEC;
+}
+.listDetail{
+    border-bottom: 1px solid black;
+    font-size: 14px;
+    padding:5px;
+    cursor: pointer;
 }

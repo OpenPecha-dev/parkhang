@@ -6,7 +6,6 @@ import * as constants from "app_constants";
 
 export type UIState = {
     selectedText: api.TextData | null,
-    filterAuthor:string|null,
     selectedTextWitness: { [textId: number]: number },
     selectedSearchResult: {
         textId: number,
@@ -34,12 +33,16 @@ export type UIState = {
         [witnessId: number]: boolean
     },
     showAccountOverlay: boolean,
-    textFontSize: number
+    textFontSize: number,
+    notification:{
+        message:String,
+        time:Number,
+        type:String
+    }
 };
 
 export const initialUIState = {
     selectedText: null,
-    filterAuthor:null,
     selectedAuthor: null,
     selectedTextWitness: {},
     selectedSearchResult: null,
@@ -55,7 +58,12 @@ export const initialUIState = {
     scrollPositions: {},
     exportingWitness: {},
     showAccountOverlay: false,
-    textFontSize: constants.DEFAULT_TEXT_FONT_SIZE
+    textFontSize: constants.DEFAULT_TEXT_FONT_SIZE,
+    notification:{
+        message:'',
+        time:null,
+        type:''
+    }
 };
 
 function loadedUserSettings(
@@ -101,18 +109,6 @@ function noSelectedText(
     };
     return state;
 }
-
-function filterAuthor(
-    state: UIState,
-    action: actions.SelectedTextAction
-): UIState {
-    state = {
-        ...state,
-        selectedText: action.data
-    };
-    return state;
-}
-
 
 function selectedTextWitness(
     state: UIState,
@@ -205,6 +201,17 @@ function changedTextFontSize(
         textFontSize: action.fontSize
     };
 }
+
+function changedNotification(
+    state: UIState,
+    action: actions.ChangedTextFontSizeAction
+): UIState {
+    return {
+        ...state,
+        notification: {...action.data}
+    };
+}
+
 
 // TODO: delete? Doesn't seem to be used anywhere.
 // function changedSelectedSegment(state, action) {
@@ -415,14 +422,13 @@ function changedAccountOverlay(
         ...state,
         showAccountOverlay: action.isVisible
     };
-
+     
     return state;
 }
 
 const uiReducers = {};
 uiReducers[actions.LOADED_USER_SETTINGS] = loadedUserSettings;
 uiReducers[actions.SELECTED_TEXT] = selectedText;
-uiReducers[actions.FILTERED_TEXT] = filterAuthor;
 uiReducers[actions.NO_SELECTED_TEXT] = noSelectedText;
 uiReducers[actions.SELECTED_WITNESS] = selectedTextWitness;
 uiReducers[actions.CHANGED_SEARCH_VALUE] = changedSearchValue;
@@ -445,6 +451,7 @@ uiReducers[actions.CHANGED_WITNESS_SCROLL_POSITION] = changedScrollPosition;
 uiReducers[actions.EXPORT_WITNESS] = exportingWitness;
 uiReducers[actions.EXPORTED_WITNESS] = exportedWitness;
 uiReducers[actions.CHANGED_ACCOUNT_OVERLAY] = changedAccountOverlay;
+uiReducers[actions.CHANGED_NOTIFICATION]= changedNotification;
 export default uiReducers;
 
 export const getSelectedText = (state: UIState): api.TextData | null => {
@@ -452,6 +459,10 @@ export const getSelectedText = (state: UIState): api.TextData | null => {
     return state.selectedText;
 };
 
+export const getNotification = (state: UIState): api.TextData | null => {
+   
+    return state.notification;
+};
 export const getSelectedTextWitnessId = (
     state: UIState,
     textId: number

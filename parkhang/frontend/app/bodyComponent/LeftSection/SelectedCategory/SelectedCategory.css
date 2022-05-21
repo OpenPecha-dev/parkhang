@@ -29,4 +29,106 @@
     color: #666;
     -webkit-transition: 0.4s all ease-in;
     transition: 0.4s all ease-in;
+    margin-top: 100px;
    }
+
+
+   
+   .versionHeading{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    align-items: center;
+   }
+   .versionHeading h4{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 25px;
+    max-inline-size: max-content;
+   }
+   .versionHeading a{
+    color:#222;
+   }
+   .versionDetails{
+     height: 50px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     font-style: normal;
+     font-weight: normal;
+     font-size: 14px;
+     line-height: 20px;
+     color: #666666;
+   }
+   .versionNotes{
+    font-size: 16px;
+    line-height: 19px;
+    padding-bottom: 15px;
+   }
+   .versionImage{
+     height:100%;
+   }
+   .versionImage img{
+     height: 100%;
+     object-fit: contain;
+     transition: 0.3s all linear;
+   }
+   .versionImage img:hover{
+    transform: scale(2);
+   }
+
+   
+  .selection{
+    display: inline-block;
+    height: 50px;
+    min-width: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    font-size: 18px;
+    font-weight: lighter;
+    margin: 3px;
+    text-align: center;
+    background-color: #bbbbb5;
+    color: rgb(255, 249, 249);
+    cursor: pointer;
+    padding: 0 6px;
+    box-sizing: border-box;
+
+  }
+  .selection a{
+      text-decoration: none;
+      color:inherit;
+  }
+  a .selection:hover {
+text-decoration: underline;
+background-color: rgb(113, 112, 112);
+  }
+
+   .sectionHeader{
+    font-size: 16px;
+    line-height: 18.75px;
+    color:#666;
+   }
+
+   
+  .content {
+    background: white;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+  }
+  .content h2 {
+    padding: 0px 0 5px 0px;
+  }
+  .content hr {
+    width: 100px;
+    height: 2px;
+    background: #222;
+    margin-bottom: 5px;
+  }
+  .content p {
+    width: 100%;
+    height: 100%;
+  }

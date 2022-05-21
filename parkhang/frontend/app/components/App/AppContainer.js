@@ -22,6 +22,7 @@ const mapStateToProps = state => {
 };
 
 const matchDispatchToProps = dispatch => {
+    
     return {
         onChangedTextWidth: (width: number) => {
             dispatch(actions.changedTextListWidth(width));
@@ -34,7 +35,10 @@ const matchDispatchToProps = dispatch => {
         },
         onChangedMenuListVisible: (isVisible: boolean) => {
             dispatch(actions.changedMenuListVisible(isVisible));
-        },
+        },  
+        onChangedNotification: (data) => {
+            dispatch(actions.changedNotification(data));
+        },                          
         dispatch
     };
 };

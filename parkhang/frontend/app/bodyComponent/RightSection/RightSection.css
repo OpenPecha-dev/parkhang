@@ -1,8 +1,11 @@
+@import '../../css/colour.css';
+
 .RightSection{
     width: 420px;
-    background-color: #FBFBFA;
-    border-top: 80px solid #FBFBFA;
-    border-bottom: 120px solid #FBFBFA;
+    background-color: var(--rightbackground);
+     padding-top: 80px ;
+    padding-bottom: 120px ;
+    font-family: Macondo;
     margin: -80px 0 0 0;
 }
 .RightTitle{

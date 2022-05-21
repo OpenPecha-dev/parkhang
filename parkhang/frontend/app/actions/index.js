@@ -68,6 +68,7 @@ export const CHANGED_SEARCH_TERM = "textList/CHANGED_SEARCH_TERM";
 export const SEARCHED_TEXT = "textList/SEARCHED_TEXT";
 export const UPDATED_SEARCH_RESULTS = "textList/UPDATED_SEARCH_RESULTS";
 export const SELECTED_SEARCH_RESULT = "textList/SELECTED_SEARCH_RESULT";
+export const CHANGED_NOTIFICATION ="notification/CHANGED_NOTIFICATION"
 
 export const SELECTED_WITNESS = "text/SELECTED_WITNESS";
 export const CHANGED_SHOW_PAGE_IMAGES = "text/CHANGED_SHOW_PAGE_IMAGES";
@@ -503,13 +504,7 @@ export function selectedText(text: api.TextData): SelectedTextAction {
     };
 }
 
-export type FilterTextAction = Action & TextDataAction;
-export function filterText(data: number): FilterTextAction {
-    return {
-        type: FILTERED_TEXT,
-        data
-    };
-}
+
 
 export type ChangedSearchValueAction = Action & {
     searchValue: string
@@ -590,6 +585,13 @@ export function changedTextListWidth(width: number): ChangedTextListWidth {
     return {
         type: CHANGED_TEXT_LIST_WIDTH,
         width
+    };
+}
+
+export function changedNotification(data) {
+    return {
+        type: CHANGED_NOTIFICATION,
+        data
     };
 }
 
@@ -800,12 +802,7 @@ export type TextUrlAction = {
         annotation?: string
     }
 };
-export type FilterUrlAction = {
-    type: string,
-    payload: {
-        author:string
-    }
-};
+
 
 export function enteredUrl(url: TextUrlAction) {
     return {

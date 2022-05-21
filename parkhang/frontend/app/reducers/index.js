@@ -186,7 +186,9 @@ export const getExportingWitness = (
 export const getSearchValue = (state: AppState): string => {
     return ui.getSearchValue(state.ui);
 };
-
+export const getNotification = (state: AppState): string => {
+    return ui.getNotification(state.ui);
+};
 export const getSearchTerm = (state: AppState): string => {
     return ui.getSearchTerm(state.ui);
 };

@@ -14,6 +14,9 @@
     --cancel: #aaa;
     --active-button: active-button;
     --white:white;
+    --rightbackground:#FBFBFA;
+    --dark-gray:#666;
+    --light-gray:rgb(208, 199, 199);
 }
 
 :export {

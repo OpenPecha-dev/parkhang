@@ -744,7 +744,7 @@ function* watchTextUrlActions() {
 
 
 //URL to LOAD TEXTDATA AND AUTO WITNESS 
-function* loadedFilterUrl(action){
+function* loadedTextIdonlyUrl(action){
     _loadedTextUrl = true;
     
 
@@ -782,8 +782,8 @@ function* loadedFilterUrl(action){
 }
 }
 
-function* watchFilterUrlActions() {
-    yield takeEvery(actions.TEXTID_ONLY_URL, loadedFilterUrl);
+function* watchTextIdonlyUrlActions() {
+    yield takeEvery(actions.TEXTID_ONLY_URL, loadedTextIdonlyUrl);
 }
 //url /title/:title
 
@@ -868,7 +868,7 @@ function* selectTextUrl(action){
         yield put(noCategorySelected)
         yield put(noChapterSelected)
         yield put(noTitleSelected);
-        yield delay(2000)
+        yield delay(1000)
         const texts = yield call(api.fetchChapterDetail);
         const setTextData=actions.setTextData(texts.data);
         yield put(setTextData);
@@ -941,6 +941,10 @@ function* searchUrl(action){
 function* watchSearchUrl(){
     yield takeEvery(actions.SEARCH,searchUrl)
 }
+
+//notification
+
+
 /**
  * Stores functions by action type.
  * Used primarily to allow batched actions to be handled
@@ -967,12 +971,12 @@ const typeCalls: { [string]: (any) => Saga<void> } = {
     [actions.CHANGED_TEXT_FONT_SIZE]: changedTextFontSize,
     [actions.USER_LOGGED_IN]: loadUserSettings,
     [actions.TEXT_URL]: loadedTextUrl,
-    [actions.TEXTID_ONLY_URL]:loadedFilterUrl,
+    [actions.TEXTID_ONLY_URL]:loadedTextIdonlyUrl,
     [actions.TEXTS]:selectTextUrl,
     [actions.CREATED_QUESTION]: reqAction(createQuestion),
     [actions.LOAD_QUESTION]: loadQuestion,
     [actions.EDITOR]:editorUrl,
-    [actions.SEARCH]:searchUrl
+    [actions.SEARCH]:searchUrl,
 };
 
 /** Root **/
@@ -1002,7 +1006,7 @@ export default function* rootSaga(): Saga<void> {
         call(watchChangedTextFontSize),
         call(watchUserLoggedIn),
         call(watchTextUrlActions),
-        call(watchFilterUrlActions),
+        call(watchTextIdonlyUrlActions),
         call(watchChangedActiveAnnotation),
         call(watchCreatedQuestion),
         call(watchLoadQuestion),
@@ -1011,6 +1015,6 @@ export default function* rootSaga(): Saga<void> {
         call(watchTextCategoryUrlAction),
         call(watchTextChapterUrlAction),
         call(watchEditorUrl),
-        call(watchSearchUrl)
+        call(watchSearchUrl),
     ]);
 }
