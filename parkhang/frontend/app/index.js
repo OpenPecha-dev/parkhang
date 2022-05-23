@@ -28,7 +28,7 @@ import rootReducer, { allReducers } from "reducers";
 import textMiddleware from "state_helpers/textMiddleware";
 
 // URL management
-import { connectRoutes, redirect} from "redux-first-router";
+import { connectRoutes, history} from "redux-first-router";
 
 // Sagas
 import 'core-js/stable';
@@ -70,7 +70,11 @@ const sagaMiddleware = createSagaMiddleware();
 
 // redux-first-router
 const routesMap = {
-    HOME: "/",
+    HOME: {path:'/',
+           thunk:()=>{
+               let h=history();
+                h.push('/textSelection')
+           }},
     [actions.TEXT_URL]: "/texts/:textId/witnesses/:witnessId/:annotation?",
     USER: "/user/:id",
     [actions.TEXTID_ONLY_URL]: "/texts/:textId",

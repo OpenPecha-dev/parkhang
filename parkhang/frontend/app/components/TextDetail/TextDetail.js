@@ -114,7 +114,8 @@ class TextDetail extends React.Component<Props> {
         }
 
         let textComponents = [textComponent];
-
+        
+    
         return (
             <div
                 style={{ height: "100vh" }}
@@ -128,6 +129,7 @@ class TextDetail extends React.Component<Props> {
                 
                 <TextDetailHeadingContainer />
                 <Loader loaded={!this.props.loading} />
+                    
                 <div
                     className={classnames(
                         styles.textContainer,
@@ -135,7 +137,9 @@ class TextDetail extends React.Component<Props> {
                     )}
                 >
                     {!this.props.loading ? textComponents : <div />}
-                </div>        
+                </div>   
+               
+                    
             </div>
         );
     }

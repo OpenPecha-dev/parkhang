@@ -791,9 +791,15 @@ function* loadTextTitle(action){
 const changeLoaded=actions.changeIsLoaded(false);
     yield put(changeLoaded)
 
-    const texts = yield call(api.fetchChapterDetail);
-    const setTextData=actions.setTextData(texts.data);
-    yield put(setTextData);
+    const textdata = yield select(reducers.getTextTitle);
+        
+    if(textdata.detail.length===0){
+        console.log('fetched')
+        const texts = yield call(api.fetchChapterDetail);
+        const setTextData=actions.setTextData(texts.data);
+        yield put(setTextData);
+    }
+    
 
  let {title}=action.payload;
  const selectedTextTitle=actions.selectTextTitle(title)
@@ -811,9 +817,14 @@ function* watchTextTitleUrlAction(){
 
 
 function* loadTextCategory(action){
-    const texts = yield call(api.fetchChapterDetail);
-    const setTextData=actions.setTextData(texts.data);
-    yield put(setTextData);
+    const textdata = yield select(reducers.getTextTitle);
+        
+    if(textdata.detail.length===0){
+        const texts = yield call(api.fetchChapterDetail);
+        const setTextData=actions.setTextData(texts.data);
+        yield put(setTextData);
+    }
+    
     let {title,category}=action.payload;
    const selectedTextTitle=actions.selectTextTitle(title)
    const textlist=yield call(api.fetchTexts)
@@ -830,9 +841,14 @@ function* loadTextCategory(action){
 //url /title/:title/category/:category/chapter/:chapter
 
 function* loadTextChapter(action){
-    const texts = yield call(api.fetchChapterDetail);
-    const setTextData=actions.setTextData(texts.data);
-    yield put(setTextData);
+    const textdata = yield select(reducers.getTextTitle);
+        
+    if(textdata.detail.length===0){
+        const texts = yield call(api.fetchChapterDetail);
+        const setTextData=actions.setTextData(texts.data);
+        yield put(setTextData);
+    }
+    
     
     let {title,category}=action.payload;
    const selectedTextTitle=actions.selectTextTitle(title)
@@ -868,10 +884,15 @@ function* selectTextUrl(action){
         yield put(noCategorySelected)
         yield put(noChapterSelected)
         yield put(noTitleSelected);
-        yield delay(1000)
-        const texts = yield call(api.fetchChapterDetail);
-        const setTextData=actions.setTextData(texts.data);
-        yield put(setTextData);
+        yield delay(500)
+        const textdata = yield select(reducers.getTextTitle);
+
+        if(textdata.detail.length===0){
+            const texts = yield call(api.fetchChapterDetail);
+            const setTextData=actions.setTextData(texts.data);
+            yield put(setTextData);
+        }
+        
   
     const trueLoaded = actions.changeIsLoaded(true);
     yield put(trueLoaded);

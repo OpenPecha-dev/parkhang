@@ -112,8 +112,6 @@ export const Header = (props: HeaderProps) => {
                      <li><NavLink to='/editor'>Editor</NavLink></li>
                      <li><NavLink to='/#'>Topics</NavLink></li>
                      <li><NavLink to='/#'>Community</NavLink></li>
-
-
                  </ul>
              </div>
             <LocaleSwitcher />

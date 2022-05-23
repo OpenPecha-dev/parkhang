@@ -5,7 +5,7 @@ import TranslateButton from "../../utility/TranslateButton";
 import SelectedCategory from "../SelectedCategory";
 
 function SelectedText(props) {
-    const { Textdata, onChangedTextTitle } = props;
+    const { Textdata } = props;
 
     const isTextPresent=Textdata?.detail?.find((el)=>{
         return el.texttitle === Textdata?.activeText
@@ -62,14 +62,7 @@ function SelectedText(props) {
                         </div>
                     </div>
                 </div>
-
-                <Link
-                    to="/"
-                    onClick={() => onChangedTextTitle(null)}
-                    className={styles.back}
-                >
-                    back
-                </Link>
+               
             </div>
         );
     

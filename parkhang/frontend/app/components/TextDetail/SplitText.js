@@ -880,7 +880,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         // const menuVisible=this.props.menuListIsVisible
         const component = this;
         const pechaImageClass = props.showImages ? styles.pechaImage : null;
-        let imageUrl = index;
+        let imageUrl = '';
+
         if (
             props.selectedWitness &&
             props.selectedWitness.properties &&
@@ -921,6 +922,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                                 style={pechaStyles}
                             >
                                 <img
+                                    alt="Text related Image"
                                     src={imageUrl}
                                     width="100%"
                                     height="100%"

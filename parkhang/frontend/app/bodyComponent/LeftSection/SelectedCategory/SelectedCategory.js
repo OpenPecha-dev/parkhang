@@ -5,7 +5,7 @@ import Tab from "../../utility/Tab";
 import Link from "redux-first-router-link";
 
 function SelectedCategory(props) {
-    const { onChangedActiveCategory, Textdata } = props;
+    const {  Textdata } = props;
     let versionData = [{ title: "working",
     language:'བོད་ཡིག',
     link:'lopenling.org',
@@ -88,12 +88,7 @@ function SelectedCategory(props) {
                     </Tab.TabPane>
                 ))}
             </Tab>
-            <button
-                onClick={() => onChangedActiveCategory(null)}
-                className={styles.back}
-            >
-                Back
-            </button>
+          
         </div>
     );
 }

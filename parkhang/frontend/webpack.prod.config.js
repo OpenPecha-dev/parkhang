@@ -33,7 +33,8 @@ module.exports = {
                 NODE_ENV: JSON.stringify("production")
             }
         }),
-        new LodashModuleReplacementPlugin()
+        new LodashModuleReplacementPlugin(),
+      
     ],
 
     module: {

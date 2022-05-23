@@ -34,6 +34,7 @@ module.exports = {
             }
         }),
         new LodashModuleReplacementPlugin()
+        
     ],
 
     module: {

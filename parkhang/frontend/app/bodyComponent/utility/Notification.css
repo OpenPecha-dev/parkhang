@@ -12,7 +12,11 @@
     bottom:100px;
     transition: all 0.5s ease-in-out;
     transform:translateX(120%);
-
+    opacity: 0;
+}
+.notificationWrapper:hover{
+    transform: translateX(0);
+    opacity: 1;
 }
 .notificationDisc{
     font-size: 14px;
@@ -23,10 +27,14 @@
 }
 .closeButton{
     color:gray;
+    cursor: pointer;
 }
 .closeButton:hover{
     color:black;
+    cursor: pointer;
+
 }
 .notificationWrapper.show{
     transform:translateX(0);
+    opacity: 1;
 }

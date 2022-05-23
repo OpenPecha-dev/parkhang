@@ -16,6 +16,9 @@ function Search(props) {
         if(input.current.value!==''){
             history.push(`/search/${input.current.value}`);
         }
+        if(input.current.value===''){
+            history.push('/')
+        }
         input.current.value=''
 
 
@@ -29,9 +32,7 @@ function Search(props) {
     if (inputEmpty !== "") {
         classes.push(styles.active)
     }
-const data=['asdf','fdfsdfsaf','safawe']
 
-   let lists=data.filter(a=>a.includes(search))
     return (
         <div className={styles.searchContainer}>
         <form className={styles.Search} onSubmit={handleSubmit}>
@@ -55,11 +56,7 @@ const data=['asdf','fdfsdfsaf','safawe']
                 x
             </button>
         </form>
-        <div className={styles.ShortcutSearch} style={{display:inputEmpty && 'block'}}>
-            {lists.map((list,idx)=>{
-                return <div key={`list-${idx}`} className={styles.listDetail}>{list}</div>
-            })}
-        </div>
+       
         </div>
     );
 }

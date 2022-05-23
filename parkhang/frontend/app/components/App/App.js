@@ -19,14 +19,16 @@ import utilStyles from "css/util.css";
 import { handleKeyDown } from "../../shortcuts";
 import SideMenuContainer from "../SideMenu/SideMenuContainer";
 import { useFlags } from 'flagsmith/react';
-
+import favimage from 'images/favicon.png'
 import Main from 'bodyComponent/Main'
-import isOnline from 'helper/checkOnlineStatus'
 import Resources from 'components/Resources'
 import {useActive} from '../UI/activeHook'
 import { history as his} from 'redux-first-router'
 import Search from 'bodyComponent/Search'
 import Notification from 'bodyComponent/utility/Notification'
+import Favicon from 'react-favicon'
+import isMobile from 'bodyComponent/utility/isMobile'
+
 
 type Props = {
     title: string,
@@ -51,24 +53,22 @@ function setTitle(title: string) {
 
 const App = (props: Props) => {
     setTitle(props.title);
-    const [online,setOnline]=useState(false);
-    const isActive=useActive(3000)
+    const isActive=useActive(4000)
     const history=his();
     const path=history.location.pathname;
     const isSearchActive=path.includes('/search/');
     
+    
 
-    useEffect(()=>{
-        isOnline().then(data=>setOnline(true)).catch(err=>setOnline(false))
-    },[])
   
     useEffect(()=>{
        if(isActive===false) props.onChangedNotification({
-            message:'YOU ARE NOT ACTIVE FOR SOME TIME NOW, CAN WE HELP YOU',
-            time:4000,
+            message:'YOU ARE NOT ACTIVE FOR SOME TIME NOW, CAN WE HELP YOU?',
+            time:8000,
             type:'warning'
         })
     },[isActive])
+
     let SelectedText=   props.state?.ui?.selectedText
    
     if(!SelectedText){
@@ -76,17 +76,10 @@ const App = (props: Props) => {
      }
    
     const  flags = useFlags(['navbar_parkhang','toggle_mainpage']);
-   let navbar_parkhang;
-   let toggle_mainpage;
-    if(online){
-        
-         navbar_parkhang = flags?.navbar_parkhang?.enabled
-         toggle_mainpage=flags?.toggle_mainpage?.enabled
-     }
-     else{
-        navbar_parkhang = true
-        toggle_mainpage=true
-     }
+
+       let navbar_parkhang = flags?.navbar_parkhang?.enabled
+       let toggle_mainpage=flags?.toggle_mainpage?.enabled
+    
 
     return (
         <div
@@ -99,7 +92,8 @@ const App = (props: Props) => {
                 handleKeyDown(e, props.state, props.dispatch);
             }}
         >
-              
+               <Favicon url={favimage} />
+         
             <HeaderContainer />
           {isSearchActive ? <Search/> : (SelectedText !== null) ? <Editor props={props}/> : <Main/>} 
              <Notification/>
@@ -110,14 +104,11 @@ const App = (props: Props) => {
 
 
 const Editor=({props})=>{
-    const [online,setOnline]=useState(false);
-    isOnline().then(data=>setOnline(true)).catch(err=>setOnline(false));
+   
     const flags = useFlags(['navbar_parkhang']);
    
-   let navbar_parkhang = true;
-   if(online){
-    navbar_parkhang = flags?.navbar_parkhang?.enabled
-}
+   let navbar_parkhang = flags?.navbar_parkhang?.enabled
+
     let textListClassnames = [styles.listContainer];
     let bodyHeight;
     let minSize = constants.MIN_TEXT_LIST_WIDTH;
@@ -135,7 +126,9 @@ const Editor=({props})=>{
         bodyHeight = "calc(100vh - " + headerStyles.headerHeight + ")";
     }
     const image_location = lopenlingLogo;
-    return (
+if( isMobile.any() ) return <div style={{height:'100%',width:'100wh',fontSize:30,fontWeight:"bold" ,display:'flex',placeItems:'center',margin:'0 auto'}}>please open in a PC browser</div> 
+    
+return (
         <div className={classnames(styles.interface, utilStyles.flex)}>
         <SplitPane
             split="vertical"
@@ -189,6 +182,7 @@ const Editor=({props})=>{
         </SplitPane>
     </div>
     )
+
 }
 
 

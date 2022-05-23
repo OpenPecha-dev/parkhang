@@ -95,13 +95,21 @@
 
 .navlinks {
     flex: 1;
+    height:100%;
 }
 
 .navlinks ul {
+    height: 100%;
     display: flex;
     gap: 10px;
     list-style: none;
+    margin:0;
 
+}
+.navlinks ul li{
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navlinks a {

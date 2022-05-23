@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './Search.css'
 import Tab from '../utility/Tab'
+
+
 function Search(props) {
 
 const {searchTerm} =props
@@ -11,6 +13,10 @@ const tabContent =[{
 {
   title:'Sheets',
   count:3
+},
+{
+  title:'fulltexts',
+  count:4
 }];
 const searchCount=10;
   return (
@@ -22,7 +28,7 @@ const searchCount=10;
       <Tab active={0}>
                 {tabContent.map((tab, idx) => (
                     <Tab.TabPane key={`Tab-${idx}`} tab={tab.title} count={tab.count}>
-                     
+                       
                     </Tab.TabPane>
                 ))}
             </Tab>
@@ -35,8 +41,6 @@ const searchCount=10;
            <li><input type='checkbox'/><span>Chojuk</span></li>
            <li><input type='checkbox'/><span>Chojuk</span></li>
            <li><input type='checkbox'/><span>Chojuk</span></li>
-
-
          </ul>
     </div>
     </div>
