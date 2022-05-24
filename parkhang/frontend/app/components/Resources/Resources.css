@@ -1,21 +1,33 @@
 .Resources{
-
+    height: 50%;
 }
 .ResourcesHeader{
     background-color: #EDEDED;
-    padding:10px;
-    text-transform: uppercase;
-}
-.ResourcesBody ul {
-list-style: none;
-}
-.ResourcesBody ul>li{
-    cursor: pointer;
     display: flex;
-    gap:5px;
-    padding:9px;
-    font-family: "Roboto", "Helvetica Neue", "Helvetica", sans-serif;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    padding:10px 0;
 }
-.ResourcesBody ul>li:hover{
-    color:hsl(0, 0%, 59%);
+.ResourceIcon{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    cursor: pointer;
+}
+.ResourceIcon:hover svg>path{
+    fill:black;
+}
+
+.ResourceDetail{
+   background-color:white;
+    height: 100%;
+    margin-top:20px;
+}
+.activeResource{
+    background-color: #eee;
+}
+.activeResource svg>path{
+    fill:black;
 }

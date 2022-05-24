@@ -1,26 +1,67 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styles from './Resources.css'
-import About from 'images/about-text.svg'
-import Comment from 'images/notes.svg'
-import Dictionaries from 'images/dictionaries.svg'
-import Feedback from 'images/feedback.svg'
-
+import AboutIcon from 'images/about-text.svg'
+import CommentIcon from 'images/notes.svg'
+import DictionariesIcon from 'images/dictionaries.svg'
+import FeedbackIcon from 'images/feedback.svg'
+import ApplyTooltip from '../UI/ApplyTooltip'
+import classnames from 'classnames'
+import Index from './ResourceOption'
 function Resources() {
-  
-    const header=(head)=><span>{head}</span>
+  const [selectedOption,setSelectedOption]=useState(0);
+  const handleClick=(num)=>{
+      setSelectedOption(num)
+  } 
+  const resources=[{
+      id:0,
+      title:'About',
+      effect:'float',
+      className:styles.ResourceIcon
+  },
+  {
+    id:1,
+    title:'Commentary',
+    effect:'solid',
+    className:styles.ResourceIcon
+},
+{
+    id:2,
+    title:'Dictionary',
+    effect:'solid',
+    className:styles.ResourceIcon
+},
+{
+    id:3,
+    title:'Question',
+    effect:'solid',
+    className:styles.ResourceIcon
+},
+]
 
     return (
     <div className={styles.Resources}>
-       <div className={styles.ResourcesHeader}>{header('Resources')}</div>
-       <div className={styles.ResourcesBody}>
-           <ul>
-               <li><About/>About this Text</li>
-               <li><Comment/>Commentary</li>
-               <li><Dictionaries/>Dictionary</li>
-               <li><Feedback/>Questions</li>
-
-           </ul>
+       <div className={styles.ResourcesHeader}>
+              {
+                  resources.map((resource,key)=>
+                  <div className={selectedOption===key?classnames(resource.className,styles.activeResource):resource.className} onClick={()=>handleClick(resource.id)} key={`resources-${key}`}>
+                  <ApplyTooltip tooltipName={resource.title} effect={resource.effect} className={resource.className}>
+                  {resource.id ===0 && <AboutIcon/>}
+                  {resource.id ===1 && <CommentIcon/>}
+                  {resource.id ===2 && <DictionariesIcon/>}
+                  {resource.id  ===3 && <FeedbackIcon/>}
+                  </ApplyTooltip>
+                  </div>
+                  )
+              }
+              
        </div>
+        <div className={styles.ResourceDetail}>
+          {selectedOption ===0 && <Index.About/>}
+          {selectedOption ===1 && <Index.Comment/>}
+          {selectedOption ===2 && <Index.Dictionary/>}
+          {selectedOption ===3 && <Index.Question/>}
+
+        </div>
     </div>
   )
 }

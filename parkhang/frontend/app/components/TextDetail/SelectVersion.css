@@ -1,36 +1,26 @@
 @import 'css/colour.css';
 
-.tabBar {
+.selectVersion {
     height: 30px;
-    display: flex;
-    gap:20px;
-    transition: all 0.3s ease-in;
     overflow: hidden;
-    margin:0 100px;
-}
-.tab {
-    width:0;
-    flex-grow:0;
-    opacity: 0;
-    font-size: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s linear;
-    display:none;
-
-}
-.tabBar:hover .tab{
-    flex:1;
-    opacity: 1;
-    display: block;
+    border:none;
+    outline:none;
+    padding:0 10px;
+    background-color: #eee;
+    flex:1
 }
 
 .selected {
-    display: block;
     width: 100%;
-    flex:1;
-    opacity: 1;
-    background-color: #eee;
-    padding:2px 10px;
+    padding:10px;
     border-radius: 10px;
+}
+.selectVersion:hover{
+    color:green;
+}
+
+.styled-select select {
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
 }
