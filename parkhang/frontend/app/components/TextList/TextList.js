@@ -210,8 +210,7 @@ class TextList extends React.Component<Props> {
             <div className={styles.textList}>
                 {this.props.texts && this.props.texts.length > 0 ? (
                     <AutoSizer>
-                        {({ height, width }) => (
-                           
+                        {({ height,width }) => (
                             <List
                                 ref={list => (this.list = list)}
                                 height={height}
@@ -221,7 +220,10 @@ class TextList extends React.Component<Props> {
                                 width={width}
                                 overscanRowCount={3}
                                 deferredMeasurementCache={this.cache}
-                           />
+                           >
+                           {console.log(height, width)}
+
+                           </List>
                           
                         )}
                     </AutoSizer>

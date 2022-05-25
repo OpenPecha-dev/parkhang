@@ -1,0 +1,17 @@
+.question {
+    background-color: #ffffff;
+}
+
+.question blockquote {
+    display: none;
+}
+
+.question p {
+    margin: 0;
+    padding: 0;
+}
+
+.threadLink {
+    float: right;
+    color: green;
+}

@@ -1,0 +1,18 @@
+@import 'css/colour.css';
+
+:root {
+    --radius: 18px;
+}
+
+.button {
+    background-color: var(--main-tint);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 14px;
+    width: var(--radius);
+    height: var(--radius);
+    text-align: center;
+    line-height: var(--radius);
+    cursor: pointer;
+}
+

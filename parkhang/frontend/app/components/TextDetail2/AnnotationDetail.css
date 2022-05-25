@@ -1,0 +1,116 @@
+@import 'css/type.css';
+@import 'css/colour.css';
+
+:root {
+    --button: {
+        padding: 5px 8px 5px 8px;
+        border: 0;
+        border-radius: 3px;
+        font-weight: normal;
+        font-size: 12px;
+        box-shadow: 0px 1px 1px #555;
+        cursor: pointer;
+    }
+}
+
+.annotationDetail {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 5px 10px 0px 0;
+    padding: 0 0 0 0;
+    background-color: #ddd;
+    position: relative;
+    box-shadow: 0px 2px 1px rgba(0,0,0,0.2);
+}
+
+.annotationDetail h3 {
+    flex-grow: 1;
+    font-size: 14px;
+    color: #444;
+    font-family: var(--tibetan-fonts);
+    font-weight: normal;
+    margin: 0 0 10px 0;
+    padding: 5px 10px 0px 10px;
+}
+
+.annotationDetail p {
+    flex-shrink: 0;
+    font-size: 18px;
+    color: #000;
+    font-family: var(--tibetan-fonts);
+    margin: 0;
+    padding: 0px 10px 5px 10px;
+    margin-left: 5px;
+}
+
+.active {
+    background-color: #aebcc7;
+    box-shadow: 0px 0px 0px rgba(0,0,0,0.8);
+}
+
+.annotationHeader {
+    display: flex;
+    align-items: flex-start;
+    background-color: #aebcc7;
+}
+
+.annotationDetail.active h3 {
+    color: var(--main-tint);
+    padding-left: 5px;
+}
+
+.activeIcon {
+    padding: 3px 0px 0 5px;
+}
+
+.editing {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px 0px 10px;
+}
+
+.editing textarea {
+    font-size: 18px;
+    font-family: var(--tibetan-fonts);
+    flex-grow: 1;
+}
+
+.actionButtons {
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.edit {
+    @apply --button;
+    display: flex;
+    margin: 5px auto;
+    color: white;
+    background-color: var(--main-tint);
+    padding: 5px 8px 5px 5px;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+.edit svg {
+    margin-right: 5px;
+}
+
+.editImage {
+    fill: white;
+}
+
+.save {
+    color: white;
+    background-color: var(--main-tint);
+    @apply --button;
+}
+
+.cancel {
+    color: white;
+    background-color: var(--cancel);
+    @apply --button;
+}

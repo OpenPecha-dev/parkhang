@@ -1,0 +1,8 @@
+.fontSize {
+    display: flex;
+    margin-right: 1em;
+}
+
+.fontSize label {
+    font-size: 1em;
+}

@@ -1,0 +1,13 @@
+.loading {
+    display: flex;
+    margin-top: 5px;
+}
+
+.loading :global(.loader) {
+    position: relative;
+    left: 0;
+    top: 0;
+    background: 0;
+    padding: 0;
+    width: 30px;
+}

@@ -1,0 +1,119 @@
+@import 'css/type.css';
+@import 'css/colour.css';
+
+:root {
+    --fontSize: 24px;
+    --paddingSide: 20px;
+    --maxWidth: 600px;
+    --removedText: {
+        color: #aaa;
+        cursor: pointer;
+    }
+}
+
+:export {
+    paddingSide: var(--paddingSide);
+    maxWidth: var(--maxWidth);
+}
+
+.text {
+    font-size: 24px;
+    line-height: 1.8;
+    padding: 0px var(--paddingSide);
+    font-family: var(--tibetan-fonts);
+    letter-spacing: 0.04em;
+    background-color: white;
+    margin: 0px;
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.textFirstRow {
+    margin-top: 0px;
+    border-top: 15px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.textLine {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    cursor: pointer;
+}
+
+.limitWidth.textFirstRow {
+    margin-top: 20px;
+}
+
+.textContainer {
+    overflow: auto;
+    background-color: var(--text-bg);
+    flex-grow: 1;
+    padding-left: 0;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.limitWidth {
+    max-width: var(--maxWidth);
+}
+
+.limitWidth.text {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.annotation {
+    color: #0366bc;
+    cursor: pointer;
+}
+
+.selectedAnnotation {
+    background-color: #ccc;
+}
+
+.removedByAnnotation {
+    @apply --removedText;
+    text-decoration: line-through red;
+
+}
+
+.insertion {
+    @apply --removedText;
+    text-decoration: line-through green;
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+.activeHighlight {
+    background-color: orange;
+}
+
+.lineBreak {
+    color: #aaa;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 0.8em;
+}
+
+.pageBreak {
+    color: #aaa;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 0.8em;
+    display: flex;
+}
+
+.pageBreak > svg {
+    width: 0.8em;
+    pointer-events: none;
+}

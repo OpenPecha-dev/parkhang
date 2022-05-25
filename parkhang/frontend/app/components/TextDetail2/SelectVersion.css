@@ -1,0 +1,26 @@
+@import 'css/colour.css';
+
+.selectVersion {
+    height: 30px;
+    overflow: hidden;
+    border:none;
+    outline:none;
+    padding:0 10px;
+    background-color: #eee;
+    flex:1
+}
+
+.selected {
+    width: 100%;
+    padding:10px;
+    border-radius: 10px;
+}
+.selectVersion:hover{
+    color:green;
+}
+
+.styled-select select {
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}

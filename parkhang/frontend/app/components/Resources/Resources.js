@@ -3,6 +3,7 @@ import styles from './Resources.css'
 import AboutIcon from 'images/about-text.svg'
 import CommentIcon from 'images/notes.svg'
 import DictionariesIcon from 'images/dictionaries.svg'
+import FindIcon from 'images/magnifier.svg'
 import FeedbackIcon from 'images/feedback.svg'
 import ApplyTooltip from '../UI/ApplyTooltip'
 import classnames from 'classnames'
@@ -35,7 +36,12 @@ function Resources() {
     title:'Question',
     effect:'solid',
     className:styles.ResourceIcon
-},
+},{
+    id:4,
+    title:'Search',
+    effect:'solid',
+    className:styles.ResourceIcon
+}
 ]
 
     return (
@@ -49,6 +55,7 @@ function Resources() {
                   {resource.id ===1 && <CommentIcon/>}
                   {resource.id ===2 && <DictionariesIcon/>}
                   {resource.id  ===3 && <FeedbackIcon/>}
+                  {resource.id  ===4 && <FindIcon/>}
                   </ApplyTooltip>
                   </div>
                   )
@@ -60,7 +67,7 @@ function Resources() {
           {selectedOption ===1 && <Index.Comment/>}
           {selectedOption ===2 && <Index.Dictionary/>}
           {selectedOption ===3 && <Index.Question/>}
-
+          {selectedOption ===4 && <Index.Find/>}
         </div>
     </div>
   )

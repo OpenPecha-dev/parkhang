@@ -1,0 +1,38 @@
+@import 'css/colour.css';
+
+
+.textDetail {
+    background-color: var(--text-bg);
+    position: relative;
+    flex-grow: 1;
+}
+
+.textContainer {
+    flex-grow: 1;
+    border-radius: 10px;
+    padding:10px;
+}
+
+:global(.loader) {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    padding: 50px;
+    background-color: rgba(1,1,1,0.1);
+    border-radius: 5px;
+}
+
+.textContainer *::-webkit-scrollbar {
+    width: 5px;
+  }
+  .textContainer *::-webkit-scrollbar-track {
+    background:var(--text-list-colour);
+  }
+  .textContainer *::-webkit-scrollbar-thumb {
+    background: var(--text-bg);
+    border-radius: 2px
+  }
+  .textContainer *::-webkit-scrollbar-thumb:hover {
+    background: darkgray;
+    border-radius: 5px;
+  }

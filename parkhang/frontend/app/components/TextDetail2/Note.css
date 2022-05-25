@@ -1,0 +1,41 @@
+@import 'css/type.css';
+@import 'css/colour.css';
+
+:root {
+    --delete-radius: 16px;
+}
+
+.note {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0;
+    margin: 0 0 1em 0;
+}
+
+.content {
+    font-size: 18px;
+}
+
+.delete {
+    border-radius: 50%;
+    color: #444;
+    font-size: 18px;
+    width: var(--delete-radius);
+    height: var(--delete-radius);
+    text-align: center;
+    line-height: var(--delete-radius);
+    cursor: pointer;
+}

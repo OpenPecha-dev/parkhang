@@ -1,0 +1,65 @@
+@import 'AnnotationControls.css';
+
+.splitText {
+    width: 100%;
+    background-color: white;
+    flex-grow: 1;
+    min-width: 0;
+    font-size: 24px;
+    padding:10px;
+}
+
+.splitText *:focus {
+    outline: none;
+}
+
+.splitTextRowContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.splitTextRow {
+    display: flex;
+    flex-direction: row;
+    background-color: #ccc;
+}
+
+.splitTextRow .text {
+    max-width: 100%;
+}
+
+.pechaImage {
+    background-color: #eee;
+    height: 260px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.pechaImage img {
+    object-fit: contain;
+}
+
+.controlsPlaceholder {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: var(--controlsWidth);
+    padding: var(--controlsPadding);
+    margin-left: var(--controlsMargin);
+    margin-right: var(--controlsMargin);
+}
+
+.pageNumber {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 42px;
+    color: #444;
+}
+
+:global(.ReactVirtualized__Grid__innerScrollContainer) {
+    overflow: visible !important;
+    margin-bottom: 300px;
+}

@@ -1,0 +1,53 @@
+@import 'css/type.css';
+@import 'css/colour.css';
+
+.headingContainer {
+    display: flex;
+    flex:1;
+    flex-direction: column;
+    border-bottom: 1px solid #ccc;
+    flex-shrink: 0;
+    color:var(--dark-text);
+    background-color: var(--text-bg);
+}
+
+.textHeading {
+    font-size: 21px;
+    margin: 0;
+    margin-left:30px;
+    font-weight: normal;
+    flex-grow: 1;
+    flex-shrink: 0;
+    font-family: var(--tibetan-fonts);
+}
+
+.topRow {
+    display: flex;
+    flex: 1;
+    align-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    justify-content: space-between;
+}
+
+.textHeadingloader {
+    position: relative;
+    right: 10px;
+}
+
+.textHeadingloader :global(.loader) {
+    position: relative;
+    left: 0;
+    top: 0;
+    background: 0;
+    padding: 0;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.controls label {
+    margin-right: 5px;
+}
