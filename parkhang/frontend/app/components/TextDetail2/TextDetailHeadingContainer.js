@@ -33,6 +33,7 @@ const mapStateToProps = (state: AppState): {} => {
             );
         }
     }
+    let textFontSize = reducers.getTextFontSize2(state);
 
 
     return {
@@ -42,6 +43,8 @@ const mapStateToProps = (state: AppState): {} => {
         textListIsVisible: getTextListVisible(state),
         menuListIsVisible: getMenuListVisible(state),
         accountOverlayVisible: getAccountOverlayVisible(state),
+        textFontSize,
+
     };
 };
 
@@ -68,6 +71,9 @@ return {
     menuButtonClicked,
     onSelectedWitness: (witness: Witness) => {
         dispatch(actions.selectedTextWitness(selectedText.id, witness.id));
+    },
+    onChangedFontSize: (fontSize: number) => {
+        dispatch(actions.changedTextFontSize2(fontSize));
     }
 };
 }

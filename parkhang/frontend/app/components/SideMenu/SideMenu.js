@@ -172,29 +172,7 @@ function SideMenu(props: Props) {
                     </div>
                 </ApplyTooltip>
 
-                <ApplyTooltip tooltipName={`Font: ${textSize + 2}`}>
-                    <div
-                        className={classnames(styles.fontSize, styles.logo)}
-                        onClick={handleFontUp}
-                    >
-                        <img
-                            src="https://pics.freeicons.io/uploads/icons/png/14698440671543238957-512.png"
-                            alt="fontLogo"
-                        ></img>
-                    </div>
-                </ApplyTooltip>
-                <ApplyTooltip tooltipName={`Font: ${textSize - 2}`}>
-                    <div
-                        className={classnames(styles.fontSize, styles.logo)}
-                        onClick={handleFontDown}
-                    >
-                        <img
-                            src="https://pics.freeicons.io/uploads/icons/png/11688289221543238957-512.png"
-                            alt="fontLogo"
-                        ></img>
-                    </div>
-                </ApplyTooltip>
-                {/* <ApplyTooltip tooltipName="share" format="annotation.share"> */}
+              
                 <div
                     className={classnames(styles.share, styles.logo)}
                     onClick={shareClick}
@@ -234,7 +212,6 @@ function SideMenu(props: Props) {
                         </WhatsappShareButton>
                     </div>
                 </div>
-                {/* </ApplyTooltip> */}
             </div>
             <hr />
             {controls}

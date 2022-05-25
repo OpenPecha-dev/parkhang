@@ -1,6 +1,7 @@
 // @flow
 import { combineReducers } from "redux";
 import dataReducers, * as data from "./data";
+import dataReducers2, * as data2 from "./data2";
 import uiReducers, * as ui from "./ui";
 import userReducers, * as user from "./user";
 import categoryReducers,* as category from './category';
@@ -37,7 +38,7 @@ function createReducer(
         }
     };
 }
-
+export const dataReducer2= createReducer(data2.initialDataState,dataReducers2)
 export const dataReducer = createReducer(data.initialDataState, dataReducers);
 export const uiReducer = createReducer(ui.initialUIState, uiReducers);
 export const userReducer = createReducer(user.initialUserState, userReducers);
@@ -207,6 +208,10 @@ export const getTextFontSize = (state: AppState): number => {
     return ui.getTextFontSize(state.ui);
 };
 
+export const getTextFontSize2 = (state: AppState): number => {
+    return ui.getTextFontSize2(state.ui);
+};
+
 // data
 
 export const getText = (
@@ -217,9 +222,11 @@ export const getText = (
     return data.getText(state.data, textId, asData);
 };
 
+
 export const getSources = (state: AppState): Source[] => {
     return data.getSources(state.data);
 };
+
 
 export const getSource = (state: AppState, sourceId: number): Source | null => {
     return data.getSource(state.data, sourceId);
@@ -407,6 +414,26 @@ export const getQuestions = (
 ): Question[] | null => {
     return data.getQuestions(state.data, questionId);
 }
+
+//data2
+
+export const getText2 = (
+    state: AppState,
+    textId: number,
+    asData: boolean = false
+): Text | TextData | null => {
+    return data2.getText(state.data, textId, asData);
+};
+export const getSources2 = (state: AppState): Source[] => {
+    return data2.getSources(state.data);
+};
+
+
+export const getSource2 = (state: AppState, sourceId: number): Source | null => {
+    return data2.getSource(state.data, sourceId);
+};
+
+
 // get selectedTextTitle
 
 
@@ -421,6 +448,7 @@ export const getTextTitle = (
 
 export const allReducers = {
     data: dataReducer,
+    data2:dataReducer2,
     ui: uiReducer,
     user: userReducer,
     intl: intlReducer,

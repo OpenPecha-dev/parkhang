@@ -73,6 +73,7 @@ export const CHANGED_NOTIFICATION ="notification/CHANGED_NOTIFICATION"
 export const SELECTED_WITNESS = "text/SELECTED_WITNESS";
 export const CHANGED_SHOW_PAGE_IMAGES = "text/CHANGED_SHOW_PAGE_IMAGES";
 export const CHANGED_TEXT_FONT_SIZE = "text/CHANGED_TEXT_FONT_SIZE";
+export const CHANGED_TEXT_FONT_SIZE2 = "text/CHANGED_TEXT_FONT_SIZE2";
 
 export const CHANGED_SELECTED_SEGMENT = "text/CHANGED_SELECTED_SEGMENT";
 export const DESELECTED_SEGMENT = "text/DESELECTED_SEGMENT";
@@ -628,6 +629,19 @@ export function changedTextFontSize(
         fontSize
     };
 }
+
+export type ChangedTextFontSizeAction2 = Action & {
+    fontSize: number
+};
+export function changedTextFontSize2(
+    fontSize: number
+): ChangedTextFontSizeAction2 {
+    return {
+        type: CHANGED_TEXT_FONT_SIZE2,
+        fontSize
+    };
+}
+
 
 export type SelectedTextWitnessAction = Action & {
     witnessId: number,

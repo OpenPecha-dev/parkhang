@@ -43,6 +43,7 @@ export type UIState = {
 
 export const initialUIState = {
     selectedText: null,
+    selectedText2: null,
     selectedAuthor: null,
     selectedTextWitness: {},
     selectedSearchResult: null,
@@ -59,6 +60,7 @@ export const initialUIState = {
     exportingWitness: {},
     showAccountOverlay: false,
     textFontSize: constants.DEFAULT_TEXT_FONT_SIZE,
+    textFontSize2: constants.DEFAULT_TEXT_FONT_SIZE,    
     notification:{
         message:'',
         time:null,
@@ -87,6 +89,25 @@ function selectedText(
     state = {
         ...state,
         selectedText: action.text
+    };
+
+    if (
+        state.selectedSearchResult &&
+        state.selectedSearchResult.textId !== action.text.id
+    ) {
+        state = clearSearchResult(state);
+    }
+
+    return state;
+}
+
+function selectedText2(
+    state: UIState,
+    action: actions.SelectedTextAction
+): UIState {
+    state = {
+        ...state,
+        selectedText2: action.text
     };
 
     if (
@@ -201,7 +222,15 @@ function changedTextFontSize(
         textFontSize: action.fontSize
     };
 }
-
+function changedTextFontSize2(
+    state: UIState,
+    action: actions.ChangedTextFontSizeAction
+): UIState {
+    return {
+        ...state,
+        textFontSize2: action.fontSize
+    };
+}
 function changedNotification(
     state: UIState,
     action: actions.ChangedTextFontSizeAction
@@ -436,6 +465,8 @@ uiReducers[actions.CHANGED_SEARCH_TERM] = changedSearchTerm;
 uiReducers[actions.SELECTED_SEARCH_RESULT] = selectedSearchResult;
 uiReducers[actions.CHANGED_SHOW_PAGE_IMAGES] = changedShowPageImages;
 uiReducers[actions.CHANGED_TEXT_FONT_SIZE] = changedTextFontSize;
+uiReducers[actions.CHANGED_TEXT_FONT_SIZE2] = changedTextFontSize2;
+
 // uiReducers[actions.CHANGED_SELECTED_SEGMENT] = changedSelectedSegment;
 uiReducers[actions.CHANGED_ACTIVE_ANNOTATION] = changedActiveAnnotation;
 uiReducers[
@@ -576,4 +607,7 @@ export const getAccountOverlayVisible = (state: UIState): boolean => {
 
 export const getTextFontSize = (state: UIState): number => {
     return state.textFontSize;
+};
+export const getTextFontSize2 = (state: UIState): number => {
+    return state.textFontSize2;
 };

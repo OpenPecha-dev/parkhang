@@ -1,6 +1,5 @@
 .textDetailHeading{
     font-weight: bold;
-    align-items: center;
     display: flex;
     padding:3px 0;
     height: 70px;
@@ -10,14 +9,13 @@
 .textHeadingTitle{
 margin-left:15px;
 }
-.textDetailHeading span{
+/* .textDetailHeading span{
     height: 16px;
-    overflow: hidden;
     width: 16px;
     justify-content: center;
     align-items: center;
     transition: .3s ease 0ms;
-}
+} */
 .leftLogo svg:hover, .rightLogo svg:hover{
     background-color: darkgray;
     cursor: pointer;
@@ -41,7 +39,30 @@ margin-left:15px;
     gap:10px;
 }
 .textDetailHeading .coverImage{
-    height: 40px;
+    margin-top:6px;
+    margin-right: 10px;
     width:30px;
     object-fit: contain;
+    margin-left:20px;
+    cursor: pointer;
+}
+.coverImage:hover{
+    box-shadow: 0 0 10px black;
+}
+.OptionToggle{
+    position:relative;
+    top:0;
+    z-index: 1000;
+
+    
+}
+.option{
+    padding:10px;
+    background-color: #f9f9f8;
+    position:absolute;
+    height:100px;
+    width:135px;
+    bottom:-100px;
+    box-shadow: 0 2px 10px black;
+    left:20px;
 }

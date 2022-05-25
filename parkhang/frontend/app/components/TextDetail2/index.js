@@ -1,1 +1,1 @@
-export { default } from "./TextDetail";
+export {default} from './TextDetailContainer'

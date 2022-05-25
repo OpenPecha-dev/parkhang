@@ -17,22 +17,11 @@ import Text, {
 } from "./Text";
 import SplitText from "lib/SplitText";
 import SegmentedText from "lib/SegmentedText";
-import shallowEqual from "lib/shallowEqual";
-import { CONTROLS_MARGIN_LEFT } from "./AnnotationControls";
-import AnnotationControlsContainer from "./AnnotationControlsContainer";
 import styles from "./SplitText.css";
-import annotationControlsStyles from "./AnnotationControls.css";
-import textStyles from "./Text.css";
-import controlStyles from "./AnnotationControls.css";
 import _ from "lodash";
 import TextSegment from "lib/TextSegment";
-import Annotation, { ANNOTATION_TYPES } from "lib/Annotation";
-import type { AnnotationUniqueId } from "lib/Annotation";
 import Witness from "lib/Witness";
 import GraphemeSplitter from "grapheme-splitter";
-
-const MIN_SPACE_RIGHT =
-    parseInt(controlStyles.inlineWidth) + CONTROLS_MARGIN_LEFT;
 
 const IMAGE_URL_PREFIX = "//iiif.bdrc.io/";
 const IMAGE_URL_SUFFIX = "/full/full/0/default.jpg";
@@ -49,26 +38,18 @@ let _searchResultsCache: {
 } = {};
 
 export type Props = {
-    textListVisible: boolean,
-    editMenuVisible:Boolean,
-    imagesBaseUrl: string,
     splitText: SplitText,
     didSelectSegmentIds: (segmentIds: string[]) => void,
     limitWidth: boolean,
-    activeAnnotation: Annotation | null,
     selectedAnnotatedSegments: Array<TextSegment | number>,
-    showImages: boolean,
-    annotationPositions: { [string]: Annotation[] },
-    annotations: Annotation[],
-    activeAnnotations: { [AnnotationUniqueId]: Annotation } | null,
     selectedSegmentId: (segmentId: string) => void,
     selectedWitness: Witness | null,
-    selectedSearchResult: {
-        textId: number,
-        start: number,
-        length: number
-    } | null,
-    searchValue: string | null,
+    // selectedSearchResult: {
+    //     textId: number,
+    //     start: number,
+    //     length: number
+    // } | null,
+    // searchValue: string | null,
     fontSize: number,
 };
 
@@ -113,8 +94,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             defaultHeight: 300
         });
         this.rowRenderer = this.rowRenderer.bind(this);
-        this.textListVisible = props.textListVisible;
-        this.editMenuVisible =props.editMenuVisible;
+        // this.textListVisible = props.textListVisible;
+        // this.editMenuVisible =props.editMenuVisible;
         this.activeSelection = null;
         this.selectedNodes = null;
         this._mouseDown = false;
@@ -508,7 +489,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
 
         // make sure there's no numbers in selectedAnnotatedSegments
         // as we want to pass it to Text which only expects TextSegments
-        this._filteredSelectedAnnotatedSegments = props.selectedAnnotatedSegments.reduce(
+        this._filteredSelectedAnnotatedSegments = props?.selectedAnnotatedSegments?.reduce(
             (acc, current: TextSegment | number) => {
                 if (current instanceof TextSegment) acc.push(current);
                 return acc;
@@ -971,22 +952,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             // menuVisible={props.menuVisible}
                         />
                     </div>
-                    {this.selectedTextIndex === index &&
-                        this.props.activeAnnotation && (
-                            <AnnotationControlsContainer
-                                annotationPositions={props.annotationPositions}
-                                annotatedText={props.splitText.annotatedText}
-                                activeAnnotation={props.activeAnnotation}
-                                inline={true}
-                                firstSelectedSegment={this.firstSelectedSegment}
-                                splitTextRect={this.splitTextRect}
-                                selectedElementId={this.selectedElementId}
-                                pechaImageClass={pechaImageClass}
-                                splitText={props.splitText}
-                                selectedElementIds={this.selectedElementIds}
-                                list={this.list}
-                            />
-                        )}
+                   
                 </div>
             </CellMeasurer>
         );
