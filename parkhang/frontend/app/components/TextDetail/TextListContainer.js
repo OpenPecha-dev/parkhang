@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import TextList from "./TextList";
 import * as actions from "actions";
-import { getSelectedText2   } from "reducers";
+import { getSelectedText } from "reducers";
 import type { AppState } from "reducers";
 import * as api from "api";
 import * as reducers from "reducers";
@@ -29,7 +29,7 @@ const mapStateToProps = (state: AppState) => {
 
     return {
         texts: texts,
-        selectedText: getSelectedText2(state),
+        selectedText: getSelectedText(state),
         searchTerm: searchValue,
         searchResults,
         selectedSearchResult,
@@ -40,7 +40,7 @@ const mapStateToProps = (state: AppState) => {
 const mapDispatchToProps = dispatch => {
     return {
         onSelectedText: (text: api.TextData) => {
-            dispatch(actions.selectedText2(text));
+            dispatch(actions.selectedText(text));
         }
         
     };

@@ -127,7 +127,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         
         this.processProps(props);
     }
-
+   
     updateList(
         resetCache: boolean = true,
         resetRows: number | number[] | null = null

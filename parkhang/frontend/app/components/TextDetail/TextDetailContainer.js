@@ -232,6 +232,7 @@ const mapStateToProps = state => {
                 annotatedText,
                 (Object.values(annotations): any)
             );
+
         }
 
         // Get the segments that are part of the current active annotation.
@@ -295,7 +296,6 @@ const mapStateToProps = state => {
 
     _selectedWitness = selectedWitness;
     let menuListIsVisible= getMenuListVisible(state)
-
     return {
         text: selectedText,
         witnesses: witnesses,

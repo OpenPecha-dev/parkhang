@@ -6,6 +6,7 @@ import * as constants from "app_constants";
 
 export type UIState = {
     selectedText: api.TextData | null,
+    selectedText2: api.TextData | null,
     selectedTextWitness: { [textId: number]: number },
     selectedSearchResult: {
         textId: number,
@@ -458,6 +459,7 @@ function changedAccountOverlay(
 const uiReducers = {};
 uiReducers[actions.LOADED_USER_SETTINGS] = loadedUserSettings;
 uiReducers[actions.SELECTED_TEXT] = selectedText;
+uiReducers[actions.SELECTED_TEXT2] = selectedText2;
 uiReducers[actions.NO_SELECTED_TEXT] = noSelectedText;
 uiReducers[actions.SELECTED_WITNESS] = selectedTextWitness;
 uiReducers[actions.CHANGED_SEARCH_VALUE] = changedSearchValue;
@@ -489,7 +491,10 @@ export const getSelectedText = (state: UIState): api.TextData | null => {
    
     return state.selectedText;
 };
-
+export const getSelectedText2 = (state: UIState): api.TextData | null => {
+   
+    return state.selectedText2;
+};
 export const getNotification = (state: UIState): api.TextData | null => {
    
     return state.notification;

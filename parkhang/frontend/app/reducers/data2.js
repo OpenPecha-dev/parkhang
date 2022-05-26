@@ -144,7 +144,7 @@ function loadingWitnesses(state: DataState): DataState {
 }
 
 
-function loadedWitnesses(
+function loadedWitnesses2(
     state: DataState,
     action: actions.LoadedWitnessesAction
 ): DataState {
@@ -553,7 +553,7 @@ dataReducers[actions.LOADED_TEXTS] = loadedTexts;
 dataReducers[actions.LOADING_SOURCES] = loadingSources;
 dataReducers[actions.LOADED_SOURCES] = loadedSources;
 dataReducers[actions.LOADING_WITNESSES] = loadingWitnesses;
-dataReducers[actions.LOADED_WITNESSES] = loadedWitnesses;
+dataReducers[actions.LOADED_WITNESSES2] = loadedWitnesses2;
 dataReducers[actions.LOADING_WITNESS_ANNOTATIONS] = loadingAnnotations;
 dataReducers[actions.LOADED_WITNESS_ANNOTATIONS] = loadedAnnotations;
 dataReducers[
@@ -580,7 +580,7 @@ export const getText = (
     asData: boolean
 ): Text | TextData | null => {
     const textData = state.textsById[textId];
-    console.log(textData)
+   
 
     let text = null;
     if (textData) {
@@ -711,6 +711,7 @@ export const getWorkingWitness = (
 ): Witness | null => {
     let workingWitness = null;
     if (state.textWitnessesById.hasOwnProperty(textId)) {
+       
         const witnesses = state.textWitnessesById[textId];
         for (let witnessId of Object.keys(witnesses)) {
             const witness = witnesses[Number(witnessId)];
@@ -731,6 +732,7 @@ export const getTextWitnesses = (
 ): Witness[] => {
     let witnesses = [];
     if (state.textWitnessesById.hasOwnProperty(textId)) {
+    
         const witnessesById = state.textWitnessesById[textId];
         for (let witnessId in witnessesById) {
             const witness = getWitness(state, Number(witnessId));
@@ -738,8 +740,11 @@ export const getTextWitnesses = (
                 witnesses.push(witness);
             }
         }
+        
+
     }
     return witnesses;
+
 };
 
 export function annotationFromData(

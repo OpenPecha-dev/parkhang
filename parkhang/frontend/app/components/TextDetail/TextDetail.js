@@ -69,7 +69,6 @@ class TextDetail extends React.Component<Props> {
         let inlineControls = false;
         let textComponent = null;
         let splitText = null;
-
         if (
             !this.props.annotatedText ||
             !this.props.text ||

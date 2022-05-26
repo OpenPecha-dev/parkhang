@@ -34,23 +34,19 @@ const handleClick=()=>{
                  rowHeight={cache.current.rowHeight}
                  deferredMeasurementCache={cache.current}
                  rowCount={textslist.length}
-                 rowRenderer={
-                   ({key,index,style,parent})=>{
+                 rowRenderer={({key,index,style,parent})=>{
                  let data=textslist[index]
                   return (
                   <CellMeasurer key={`optionvalues-${key}`} cache={cache.current } parent={parent}
                   columnIndex={0} rowIndex={index}
                   > 
-                    <div 
-                    style={style} 
+                    <div style={style} 
                   onClick={()=>{
                     setSelected(data.name);
                     setIsOpen(false);
                     onSelectedText(data)
-                  }}>
-                    <span style={{paddingLeft:'10px'}}>{data.name}
-                      </span>
-                    </div>
+                  }}>  <span style={{paddingLeft:'10px'}}>{data.name}
+                  </span></div>
                   </CellMeasurer>)
                  }}
        

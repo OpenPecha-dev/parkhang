@@ -221,7 +221,6 @@ class TextList extends React.Component<Props> {
                                 overscanRowCount={3}
                                 deferredMeasurementCache={this.cache}
                            >
-                           {console.log(height, width)}
 
                            </List>
                           

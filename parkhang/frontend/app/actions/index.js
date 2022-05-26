@@ -28,6 +28,7 @@ export const LOADING_TEXT_DATA = "LOADING_TEXT_DATA";
 export const LOAD_WITNESSES = "LOAD_WITNESSES";
 export const LOADING_WITNESSES = "LOADING_WITNESSES";
 export const LOADED_WITNESSES = "LOADED_WITNESSES";
+export const LOADED_WITNESSES2 = "LOADED_WITNESSES2";
 
 export const LOAD_WITNESS_ANNOTATIONS = "LOAD_WITNESS_ANNOTATIONS";
 export const LOADING_WITNESS_ANNOTATIONS = "LOADING_WITNESS_ANNOTATIONS";
@@ -62,6 +63,7 @@ export const REMOVED_TEMPORARY_ANNOTATION = "text/REMOVED_TEMPORARY_ANNOTATION";
 
 // UI
 export const SELECTED_TEXT = "textList/SELECTED_TEXT";
+export const SELECTED_TEXT2 = "textList/SELECTED_TEXT2";
 export const NO_SELECTED_TEXT="textList/NO_SELECTED_TEXT";
 export const CHANGED_SEARCH_VALUE = "textList/CHANGED_SEARCH_VALUE";
 export const CHANGED_SEARCH_TERM = "textList/CHANGED_SEARCH_TERM";
@@ -228,6 +230,18 @@ export function loadedWitnesses(
 ) {
     return {
         type: LOADED_WITNESSES,
+        text,
+        witnesses
+    };
+}
+
+
+export function loadedWitnesses2(
+    text: api.TextData,
+    witnesses: api.WitnessData[]
+) {
+    return {
+        type: LOADED_WITNESSES2,
         text,
         witnesses
     };
@@ -501,6 +515,14 @@ export type SelectedTextAction = Action & TextDataAction;
 export function selectedText(text: api.TextData): SelectedTextAction {
     return {
         type: SELECTED_TEXT,
+        text
+    };
+}
+
+export type SelectedTextAction2 = Action & TextDataAction;
+export function selectedText2(text: api.TextData): SelectedTextAction2 {
+    return {
+        type: SELECTED_TEXT2,
         text
     };
 }

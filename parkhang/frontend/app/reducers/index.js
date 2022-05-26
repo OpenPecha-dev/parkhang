@@ -50,6 +50,7 @@ export const categoryReducer =createReducer(category.initialCategoryState,catego
 
 export type AppState = {
     data: data.DataState,
+    data2:data.DataState,
     ui: ui.UIState,
     user: user.UserState,
     intl: { locale: string, messages: { [string]: string } },
@@ -107,7 +108,10 @@ export const getSelectedText = (state: AppState): TextData | null => {
    
     return ui.getSelectedText(state.ui);
 };
-
+export const getSelectedText2 = (state: AppState): TextData | null => {
+   
+    return ui.getSelectedText2(state.ui);
+};
 export const getSelectedTextWitnessId = (
     state: AppState,
     textId: number
@@ -253,6 +257,14 @@ export const getTextWitnesses = (
     return data.getTextWitnesses(state.data, textId);
 };
 
+export const getTextWitnesses2 = (
+    state: AppState,
+    textId: number
+): Witness[] => {
+    return data2.getTextWitnesses(state.data2, textId);
+};
+
+
 export const getBaseWitness = (
     state: AppState,
     textId: number
@@ -264,7 +276,15 @@ export const getWorkingWitness = (
     state: AppState,
     textId: number
 ): Witness | null => {
+
     return data.getWorkingWitness(state.data, textId);
+};
+
+export const getWorkingWitness2 = (
+    state: AppState,
+    textId: number
+): Witness | null => {
+    return data2.getWorkingWitness(state.data2, textId);
 };
 
 export const hasLoadedWitness = (

@@ -5,8 +5,6 @@ import SplitText from "lib/SplitText";
 import lengthSplitter from "lib/text_splitters/lengthSplitter";
 
 function TextDetail(props) {
-
-  // console.log(props)
   let text = {
     name: "",
   };
@@ -16,13 +14,12 @@ if (props.text) {
 let inlineControls = false;
 let textComponent = null;
 let splitText = null;
-
 if (
  props.annotatedText ||
   props.text ||
   props.loading
 ) {
-  textComponent = <div key={this.key} />;
+  textComponent = <div key={`key-${Math.random()}`}/>;
 } else {
   let limitWidth = false;
   let splitter;

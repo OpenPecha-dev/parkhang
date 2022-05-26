@@ -6,6 +6,7 @@ import ApplyTooltip from "../UI/ApplyTooltip";
 import SelectVersion from "./SelectVersion";
 import Witness from "lib/Witness";
 import Slider from "../UI/Slider";
+import TextList from "./TextListContainer";
 
 type HeaderProps = {
     witnesses: Witness[],
@@ -46,7 +47,7 @@ function TextDetailHeading(props: HeaderProps) {
                     onSelectedWitness={props.onSelectedWitness}
                 />
                 <div className={styles.textHeadingTitle} style={{ flex: 1 }}>
-                    {selectedText?.name}
+                    <TextList/>
                 </div>
             </div>
 
