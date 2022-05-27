@@ -15,8 +15,8 @@ let inlineControls = false;
 let textComponent = null;
 let splitText = null;
 if (
- props.annotatedText ||
-  props.text ||
+ !props.annotatedText ||
+ !props.text ||
   props.loading
 ) {
   textComponent = <div key={`key-${Math.random()}`}/>;
@@ -28,6 +28,7 @@ if (
   } else {
       splitter = lengthSplitter(1000, /^།[\s]+(?!།[\s]+)/, 2, 5);
   }
+  
 let key=12;
   splitText = new SplitText(props.annotatedText, splitter);
   inlineControls = true;
@@ -38,7 +39,7 @@ let key=12;
           // activeAnnotations={this.props.activeAnnotations}
           // activeAnnotation={this.props.activeAnnotation}
           limitWidth={limitWidth}
-          // didSelectSegmentIds={this.props.didSelectSegmentIds}
+          // // didSelectSegmentIds={this.props.didSelectSegmentIds}
           // selectedSegmentId={this.props.selectedSegmentId}
           // annotationPositions={this.props.annotationPositions}
           selectedAnnotatedSegments={
@@ -60,7 +61,7 @@ let key=12;
 let textComponents = [textComponent];
 
   return (
-    <div style={{width:'50%'}}>
+    <div style={{width:'50%',height:'100%'}}>
         
         <TextDetailHeading/>
           

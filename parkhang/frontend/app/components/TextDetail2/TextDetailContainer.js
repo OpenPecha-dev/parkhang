@@ -23,6 +23,7 @@ const mapStateToProps = (state: AppState): {} => {
         );
         if (selectedWitnessId) {
             selectedWitness =reducers.getWitness(state, selectedWitnessId);
+      
         }
         if (!selectedWitness) {
             selectedWitness = workingWitness;
@@ -32,9 +33,10 @@ const mapStateToProps = (state: AppState): {} => {
      annotatedText = TextStore2.getWitnessText(state, selectedWitness.id);
     
     return {
+        text: selectedText,
         textFontSize,
-        selectedText,
         annotatedText,
+        selectedWitness,
 
     };
    

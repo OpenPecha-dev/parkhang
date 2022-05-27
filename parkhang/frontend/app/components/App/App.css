@@ -49,3 +49,6 @@ body {
     z-index: 1;
     background-color: #ffffff;
 }
+.ReactVirtualized__List{
+    background-color: red;
+}

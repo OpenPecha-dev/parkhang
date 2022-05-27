@@ -47,7 +47,6 @@ const App = (props: Props) => {
     const path=history.location.pathname;
     const isSearchActive=path.includes('/search/');
     
-    
 
   
     useEffect(()=>{

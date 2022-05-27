@@ -2,7 +2,7 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import { AutoSizer } from "react-virtualized/dist/es/AutoSizer";
-import { List } from "react-virtualized/dist/es/List";
+import { List } from "react-virtualized";
 import {
     CellMeasurer,
     CellMeasurerCache
@@ -22,7 +22,7 @@ export type Props = {
     splitText: SplitText,
     didSelectSegmentIds: (segmentIds: string[]) => void,
     limitWidth: boolean,
-    selectedAnnotatedSegments: Array<TextSegment | number>,
+    // selectedAnnotatedSegments: Array<TextSegment | number>,
     selectedSegmentId: (segmentId: string) => void,
     selectedWitness: Witness | null,
     // selectedSearchResult: {
@@ -57,7 +57,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     firstSelectedSegment: TextSegment | null;
     selectedElementId: string | null;
     selectedElementIds: string[] | null;
-
+    
     constructor(props: Props) {
         super(props);
 
@@ -67,7 +67,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             fixedWidth: true,
             defaultHeight: 300
         });
-        this.rowRenderer = this.rowRenderer.bind(this);
+        this.rowRenderer=this.rowRenderer.bind(this)
         this.activeSelection = null;
         this.selectedNodes = null;
         this._mouseDown = false;
@@ -81,124 +81,275 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         // this.processProps(props);
     }
 
-    // updateList(
-    //     resetCache: boolean = true,
-    //     resetRows: number | number[] | null = null
-    // ) {
-    //     if (
-    //         this.props.showImages &&
-    //         !this.calculatedImageHeight &&
-    //         this.imageHeight &&
-    //         this.imageWidth
-    //     ) {
-    //         this.calculatedImageHeight = this.calculateImageHeight();
-    //     }
-    //     if (this.list) {
-    //         const list = this.list;
-    //         if (resetCache) {
-    //             if (resetRows !== null) {
-    //                 if (!Array.isArray(resetRows)) {
-    //                     this.cache.clear(resetRows);
-    //                 } else if (Array.isArray(resetRows)) {
-    //                     for (let i = 0; i < resetRows.length; i++) {
-    //                         let resetRow = resetRows[i];
-    //                         this.cache.clear(resetRow);
-    //                     }
-    //                 }
-    //             } else {
-    //                 this.cache.clearAll();
-    //                 list.measureAllRows();
-    //                 list.recomputeRowHeights(0);
-    //             }
-    //         }
-    //         list.forceUpdateGrid();
-    //     }
-    // }
+    updateList(
+        resetCache: boolean = true,
+        resetRows: number | number[] | null = null
+    ) {
+        if (
+            this.props.showImages &&
+            !this.calculatedImageHeight &&
+            this.imageHeight &&
+            this.imageWidth
+        ) {
+            this.calculatedImageHeight = this.calculateImageHeight();
+        }
+        if (this.list) {
+            const list = this.list;
+            if (resetCache) {
+                if (resetRows !== null) {
+                    if (!Array.isArray(resetRows)) {
+                        this.cache.clear(resetRows);
+                    } else if (Array.isArray(resetRows)) {
+                        for (let i = 0; i < resetRows.length; i++) {
+                            let resetRow = resetRows[i];
+                            this.cache.clear(resetRow);
+                        }
+                    }
+                } else {
+                    this.cache.clearAll();
+                    list.measureAllRows();
+                    list.recomputeRowHeights(0);
+                }
+            }
+            list.forceUpdateGrid();
+        }
+    }
 
 
 
+    processProps(props: Props) {
+        let changedWitness = false;
+        if (
+            !this.props.selectedWitness ||
+            (props.selectedWitness &&
+                props.selectedWitness.id !== this.props.selectedWitness.id)
+        ) {
+            changedWitness = true;
+            this._didSetInitialScrollPosition = false;
+        }
 
-    // shouldResetListCache(oldProps: Props, newProps: Props) {
-    //     let shouldReset = false;
-    //     if (
-    //         oldProps.showImages !== newProps.showImages ||
-    //         this.pageBreaksChanged(oldProps, newProps)
-    //     ) {
-    //         shouldReset = true;
-    //     }
+        if (
+            props.selectedSearchResult &&
+            (!this.props.selectedSearchResult ||
+                props.selectedSearchResult.start !==
+                    this.props.selectedSearchResult.start ||
+                props.selectedSearchResult.textId !==
+                    this.props.selectedSearchResult.textId)
+        ) {
+            console.log("resetting scroll position from search result");
+            this._didSetInitialScrollPosition = false;
+        }
 
-    //     return shouldReset;
-    // }
+        // TODO: check if new selectedSearchResult and if so
+        // set this._didSetInitialScrollPosition = false
+
+        // make sure there's no numbers in selectedAnnotatedSegments
+        // as we want to pass it to Text which only expects TextSegments
+        // this._filteredSelectedAnnotatedSegments = props.selectedAnnotatedSegments.reduce(
+        //     (acc, current: TextSegment | number) => {
+        //         if (current instanceof TextSegment) acc.push(current);
+        //         return acc;
+        //     },
+        //     []
+        // );
+
+        const controlsMeasurements = this.getControlsMeasurements(props);
+        if (controlsMeasurements) {
+            this.selectedTextIndex = controlsMeasurements.selectedTextIndex;
+            this.firstSelectedSegment =
+                controlsMeasurements.firstSelectedSegment;
+            this.splitTextRect = controlsMeasurements.splitTextRect;
+            this.selectedElementId = controlsMeasurements.selectedElementId;
+            this.selectedElementIds = controlsMeasurements.selectedElementIds;
+        }
+   
+       
+        if ((props.textListVisible !== this.textListVisible) || (props.editMenuVisible !== this.editMenuVisible)) {
+            setTimeout(() => {
+                this.textListVisible = props.textListVisible;
+                this.editMenuVisible = props.editMenuVisible;
+                this.updateList(true);
+            }, 500);
+
+        
+        } else {
+            if (changedWitness) {
+                this.updateList(true);
+            } else if (this.pageBreaksChanged(this.props, props)) {
+                let selectedRows = null;
+                let currentSelectedRow = this.selectedListRow(this.props);
+                let newSelectedRow = this.selectedListRow(props);
+                if (currentSelectedRow && newSelectedRow) {
+                    let firstChangedRow =
+                        currentSelectedRow > newSelectedRow
+                            ? newSelectedRow
+                            : currentSelectedRow;
+
+                    let splitRowTexts = this.props.splitText.texts;
+                    selectedRows = [];
+                    for (
+                        let i = firstChangedRow, len = splitRowTexts.length;
+                        i < len;
+                        i++
+                    ) {
+                        selectedRows.push(i);
+                    }
+                }
+                this.updateList(true, selectedRows);
+            } else if (this.lineBreaksChanges(this.props, props)) {
+                let selectedRow = this.selectedListRow(props);
+                if (!selectedRow)
+                    selectedRow = this.selectedListRow(this.props);
+                let splitRowTexts = this.props.splitText.texts;
+                let selectedRows = [];
+                if (selectedRow !== null) {
+                    for (
+                        let i = selectedRow, len = splitRowTexts.length;
+                        i < len;
+                        i++
+                    ) {
+                        selectedRows.push(i);
+                    }
+                    this.updateList(true, selectedRows);
+                }
+            } else if (this.props.fontSize !== props.fontSize) {
+                this.updateList(true);
+            } else if (
+                this.props.activeAnnotation &&
+                props.activeAnnotation &&
+                this.annotationsInSameLocation(
+                    this.props.activeAnnotation,
+                    props.activeAnnotation
+                )
+            ) {
+                this.updateList(true, this.selectedListRow(props));
+            } else {
+                this.updateList(this.shouldResetListCache(this.props, props));
+            }
+        }
+    }
 
 
-    // UNSAFE_componentWillReceiveProps(props: Props) {
-    //     this.processProps(props);
-    // }
+    pageBreaksChanged(oldProps: Props, newProps: Props) {
+        const oldTextBreaks = oldProps.splitText.getTextsFinalPositions();
+        const newTextBreaks = newProps.splitText.getTextsFinalPositions();
 
-    // componentDidMount() {
-    //     this.resizeHandler = _.throttle(() => {
-    //         this.calculatedImageHeight = null;
-    //         this.updateList();
-    //     }, 500).bind(this);
+        if (oldTextBreaks.length !== newTextBreaks.length) return true;
 
-    //     window.addEventListener("resize", this.resizeHandler);
+        return JSON.stringify(oldTextBreaks) !== JSON.stringify(newTextBreaks);
+    }
 
-    //     this.selectionHandler = _.debounce(e => {
-    //         this.handleSelection(e);
-    //     }, 200).bind(this);
+    lineBreaksChanges(oldProps: Props, newProps: Props) {
+        let oldActiveAnnotation = oldProps.activeAnnotation;
+        let newActiveAnnotation = newProps.activeAnnotation;
+        let hasChanged = false;
 
-    //     document.addEventListener("selectionchange", this.selectionHandler);
+        if (
+            oldActiveAnnotation &&
+            oldActiveAnnotation.isType(ANNOTATION_TYPES.lineBreak) &&
+            newProps.activeAnnotations &&
+            !newProps.activeAnnotations.hasOwnProperty(
+                oldActiveAnnotation.uniqueId
+            )
+        ) {
+            hasChanged = true;
+        }
 
-    //     document.addEventListener("mousedown", this.mouseDown.bind(this), true);
-    //     document.addEventListener("mouseup", this.mouseUp.bind(this), true);
+        if (
+            newActiveAnnotation &&
+            newActiveAnnotation.isType(ANNOTATION_TYPES.lineBreak) &&
+            oldProps.activeAnnotations &&
+            !oldProps.activeAnnotations.hasOwnProperty(
+                newActiveAnnotation.uniqueId
+            )
+        ) {
+            hasChanged = true;
+        }
 
-    //     this.processProps(this.props);
-    //     this.componentDidUpdate();
-    // }
+        return hasChanged;
+    }
+    shouldResetListCache(oldProps: Props, newProps: Props) {
+        let shouldReset = false;
+        if (
+            oldProps.showImages !== newProps.showImages ||
+            this.pageBreaksChanged(oldProps, newProps)
+        ) {
+            shouldReset = true;
+        }
 
-    // componentDidUpdate() {
-    //     if (this.selectedNodes && this.selectedNodes.length > 0) {
-    //         const selectedNodes = this.selectedNodes;
-    //         const selectedSegments = this.props.selectedAnnotatedSegments;
-    //         setTimeout(() => {
-    //             let selRange = document.createRange();
-    //             let startNode = selectedNodes[0];
-    //             let endNode = selectedNodes[selectedNodes.length - 1];
-    //             let lastSegment = selectedSegments[selectedSegments.length - 1];
-    //             if (lastSegment instanceof TextSegment) {
-    //                 let lastElement = document.getElementById(
-    //                     idForSegment(lastSegment)
-    //                 );
-    //                 if (lastElement) endNode = lastElement;
-    //             }
+        return shouldReset;
+    }
 
-    //             if (
-    //                 startNode instanceof Element &&
-    //                 endNode instanceof Element
-    //             ) {
-    //                 startNode = document.getElementById(startNode.id);
-    //                 endNode = document.getElementById(endNode.id);
-    //                 if (startNode && endNode) {
-    //                     selRange.setStart(startNode, 0);
-    //                     selRange.setEnd(endNode, endNode.childNodes.length);
-    //                     let sel = document.getSelection();
-    //                     if (sel) {
-    //                         this._modifyingSelection = true;
-    //                         sel.removeAllRanges();
-    //                         sel.addRange(selRange);
-    //                         this.selectedNodes = null;
-    //                     }
-    //                 }
-    //             }
-    //         }, 0);
-    //     }
 
-    // componentWillUnmount() {
-    //     document.removeEventListener("mousedown", this);
-    //     document.removeEventListener("mouseup", this);
-    //     window.removeEventListener("resize", this.resizeHandler);
-    //     document.removeEventListener("selectionchange", this.selectionHandler);
-    // }
+    UNSAFE_componentWillReceiveProps(props: Props) {
+        this.processProps(props);
+    }
+
+    componentDidMount() {
+        this.resizeHandler = _.throttle(() => {
+            this.calculatedImageHeight = null;
+            this.updateList();
+        }, 500).bind(this);
+
+        window.addEventListener("resize", this.resizeHandler);
+
+        this.selectionHandler = _.debounce(e => {
+            this.handleSelection(e);
+        }, 200).bind(this);
+
+        document.addEventListener("selectionchange", this.selectionHandler);
+
+        // document.addEventListener("mousedown", this.mouseDown.bind(this), true);
+        // document.addEventListener("mouseup", this.mouseUp.bind(this), true);
+
+        this.processProps(this.props);
+        this.componentDidUpdate();
+    }
+
+    componentDidUpdate() {
+        if (this.selectedNodes && this.selectedNodes.length > 0) {
+            const selectedNodes = this.selectedNodes;
+            const selectedSegments = this.props.selectedAnnotatedSegments;
+            setTimeout(() => {
+                let selRange = document.createRange();
+                let startNode = selectedNodes[0];
+                let endNode = selectedNodes[selectedNodes.length - 1];
+                let lastSegment = selectedSegments[selectedSegments.length - 1];
+                if (lastSegment instanceof TextSegment) {
+                    let lastElement = document.getElementById(
+                        idForSegment(lastSegment)
+                    );
+                    if (lastElement) endNode = lastElement;
+                }
+
+                if (
+                    startNode instanceof Element &&
+                    endNode instanceof Element
+                ) {
+                    startNode = document.getElementById(startNode.id);
+                    endNode = document.getElementById(endNode.id);
+                    if (startNode && endNode) {
+                        selRange.setStart(startNode, 0);
+                        selRange.setEnd(endNode, endNode.childNodes.length);
+                        let sel = document.getSelection();
+                        if (sel) {
+                            this._modifyingSelection = true;
+                            sel.removeAllRanges();
+                            sel.addRange(selRange);
+                            this.selectedNodes = null;
+                        }
+                    }
+                }
+            }, 0);
+        }
+    }
+
+    componentWillUnmount() {
+        // document.removeEventListener("mousedown", this);
+        // document.removeEventListener("mouseup", this);
+        window.removeEventListener("resize", this.resizeHandler);
+        document.removeEventListener("selectionchange", this.selectionHandler);
+    }
 
     
 
@@ -228,17 +379,155 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     //     }
     //     return selectedTextIndex;
     // }
+    getControlsMeasurements(
+        props: Props
+    ): {
+        selectedTextIndex: number,
+        firstSelectedSegment: TextSegment,
+        selectedElementId: string,
+        splitTextRect: ClientRect,
+        selectedElementIds: string[]
+    } | null {
+        if (!this.splitText) {
+            return null;
+        }
+        let splitTextComponent = this.splitText;
+        let selectedTextIndex = null;
+        let firstSelectedSegment = null;
+        let selectedElementId = null;
+        let splitTextRect = null;
+        let segmentIdFunction: null | ((segment: TextSegment) => string) = null;
+        let selectedElementIds = [];
+        let startPos = 0;
+        if (props.activeAnnotation) {
+            let activeAnnotation = props.activeAnnotation;
+            [startPos] = props.splitText.annotatedText.getPositionOfAnnotation(
+                activeAnnotation
+            );
+            if (startPos === null) {
+                console.warn("No startPos in getControlsMeasurements");
+                return null;
+            }
+            if (activeAnnotation.type === ANNOTATION_TYPES.pageBreak) {
+                startPos -= 1;
+            }
+            if (activeAnnotation.type === ANNOTATION_TYPES.lineBreak) {
+                startPos -= 1;
+            }
 
+            // Index of text containing end of annotation
+            let positionEnd = startPos + activeAnnotation.length;
+            if (activeAnnotation.length > 0) positionEnd -= 1;
+            selectedTextIndex = props.splitText.getTextIndexOfPosition(
+                positionEnd
+            );
+            splitTextRect = splitTextComponent.getBoundingClientRect();
+        }
+        let selectedAnnotatedSegments = [];
+        if (
+            props.selectedAnnotatedSegments &&
+            props.selectedAnnotatedSegments.length > 0
+        ) {
+            selectedAnnotatedSegments = props.selectedAnnotatedSegments;
+            for (let i = 0; i < selectedAnnotatedSegments.length; i++) {
+                let segment = selectedAnnotatedSegments[i];
+                if (
+                    firstSelectedSegment === null &&
+                    segment instanceof TextSegment
+                ) {
+                    firstSelectedSegment = segment;
+                    break;
+                }
+            }
+            if (firstSelectedSegment) {
+                if (
+                    firstSelectedSegment.length === 0 &&
+                    props.activeAnnotation &&
+                    props.activeAnnotation.isInsertion
+                ) {
+                    selectedElementId = idForInsertion(firstSelectedSegment);
+                    segmentIdFunction = idForInsertion;
+                } else {
+                    selectedElementId = idForSegment(firstSelectedSegment);
+                    segmentIdFunction = idForSegment;
+                }
+            }
+        } else if (props.activeAnnotation) {
+            if (props.activeAnnotation.isDeletion) {
+                let segment = new TextSegment(startPos, "");
+                selectedElementId = idForDeletedSegment(segment);
+                segmentIdFunction = idForDeletedSegment;
+                firstSelectedSegment = segment;
+                selectedAnnotatedSegments = [firstSelectedSegment];
+            } else if (props.activeAnnotation.isInsertion) {
+                const [
+                    start
+                ] = props.splitText.annotatedText.getPositionOfAnnotation(
+                    props.activeAnnotation
+                );
+                if (start) {
+                    let segment = new TextSegment(start, "");
+                    selectedElementId = idForInsertion(segment);
+                    segmentIdFunction = idForInsertion;
+                    firstSelectedSegment = segment;
+                    selectedAnnotatedSegments = [firstSelectedSegment];
+                }
+            } else if (
+                props.activeAnnotation.type === ANNOTATION_TYPES.pageBreak
+            ) {
+                let segment = new TextSegment(startPos + 1, "");
+                let prevSegment = new TextSegment(startPos, "");
+                selectedElementId = idForPageBreak(prevSegment);
+                firstSelectedSegment = segment;
+                selectedAnnotatedSegments = [segment];
+                selectedElementIds = [selectedElementId];
+            } else if (
+                props.activeAnnotation.type === ANNOTATION_TYPES.lineBreak
+            ) {
+                let segment = new TextSegment(startPos + 1, "");
+                let prevSegment = new TextSegment(startPos, "");
+                selectedElementId = idForLineBreak(prevSegment);
+                firstSelectedSegment = segment;
+                selectedAnnotatedSegments = [segment];
+                selectedElementIds = [selectedElementId];
+            }
+        }
+        if (segmentIdFunction) {
+            for (let i = 0; i < selectedAnnotatedSegments.length; i++) {
+                let segment = selectedAnnotatedSegments[i];
+                if (segment instanceof TextSegment) {
+                    const segmentId = segmentIdFunction(segment);
+                    selectedElementIds.push(segmentId);
+                }
+            }
+        }
+        if (
+            selectedTextIndex != null &&
+            firstSelectedSegment &&
+            selectedElementId &&
+            splitTextRect
+        ) {
+            return {
+                selectedTextIndex: selectedTextIndex,
+                firstSelectedSegment: firstSelectedSegment,
+                selectedElementId: selectedElementId,
+                splitTextRect: splitTextRect,
+                selectedElementIds: selectedElementIds
+            };
+        } else {
+            return null;
+        }
+    }
   
     render() {
         const props = this.props;
         const rowRenderer = this.rowRenderer;
         const cache = this.cache;
         const key = props.selectedWitness ? props.selectedWitness.id : 0;
-
+  
         return (
             <div
-                className={styles.splitText}
+                className={styles.splitText2}
                 ref={div => (this.splitText = div)}
                 key={key}
             >
@@ -253,10 +542,9 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             width={width}
                             overscanRowCount={3}
                             deferredMeasurementCache={cache}
-                        >{
-                            props.splitText
-                        }
-                        </List>
+                        >
+                            </List>
+                       
                     )}
                 </AutoSizer>
             </div>
@@ -349,21 +637,10 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     }): React.Element<CellMeasurer> {
         const props = this.props;
         const cache = this.cache;
-        // const menuVisible=this.props.menuListIsVisible
-        const component = this;
-        const pechaImageClass = props.showImages ? styles.pechaImage : null;
-        let imageUrl = '';
-
-        if (
-            props.selectedWitness &&
-            props.selectedWitness.properties &&
-            props.selectedWitness.properties.hasOwnProperty(IMAGE_START_PRE_KEY)
-        ) {
-            imageUrl = this.getImageUrl(index);
-        }
+     
 
         let searchStringPositions = {};
-        let searchValue = this.props.searchValue;
+        let searchValue = props.searchValue;
         if (searchValue && searchValue.length > 0 && props.splitText) {
             searchStringPositions = this.getStringPositions(
                 props.splitText.texts[index],
@@ -372,11 +649,6 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             );
         }
 
-        let pechaStyles = {};
-        let imageHeight = null;
-        if (props.showImages && pechaImageClass && this.calculatedImageHeight) {
-            pechaStyles["height"] = this.calculatedImageHeight + "px";
-        }
 
         return (
             <CellMeasurer
@@ -388,27 +660,17 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             >
                 <div key={key} style={style} className={styles.splitTextRow}>
                     <div className={styles.splitTextRowContent}>
+                        
                         <Text
                             segmentedText={props.splitText.texts[index]}
-                            activeAnnotations={props.activeAnnotations}
-                            activeAnnotation={props.activeAnnotation}
-                            row={index}
-                            selectedSegmentId={props.selectedSegmentId}
-                            annotationPositions={props.annotationPositions}
-                            selectedAnnotatedSegments={
-                                this._filteredSelectedAnnotatedSegments
-                            }
-                            getBaseAnnotation={this.getBaseAnnotation.bind(
-                                this
-                            )}
-                            activeWitness={this.props.selectedWitness}
-                            searchValue={searchValue}
-                            selectedSearchResult={
-                                this.props.selectedSearchResult
-                            }
-                            searchStringPositions={searchStringPositions}
+                            // row={index}
+                            // selectedSegmentId={props.selectedSegmentId}
+                            // searchValue={searchValue}
+                            // selectedSearchResult={
+                            //     this.props.selectedSearchResult
+                            // }
+                            // searchStringPositions={searchStringPositions}
                             fontSize={props.fontSize}
-                            // menuVisible={props.menuVisible}
                         />
                     </div>
                    
@@ -416,4 +678,5 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             </CellMeasurer>
         );
     }
+
 }

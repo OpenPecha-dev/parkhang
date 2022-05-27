@@ -21,52 +21,52 @@ export function idForSegment(segment: TextSegment): string {
     return "s_" + segment.start;
 }
 
-export function idForDeletedSegment(segment: TextSegment): string {
-    return "ds_" + segment.start;
-}
+// export function idForDeletedSegment(segment: TextSegment): string {
+//     return "ds_" + segment.start;
+// }
 
-export function idForInsertion(segment: TextSegment): string {
-    return "i_" + segment.start;
-}
+// export function idForInsertion(segment: TextSegment): string {
+//     return "i_" + segment.start;
+// }
 
-export function idForPageBreak(segment: TextSegment): string {
-    return "p_" + (segment.end + 1);
-}
+// export function idForPageBreak(segment: TextSegment): string {
+//     return "p_" + (segment.end + 1);
+// }
 
-export function idForLineBreak(segment: TextSegment): string {
-    return "l_" + (segment.end + 1);
-}
+// export function idForLineBreak(segment: TextSegment): string {
+//     return "l_" + (segment.end + 1);
+// }
 
-export type Props = {
-    segmentedText: SegmentedText,
-    annotationPositions: { [string]: Annotation[] },
-    selectedSegmentId: (id: string) => void,
-    activeAnnotations: { [AnnotationUniqueId]: Annotation } | null,
-    getBaseAnnotation: (annotation: Annotation) => Annotation,
-    selectedAnnotatedSegments: TextSegment[],
-    row: number,
-    activeAnnotation: Annotation | null,
-    searchValue: string | null,
-    selectedSearchResult: {
-        textId: number,
-        start: number,
-        length: number
-    } | null,
-    searchStringPositions: { [position: number]: [number, number] },
-    fontSize?: number,
-    activeWitness: Witness
-};
+// export type Props = {
+//     segmentedText: SegmentedText,
+//     annotationPositions: { [string]: Annotation[] },
+//     selectedSegmentId: (id: string) => void,
+//     activeAnnotations: { [AnnotationUniqueId]: Annotation } | null,
+//     getBaseAnnotation: (annotation: Annotation) => Annotation,
+//     selectedAnnotatedSegments: TextSegment[],
+//     row: number,
+//     activeAnnotation: Annotation | null,
+//     searchValue: string | null,
+//     selectedSearchResult: {
+//         textId: number,
+//         start: number,
+//         length: number
+//     } | null,
+//     searchStringPositions: { [position: number]: [number, number] },
+//     fontSize?: number,
+//     activeWitness: Witness
+// };
 
-export type State = {
-    segmentedText: SegmentedText
-};
+// export type State = {
+//     segmentedText: SegmentedText
+// };
 
-import ReactDOMServer from "react-dom/server";
-import PageBreakIcon from "images/page_break_icon.svg";
-const PARA_SYMBOL = String.fromCharCode(182);
-const pageBreakIconString = ReactDOMServer.renderToStaticMarkup(
-    <PageBreakIcon />
-);
+// import ReactDOMServer from "react-dom/server";
+// import PageBreakIcon from "images/page_break_icon.svg";
+// const PARA_SYMBOL = String.fromCharCode(182);
+// const pageBreakIconString = ReactDOMServer.renderToStaticMarkup(
+//     <PageBreakIcon />
+// );
 
 export default class Text extends React.Component<Props, State> {
     _renderedSegments: TextSegment[] | null;
@@ -143,166 +143,29 @@ export default class Text extends React.Component<Props, State> {
     }
 
     generateHtml(renderProps: Props, renderState: State): { __html: string } {
+       
         let segments = renderState.segmentedText.segments;
         let textLineClass = styles.textLine;
         let segmentHTML = '<p class="' + textLineClass + '">';
         if (segments.length === 0) return { __html: segmentHTML };
 
-        const insertionClass = styles.insertion;
         const endPosition = segments[segments.length - 1].end + 1;
-        if (renderProps.annotationPositions[INSERTION_KEY + endPosition]) {
-            const endSegment = new TextSegment(endPosition, "");
-            segments.push(endSegment);
-        }
-        if (renderProps.annotationPositions[PAGE_BREAK_KEY + endPosition]) {
-            const endSegment = new TextSegment(endPosition, "");
-            segments.push(endSegment);
-        }
-        if (renderProps.annotationPositions[LINE_BREAK_KEY + endPosition]) {
-            const endSegment = new TextSegment(endPosition, "");
-            segments.push(endSegment);
-        }
+    
 
-        let activeAnnotations = renderProps.activeAnnotations || {};
 
         let highlightClass = styles.highlight;
         let activeHighlightClass = styles.activeHighlight;
         let activeSearchResultEnd = null;
-        let processedInactiveInsertions = {};
         for (let i = 0; i < segments.length; i++) {
             let segment = segments[i];
             let classAttribute = "";
             let classes = [];
-            let annotations = this.annotationsForSegment(segment);
-            let deletionText = null;
             let selectedCurrentDeletion = false;
             let selectedCurrentPageBreak = false;
             let selectedCurrentLineBreak = false;
             let lineBreakAnnotation = false;
             let pageBreakAnnotation = null;
-            if (annotations) {
-                let activeInsertions = [];
-                let inactiveInsertions = [];
-                let remainingAnnotations = [];
-                let activeDeletions = [];
-
-                for (let j = 0, len = annotations.length; j < len; j++) {
-                    let annotation = annotations[j];
-                    if (annotation.isInsertion) {
-                        if (annotation.uniqueId in activeAnnotations) {
-                            activeInsertions.push(annotation);
-                        } else {
-                            // Only first inactive insertion at a position will
-                            // be shown, so only process first one.
-                            // TODO: need to check if there is an active insertion
-                            // at the same place. If so, ignore inactive insertion
-                            // as they should be shown in the popover.
-                            const annotationKey = annotation.start;
-                            if (
-                                !processedInactiveInsertions.hasOwnProperty(
-                                    annotationKey
-                                )
-                            ) {
-                                inactiveInsertions.push(annotation);
-                                processedInactiveInsertions[
-                                    annotationKey
-                                ] = annotation;
-                            }
-                        }
-                    } else {
-                        if (annotation.isDeletion) {
-                            if (annotation.uniqueId in activeAnnotations) {
-                                activeDeletions.push(annotation);
-                            }
-                        } else if (
-                            annotation.type === ANNOTATION_TYPES.pageBreak &&
-                            !renderProps.activeWitness.isWorking
-                        ) {
-                            pageBreakAnnotation = annotation;
-                        } else if (
-                            annotation.type === ANNOTATION_TYPES.lineBreak &&
-                            !renderProps.activeWitness.isWorking
-                        ) {
-                            lineBreakAnnotation = annotation;
-                        } else {
-                            remainingAnnotations.push(annotation);
-                        }
-                    }
-                }
-
-                if (
-                    activeInsertions.length === 0 &&
-                    inactiveInsertions.length > 0
-                ) {
-                    const insertion = inactiveInsertions[0];
-                    const insertionId = idForInsertion(segment);
-                    let insertionClasses = insertionClass;
-                    if (
-                        renderProps.activeAnnotation &&
-                        renderProps.activeAnnotation.isInsertion &&
-                        renderProps.activeAnnotation.start === insertion.start
-                    ) {
-                        insertionClasses += " " + styles.selectedAnnotation;
-                    }
-
-                    segmentHTML +=
-                        "<span id=" +
-                        insertionId +
-                        " key=" +
-                        insertionId +
-                        ' class="' +
-                        insertionClasses +
-                        '">' +
-                        insertion.content +
-                        "</span>";
-                }
-
-                if (activeDeletions.length > 0) {
-                    const activeDeletion = activeDeletions[0];
-                    const baseAnnotation = renderProps.getBaseAnnotation(
-                        activeDeletion
-                    );
-                    deletionText = baseAnnotation.content;
-                    if (
-                        renderProps.activeAnnotation &&
-                        renderProps.activeAnnotation.isDeletion &&
-                        renderProps.activeAnnotation.start ===
-                            activeDeletion.start &&
-                        renderProps.activeAnnotation.length ===
-                            activeDeletion.length &&
-                        segment.length === 0
-                    ) {
-                        selectedCurrentDeletion = true;
-                    }
-                }
-
-                if (pageBreakAnnotation) {
-                    if (
-                        renderProps.activeAnnotation &&
-                        renderProps.activeAnnotation.uniqueId ===
-                            pageBreakAnnotation.uniqueId
-                    ) {
-                        selectedCurrentPageBreak = true;
-                    }
-                }
-
-                if (lineBreakAnnotation) {
-                    if (
-                        renderProps.activeAnnotation &&
-                        renderProps.activeAnnotation.uniqueId ===
-                            lineBreakAnnotation.uniqueId
-                    ) {
-                        selectedCurrentLineBreak = true;
-                    }
-                }
-
-                if (
-                    remainingAnnotations.length > 0 ||
-                    activeInsertions.length > 0
-                ) {
-                    classes.push(styles.annotation);
-                }
-            }
+          
 
             // It's an insertion at the end of the text, which should have just been added to the html.
             // So break as we don't want anymore segment html adding.
@@ -320,15 +183,15 @@ export default class Text extends React.Component<Props, State> {
                 id = idForSegment(segment);
             }
 
-            if (
-                this.segmentsContainSegment(
-                    renderProps.selectedAnnotatedSegments,
-                    segment
-                ) ||
-                selectedCurrentDeletion
-            ) {
-                classes.push(styles.selectedAnnotation);
-            }
+            // if (
+            //     this.segmentsContainSegment(
+            //         renderProps.selectedAnnotatedSegments,
+            //         segment
+            //     ) ||
+            //     selectedCurrentDeletion
+            // ) {
+            //     classes.push(styles.selectedAnnotation);
+            // }
 
             if (classes.length > 0) {
                 let className = classnames(...classes);
@@ -336,7 +199,6 @@ export default class Text extends React.Component<Props, State> {
             }
 
             let segmentContent = segment.text;
-
             // Add search result highlight if required.
             if (renderProps.searchStringPositions) {
                 let segmentStart = segment.start;
@@ -399,44 +261,6 @@ export default class Text extends React.Component<Props, State> {
                 ">" +
                 segmentContent +
                 "</span>";
-
-            if (pageBreakAnnotation) {
-                let pageBreakClasses = [styles.pageBreak];
-                if (selectedCurrentPageBreak) {
-                    pageBreakClasses.push(styles.selectedAnnotation);
-                }
-                const pageBreakClassAttribute =
-                    ' class="' + pageBreakClasses.join(" ") + '" ';
-                segmentHTML +=
-                    "<span id=" +
-                    idForPageBreak(segment) +
-                    " key=" +
-                    idForPageBreak(segment) +
-                    pageBreakClassAttribute +
-                    ">" +
-                    pageBreakIconString +
-                    "</span>";
-            }
-
-            if (lineBreakAnnotation) {
-                let lineBreakClasses = [styles.lineBreak];
-                if (selectedCurrentLineBreak) {
-                    lineBreakClasses.push(styles.selectedAnnotation);
-                }
-                const lineBreakClassAttribute =
-                    ' class="' + lineBreakClasses.join(" ") + '" ';
-                segmentHTML +=
-                    "<span id=" +
-                    idForLineBreak(segment) +
-                    " key=" +
-                    idForLineBreak(segment) +
-                    lineBreakClassAttribute +
-                    ">" +
-                    PARA_SYMBOL +
-                    "</span>";
-
-                segmentHTML += '</p><p class="' + textLineClass + '">';
-            }
         }
 
         this._renderedSegments = segments;
@@ -445,7 +269,6 @@ export default class Text extends React.Component<Props, State> {
         const html = {
             __html: segmentHTML
         };
-
         return html;
     }
 
@@ -481,10 +304,11 @@ export default class Text extends React.Component<Props, State> {
 
         return (
             <div className={styles.textContainer}>
+               
                 <div
                     className={classnames(...classes)}
                     dangerouslySetInnerHTML={html}
-                    onClick={e => this.selectedElement(e.target)}
+                    // onClick={e => this.selectedElement(e.target)}
                     style={{
                         fontSize: this.props.fontSize
                     }}

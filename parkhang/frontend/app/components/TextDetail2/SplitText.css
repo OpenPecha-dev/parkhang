@@ -1,12 +1,11 @@
 
 
-.splitText {
-    width: 100%;
+.splitText2 {
     background-color: white;
-    flex-grow: 1;
+    flex: 1;
     min-width: 0;
     font-size: 24px;
-    padding:10px;
+    height: 100%;
 }
 
 .splitText *:focus {
