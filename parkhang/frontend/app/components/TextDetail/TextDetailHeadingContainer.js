@@ -44,6 +44,7 @@ const mapStateToProps = (state: AppState): {} => {
         menuListIsVisible: getMenuListVisible(state),
         accountOverlayVisible: getAccountOverlayVisible(state),
         textFontSize,
+        isSecondWindowOpen:reducers.isSecondWindowOpen(state)
 
     };
 };
@@ -74,6 +75,9 @@ return {
     },
     onChangedFontSize: (fontSize: number) => {
         dispatch(actions.changedTextFontSize(fontSize));
+    },
+    onChangeWindowOpen: (data: boolean) => {
+        dispatch(actions.toggleSecondWindow(data));
     }
 };
 }

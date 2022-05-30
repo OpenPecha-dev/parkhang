@@ -144,10 +144,12 @@ function loadingWitnesses(state: DataState): DataState {
 }
 
 
-function loadedWitnesses2(
+function loadedWitnesses(
     state: DataState,
     action: actions.LoadedWitnessesAction
 ): DataState {
+
+
     const witnessesById = arrayToObject(action.witnesses, "id");
     const textWitnessesById = {
         ...state.textWitnessesById,
@@ -218,7 +220,6 @@ function loadedAnnotationOperations(
         },
         operations
     );
-
     return {
         ...state,
         witnessAnnotationOperationsById: {
@@ -552,12 +553,12 @@ dataReducers[actions.LOADING_TEXTS] = loadingTexts;
 dataReducers[actions.LOADED_TEXTS] = loadedTexts;
 dataReducers[actions.LOADING_SOURCES] = loadingSources;
 dataReducers[actions.LOADED_SOURCES] = loadedSources;
-dataReducers[actions.LOADING_WITNESSES] = loadingWitnesses;
-dataReducers[actions.LOADED_WITNESSES2] = loadedWitnesses2;
+dataReducers[actions.LOADING_WITNESSES2] = loadingWitnesses;
+dataReducers[actions.LOADED_WITNESSES2] = loadedWitnesses;
 dataReducers[actions.LOADING_WITNESS_ANNOTATIONS] = loadingAnnotations;
-dataReducers[actions.LOADED_WITNESS_ANNOTATIONS] = loadedAnnotations;
+dataReducers[actions.LOADED_WITNESS_ANNOTATIONS2] = loadedAnnotations;
 dataReducers[
-    actions.LOADED_WITNESS_ANNOTATION_OPERATIONS
+    actions.LOADED_WITNESS_ANNOTATION_OPERATIONS2
 ] = loadedAnnotationOperations;
 dataReducers[actions.APPLIED_ANNOTATION] = appliedAnnotation;
 dataReducers[actions.REMOVED_APPLIED_ANNOTATION] = removedAppliedAnnotation;
@@ -634,6 +635,7 @@ export const getWitness = (
         return cachedWitnesses[witnessId];
     }
     const witnessData = state.witnessesById[witnessId];
+    
     let witness = null;
     if (witnessData) {
         const source = getSource(state, witnessData.source);

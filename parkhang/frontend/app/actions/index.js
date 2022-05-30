@@ -27,14 +27,20 @@ export const LOADING_TEXT_DATA = "LOADING_TEXT_DATA";
 
 export const LOAD_WITNESSES = "LOAD_WITNESSES";
 export const LOADING_WITNESSES = "LOADING_WITNESSES";
+export const LOADING_WITNESSES2 = "LOADING_WITNESSES2";
 export const LOADED_WITNESSES = "LOADED_WITNESSES";
 export const LOADED_WITNESSES2 = "LOADED_WITNESSES2";
 
 export const LOAD_WITNESS_ANNOTATIONS = "LOAD_WITNESS_ANNOTATIONS";
+export const LOAD_WITNESS_ANNOTATIONS2 = "LOAD_WITNESS_ANNOTATIONS2";
 export const LOADING_WITNESS_ANNOTATIONS = "LOADING_WITNESS_ANNOTATIONS";
+export const LOADING_WITNESS_ANNOTATIONS2 = "LOADING_WITNESS_ANNOTATIONS2";
 export const LOADED_WITNESS_ANNOTATIONS = "LOADED_WITNESS_ANNOTATIONS";
+export const LOADED_WITNESS_ANNOTATIONS2 = "LOADED_WITNESS_ANNOTATIONS2";
 export const LOADED_WITNESS_ANNOTATION_OPERATIONS =
     "LOADED_WITNESS_ANNOTATION_OPERATIONS";
+export const LOADED_WITNESS_ANNOTATION_OPERATIONS2 =
+    "LOADED_WITNESS_ANNOTATION_OPERATIONS2";
 export const LOADED_WITNESS_REMOVED_ANNOTATIONS =
     "LOADED_WITNESS_REMOVED_ANNOTATIONS";
 
@@ -71,8 +77,11 @@ export const SEARCHED_TEXT = "textList/SEARCHED_TEXT";
 export const UPDATED_SEARCH_RESULTS = "textList/UPDATED_SEARCH_RESULTS";
 export const SELECTED_SEARCH_RESULT = "textList/SELECTED_SEARCH_RESULT";
 export const CHANGED_NOTIFICATION ="notification/CHANGED_NOTIFICATION"
+export const SECOND_WINDOW ="notification/SECOND_WINDOW"
 
 export const SELECTED_WITNESS = "text/SELECTED_WITNESS";
+export const SELECTED_WITNESS2 = "text/SELECTED_WITNESS2";
+
 export const CHANGED_SHOW_PAGE_IMAGES = "text/CHANGED_SHOW_PAGE_IMAGES";
 export const CHANGED_TEXT_FONT_SIZE = "text/CHANGED_TEXT_FONT_SIZE";
 export const CHANGED_TEXT_FONT_SIZE2 = "text/CHANGED_TEXT_FONT_SIZE2";
@@ -220,6 +229,12 @@ export function loadingWitnesses(text: api.TextData): TextDataAction {
         text
     };
 }
+export function loadingWitnesses2(text: api.TextData): TextDataAction {
+    return {
+        type: LOADING_WITNESSES2,
+        text
+    };
+}
 
 export type LoadedWitnessesAction = TextDataAction & {
     witnesses: api.WitnessData[]
@@ -255,10 +270,22 @@ export function loadWitnessAnnotations(witnessId: number): WitnessAction {
         witnessId
     };
 }
+export function loadWitnessAnnotations2(witnessId: number): WitnessAction {
+    return {
+        type: LOAD_WITNESS_ANNOTATIONS2,
+        witnessId
+    };
+}
 
 export function loadingWitnessAnnotations(witnessId: number): WitnessAction {
     return {
         type: LOADING_WITNESS_ANNOTATIONS,
+        witnessId
+    };
+}
+export function loadingWitnessAnnotations2(witnessId: number): WitnessAction {
+    return {
+        type: LOADING_WITNESS_ANNOTATIONS2,
         witnessId
     };
 }
@@ -278,6 +305,27 @@ export function loadedWitnessAnnotations(
     };
 }
 
+export type LoadedWitnessAnnotationsAction2 = Action & {
+    witnessId: number,
+    annotations: api.AnnotationData[]
+};
+export function loadedWitnessAnnotations2(
+    witnessId: number,
+    annotations: api.AnnotationData[]
+): LoadedWitnessAnnotationsAction2 {
+    return {
+        type: LOADED_WITNESS_ANNOTATIONS2,
+        witnessId,
+        annotations
+    };
+}
+
+
+
+
+
+
+
 export type LoadedWitnessAnnotationOperationsAction = WitnessAction & {
     annotationOperations: api.AnnotationOperationData[]
 };
@@ -287,6 +335,16 @@ export function loadedWitnessAnnotationOperations(
 ): LoadedWitnessAnnotationOperationsAction {
     return {
         type: LOADED_WITNESS_ANNOTATION_OPERATIONS,
+        witnessId,
+        annotationOperations
+    };
+}
+export function loadedWitnessAnnotationOperations2(
+    witnessId: number,
+    annotationOperations: api.AnnotationOperationData[]
+): LoadedWitnessAnnotationOperationsAction {
+    return {
+        type: LOADED_WITNESS_ANNOTATION_OPERATIONS2,
         witnessId,
         annotationOperations
     };
@@ -680,6 +738,24 @@ export function selectedTextWitness(
     };
 }
 
+
+export type SelectedTextWitnessAction2 = Action & {
+    witnessId: number,
+    textId: number
+};
+export function selectedTextWitness2(
+    textId: number,
+    witnessId: number
+): SelectedTextWitnessAction2 {
+    return {
+        type: SELECTED_WITNESS2,
+        textId,
+        witnessId
+    };
+}
+
+
+
 export type AddedTemporaryAnnotationAction = Action & {
     annotation: TemporaryAnnotation,
     isActive: boolean
@@ -895,6 +971,12 @@ export function changeIsLoaded(loaded){
 export function searchTerm(data){
     return {
       type:SEARCH_TERM,
+      payload:data
+    }
+}
+export function toggleSecondWindow(data){
+    return {
+      type:SECOND_WINDOW,
       payload:data
     }
 }

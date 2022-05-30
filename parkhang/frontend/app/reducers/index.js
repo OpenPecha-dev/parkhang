@@ -119,6 +119,13 @@ export const getSelectedTextWitnessId = (
     return ui.getSelectedTextWitnessId(state.ui, textId);
 };
 
+export const getSelectedTextWitnessId2 = (
+    state: AppState,
+    textId: number
+): number | null => {
+    return ui.getSelectedTextWitnessId2(state.ui, textId);
+};
+
 export const getSelectedTextWitness = (state: AppState): Witness | null => {
     const text = getSelectedText(state);
     let witness = null;
@@ -215,6 +222,9 @@ export const getTextFontSize = (state: AppState): number => {
 export const getTextFontSize2 = (state: AppState): number => {
     return ui.getTextFontSize2(state.ui);
 };
+export const isSecondWindowOpen = (state: AppState): number => {
+    return ui.isSecondWindowOpen(state.ui);
+};
 
 // data
 
@@ -242,14 +252,24 @@ export const getWitness = (
 ): Witness | null => {
     return data.getWitness(state.data, witnessId);
 };
-
+export const getWitness2 = (
+    state: AppState,
+    witnessId: number
+): Witness | null => {
+    return data2.getWitness(state.data2, witnessId);
+};
 export const getWitnessData = (
     state: AppState,
     witnessId: number
 ): WitnessData | null => {
     return data.getWitnessData(state.data, witnessId);
 };
-
+export const getWitnessData2 = (
+    state: AppState,
+    witnessId: number
+): WitnessData | null => {
+    return data2.getWitnessData(state.data2, witnessId);
+};
 export const getTextWitnesses = (
     state: AppState,
     textId: number
@@ -270,6 +290,12 @@ export const getBaseWitness = (
     textId: number
 ): Witness | null => {
     return data.getBaseWitness(state.data, textId);
+};
+export const getBaseWitness2 = (
+    state: AppState,
+    textId: number
+): Witness | null => {
+    return data2.getBaseWitness(state.data2, textId);
 };
 
 export const getWorkingWitness = (
@@ -299,6 +325,13 @@ export const hasLoadedWitnessAnnotations = (
     witnessId: number
 ): boolean => {
     return state.data["witnessAnnotationsById"].hasOwnProperty(witnessId);
+};
+
+export const hasLoadedWitnessAnnotations2 = (
+    state: AppState,
+    witnessId: number
+): boolean => {
+    return state.data2["witnessAnnotationsById"].hasOwnProperty(witnessId);
 };
 
 export const hasLoadedWitnessAppliedAnnotations = (

@@ -614,6 +614,8 @@ dataReducers[actions.LOADING_WITNESSES] = loadingWitnesses;
 dataReducers[actions.LOADED_WITNESSES] = loadedWitnesses;
 dataReducers[actions.LOADING_WITNESS_ANNOTATIONS] = loadingAnnotations;
 dataReducers[actions.LOADED_WITNESS_ANNOTATIONS] = loadedAnnotations;
+
+
 dataReducers[
     actions.LOADED_WITNESS_ANNOTATION_OPERATIONS
 ] = loadedAnnotationOperations;

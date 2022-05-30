@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect, useRef} from "react";
 import styles from "./textDetailHeading.css";
 import Left from "images/left.svg";
 import Tick from "images/Tick.svg";
@@ -7,7 +7,7 @@ import SelectVersion from "./SelectVersion";
 import Witness from "lib/Witness";
 import Slider from "../UI/Slider";
 import TextList from "./TextListContainer";
-
+import useClickOutSide from '../UI/useClickOutSideClose'
 type HeaderProps = {
     witnesses: Witness[],
     selectedWitness: Witness,
@@ -19,6 +19,8 @@ type HeaderProps = {
     menuButtonClicked: () => void,
     textFontSize: Number,
     onChangedFontSize: () => void,
+    onChangeWindowOpen:() => void,
+    isSecondWindowOpen:boolean
 };
 
 function TextDetailHeading(props: HeaderProps) {
@@ -26,11 +28,16 @@ function TextDetailHeading(props: HeaderProps) {
     const textListIsVisible = props?.textListIsVisible;
     const menuListIsVisible = props?.menuListIsVisible;
     let [showOption,setShowOption]=useState(false)
+    let domNode=useClickOutSide(()=>setShowOption(false))
+
+  const handleClick=()=>{
+    setShowOption(prev=>!prev)
+      }
     return (
         <div className={styles.textDetailHeading}>
             {/* <span className={styles.leftLogo} style={{transform:!textListIsVisible?'rotate(180deg)':null}}  onClick={props.navigationButtonClicked}><Left/> </span> */}
-            <div className={styles.OptionToggle}>
-                <img src={image} className={styles.coverImage} onClick={()=>setShowOption(prev=>!prev)}/>
+            <div ref={domNode} className={styles.OptionToggle}>
+                <img src={image} className={styles.coverImage} onClick={handleClick}/>
                 {showOption && <div className={styles.option}>
                     <Slider
                         max={24}
@@ -50,7 +57,9 @@ function TextDetailHeading(props: HeaderProps) {
                     <TextList/>
                 </div>
             </div>
-
+             <div style={{float:'right'}}>
+                 <button id='doubleWindow' onClick={()=>props.onChangeWindowOpen(!props.isSecondWindowOpen)}>Second Window</button>
+             </div>
             {/* <span className={styles.rightLogo}   style={{transform:!menuListIsVisible?'rotate(0deg)':'rotate(180deg)',marginRight:10}} onClick={props.menuButtonClicked}><Left/> </span> */}
         </div>
     );

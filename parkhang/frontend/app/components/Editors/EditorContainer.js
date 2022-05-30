@@ -69,7 +69,7 @@ return (
                 {/* <TextsSearchContainer />
                 <TextListContainer />  */}
             </div>
-       <SplitPane
+       {/* <SplitPane
                 split="vertical"
                 resizerClassName={classnames(styles.resizer)}
                 minSize={"96vw"}
@@ -87,10 +87,10 @@ return (
                     }
                     window.dispatchEvent(new Event("resize"));
                 }}
-            >
+            > */}
                 <TextSheet/>
-                <SideMenuContainer />
-            </SplitPane>
+                {/* <SideMenuContainer />
+            </SplitPane> */}
         </SplitPane>
     </div>
     )

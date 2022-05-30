@@ -19,6 +19,9 @@
 .ResourceIcon:hover svg>path{
     fill:black;
 }
+.ResourceIcon path{
+    fill:gray;
+}
 
 .ResourceDetail{
    background-color:white;

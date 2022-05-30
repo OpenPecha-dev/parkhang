@@ -9,8 +9,8 @@ let user;
 const mapStateToProps = state => {
     if(!state.user.userId===-1){
         user=state.user
-    }
-    return {
+}
+return {
         title: reducers.getTranslation(state, "header.title"),
         textListIsVisible: reducers.getTextListVisible(state),
         menuListIsVisible: reducers.getMenuListVisible(state),

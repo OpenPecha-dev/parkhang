@@ -3,6 +3,8 @@ import styles from "./textDetailHeading.css";
 import SelectVersion from "./SelectVersion";
 import Slider from "../UI/Slider";
 import TextListContainer from './TextListContainer'
+import useClickOutSide from '../UI/useClickOutSideClose'
+
 type HeaderProps = {
   
     textFontSize: Number,
@@ -11,10 +13,11 @@ type HeaderProps = {
 
 function TextDetailHeading(props: HeaderProps) {
     const selectedText = props?.selectedText;
+    let domNode=useClickOutSide(()=>setShowOption(false))
     let [showOption,setShowOption]=useState(false)
     return (
         <div className={styles.textDetailHeading}>
-            <div className={styles.OptionToggle}>
+            <div ref={domNode} className={styles.OptionToggle}>
                 <img src={image} className={styles.coverImage} onClick={()=>setShowOption(prev=>!prev)}/>
                 {showOption && <div className={styles.option}>
                     <Slider

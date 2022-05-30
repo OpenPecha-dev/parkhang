@@ -5,6 +5,8 @@ import styles from './TextList.css'
 function TextList(props) {
     let textslist=[];
     const onSelectedText=props.onSelectedText;
+    const selectedText=props.selectedText;
+
     textslist=props.texts;
     const [isOpen,setIsOpen]=useState(false);
     const [selected,setSelected]=useState(textslist[0]?.name);
@@ -24,7 +26,7 @@ const handleClick=()=>{
 }
 
   return (<div style={{position:'relative'}}>     
-        <button onClick={handleClick}>{selected}</button>
+        <button onClick={handleClick}>{selectedText?selectedText.name:selected}</button>
         {isOpen && <div className={classname(classes)} style={{position:'absolute'}}>
           <AutoSizer>{
               ({width,height})=>(

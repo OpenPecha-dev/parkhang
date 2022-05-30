@@ -8,6 +8,7 @@ export type UIState = {
     selectedText: api.TextData | null,
     selectedText2: api.TextData | null,
     selectedTextWitness: { [textId: number]: number },
+    selectedTextWitness2: { [textId: number]: number },
     selectedSearchResult: {
         textId: number,
         start: number,
@@ -35,11 +36,13 @@ export type UIState = {
     },
     showAccountOverlay: boolean,
     textFontSize: number,
+    textFontSize2: number,
     notification:{
         message:String,
         time:Number,
         type:String
-    }
+    },
+    showSecondWindow:Boolean
 };
 
 export const initialUIState = {
@@ -47,10 +50,11 @@ export const initialUIState = {
     selectedText2: null,
     selectedAuthor: null,
     selectedTextWitness: {},
+    selectedTextWitness2: {},
     selectedSearchResult: null,
     searchValue: "",
     searchTerm:"",
-    showPageImages: true,
+    showPageImages: false,
     activeAnnotations: {},
     activeTextAnnotations: {},
     textListVisible: true,
@@ -66,7 +70,8 @@ export const initialUIState = {
         message:'',
         time:null,
         type:''
-    }
+    },
+    showSecondWindow:true
 };
 
 function loadedUserSettings(
@@ -99,6 +104,17 @@ function selectedText(
         state = clearSearchResult(state);
     }
 
+    return state;
+}
+
+function toggleSecondWindow(
+    state: UIState,
+    action: actions.SelectedTextAction
+): UIState {
+    state = {
+        ...state,
+        showSecondWindow: action.payload
+    };
     return state;
 }
 
@@ -145,6 +161,19 @@ function selectedTextWitness(
     };
 }
 
+function selectedTextWitness2(
+    state: UIState,
+    action: actions.SelectedTextWitnessAction
+): UIState {
+
+    return {
+        ...state,
+        selectedTextWitness2: {
+            ...selectedTextWitness2,
+            [action.textId]:action.witnessId
+        }
+    };
+}
 function changedSearchValue(
     state: UIState,
     action: actions.ChangedSearchValueAction
@@ -462,6 +491,7 @@ uiReducers[actions.SELECTED_TEXT] = selectedText;
 uiReducers[actions.SELECTED_TEXT2] = selectedText2;
 uiReducers[actions.NO_SELECTED_TEXT] = noSelectedText;
 uiReducers[actions.SELECTED_WITNESS] = selectedTextWitness;
+uiReducers[actions.SELECTED_WITNESS2] = selectedTextWitness2;
 uiReducers[actions.CHANGED_SEARCH_VALUE] = changedSearchValue;
 uiReducers[actions.CHANGED_SEARCH_TERM] = changedSearchTerm;
 uiReducers[actions.SELECTED_SEARCH_RESULT] = selectedSearchResult;
@@ -485,6 +515,8 @@ uiReducers[actions.EXPORT_WITNESS] = exportingWitness;
 uiReducers[actions.EXPORTED_WITNESS] = exportedWitness;
 uiReducers[actions.CHANGED_ACCOUNT_OVERLAY] = changedAccountOverlay;
 uiReducers[actions.CHANGED_NOTIFICATION]= changedNotification;
+uiReducers[actions.SECOND_WINDOW]= toggleSecondWindow;
+
 export default uiReducers;
 
 export const getSelectedText = (state: UIState): api.TextData | null => {
@@ -505,7 +537,12 @@ export const getSelectedTextWitnessId = (
 ): number | null => {
     return state.selectedTextWitness[textId];
 };
-
+export const getSelectedTextWitnessId2 = (
+    state: UIState,
+    textId: number
+): number | null => {
+    return state.selectedTextWitness2[textId];
+};
 export const showPageImages = (state: UIState): boolean => {
     return state.showPageImages;
 };
@@ -615,4 +652,7 @@ export const getTextFontSize = (state: UIState): number => {
 };
 export const getTextFontSize2 = (state: UIState): number => {
     return state.textFontSize2;
+};
+export const isSecondWindowOpen = (state: UIState): number => {
+    return state.showSecondWindow;
 };

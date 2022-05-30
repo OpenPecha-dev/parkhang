@@ -70,9 +70,11 @@ export type Props = {
     } | null,
     searchValue: string | null,
     fontSize: number,
+    isSecondWindowOpen:Boolean
 };
 
 export default class SplitTextComponent extends React.PureComponent<Props> {
+    isSecondWindowOpen:Boolean;
     list: List | null;
     splitText: HTMLDivElement | null;
     cache: CellMeasurerCache;
@@ -133,7 +135,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         resetRows: number | number[] | null = null
     ) {
         if (
-            this.props.showImages &&
+            ! this.props.showImages &&
             !this.calculatedImageHeight &&
             this.imageHeight &&
             this.imageWidth
@@ -610,8 +612,13 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             this.updateList();
         }, 500).bind(this);
 
+        document.querySelector('#doubleWindow').addEventListener('click',()=>{
+           setTimeout(()=>{
+            this.updateList()
+           },200) 
+        })
         window.addEventListener("resize", this.resizeHandler);
-
+        
         this.selectionHandler = _.debounce(e => {
             this.handleSelection(e);
         }, 200).bind(this);
@@ -626,6 +633,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     }
 
     componentDidUpdate() {
+
         if (this.selectedNodes && this.selectedNodes.length > 0) {
             const selectedNodes = this.selectedNodes;
             const selectedSegments = this.props.selectedAnnotatedSegments;
@@ -680,6 +688,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             }
             this._didSetInitialScrollPosition = true;
         }
+        
     }
 
     componentWillUnmount() {
@@ -750,7 +759,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         const rowRenderer = this.rowRenderer;
         const cache = this.cache;
         const key = props.selectedWitness ? props.selectedWitness.id : 0;
-    
+  
         return (
             <div
                 className={styles.splitText}
@@ -759,6 +768,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             >
                 <AutoSizer>
                     {({ height, width }) => (
+                        
                         <List
                             ref={list => (this.list = list)}
                             height={height}
@@ -768,7 +778,9 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             width={width}
                             overscanRowCount={3}
                             deferredMeasurementCache={cache}
+                        
                         >
+                            {this.updateList}
                         </List>
                     )}
                 </AutoSizer>

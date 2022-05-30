@@ -2,7 +2,9 @@ import React from 'react'
 import TextDetailHeading from './TextDetailHeadingContainer'
 import SplitTextComponent from './SplitText'
 import SplitText from "lib/SplitText";
+import Loader from "react-loader";
 import lengthSplitter from "lib/text_splitters/lengthSplitter";
+import styles from './TextDetail.css'
 
 function TextDetail(props) {
   let text = {
@@ -39,11 +41,11 @@ let key=12;
           // activeAnnotations={this.props.activeAnnotations}
           // activeAnnotation={this.props.activeAnnotation}
           limitWidth={limitWidth}
-          // // didSelectSegmentIds={this.props.didSelectSegmentIds}
+          didSelectSegmentIds={props.didSelectSegmentIds}
           // selectedSegmentId={this.props.selectedSegmentId}
           // annotationPositions={this.props.annotationPositions}
           selectedAnnotatedSegments={
-              this?.props?.selectedAnnotatedSegments
+             props?.selectedAnnotatedSegments
           }
           // textListVisible={this.props.textListVisible}
           // showImages={this.props.pageImagesVisible}
@@ -61,11 +63,12 @@ let key=12;
 let textComponents = [textComponent];
 
   return (
-    <div style={{width:'50%',height:'100%'}}>
+    <div style={{width:'50%',height:'100%'}} className={styles.textDetail2}>
         
         <TextDetailHeading/>
-          
-           {!false ? textComponents : <div />}
+        <Loader loaded={!props.loading} />
+
+           {!props.loading ? textComponents : <div />}
     </div>
   )
 }

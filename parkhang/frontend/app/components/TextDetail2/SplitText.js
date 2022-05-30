@@ -11,7 +11,7 @@ import "react-virtualized/styles.css";
 import Text from "./Text";
 import SplitText from "lib/SplitText";
 import styles from "./SplitText.css";
-import _ from "lodash";
+import _, { split } from "lodash";
 import TextSegment from "lib/TextSegment";
 import Witness from "lib/Witness";
 import GraphemeSplitter from "grapheme-splitter";
@@ -37,6 +37,7 @@ export type Props = {
 export default class SplitTextComponent extends React.PureComponent<Props> {
     list: List | null;
     splitText: HTMLDivElement | null;
+    didSelectSegmentIds;
     cache: CellMeasurerCache;
     rowRenderer: (params: {
         key: string,
@@ -80,7 +81,108 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         
         // this.processProps(props);
     }
+    handleSelection(e: Event) {
+        if (!this._modifyingSelection) {
+            this.activeSelection = document.getSelection();
+            if (!this._mouseDown) {
+                // sometimes, this gets called after the mouseDown event handler
+                this.mouseUp();
+            }
+        } else {
+            e.stopPropagation();
+            // Need to set this here. If set at callsite, the event will not
+            // have time to propagate.
+            this._modifyingSelection = false;
+        }
+    }
+    
+    mouseDown() {
+        this._mouseDown = true;
+    }
 
+    mouseUp() {
+        this._mouseDown = false;
+        if (this.activeSelection) {
+            let segmentIds = this.processSelection(this.activeSelection);
+            if (!segmentIds) {
+                segmentIds = [];
+            }
+            this.props.didSelectSegmentIds(segmentIds);
+            this.activeSelection = null;
+        }
+    }
+    
+    processSelection(selection: Selection): string[] | null {
+        if (
+            selection.rangeCount === 0 ||
+            selection.isCollapsed ||
+            selection.type === "Caret"
+        ) {
+            this.selectedNodes = null;
+            return null;
+        }
+
+        const range = selection.getRangeAt(0);
+        const start = range.startContainer;
+        const startSpan = this.getNodeSegmentSpan(start);
+        if (!(startSpan && startSpan.parentNode)) {
+            // If the selection is not a text segment, ignore.
+            // Assuming if the first node is a non-segment, they
+            // all are.
+            return null;
+        }
+
+        let nodes = this.getRangeNodes(range, startSpan.parentNode);
+        // Check if the selection starts after the end of a node, and
+        // if so remove that node.
+        if (nodes.length > 0) {
+            let firstNode = nodes[0];
+            if (range.startOffset === firstNode.textContent.length) {
+                nodes.shift();
+            }
+        }
+
+        const end = range.endContainer;
+        const endSpan = this.getNodeSegmentSpan(end);
+        if (!(endSpan && endSpan.parentNode)) {
+            return null;
+        }
+        if (endSpan && startSpan.parentNode !== endSpan.parentNode) {
+            // Selection is spanning Texts.
+            // We assume a selection can only run across a maximum
+            // of two Texts.
+            nodes = nodes.concat(this.getRangeNodes(range, endSpan.parentNode));
+        } else {
+            // Check if the selection ends before the start of a node, and
+            // if so remove that node.
+            if (range.endOffset === 0) {
+                nodes.pop();
+            }
+        }
+        this.selectedNodes = nodes;
+        let nodeIds = [];
+        nodes.reduce((accumulator: string[], current: Node) => {
+            if (current instanceof Element) {
+                accumulator.push(current.id);
+            }
+            return accumulator;
+        }, nodeIds);
+
+        return nodeIds;
+    }
+    getNodeSegmentSpan(node: Node): Element | null {
+        let currentNode = node;
+        let span = null;
+        const test = /^(i|s|ds)_/;
+        while (!span && currentNode.parentNode) {
+            if (currentNode instanceof Element && test.test(currentNode.id)) {
+                span = currentNode;
+            }
+            currentNode = currentNode.parentNode;
+        }
+
+        return span;
+    }
     updateList(
         resetCache: boolean = true,
         resetRows: number | number[] | null = null
@@ -507,6 +609,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             selectedElementId &&
             splitTextRect
         ) {
+           
             return {
                 selectedTextIndex: selectedTextIndex,
                 firstSelectedSegment: firstSelectedSegment,
@@ -518,13 +621,13 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             return null;
         }
     }
-  
+    
     render() {
         const props = this.props;
         const rowRenderer = this.rowRenderer;
         const cache = this.cache;
         const key = props.selectedWitness ? props.selectedWitness.id : 0;
-  
+       
         return (
             <div
                 className={styles.splitText2}

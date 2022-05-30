@@ -84,7 +84,7 @@ const App = (props: Props) => {
          
             <HeaderContainer />
           {isSearchActive ? <Search/> : (SelectedText !== null) ? <Editor props={props}/>: <Main/>} 
-             <Notification/>
+             {/* <Notification/> */}
    
         </div>
     );

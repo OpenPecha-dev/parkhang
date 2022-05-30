@@ -45,7 +45,9 @@ import {
     getSelectedSearchResult,
     getSearchValue,
     getTextFontSize,
-    getMenuListVisible
+    getMenuListVisible,
+    isSecondWindowOpen
+
 } from "reducers";
 import _ from "lodash";
 
@@ -168,7 +170,9 @@ const mapStateToProps = state => {
             activeAnnotation: null,
             user: user,
             textListVisible,
-            fontSize: constants.DEFAULT_TEXT_FONT_SIZE
+            fontSize: constants.DEFAULT_TEXT_FONT_SIZE,
+            isSecondWindowOpen:isSecondWindowOpen(state)
+
         };
     }
 
@@ -318,7 +322,9 @@ const mapStateToProps = state => {
         selectedSearchResult,
         searchValue,
         fontSize,
-        menuListIsVisible
+        menuListIsVisible,
+        isSecondWindowOpen:isSecondWindowOpen(state)
+
     };
 };
 

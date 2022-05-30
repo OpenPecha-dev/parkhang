@@ -247,15 +247,17 @@ const generateAnnotatedText = (
     state: AppState,
     witnessId: number
 ): AnnotatedText | null => {
-    const witness = reducers.getWitness(state, witnessId);
+    const witness = reducers.getWitness2(state, witnessId);
     if (!witness) {
         console.warn("no witness");
         return null;
     }
     const text = witness.text;
-    const workingWitness = reducers.getWorkingWitness(state, text.id);
-    const baseWitness = reducers.getBaseWitness(state, text.id);
+    const workingWitness = reducers.getWorkingWitness2(state, text.id);
+    const baseWitness = reducers.getBaseWitness2(state, text.id);
+   
     if (!workingWitness || !baseWitness) {
+    
         return null;
     }
 
@@ -268,9 +270,7 @@ const generateAnnotatedText = (
     let annotatedText = new AnnotatedText(
         segmentedWorkingWitness,
         (Object.values(appliedAnnotations): any),
-        text => {
-            return segmentTibetanText(text).segments;
-        },
+        text => segmentTibetanText(text).segments,
         workingWitness,
         witness
     );

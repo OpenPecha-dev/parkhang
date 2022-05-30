@@ -11,20 +11,7 @@
     background-color: var(--text-list-colour);
     display: flex;
 }
-.textList *::-webkit-scrollbar {
-    width: 15px;
-  }
-  .textList *::-webkit-scrollbar-track {
-    background:var(--text-list-colour);
-  }
-  .textList *::-webkit-scrollbar-thumb {
-    background: #eee;
-    border-radius: 5px;
-  }
-  .textList *::-webkit-scrollbar-thumb:hover {
-    background: darkgray;
-    border-radius: 5px;
-  }
+
 
 .textList *:focus {
     outline: none;

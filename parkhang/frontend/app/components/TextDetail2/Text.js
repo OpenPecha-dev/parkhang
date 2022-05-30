@@ -174,11 +174,12 @@ export default class Text extends React.Component<Props, State> {
             }
             let id = null;
             if (segment.length === 0) {
-                id = idForDeletedSegment(segment);
-                classes.push(styles.removedByAnnotation);
-                if (deletionText) {
-                    segment = new TextSegment(segment.start, deletionText);
-                }
+                // id = idForDeletedSegment(segment);
+                // classes.push(styles.removedByAnnotation);
+                // if (deletionText) {
+                //     segment = new TextSegment(segment.start, deletionText);
+                // }
+                console.log('no')
             } else {
                 id = idForSegment(segment);
             }

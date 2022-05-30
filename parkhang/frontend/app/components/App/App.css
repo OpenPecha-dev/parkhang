@@ -1,5 +1,5 @@
 @import 'css/type.css';
-
+@import 'css/colour.css';
 html {
     box-sizing: border-box;
 }
@@ -52,3 +52,32 @@ body {
 .ReactVirtualized__List{
     background-color: red;
 }
+
+
+
+::-webkit-scrollbar {
+    width: 0.6vw;
+  }
+::-webkit-scrollbar-track {
+    background:var(--text-list-colour);
+    margin-block: 10px;
+
+  }
+::-webkit-scrollbar-thumb {
+    background: var(--text-bg);
+    border-radius: 2px
+  }
+::-webkit-scrollbar-thumb:hover {
+    background: darkgray;
+    border-radius: 5px;
+  }
+
+  
+  @supports(scrollbar-color: var(--text-list-colour) var(--text-bg)){
+
+
+    *{
+        scrollbar-color: var(--text-list-colour) var(--text-bg);
+        scrollbar-width: thin;
+    }
+  }

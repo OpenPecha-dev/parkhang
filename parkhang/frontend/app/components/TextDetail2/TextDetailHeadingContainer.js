@@ -10,31 +10,30 @@ import { getTextListVisible, getAccountOverlayVisible, getMenuListVisible } from
 
 
 const mapStateToProps = (state: AppState): {} => {
-    const selectedText = reducers.getSelectedText(state);
+    const selectedText = reducers.getSelectedText2(state);
     let witnesses = [];
     let exportingWitness = false;
     let selectedWitness;
     if (selectedText) {
-        witnesses = reducers.getTextWitnesses(state, selectedText.id);
-        const selectedWitnessId = reducers.getSelectedTextWitnessId(
+        witnesses = reducers.getTextWitnesses2(state, selectedText.id);
+        const selectedWitnessId = reducers.getSelectedTextWitnessId2(
             state,
             selectedText.id
         );
         if (selectedWitnessId) {
-            selectedWitness = reducers.getWitness(state, selectedWitnessId);
-            exportingWitness = reducers.getExportingWitness(
-                state,
-                selectedWitnessId
-            );
+            selectedWitness = reducers.getWitness2(state, selectedWitnessId);
+            // exportingWitness = reducers.getExportingWitness(
+            //     state,
+            //     selectedWitnessId
+            // );
         } else {
-            selectedWitness = reducers.getWorkingWitness(
+            selectedWitness = reducers.getWorkingWitness2(
                 state,
                 selectedText.id
             );
         }
     }
     let textFontSize = reducers.getTextFontSize2(state);
-
 
     return {
         witnesses,
@@ -70,7 +69,7 @@ return {
     navigationButtonClicked,
     menuButtonClicked,
     onSelectedWitness: (witness: Witness) => {
-        dispatch(actions.selectedTextWitness(selectedText.id, witness.id));
+        dispatch(actions.selectedTextWitness2(selectedText.id, witness.id));
     },
     onChangedFontSize: (fontSize: number) => {
         dispatch(actions.changedTextFontSize2(fontSize));
