@@ -1,8 +1,12 @@
 import React from 'react'
-
+import styles from './ResourceOption.css'
 function Dictionary() {
   return (
-    <div>Dictionary</div>
+    <div className={styles.Dictionary}>
+      
+      <input type='text' placeholder='search Terms'></input>
+
+    </div>
   )
 }
 

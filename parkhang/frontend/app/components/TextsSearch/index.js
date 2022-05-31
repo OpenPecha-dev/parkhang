@@ -1,1 +1,1 @@
-export { default } from "./TextsSearch";
+export { default } from "./TextsSearchContainer";

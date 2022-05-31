@@ -11,16 +11,17 @@ const mapStateToProps = (state: AppState) => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
+const mergeProps =(stateProps: Props, dispatchProps, ownProps) => {
+    const { dispatch } = dispatchProps;
+    const { selectedText } = stateProps;
     return {
         searchChanged: (searchTerm: string) => {
-            // const value = e.currentTarget.value;
             dispatch(changedSearchValue(searchTerm));
         }
     };
 };
 
-const TextsSearchContainer = connect(mapStateToProps, mapDispatchToProps)(
+const TextsSearchContainer = connect(mapStateToProps,null, mergeProps)(
     TextsSearch
 );
 

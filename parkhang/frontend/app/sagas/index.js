@@ -644,7 +644,7 @@ function* watchChangedSearchValue() {
 
 function* searchTerm(action: actions.ChangedSearchValueAction) {
 const searchTerm=action.searchTerm
-console.log('searched TERM is' + searchTerm )
+yield put(actions.changedSearchValue(searchTerm))
 }
 
 function* watchChangedSearchTerm() {

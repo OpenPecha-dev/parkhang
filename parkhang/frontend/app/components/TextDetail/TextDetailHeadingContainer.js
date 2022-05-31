@@ -34,8 +34,7 @@ const mapStateToProps = (state: AppState): {} => {
         }
     }
     let textFontSize = reducers.getTextFontSize(state);
-
-
+    
     return {
         witnesses,
         selectedText,   
@@ -44,7 +43,8 @@ const mapStateToProps = (state: AppState): {} => {
         menuListIsVisible: getMenuListVisible(state),
         accountOverlayVisible: getAccountOverlayVisible(state),
         textFontSize,
-        isSecondWindowOpen:reducers.isSecondWindowOpen(state)
+        isSecondWindowOpen:reducers.isSecondWindowOpen(state),
+        exportingWitness
 
     };
 };
@@ -78,7 +78,10 @@ return {
     },
     onChangeWindowOpen: (data: boolean) => {
         dispatch(actions.toggleSecondWindow(data));
-    }
+    },
+    onExport: () => {
+            dispatch(actions.exportWitness(stateProps.selectedWitness.id, "docx"));
+        }
 };
 }
 

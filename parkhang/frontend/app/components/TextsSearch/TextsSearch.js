@@ -11,17 +11,23 @@ type Props = {
     searchChanged: (searchTerm: string) => void,
     selectedSearchOption?: (e: SyntheticEvent<HTMLSelectElement>) => void,
     minimiseButtonClicked: () => void,
-    intl: { formatMessage: ({ [id: string]: string }) => string }
+    intl: { formatMessage: ({ [id: string]: string }) => string },
+    searchTerm:string
 };
 
 const TextsSearch = (props: Props) => {
     let textInput: { current: null | HTMLInputElement } = React.createRef();
+
     const initiateSearch = (e: SyntheticEvent<HTMLElement>) => {
-        e.preventDefault();
+        e.preventDefault();   
         if (textInput.current instanceof HTMLInputElement) {
+        
             const searchTerm = textInput.current.value;
             props.searchChanged(searchTerm);
+        
         }
+
+
     };
     return (
         <div className={styles.textsSearchContainer}>
@@ -31,9 +37,11 @@ const TextsSearch = (props: Props) => {
                         style={{outline:'none'}}
                         type="text"
                         id="textSearchInput"
-                        placeholder={props.intl.formatMessage({
+                        placeholder={
+                    props.searchTerm ? props.searchTerm : props.intl.formatMessage({
                             id: "leftbar.search"
-                        })}
+                        })
+                    }
                         ref={textInput}
                     />
                     <Button

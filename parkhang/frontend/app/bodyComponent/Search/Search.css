@@ -2,7 +2,7 @@
 
 .SearchContainer{
     
-    min-height: 520px;
+    min-height: 100vh;
     max-width: 100%;
     box-sizing: border-box;
     padding-inline-start: 30px;
@@ -18,8 +18,9 @@
     width: 420px;
     background-color: #FBFBFA;
     padding-top: 80px;
-    padding-bottom: 120px;
     padding-inline:44px;
+    display: flex;
+    flex-direction: column;
 }
 .RightSearch h2{
     font-size: 22px;

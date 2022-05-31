@@ -2,6 +2,8 @@ import React,{useState,useRef} from 'react'
 import {List,AutoSizer,CellMeasurer,CellMeasurerCache} from 'react-virtualized';
 import classname from 'classnames';
 import styles from './TextList.css'
+import useClickOutSide from '../UI/useClickOutSideClose';
+
 function TextList(props) {
     let textslist=[];
     const onSelectedText=props.onSelectedText;
@@ -24,9 +26,10 @@ const handleClick=()=>{
     setIsOpen((prev=>!prev))
     if(isOpen===false) classes.push(styles.open)
 }
+const domNode2=useClickOutSide(()=>setIsOpen(false))
 
-  return (<div style={{position:'relative'}}>     
-        <button onClick={handleClick}>{selectedText?selectedText.name:selected}</button>
+  return (<div style={{position:'relative'}} ref={domNode2}>     
+        <button onClick={handleClick} >{selectedText?selectedText.name:selected}</button>
         {isOpen && <div className={classname(classes)} style={{position:'absolute'}}>
           <AutoSizer>{
               ({width,height})=>(

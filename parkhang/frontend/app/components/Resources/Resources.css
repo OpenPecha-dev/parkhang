@@ -1,5 +1,7 @@
 .Resources{
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .ResourcesHeader{
     background-color: #EDEDED;
@@ -25,7 +27,7 @@
 
 .ResourceDetail{
    background-color:white;
-    height: 100%;
+   flex:1;
     margin-top:20px;
 }
 .activeResource{
@@ -33,4 +35,7 @@
 }
 .activeResource svg>path{
     fill:black;
+}
+.ResourceFooter{
+margin-left: 20px;
 }

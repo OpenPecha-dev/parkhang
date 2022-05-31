@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './Search.css'
 import Tab from '../utility/Tab'
-
-
+import TextList from 'containers/TextListContainer'
+import TextSearch from 'components/TextsSearch'
 function Search(props) {
 
 const {searchTerm} =props
@@ -35,13 +35,9 @@ const searchCount=10;
       </div>
     <div className={styles.RightSearch}>
        <h2>
-         <span>Topics</span></h2>
-         <ul>
-           
-           <li><input type='checkbox'/><span>Chojuk</span></li>
-           <li><input type='checkbox'/><span>Chojuk</span></li>
-           <li><input type='checkbox'/><span>Chojuk</span></li>
-         </ul>
+         <span>Full Term Search</span></h2>
+         <TextSearch searchTerm={searchTerm}/>
+         <TextList/>
     </div>
     </div>
   )

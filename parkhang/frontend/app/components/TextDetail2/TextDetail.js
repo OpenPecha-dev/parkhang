@@ -28,7 +28,7 @@ if (
   if (props.paginated) {
       splitter = positionSplitter(props.pageBreaks);
   } else {
-      splitter = lengthSplitter(1000, /^།[\s]+(?!།[\s]+)/, 2, 5);
+      splitter = lengthSplitter(9000, /^།[\s]+(?!།[\s]+)/, 2, 5);
   }
   
 let key=12;

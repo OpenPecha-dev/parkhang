@@ -95,17 +95,17 @@ export const Header = (props: HeaderProps) => {
     const image_location =lopenlingLogo
     return (
         <header className={styles.header}>
-            {/* <NavigationButton
+            <NavigationButton
                 onClick={props.navigationButtonClicked}
                 className={styles.navigationButton}
                 title={toggleTitle}
-            /> */}
-           <NavLink to='/'>
+            />
+           {/* <NavLink to='/'>
            <div  className={styles.logo}>
                 <img src={image_location} height="30" />
             </div>
             
-           </NavLink> 
+           </NavLink>  */}
              <div className={styles.navlinks}>
                  <ul>
                      <li><NavLink to='/textSelection'>Texts</NavLink></li>

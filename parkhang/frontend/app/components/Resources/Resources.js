@@ -3,12 +3,15 @@ import styles from './Resources.css'
 import AboutIcon from 'images/about-text.svg'
 import CommentIcon from 'images/notes.svg'
 import DictionariesIcon from 'images/dictionaries.svg'
-import FindIcon from 'images/magnifier.svg'
 import FeedbackIcon from 'images/feedback.svg'
 import ApplyTooltip from '../UI/ApplyTooltip'
 import classnames from 'classnames'
 import Index from './ResourceOption'
+import {NavLink} from 'redux-first-router-link'
+import lopenlingLogo from "images/lopenling_logo.png";
+
 function Resources() {
+const image_location =lopenlingLogo
   const [selectedOption,setSelectedOption]=useState(0);
   const handleClick=(num)=>{
       setSelectedOption(num)
@@ -36,11 +39,6 @@ function Resources() {
     title:'Question',
     effect:'solid',
     className:styles.ResourceIcon
-},{
-    id:4,
-    title:'Search',
-    effect:'solid',
-    className:styles.ResourceIcon
 }
 ]
 
@@ -55,7 +53,6 @@ function Resources() {
                   {resource.id ===1 && <CommentIcon/>}
                   {resource.id ===2 && <DictionariesIcon/>}
                   {resource.id  ===3 && <FeedbackIcon/>}
-                  {resource.id  ===4 && <FindIcon/>}
                   </ApplyTooltip>
                   </div>
                   )
@@ -67,7 +64,14 @@ function Resources() {
           {selectedOption ===1 && <Index.Comment/>}
           {selectedOption ===2 && <Index.Dictionary/>}
           {selectedOption ===3 && <Index.Question/>}
-          {selectedOption ===4 && <Index.Find/>}
+        </div>
+        <div className={styles.ResourceFooter}>
+            <NavLink to='/'>
+               <div  className={styles.logo}>
+                   <img src={image_location} height="30" />
+              </div>
+            
+           </NavLink> 
         </div>
     </div>
   )

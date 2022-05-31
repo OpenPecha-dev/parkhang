@@ -6,43 +6,53 @@
       "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\8967124136190c7842d863e4a862a528.png",
       "publicPath": "/static/bundles/8967124136190c7842d863e4a862a528.png"
     },
-    "styles-fa88ab2d8d4a49b8e58e.css": {
-      "name": "styles-fa88ab2d8d4a49b8e58e.css",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-fa88ab2d8d4a49b8e58e.css",
-      "publicPath": "/static/bundles/styles-fa88ab2d8d4a49b8e58e.css"
+    "375e0e9056137a8eb3c9bbcb876efbdc.png": {
+      "name": "375e0e9056137a8eb3c9bbcb876efbdc.png",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\375e0e9056137a8eb3c9bbcb876efbdc.png",
+      "publicPath": "/static/bundles/375e0e9056137a8eb3c9bbcb876efbdc.png"
     },
-    "parkhang-fa88ab2d8d4a49b8e58e.js": {
-      "name": "parkhang-fa88ab2d8d4a49b8e58e.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-fa88ab2d8d4a49b8e58e.js",
-      "publicPath": "/static/bundles/parkhang-fa88ab2d8d4a49b8e58e.js"
+    "6e74e84b4d8b6d6420ab7dd14189a49d.png": {
+      "name": "6e74e84b4d8b6d6420ab7dd14189a49d.png",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\6e74e84b4d8b6d6420ab7dd14189a49d.png",
+      "publicPath": "/static/bundles/6e74e84b4d8b6d6420ab7dd14189a49d.png"
     },
-    "vendors~docx-fa88ab2d8d4a49b8e58e.js": {
-      "name": "vendors~docx-fa88ab2d8d4a49b8e58e.js",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-fa88ab2d8d4a49b8e58e.js",
-      "publicPath": "/static/bundles/vendors~docx-fa88ab2d8d4a49b8e58e.js"
+    "styles-7d34068d219ad225afde.css": {
+      "name": "styles-7d34068d219ad225afde.css",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-7d34068d219ad225afde.css",
+      "publicPath": "/static/bundles/styles-7d34068d219ad225afde.css"
     },
-    "styles-fa88ab2d8d4a49b8e58e.css.map": {
-      "name": "styles-fa88ab2d8d4a49b8e58e.css.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-fa88ab2d8d4a49b8e58e.css.map",
-      "publicPath": "/static/bundles/styles-fa88ab2d8d4a49b8e58e.css.map"
+    "parkhang-7d34068d219ad225afde.js": {
+      "name": "parkhang-7d34068d219ad225afde.js",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-7d34068d219ad225afde.js",
+      "publicPath": "/static/bundles/parkhang-7d34068d219ad225afde.js"
     },
-    "parkhang-fa88ab2d8d4a49b8e58e.js.map": {
-      "name": "parkhang-fa88ab2d8d4a49b8e58e.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-fa88ab2d8d4a49b8e58e.js.map",
-      "publicPath": "/static/bundles/parkhang-fa88ab2d8d4a49b8e58e.js.map"
+    "vendors~docx-7d34068d219ad225afde.js": {
+      "name": "vendors~docx-7d34068d219ad225afde.js",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-7d34068d219ad225afde.js",
+      "publicPath": "/static/bundles/vendors~docx-7d34068d219ad225afde.js"
     },
-    "vendors~docx-fa88ab2d8d4a49b8e58e.js.map": {
-      "name": "vendors~docx-fa88ab2d8d4a49b8e58e.js.map",
-      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-fa88ab2d8d4a49b8e58e.js.map",
-      "publicPath": "/static/bundles/vendors~docx-fa88ab2d8d4a49b8e58e.js.map"
+    "styles-7d34068d219ad225afde.css.map": {
+      "name": "styles-7d34068d219ad225afde.css.map",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\styles-7d34068d219ad225afde.css.map",
+      "publicPath": "/static/bundles/styles-7d34068d219ad225afde.css.map"
+    },
+    "parkhang-7d34068d219ad225afde.js.map": {
+      "name": "parkhang-7d34068d219ad225afde.js.map",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\parkhang-7d34068d219ad225afde.js.map",
+      "publicPath": "/static/bundles/parkhang-7d34068d219ad225afde.js.map"
+    },
+    "vendors~docx-7d34068d219ad225afde.js.map": {
+      "name": "vendors~docx-7d34068d219ad225afde.js.map",
+      "path": "D:\\git Project work\\parkhang\\parkhang\\frontend\\static\\bundles\\vendors~docx-7d34068d219ad225afde.js.map",
+      "publicPath": "/static/bundles/vendors~docx-7d34068d219ad225afde.js.map"
     }
   },
   "chunks": {
     "parkhang": [
-      "styles-fa88ab2d8d4a49b8e58e.css",
-      "parkhang-fa88ab2d8d4a49b8e58e.js",
-      "styles-fa88ab2d8d4a49b8e58e.css.map",
-      "parkhang-fa88ab2d8d4a49b8e58e.js.map"
+      "styles-7d34068d219ad225afde.css",
+      "parkhang-7d34068d219ad225afde.js",
+      "styles-7d34068d219ad225afde.css.map",
+      "parkhang-7d34068d219ad225afde.js.map"
     ]
   },
   "publicPath": "/static/bundles/"

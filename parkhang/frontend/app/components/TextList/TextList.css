@@ -7,7 +7,7 @@
 }
 
 .textList {
-   flex:1;
+    flex:1;
     background-color: var(--text-list-colour);
     display: flex;
 }

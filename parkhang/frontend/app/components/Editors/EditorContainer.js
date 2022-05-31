@@ -24,6 +24,8 @@ const Editor=({props})=>{
     let textListClassnames = [styles.listContainer];
     let bodyHeight;
     let minSize = constants.MIN_TEXT_LIST_WIDTH;
+    let maxSize = constants.MAX_TEXT_LIST_WIDTH;
+
     let defaultSize = constants.DEFAULT_TEXT_LIST_WIDTH;
     let size = props.textListWidth;
     if (props.textListIsVisible) {
@@ -45,6 +47,7 @@ return (
         <SplitPane
             split="vertical"
             minSize={minSize}
+            maxSize={maxSize}
             defaultSize={defaultSize}
             size={size}
             paneStyle={{
