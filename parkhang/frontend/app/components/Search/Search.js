@@ -7,7 +7,7 @@ import * as reduxroute from 'redux-first-router'
 import useLocalStorage from "../../bodyComponent/utility/useLocalStorage";
 function Search(props) {
     const input=useRef('');
-    const [search,setSearch]=useLocalStorage('search','')
+    const [search,setSearch]=useState('')
     const [inputEmpty,setInputEmpty]=useState('')
     const history=reduxroute.history()
     const handleSubmit = (e) => {

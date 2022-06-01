@@ -44,7 +44,7 @@ const mapStateToProps = (state: AppState): {} => {
         accountOverlayVisible: getAccountOverlayVisible(state),
         textFontSize,
         isSecondWindowOpen:reducers.isSecondWindowOpen(state),
-        exportingWitness
+        exportingWitness,
 
     };
 };
@@ -81,6 +81,11 @@ return {
     },
     onExport: () => {
             dispatch(actions.exportWitness(stateProps.selectedWitness.id, "docx"));
+        },
+    navigationButtonClicked: () => {
+            dispatch(
+                actions.changedTextListVisible(!stateProps.textListIsVisible)
+            );
         }
 };
 }

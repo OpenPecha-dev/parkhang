@@ -114,6 +114,16 @@ function Options({ props }) {
                 {!props.isSecondWindowOpen && <img src={Check}></img>}Stretch
                 across both column
             </li>
+            <li
+                onClick={()=>{
+                    props.navigationButtonClicked()
+                    document.querySelector("#doubleWindow").click();
+                    
+                }}
+            >
+                {!props.textListIsVisible && <img src={Check}></img>}
+                Hide sidebar
+            </li>
             <hr />
             <li>link panels</li>
         </ul>

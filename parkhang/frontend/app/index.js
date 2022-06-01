@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import Cookies from "js-cookie";
 import AppContainer from "components/App/AppContainer";
 import flagsmith from 'flagsmith'
@@ -154,8 +154,9 @@ function intlSelector(state) {
 
 
 const environmentID= process.env.NODE_ENV==='development'?'3Dt7CemgqtVS5RUzFovjx9':'YrffVXdfn7BzSFVmLBFdrv';
+const root=ReactDOM.createRoot(document.getElementById('app'));
 
-ReactDOM.render(
+root.render(
     <Provider store={store}>
         <IntlProvider textComponent={Fragment} intlSelector={intlSelector}>
         <FlagsmithProvider
@@ -166,9 +167,9 @@ ReactDOM.render(
             <AppContainer />
             </FlagsmithProvider>
         </IntlProvider>
-    </Provider>,
-    document.getElementById("app")
+    </Provider>
 );
+
 
 store.dispatch(loadInitialData());
 

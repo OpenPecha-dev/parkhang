@@ -170,6 +170,18 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
 
         return nodeIds;
     }
+    getRangeNodes(range: Range, parentNode: Node): Node[] {
+        let rangeSpans = [];
+        for (let i = 0, len = parentNode.childNodes.length; i < len; i++) {
+            const node = parentNode.childNodes[i];
+            // TODO: add polyfill for i.e.?
+            // e.g. https://gist.github.com/jonathansampson/6d09bd6d2e8c22c53868aec42e66b0f9
+            if (range.intersectsNode(node)) {
+                rangeSpans.push(node);
+            }
+        }
+        return rangeSpans;
+    }
     getNodeSegmentSpan(node: Node): Element | null {
         let currentNode = node;
         let span = null;
@@ -767,7 +779,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                         <Text
                             segmentedText={props.splitText.texts[index]}
                             // row={index}
-                            // selectedSegmentId={props.selectedSegmentId}
+                            selectedSegmentId={props.selectedSegmentId}
                             // searchValue={searchValue}
                             // selectedSearchResult={
                             //     this.props.selectedSearchResult

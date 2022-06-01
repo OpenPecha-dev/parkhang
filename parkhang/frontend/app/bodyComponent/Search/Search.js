@@ -4,7 +4,6 @@ import Tab from '../utility/Tab'
 import TextList from 'containers/TextListContainer'
 import TextSearch from 'components/TextsSearch'
 function Search(props) {
-
 const {searchTerm} =props
 const tabContent =[{
   title:'Sources',
@@ -13,11 +12,8 @@ const tabContent =[{
 {
   title:'Sheets',
   count:3
-},
-{
-  title:'fulltexts',
-  count:4
-}];
+}
+];
 const searchCount=10;
   return (
     <div className={styles.SearchContainer}>

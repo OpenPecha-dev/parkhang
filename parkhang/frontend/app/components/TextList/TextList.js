@@ -1,5 +1,5 @@
 // @flow
-import * as React from "react";
+import React from "react";
 import classnames from "classnames";
 import { AutoSizer } from "react-virtualized/dist/es/AutoSizer";
 import {
@@ -177,15 +177,15 @@ class TextList extends React.Component<Props> {
                 rowIndex={index}
                 cache={cache}
             >
-                <div key={key} style={style} className={className}>
-                    <div
+                <div key={`listkeys-${key}`} style={style} className={className}>
+                    {searchTerm && <div
                         className={styles.textNameRow}
                         onClick={() => {
                             onSelectedText(texts[index]);
                         }}
                     >
                         {nameHtml} {resultsCount}
-                    </div>
+                    </div>}
                     {textSearchResults.length > 0 && (
                         <div className={styles.searchResults}>
                             {textSearchResultRows}

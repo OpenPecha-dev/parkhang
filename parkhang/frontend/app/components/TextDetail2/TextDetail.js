@@ -42,8 +42,8 @@ let key=12;
           // activeAnnotation={this.props.activeAnnotation}
           limitWidth={limitWidth}
           didSelectSegmentIds={props.didSelectSegmentIds}
-          // selectedSegmentId={this.props.selectedSegmentId}
-          // annotationPositions={this.props.annotationPositions}
+          selectedSegmentId={props.selectedSegmentId}
+          annotationPositions={props.annotationPositions}
           selectedAnnotatedSegments={
              props?.selectedAnnotatedSegments
           }

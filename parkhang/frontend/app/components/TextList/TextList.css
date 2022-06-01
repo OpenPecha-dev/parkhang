@@ -52,6 +52,8 @@ content: '- ';
     flex-shrink: 0;
     padding:0 var(--padding-left);
     font-size: 16px;
+    background-color:rgb(80, 73, 73);
+    color:white;
 }
 
 .textName {

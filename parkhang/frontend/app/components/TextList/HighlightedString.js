@@ -41,7 +41,7 @@ export default class HighlightedString extends React.Component<Props> {
                     string,
                     foundGraphemes,
                     (match, i) => (
-                        <span className={this.props.highlightClass}>
+                        <span className={this.props.highlightClass} key={`highlight-${i}`}>
                             {match}
                         </span>
                     )

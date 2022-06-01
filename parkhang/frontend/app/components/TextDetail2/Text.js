@@ -121,21 +121,21 @@ export default class Text extends React.Component<Props, State> {
         );
     }
 
-    segmentsContainSegment(segments: TextSegment[], segment: TextSegment) {
-        for (let i = 0; i < segments.length; i++) {
-            let listSegment = segments[i];
-            if (
-                listSegment.start === segment.start &&
-                listSegment.text === segment.text
-            ) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    // segmentsContainSegment(segments: TextSegment[], segment: TextSegment) {
+    //     for (let i = 0; i < segments.length; i++) {
+    //         let listSegment = segments[i];
+    //         if (
+    //             listSegment.start === segment.start &&
+    //             listSegment.text === segment.text
+    //         ) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
     selectedElement(element: Element) {
         const selection = document.getSelection();
+        
         if (selection && selection.type === "Range") {
             return;
         }
@@ -305,11 +305,10 @@ export default class Text extends React.Component<Props, State> {
 
         return (
             <div className={styles.textContainer}>
-               
                 <div
                     className={classnames(...classes)}
                     dangerouslySetInnerHTML={html}
-                    // onClick={e => this.selectedElement(e.target)}
+                    onClick={e => this.selectedElement(e.target)}
                     style={{
                         fontSize: this.props.fontSize
                     }}
