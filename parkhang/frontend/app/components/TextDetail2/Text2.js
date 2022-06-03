@@ -18,12 +18,12 @@ import type { AnnotationUniqueId } from "lib/Annotation";
 import GraphemeSplitter from "grapheme-splitter";
 
 export function idForSegment(segment: TextSegment): string {
-    return "s_" + segment.start;
+    return "s2_" + segment.start;
 }
 
-// export function idForDeletedSegment(segment: TextSegment): string {
-//     return "ds_" + segment.start;
-// }
+export function idForDeletedSegment(segment: TextSegment): string {
+    return "ds_" + segment.start;
+}
 
 // export function idForInsertion(segment: TextSegment): string {
 //     return "i_" + segment.start;
@@ -37,29 +37,29 @@ export function idForSegment(segment: TextSegment): string {
 //     return "l_" + (segment.end + 1);
 // }
 
-// export type Props = {
-//     segmentedText: SegmentedText,
-//     annotationPositions: { [string]: Annotation[] },
-//     selectedSegmentId: (id: string) => void,
-//     activeAnnotations: { [AnnotationUniqueId]: Annotation } | null,
-//     getBaseAnnotation: (annotation: Annotation) => Annotation,
-//     selectedAnnotatedSegments: TextSegment[],
-//     row: number,
-//     activeAnnotation: Annotation | null,
-//     searchValue: string | null,
-//     selectedSearchResult: {
-//         textId: number,
-//         start: number,
-//         length: number
-//     } | null,
-//     searchStringPositions: { [position: number]: [number, number] },
-//     fontSize?: number,
-//     activeWitness: Witness
-// };
+export type Props = {
+    segmentedText: SegmentedText,
+    annotationPositions: { [string]: Annotation[] },
+    selectedSegmentId: (id: string) => void,
+    activeAnnotations: { [AnnotationUniqueId]: Annotation } | null,
+    getBaseAnnotation: (annotation: Annotation) => Annotation,
+    selectedAnnotatedSegments: TextSegment[],
+    row: number,
+    activeAnnotation: Annotation | null,
+    searchValue: string | null,
+    selectedSearchResult: {
+        textId: number,
+        start: number,
+        length: number
+    } | null,
+    searchStringPositions: { [position: number]: [number, number] },
+    fontSize?: number,
+    activeWitness: Witness
+};
 
-// export type State = {
-//     segmentedText: SegmentedText
-// };
+export type State = {
+    segmentedText: SegmentedText
+};
 
 // import ReactDOMServer from "react-dom/server";
 // import PageBreakIcon from "images/page_break_icon.svg";
@@ -68,7 +68,7 @@ export function idForSegment(segment: TextSegment): string {
 //     <PageBreakIcon />
 // );
 
-export default class Text extends React.Component<Props, State> {
+export default class Text2 extends React.Component<Props, State> {
     _renderedSegments: TextSegment[] | null;
     _renderedHtml: { __html: string } | null;
 
@@ -92,34 +92,34 @@ export default class Text extends React.Component<Props, State> {
         });
     }
 
-    annotationsForSegment(segment: TextSegment): Annotation[] {
-        let annotations: Annotation[] = [];
-        const foundAnnotations = this.props.annotationPositions[
-            String(segment.start)
-        ];
-        if (foundAnnotations) {
-            annotations = foundAnnotations;
-        }
-        const insertions =
-            this.props.annotationPositions[INSERTION_KEY + segment.start] || [];
-        const deletions =
-            this.props.annotationPositions[DELETION_KEY + segment.start] || [];
-        const pageBreaks =
-            this.props.annotationPositions[
-                PAGE_BREAK_KEY + (segment.end + 1)
-            ] || [];
-        const lineBreaks =
-            this.props.annotationPositions[
-                LINE_BREAK_KEY + (segment.end + 1)
-            ] || [];
+    // annotationsForSegment(segment: TextSegment): Annotation[] {
+    //     let annotations: Annotation[] = [];
+    //     const foundAnnotations = this.props.annotationPositions[
+    //         String(segment.start)
+    //     ];
+    //     if (foundAnnotations) {
+    //         annotations = foundAnnotations;
+    //     }
+    //     const insertions =
+    //         this.props.annotationPositions[INSERTION_KEY + segment.start] || [];
+    //     const deletions =
+    //         this.props.annotationPositions[DELETION_KEY + segment.start] || [];
+    //     const pageBreaks =
+    //         this.props.annotationPositions[
+    //             PAGE_BREAK_KEY + (segment.end + 1)
+    //         ] || [];
+    //     const lineBreaks =
+    //         this.props.annotationPositions[
+    //             LINE_BREAK_KEY + (segment.end + 1)
+    //         ] || [];
 
-        return annotations.concat(
-            insertions,
-            deletions,
-            pageBreaks,
-            lineBreaks
-        );
-    }
+    //     return annotations.concat(
+    //         insertions,
+    //         deletions,
+    //         pageBreaks,
+    //         lineBreaks
+    //     );
+    // }
 
     // segmentsContainSegment(segments: TextSegment[], segment: TextSegment) {
     //     for (let i = 0; i < segments.length; i++) {
@@ -133,9 +133,11 @@ export default class Text extends React.Component<Props, State> {
     //     }
     //     return false;
     // }
+
+
     selectedElement(element: Element) {
         const selection = document.getSelection();
-        
+        // console.log(selection)
         if (selection && selection.type === "Range") {
             return;
         }
@@ -179,7 +181,6 @@ export default class Text extends React.Component<Props, State> {
                 // if (deletionText) {
                 //     segment = new TextSegment(segment.start, deletionText);
                 // }
-                console.log('no')
             } else {
                 id = idForSegment(segment);
             }

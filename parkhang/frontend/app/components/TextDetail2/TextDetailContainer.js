@@ -5,7 +5,11 @@ import TextDetail from "./TextDetail";
 import * as actions from "actions";
 import * as reducers from "reducers";
 import AnnotatedText from "lib/AnnotatedText";
+import _ from "lodash";
 import * as TextStore2 from "state_helpers/TextStore2";
+
+
+const DISMISS_CONTROLS_ON_CLICK = true;
 
 function getInsertionKey(annotation) {
     return [annotation.start, annotation.length].join("-");
@@ -134,6 +138,7 @@ const mapStateToProps = (state: AppState): {} => {
         annotatedText,
         selectedWitness,
         loading: loading,
+        annotationPositions
     };
    
 };
@@ -144,17 +149,17 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const { dispatch } = dispatchProps;
 
 const isDeletion = id => {
-    return id.indexOf("ds_") !== -1;
+    return id.indexOf("ds2_") !== -1;
 };
 const isInsertion = id => {
-    return id.indexOf("i_") !== -1;
+    return id.indexOf("i2_") !== -1;
 };
 const isPageBreak = id => {
-    return id.indexOf("p_") !== -1;
+    return id.indexOf("p2_") !== -1;
 };
 
 const isLineBreak = id => {
-    return id.indexOf("l_") !== -1;
+    return id.indexOf("l2_") !== -1;
 };
 
 const idFromSegmentId = id => {
@@ -169,12 +174,63 @@ const idFromSegmentId = id => {
 
     return start;
 };
+
+const didSelectSegmentPosition = (segmentPosition, start, length) => {
+    let segmentAnnotations = annotationPositions[segmentPosition];
+    let segmentVariants = [];
+    let segmentPageBreaks = [];
+    let segmentLineBreaks = [];
+    if (segmentAnnotations) {
+        segmentVariants = segmentAnnotations.filter(
+            (annotation: Annotation) =>
+                annotation.type === ANNOTATION_TYPES.variant
+        );
+        segmentPageBreaks = segmentAnnotations.filter(
+            (annotation: Annotation) =>
+                annotation.type === ANNOTATION_TYPES.pageBreak
+        );
+        segmentLineBreaks = segmentAnnotations.filter(
+            (annotation: Annotation) =>
+                annotation.type === ANNOTATION_TYPES.lineBreak
+        );
+    }
+    let activeAnnotations = _.intersectionWith(
+        segmentVariants.concat(segmentPageBreaks, segmentLineBreaks),
+        annotatedText.annotations,
+        (a, b) => a.toString() == b.toString()
+    );
+    let activeAnnotation = null;
+    if (activeAnnotations.length > 0) {
+        // get any active annotations
+        activeAnnotation = activeAnnotations[0];
+    } else if (segmentVariants && segmentVariants.length > 0) {
+        // get base text annotation for longest annotation highlighted in text
+        let longestAvailable = getLongestAnnotation(segmentVariants);
+        let [start, textLength] = annotatedText.getPositionOfAnnotation(
+            longestAvailable
+        );
+        if (longestAvailable && longestAvailable.isInsertion) {
+            textLength = 0;
+        }
+        activeAnnotation = annotatedText.getBaseAnnotation(
+            start,
+            textLength
+        );
+    } else {
+        // get base annotation of just the segment
+        activeAnnotation = annotatedText.getBaseAnnotation(start, length);
+    }
+
+    // dispatch(actions.changedActiveTextAnnotation(activeAnnotation));
+};
+
 return {
     ...ownProps,
     ...stateProps,
     onChangedFontSize: (fontSize: number) => {
         dispatch(actions.changedTextFontSize(fontSize));
     },
+    
     didSelectSegmentIds: segmentIds => {
         if (segmentIds.length === 0) {
             return;
@@ -252,31 +308,32 @@ return {
         } else {
             activeAnnotation = baseAnnotation;
         }
-        dispatch(changedActiveTextAnnotation(activeAnnotation));
+        // dispatch(changedActiveTextAnnotation(activeAnnotation));
     },
     selectedSegmentId: segmentId => {
-        // let start = idFromSegmentId(segmentId);
-        // let positionKey = start;
-        // if (isInsertion(segmentId)) {
-        //     positionKey = INSERTION_KEY + start;
-        // } else if (isDeletion(segmentId)) {
-        //     positionKey = DELETION_KEY + start;
-        // } else if (isPageBreak(segmentId)) {
-        //     positionKey = PAGE_BREAK_KEY + start;
-        // } else if (isLineBreak(segmentId)) {
-        //     positionKey = LINE_BREAK_KEY + start;
-        // }
+        let start = idFromSegmentId(segmentId);
+        let positionKey = start;
+        if (isInsertion(segmentId)) {
+            positionKey = INSERTION_KEY + start;
+        } else if (isDeletion(segmentId)) {
+            positionKey = DELETION_KEY + start;
+        } else if (isPageBreak(segmentId)) {
+            positionKey = PAGE_BREAK_KEY + start;
+        } else if (isLineBreak(segmentId)) {
+            positionKey = LINE_BREAK_KEY + start;
+        }
 
-        // let segmentAnnotations = annotationPositions[positionKey];
-        // if (DISMISS_CONTROLS_ON_CLICK && stateProps.activeAnnotation) {
-        //     const activeAnnotation = stateProps.activeAnnotation;
-        //     if (activeAnnotation) {
-        //         const dismissTextAnnotation = actions.changedActiveTextAnnotation(
-        //             null
-        //         );
-        //         dispatch(dismissTextAnnotation);
-        //     }
-        // } else {
+        let segmentAnnotations = annotationPositions[positionKey];
+        if (DISMISS_CONTROLS_ON_CLICK && stateProps.activeAnnotation) {
+            const activeAnnotation = stateProps.activeAnnotation;
+            if (activeAnnotation) {
+                const dismissTextAnnotation = actions.changedActiveTextAnnotation(
+                    null
+                );
+                dispatch(dismissTextAnnotation);
+            }
+        }
+        //  else {
         //     if (
         //         isInsertion(segmentId) ||
         //         isDeletion(segmentId) ||
@@ -297,9 +354,8 @@ return {
         //                 textSegment.length
         //             );
         //         }
-            // }
+        //     }
         // }
-        console.log('segment')
     },
 };
 }

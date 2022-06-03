@@ -300,6 +300,44 @@ function* loadInitialTextData(action: actions.TextDataAction) {
 }
 
 
+function* selectedWitness(action: actions.SelectedTextWitnessAction) {
+   
+    const witnessId = action.witnessId;
+    const hasLoadedAnnotations = yield select(
+        reducers.hasLoadedWitnessAnnotations,
+        witnessId
+    );
+    const hasLoadedAnnotations2 = yield select(
+        reducers.hasLoadedWitnessAnnotations2,
+        witnessId
+    );
+    if (!hasLoadedAnnotations) {
+        yield call(loadWitnessAnnotations, action);
+
+    }
+    let urlAction = {
+        type: actions.TEXT_URL,
+        payload: {
+            textId: action.textId,
+            witnessId: action.witnessId
+        }
+    };
+    let witness = yield select(reducers.getWitness, witnessId);
+    let activeAnnotation = yield select(reducers.getActiveTextAnnotation);
+   
+    if (activeAnnotation && activeAnnotation.witness.text.id === witness.text.id) {
+        urlAction.payload.annotation = getAnnotationSlug(activeAnnotation);
+    }
+    yield put(urlAction);
+}
+
+function* watchSelectedTextWitness() {
+    yield takeEvery(actions.SELECTED_WITNESS, selectedWitness);
+}
+
+// WITNESSES 2
+
+
 function* loadInitialTextData2(action: actions.TextDataAction) {
     try {
         const witnesses = yield call(api.fetchTextWitnesses, action.text);
@@ -338,46 +376,6 @@ function* loadInitialTextData2(action: actions.TextDataAction) {
     }
 }
 
-
-
-
-
-function* selectedWitness(action: actions.SelectedTextWitnessAction) {
-   
-    const witnessId = action.witnessId;
-    const hasLoadedAnnotations = yield select(
-        reducers.hasLoadedWitnessAnnotations,
-        witnessId
-    );
-    const hasLoadedAnnotations2 = yield select(
-        reducers.hasLoadedWitnessAnnotations2,
-        witnessId
-    );
-    if (!hasLoadedAnnotations) {
-        yield call(loadWitnessAnnotations, action);
-
-    }
-    let urlAction = {
-        type: actions.TEXT_URL,
-        payload: {
-            textId: action.textId,
-            witnessId: action.witnessId
-        }
-    };
-    let witness = yield select(reducers.getWitness, witnessId);
-    let activeAnnotation = yield select(reducers.getActiveTextAnnotation);
-   
-    if (activeAnnotation && activeAnnotation.witness.text.id === witness.text.id) {
-        urlAction.payload.annotation = getAnnotationSlug(activeAnnotation);
-    }
-    yield put(urlAction);
-}
-
-function* watchSelectedTextWitness() {
-    yield takeEvery(actions.SELECTED_WITNESS, selectedWitness);
-}
-
-// WITNESSES 2
 
 function* selectedWitness2(action: actions.SelectedTextWitnessAction) {
     const witnessId = action.witnessId;

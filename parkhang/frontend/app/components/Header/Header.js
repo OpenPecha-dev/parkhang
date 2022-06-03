@@ -100,12 +100,14 @@ export const Header = (props: HeaderProps) => {
                 className={styles.navigationButton}
                 title={toggleTitle}
             /> */}
-           {/* <NavLink to='/'>
+        {
+   !window.location.href.includes('witnesses')
+   &&  <NavLink to='/'>
            <div  className={styles.logo}>
                 <img src={image_location} height="30" />
             </div>
             
-           </NavLink>  */}
+           </NavLink> }
              <div className={styles.navlinks}>
                  <ul>
                      <li><NavLink to='/textSelection'>Texts</NavLink></li>

@@ -8,7 +8,7 @@ import {
     CellMeasurerCache
 } from "react-virtualized/dist/es/CellMeasurer";
 import "react-virtualized/styles.css";
-import Text from "./Text";
+import Text2 from "./Text2";
 import SplitText from "lib/SplitText";
 import styles from "./SplitText.css";
 import _, { split } from "lodash";
@@ -82,8 +82,14 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         // this.processProps(props);
     }
     handleSelection(e: Event) {
+
+        
+
         if (!this._modifyingSelection) {
             this.activeSelection = document.getSelection();
+            let selectedId=this.activeSelection.anchorNode.parentElement.id
+            this.updateId(selectedId)
+            console.log(selectedId)
             if (!this._mouseDown) {
                 // sometimes, this gets called after the mouseDown event handler
                 this.mouseUp();
@@ -103,85 +109,85 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     mouseUp() {
         this._mouseDown = false;
         if (this.activeSelection) {
-            let segmentIds = this.processSelection(this.activeSelection);
-            if (!segmentIds) {
-                segmentIds = [];
-            }
-            this.props.didSelectSegmentIds(segmentIds);
+            // let segmentIds = this.processSelection(this.activeSelection);
+            // if (!segmentIds) {
+            //     segmentIds = [];
+            // }
+            // this.props.didSelectSegmentIds(segmentIds);
             this.activeSelection = null;
         }
     }
     
-    processSelection(selection: Selection): string[] | null {
-        if (
-            selection.rangeCount === 0 ||
-            selection.isCollapsed ||
-            selection.type === "Caret"
-        ) {
-            this.selectedNodes = null;
-            return null;
-        }
+    // processSelection(selection: Selection): string[] | null {
+    //     if (
+    //         selection.rangeCount === 0 ||
+    //         selection.isCollapsed ||
+    //         selection.type === "Caret"
+    //     ) {
+    //         this.selectedNodes = null;
+    //         return null;
+    //     }
 
-        const range = selection.getRangeAt(0);
-        const start = range.startContainer;
-        const startSpan = this.getNodeSegmentSpan(start);
-        if (!(startSpan && startSpan.parentNode)) {
-            // If the selection is not a text segment, ignore.
-            // Assuming if the first node is a non-segment, they
-            // all are.
-            return null;
-        }
+    //     const range = selection.getRangeAt(0);
+    //     const start = range.startContainer;
+    //     const startSpan = this.getNodeSegmentSpan(start);
+    //     if (!(startSpan && startSpan.parentNode)) {
+    //         If the selection is not a text segment, ignore.
+    //         Assuming if the first node is a non-segment, they
+    //         all are.
+    //         return null;
+    //     }
 
-        let nodes = this.getRangeNodes(range, startSpan.parentNode);
-        // Check if the selection starts after the end of a node, and
-        // if so remove that node.
-        if (nodes.length > 0) {
-            let firstNode = nodes[0];
-            if (range.startOffset === firstNode.textContent.length) {
-                nodes.shift();
-            }
-        }
+    //     let nodes = this.getRangeNodes(range, startSpan.parentNode);
+    //     Check if the selection starts after the end of a node, and
+    //     if so remove that node.
+    //     if (nodes.length > 0) {
+    //         let firstNode = nodes[0];
+    //         if (range.startOffset === firstNode.textContent.length) {
+    //             nodes.shift();
+    //         }
+    //     }
 
-        const end = range.endContainer;
-        const endSpan = this.getNodeSegmentSpan(end);
-        if (!(endSpan && endSpan.parentNode)) {
-            return null;
-        }
-        if (endSpan && startSpan.parentNode !== endSpan.parentNode) {
-            // Selection is spanning Texts.
-            // We assume a selection can only run across a maximum
-            // of two Texts.
-            nodes = nodes.concat(this.getRangeNodes(range, endSpan.parentNode));
-        } else {
-            // Check if the selection ends before the start of a node, and
-            // if so remove that node.
-            if (range.endOffset === 0) {
-                nodes.pop();
-            }
-        }
-        this.selectedNodes = nodes;
-        let nodeIds = [];
-        nodes.reduce((accumulator: string[], current: Node) => {
-            if (current instanceof Element) {
-                accumulator.push(current.id);
-            }
-            return accumulator;
-        }, nodeIds);
+    //     const end = range.endContainer;
+    //     const endSpan = this.getNodeSegmentSpan(end);
+    //     if (!(endSpan && endSpan.parentNode)) {
+    //         return null;
+    //     }
+    //     if (endSpan && startSpan.parentNode !== endSpan.parentNode) {
+    //         Selection is spanning Texts.
+    //         We assume a selection can only run across a maximum
+    //         of two Texts.
+    //         nodes = nodes.concat(this.getRangeNodes(range, endSpan.parentNode));
+    //     } else {
+    //         Check if the selection ends before the start of a node, and
+    //         if so remove that node.
+    //         if (range.endOffset === 0) {
+    //             nodes.pop();
+    //         }
+    //     }
+    //     this.selectedNodes = nodes;
+    //     let nodeIds = [];
+    //     nodes.reduce((accumulator: string[], current: Node) => {
+    //         if (current instanceof Element) {
+    //             accumulator.push(current.id);
+    //         }
+    //         return accumulator;
+    //     }, nodeIds);
 
-        return nodeIds;
-    }
-    getRangeNodes(range: Range, parentNode: Node): Node[] {
-        let rangeSpans = [];
-        for (let i = 0, len = parentNode.childNodes.length; i < len; i++) {
-            const node = parentNode.childNodes[i];
-            // TODO: add polyfill for i.e.?
-            // e.g. https://gist.github.com/jonathansampson/6d09bd6d2e8c22c53868aec42e66b0f9
-            if (range.intersectsNode(node)) {
-                rangeSpans.push(node);
-            }
-        }
-        return rangeSpans;
-    }
+    //     return nodeIds;
+    // }
+    // getRangeNodes(range: Range, parentNode: Node): Node[] {
+    //     let rangeSpans = [];
+    //     for (let i = 0, len = parentNode.childNodes.length; i < len; i++) {
+    //         const node = parentNode.childNodes[i];
+    //         // TODO: add polyfill for i.e.?
+    //         // e.g. https://gist.github.com/jonathansampson/6d09bd6d2e8c22c53868aec42e66b0f9
+    //         if (range.intersectsNode(node)) {
+    //             rangeSpans.push(node);
+    //         }
+    //     }
+    //     return rangeSpans;
+    // }
     getNodeSegmentSpan(node: Node): Element | null {
         let currentNode = node;
         let span = null;
@@ -194,6 +200,13 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         }
 
         return span;
+    }
+
+
+      
+    updateId(id){
+        let newId=  id.replace('s2','s');
+         document?.getElementById(newId)?.scrollIntoView();
     }
     updateList(
         resetCache: boolean = true,
@@ -404,7 +417,6 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             this.calculatedImageHeight = null;
             this.updateList();
         }, 500).bind(this);
-
         window.addEventListener("resize", this.resizeHandler);
 
         this.selectionHandler = _.debounce(e => {
@@ -413,56 +425,56 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
 
         document.addEventListener("selectionchange", this.selectionHandler);
 
-        // document.addEventListener("mousedown", this.mouseDown.bind(this), true);
-        // document.addEventListener("mouseup", this.mouseUp.bind(this), true);
+        document.addEventListener("mousedown", this.mouseDown.bind(this), true);
+        document.addEventListener("mouseup", this.mouseUp.bind(this), true);
 
         this.processProps(this.props);
         this.componentDidUpdate();
     }
 
     componentDidUpdate() {
-        if (this.selectedNodes && this.selectedNodes.length > 0) {
-            const selectedNodes = this.selectedNodes;
-            const selectedSegments = this.props.selectedAnnotatedSegments;
-            setTimeout(() => {
-                let selRange = document.createRange();
-                let startNode = selectedNodes[0];
-                let endNode = selectedNodes[selectedNodes.length - 1];
-                let lastSegment = selectedSegments[selectedSegments.length - 1];
-                if (lastSegment instanceof TextSegment) {
-                    let lastElement = document.getElementById(
-                        idForSegment(lastSegment)
-                    );
-                    if (lastElement) endNode = lastElement;
-                }
+        // if (this.selectedNodes && this.selectedNodes.length > 0) {
+        //     const selectedNodes = this.selectedNodes;
+        //     const selectedSegments = this.props.selectedAnnotatedSegments;
+        //     setTimeout(() => {
+        //         let selRange = document.createRange();
+        //         let startNode = selectedNodes[0];
+        //         let endNode = selectedNodes[selectedNodes.length - 1];
+        //         // let lastSegment = selectedSegments[selectedSegments.length - 1];
+        //         if (lastSegment instanceof TextSegment) {
+        //             let lastElement = document.getElementById(
+        //                 idForSegment(lastSegment)
+        //             );
+        //             if (lastElement) endNode = lastElement;
+        //         }
 
-                if (
-                    startNode instanceof Element &&
-                    endNode instanceof Element
-                ) {
-                    startNode = document.getElementById(startNode.id);
-                    endNode = document.getElementById(endNode.id);
-                    if (startNode && endNode) {
-                        selRange.setStart(startNode, 0);
-                        selRange.setEnd(endNode, endNode.childNodes.length);
-                        let sel = document.getSelection();
-                        if (sel) {
-                            this._modifyingSelection = true;
-                            sel.removeAllRanges();
-                            sel.addRange(selRange);
-                            this.selectedNodes = null;
-                        }
-                    }
-                }
-            }, 0);
-        }
+        //         if (
+        //             startNode instanceof Element &&
+        //             endNode instanceof Element
+        //         ) {
+        //             startNode = document.getElementById(startNode.id);
+        //             endNode = document.getElementById(endNode.id);
+        //             if (startNode && endNode) {
+        //                 selRange.setStart(startNode, 0);
+        //                 selRange.setEnd(endNode, endNode.childNodes.length);
+        //                 let sel = document.getSelection();
+        //                 if (sel) {
+        //                     this._modifyingSelection = true;
+        //                     sel.removeAllRanges();
+        //                     sel.addRange(selRange);
+        //                     this.selectedNodes = null;
+        //                 }
+        //             }
+        //         }
+        //     }, 0);
+        // }
     }
 
     componentWillUnmount() {
         // document.removeEventListener("mousedown", this);
         // document.removeEventListener("mouseup", this);
         window.removeEventListener("resize", this.resizeHandler);
-        document.removeEventListener("selectionchange", this.selectionHandler);
+        // document.removeEventListener("selectionchange", this.selectionHandler);
     }
 
     
@@ -657,6 +669,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             width={width}
                             overscanRowCount={3}
                             deferredMeasurementCache={cache}
+                            // onScroll={this.updateId}
+
                         >
                             </List>
                        
@@ -756,13 +770,13 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
 
         let searchStringPositions = {};
         let searchValue = props.searchValue;
-        if (searchValue && searchValue.length > 0 && props.splitText) {
-            searchStringPositions = this.getStringPositions(
-                props.splitText.texts[index],
-                searchValue,
-                index
-            );
-        }
+        // if (searchValue && searchValue.length > 0 && props.splitText) {
+        //     searchStringPositions = this.getStringPositions(
+        //         props.splitText.texts[index],
+        //         searchValue,
+        //         index
+        //     );
+        // }
 
 
         return (
@@ -776,9 +790,9 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                 <div key={key} style={style} className={styles.splitTextRow}>
                     <div className={styles.splitTextRowContent}>
                         
-                        <Text
+                        <Text2
                             segmentedText={props.splitText.texts[index]}
-                            // row={index}
+                            row={index}
                             selectedSegmentId={props.selectedSegmentId}
                             // searchValue={searchValue}
                             // selectedSearchResult={
@@ -786,7 +800,9 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             // }
                             // searchStringPositions={searchStringPositions}
                             fontSize={props.fontSize}
-                        />
+                        >
+
+                            </Text2>
                     </div>
                    
                 </div>

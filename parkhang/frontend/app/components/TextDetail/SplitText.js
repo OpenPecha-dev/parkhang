@@ -129,7 +129,13 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         
         this.processProps(props);
     }
-   
+    
+    updateId(e){
+        var idlocation=Math.ceil(e.scrollTop)
+        var id= `s2_${100+idlocation}`;
+         document?.getElementById(id)?.scrollIntoView();
+    }
+
     updateList(
         resetCache: boolean = true,
         resetRows: number | number[] | null = null
@@ -182,7 +188,9 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
 
     handleSelection(e: Event) {
         if (!this._modifyingSelection) {
-            this.activeSelection = document.getSelection();
+            this.activeSelection = window.getSelection();
+
+
             if (!this._mouseDown) {
                 // sometimes, this gets called after the mouseDown event handler
                 this.mouseUp();
@@ -612,11 +620,14 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             this.updateList();
         }, 500).bind(this);
 
-        document.querySelector('#doubleWindow').addEventListener('click',()=>{
-           setTimeout(()=>{
-            this.updateList()
-           },200) 
-        })
+        const handler=
+            ()=>{
+                setTimeout(()=>{
+                 this.updateList()
+                },200) 
+             }
+            
+        document.querySelector('#doubleWindow').addEventListener('click',handler)
         window.addEventListener("resize", this.resizeHandler);
         
         this.selectionHandler = _.debounce(e => {
@@ -627,7 +638,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
 
         document.addEventListener("mousedown", this.mouseDown.bind(this), true);
         document.addEventListener("mouseup", this.mouseUp.bind(this), true);
-
+   
         this.processProps(this.props);
         this.componentDidUpdate();
     }
@@ -692,10 +703,20 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     }
 
     componentWillUnmount() {
+        const handler=
+        ()=>{
+            setTimeout(()=>{
+             this.updateList()
+            },200) 
+         }
+
+
         document.removeEventListener("mousedown", this);
         document.removeEventListener("mouseup", this);
         window.removeEventListener("resize", this.resizeHandler);
         document.removeEventListener("selectionchange", this.selectionHandler);
+        document.querySelector('#doubleWindow').removeEventListener('click',handler)
+
     }
 
     calculateImageHeight() {
@@ -778,9 +799,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             width={width}
                             overscanRowCount={3}
                             deferredMeasurementCache={cache}
-                        
+                            // onScroll={this.updateId}
                         >
-                            {this.updateList}
                         </List>
                     )}
                 </AutoSizer>

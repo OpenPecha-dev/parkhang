@@ -34,11 +34,9 @@ const Editor=({props})=>{
         size = 0;
         textListClassnames.push(styles.hideListContainer);
     }
-    if (!navbar_parkhang) {
-        bodyHeight = "calc(100vh)";
-    } else {
-        bodyHeight = "calc(100vh - " + headerStyles.headerHeight + ")";
-    }
+  
+    bodyHeight = "calc(100vh - " + headerStyles.headerHeight + ")";
+
     const image_location = lopenlingLogo;
 if( isMobile.any() ) return <div style={{height:'100%',width:'100wh',fontSize:30,fontWeight:"bold" ,display:'flex',placeItems:'center',margin:'0 auto'}}>please open in a PC browser</div> 
     
