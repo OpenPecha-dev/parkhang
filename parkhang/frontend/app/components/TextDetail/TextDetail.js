@@ -118,7 +118,7 @@ class TextDetail extends React.Component<Props> {
     
         return (
             <div
-                style={{ height: '100vh' }}
+                style={{ height: '100%' }}
                 className={classnames(
                     styles.textDetail,
                     utilStyles.flex,

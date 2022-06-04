@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import TextDetailContainer from "components/TextDetail/TextDetailContainer";
 import TextDetailContainer2 from "components/TextDetail2/TextDetailContainer";
 import { connect } from "react-redux";
@@ -7,18 +7,11 @@ import * as reducers from "reducers";
 
 function TextSheet(props) {
 
-  return (
-      <div style={{display:'flex',width:'100%'}}>
-    <TextDetailContainer />
-   {props.isSecondWindowOpen && <TextDetailContainer2 />}
-      </div>
-  )
+  return (<div style={{display:'flex',width:'100%',height:props.bodyHeight,overflow:'hidden'}}>
+            <TextDetailContainer />
+          {props.isSecondWindowOpen && <TextDetailContainer2 />}
+      </div>)
 }
-
-
-
-
-
 
 const mapStateToProps = (state: AppState): { user: User } => {
  

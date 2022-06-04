@@ -89,7 +89,7 @@ return (
                     window.dispatchEvent(new Event("resize"));
                 }}
             > */}
-                <TextSheet/>
+                <TextSheet bodyHeight={bodyHeight}/>
                 {/* <SideMenuContainer />
             </SplitPane> */}
         </SplitPane>

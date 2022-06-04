@@ -82,7 +82,7 @@ const App = (props: Props) => {
         >
                <Favicon url={favimage} />
          
-            {/* <HeaderContainer /> */}
+            <HeaderContainer />
           {isSearchActive ? <Search/> : (SelectedText !== null) ? <Editor props={props}/>: <Main/>} 
              {/* <Notification/> */}
    

@@ -83,14 +83,15 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     }
     handleSelection(e: Event) {
 
-        
-
         if (!this._modifyingSelection) {
             this.activeSelection = document.getSelection();
-            let selectedId=this.activeSelection.anchorNode.parentElement.id
+
+            let selectedId=this.activeSelection?.anchorNode?.parentElement?.id
+
             this.updateId(selectedId)
-            console.log(selectedId)
+        
             if (!this._mouseDown) {
+
                 // sometimes, this gets called after the mouseDown event handler
                 this.mouseUp();
             }
@@ -104,6 +105,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     
     mouseDown() {
         this._mouseDown = true;
+     
+
     }
 
     mouseUp() {
@@ -205,9 +208,28 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
 
       
     updateId(id){
-        let newId=  id.replace('s2','s');
-         document?.getElementById(newId)?.scrollIntoView();
+        if(id && id.includes('s2')){
+            let newId=  id.replace('s2','s');
+            document?.getElementById(newId)?.scrollIntoView({block: 'center'});
+            let positionHighlight=  document.getElementById(newId).getBoundingClientRect();
+
+            let hightlighter= document.createElement('div');
+            hightlighter.classList.add(styles.hightlighter);
+           hightlighter.style.border='2px solid blue';
+          
+
+            document.getElementById(newId).append(hightlighter)
+            document.getElementById(newId).style.color='blue';
+
+             setTimeout(()=>{
+                document.getElementById(newId).style.color='black';
+                hightlighter.remove();
+            },500)
+        }
+       
     }
+
+
     updateList(
         resetCache: boolean = true,
         resetRows: number | number[] | null = null
@@ -471,10 +493,10 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     }
 
     componentWillUnmount() {
-        // document.removeEventListener("mousedown", this);
-        // document.removeEventListener("mouseup", this);
+        document.removeEventListener("mousedown", this);
+        document.removeEventListener("mouseup", this);
         window.removeEventListener("resize", this.resizeHandler);
-        // document.removeEventListener("selectionchange", this.selectionHandler);
+        document.removeEventListener("selectionchange", this.selectionHandler);
     }
 
     

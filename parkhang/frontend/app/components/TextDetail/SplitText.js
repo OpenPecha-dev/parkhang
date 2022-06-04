@@ -130,10 +130,19 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         this.processProps(props);
     }
     
-    updateId(e){
-        var idlocation=Math.ceil(e.scrollTop)
-        var id= `s2_${100+idlocation}`;
-         document?.getElementById(id)?.scrollIntoView();
+   
+    updateId(id){
+        if(id && id.includes('s')){
+            let newId=id.replace('s','s2');
+            if(document.getElementById(newId)){
+                document?.getElementById(newId)?.scrollIntoView();
+                document.getElementById(newId).style.color='red';
+                setTimeout(()=>{
+                    document.getElementById(newId).style.color='black';
+                },1500)
+            }
+    
+        }
     }
 
     updateList(
@@ -188,14 +197,17 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
 
     handleSelection(e: Event) {
         if (!this._modifyingSelection) {
-            this.activeSelection = window.getSelection();
-
+            this.activeSelection = document.getSelection();
+            let selectedId=this.activeSelection.anchorNode.parentElement.id
+            this.updateId(selectedId)
 
             if (!this._mouseDown) {
                 // sometimes, this gets called after the mouseDown event handler
                 this.mouseUp();
+
             }
         } else {
+           
             e.stopPropagation();
             // Need to set this here. If set at callsite, the event will not
             // have time to propagate.

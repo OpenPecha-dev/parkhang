@@ -63,7 +63,7 @@ let key=12;
 let textComponents = [textComponent];
 
   return (
-    <div style={{width:'50%',height:'100vh'}} className={styles.textDetail2}>
+    <div style={{width:'50%'}} className={styles.textDetail2}>
         
         <TextDetailHeading/>
         <Loader loaded={!props.loading} />

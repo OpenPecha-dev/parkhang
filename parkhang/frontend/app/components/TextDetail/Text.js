@@ -480,14 +480,16 @@ export default class Text extends React.Component<Props, State> {
         }
 
         return (
-            <div className={styles.textContainer}>
+            <div className={styles.textContainer} 
+            >
                 <div
                     className={classnames(...classes)}
                     dangerouslySetInnerHTML={html}
-                    onClick={e => this.selectedElement(e.target)}
                     style={{
                         fontSize: this.props.fontSize
                     }}
+                    onClick={e => this.selectedElement(e.target)}
+
                 />
             </div>
         );
