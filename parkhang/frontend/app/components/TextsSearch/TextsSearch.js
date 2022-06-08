@@ -46,8 +46,7 @@ const TextsSearch = (props: Props) => {
                         style={{outline:'none'}}
                         type="text"
                         id="textSearchInput"
-                        placeholder={
-                    props.searchTerm ? props.searchTerm : props.intl.formatMessage({
+                        placeholder={props.intl.formatMessage({
                             id: "leftbar.search"
                         })
                     }

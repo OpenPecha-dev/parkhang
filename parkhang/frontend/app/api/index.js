@@ -52,7 +52,8 @@ function request(method: ReqMethod, url, data: any = null): Promise<*> {
                 resolve(response.data);
             })
             .catch(error => {
-                console.dir(error);
+                // console.dir(error);
+                console.log('couldnot get the data . check connection')
                 reject(error);
             });
     });
@@ -106,7 +107,11 @@ export function setUserSettings(
 
 export function fetchChapterDetail(){
   const  url="https://api.npoint.io/bf0ceeb6cdae14e09a17"
+   
+
     return request(GET, url);
+   
+    
 }
 
 

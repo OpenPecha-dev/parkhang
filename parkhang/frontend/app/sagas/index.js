@@ -9,7 +9,7 @@ import {
     takeLatest,
     select,
     all,
-    delay
+    delay,
 } from "redux-saga/effects";
 
 import FileSaver from "file-saver";
@@ -19,7 +19,7 @@ import Witness from "lib/Witness";
 import User from "lib/User";
 import Annotation, { ANNOTATION_TYPES } from "lib/Annotation";
 import AnnotatedText, {
-    WORKING_VERSION_ANNOTATION_ID
+    WORKING_VERSION_ANNOTATION_ID,
 } from "lib/AnnotatedText";
 import * as TextStore from "state_helpers/TextStore";
 import { updateIntl } from "react-intl-redux";
@@ -119,12 +119,12 @@ function* watchRequests() {
  * @param callback
  * @return {Function}
  */
-function reqAction(callback): actions.Action => Generator<*, *, *> {
-    return function*(action: actions.Action): Generator<*, *, *> {
+function reqAction(callback): (actions.Action) => Generator<*, *, *> {
+    return function* (action: actions.Action): Generator<*, *, *> {
         yield put({
             type: SAGA_REQUEST,
             payload: callback,
-            action: action
+            action: action,
         });
     };
 }
@@ -237,8 +237,6 @@ export function* watchLoadInitialData(): any {
 // SELECTED TEXT
 
 function* selectedText(action: actions.SelectedTextAction): Saga<void> {
-
-
     yield put(actions.loadingWitnesses(action.text));
     yield all([call(loadInitialTextData, action)]);
 }
@@ -248,23 +246,20 @@ function* watchSelectedText(): Saga<void> {
 }
 
 function* selectedText2(action: actions.SelectedTextAction): Saga<void> {
-  
     yield put(actions.loadingWitnesses2(action.text));
     yield all([call(loadInitialTextData2, action)]);
 }
 
 function* watchSelectedText2(): Saga<void> {
     yield takeEvery(actions.SELECTED_TEXT2, selectedText2);
-
 }
-
 
 // WITNESSES
 
 function* loadInitialTextData(action: actions.TextDataAction) {
     try {
         const witnesses = yield call(api.fetchTextWitnesses, action.text);
-        
+
         yield put(actions.loadedWitnesses(action.text, witnesses));
         let workingWitnessData: api.WitnessData | null = null;
         let baseWitnessData: api.WitnessData | null = null;
@@ -281,13 +276,12 @@ function* loadInitialTextData(action: actions.TextDataAction) {
                 reducers.getWitness,
                 workingWitnessData.id
             ): any);
-          
 
             yield put(actions.loadingWitnessAnnotations(workingWitness.id));
 
             yield all([
                 call(loadAnnotations, workingWitness.id),
-                call(loadAnnotationOperations, workingWitness.id)
+                call(loadAnnotationOperations, workingWitness.id),
             ]);
             // auto-select the working witness
             yield put(
@@ -299,9 +293,7 @@ function* loadInitialTextData(action: actions.TextDataAction) {
     }
 }
 
-
 function* selectedWitness(action: actions.SelectedTextWitnessAction) {
-   
     const witnessId = action.witnessId;
     const hasLoadedAnnotations = yield select(
         reducers.hasLoadedWitnessAnnotations,
@@ -313,19 +305,21 @@ function* selectedWitness(action: actions.SelectedTextWitnessAction) {
     );
     if (!hasLoadedAnnotations) {
         yield call(loadWitnessAnnotations, action);
-
     }
     let urlAction = {
         type: actions.TEXT_URL,
         payload: {
             textId: action.textId,
-            witnessId: action.witnessId
-        }
+            witnessId: action.witnessId,
+        },
     };
     let witness = yield select(reducers.getWitness, witnessId);
     let activeAnnotation = yield select(reducers.getActiveTextAnnotation);
-   
-    if (activeAnnotation && activeAnnotation.witness.text.id === witness.text.id) {
+
+    if (
+        activeAnnotation &&
+        activeAnnotation.witness.text.id === witness.text.id
+    ) {
         urlAction.payload.annotation = getAnnotationSlug(activeAnnotation);
     }
     yield put(urlAction);
@@ -337,11 +331,9 @@ function* watchSelectedTextWitness() {
 
 // WITNESSES 2
 
-
 function* loadInitialTextData2(action: actions.TextDataAction) {
     try {
         const witnesses = yield call(api.fetchTextWitnesses, action.text);
-
 
         yield put(actions.loadedWitnesses2(action.text, witnesses));
         let workingWitnessData: api.WitnessData | null = null;
@@ -353,29 +345,28 @@ function* loadInitialTextData2(action: actions.TextDataAction) {
             if (witness.is_base) {
                 baseWitnessData = witness;
             }
-    }
+        }
         if (workingWitnessData) {
             const workingWitness: Witness = yield (select(
                 reducers.getWitness2,
                 workingWitnessData.id
             ): any);
-            
-        yield put(actions.loadingWitnessAnnotations2(workingWitness.id));
+
+            yield put(actions.loadingWitnessAnnotations2(workingWitness.id));
             yield all([
                 call(loadAnnotations2, workingWitness.id),
-                call(loadAnnotationOperations2, workingWitness.id)
+                call(loadAnnotationOperations2, workingWitness.id),
             ]);
             // auto-select the working witness
-           
+
             yield put(
                 actions.selectedTextWitness2(action.text.id, workingWitness.id)
             );
         }
     } catch (e) {
-        console.log("FAILED loadInitialTextData2     %o", e );
+        console.log("FAILED loadInitialTextData2     %o", e);
     }
 }
-
 
 function* selectedWitness2(action: actions.SelectedTextWitnessAction) {
     const witnessId = action.witnessId;
@@ -386,8 +377,7 @@ function* selectedWitness2(action: actions.SelectedTextWitnessAction) {
 
     if (!hasLoadedAnnotations2) {
         yield call(loadWitnessAnnotations2, action);
-    }    
-
+    }
 }
 
 function* watchSelectedTextWitness2() {
@@ -400,16 +390,11 @@ function* loadAnnotations(witnessId: number) {
     const witnessData = yield select(reducers.getWitnessData, witnessId);
     const annotations = yield call(api.fetchWitnessAnnotations, witnessData);
     yield put(actions.loadedWitnessAnnotations(witnessId, annotations));
-   
-    
-
 }
 function* loadAnnotations2(witnessId: number) {
-
-
     const witnessData = yield select(reducers.getWitnessData2, witnessId);
     const annotations = yield call(api.fetchWitnessAnnotations, witnessData);
-   
+
     yield put(actions.loadedWitnessAnnotations2(witnessId, annotations));
 }
 
@@ -437,7 +422,10 @@ function* loadAnnotationOperations2(witnessId: number) {
             witnessData
         );
         yield put(
-            actions.loadedWitnessAnnotationOperations2(witnessId, operationsData)
+            actions.loadedWitnessAnnotationOperations2(
+                witnessId,
+                operationsData
+            )
         );
     } else {
         yield put(actions.loadedWitnessAnnotationOperations2(witnessId, []));
@@ -445,11 +433,10 @@ function* loadAnnotationOperations2(witnessId: number) {
 }
 
 function* loadWitnessAnnotations(action: actions.WitnessAction) {
-   
     yield put(actions.loadingWitnessAnnotations(action.witnessId));
     yield all([
         call(loadAnnotations, action.witnessId),
-        call(loadAnnotationOperations, action.witnessId)
+        call(loadAnnotationOperations, action.witnessId),
     ]);
 }
 
@@ -457,9 +444,8 @@ function* loadWitnessAnnotations2(action: actions.WitnessAction) {
     yield put(actions.loadingWitnessAnnotations2(action.witnessId));
     yield all([
         call(loadAnnotations2, action.witnessId),
-        call(loadAnnotationOperations2, action.witnessId)
+        call(loadAnnotationOperations2, action.witnessId),
     ]);
-
 }
 
 function* watchLoadAnnotations() {
@@ -500,7 +486,12 @@ function* watchDeletedAnnotation() {
 }
 
 function createQuestion(action) {
-    return call(api.createQuestion, action.annotation, action.title, action.content);
+    return call(
+        api.createQuestion,
+        action.annotation,
+        action.title,
+        action.content
+    );
 }
 
 function* watchCreatedQuestion() {
@@ -520,10 +511,7 @@ function* loadQuestion(action) {
 }
 
 function* watchLoadQuestion() {
-    yield takeEvery(
-        actions.LOAD_QUESTION,
-        typeCalls[actions.LOAD_QUESTION]
-    );
+    yield takeEvery(actions.LOAD_QUESTION, typeCalls[actions.LOAD_QUESTION]);
 }
 
 function* changeActiveAnnotation(
@@ -534,15 +522,15 @@ function* changeActiveAnnotation(
         type: actions.TEXT_URL,
         payload: {
             textId: selectedWitness.text.id,
-            witnessId: selectedWitness.id
-        }
+            witnessId: selectedWitness.id,
+        },
     };
     if (action.annotation) {
         let annotation = action.annotation;
         let annotationSlug = getAnnotationSlug(annotation);
         urlAction.payload.annotation = annotationSlug;
     }
-    
+
     yield put(urlAction);
 }
 
@@ -578,7 +566,7 @@ function* selectLocale(action: actions.Action) {
         updateIntl({
             locale: locale,
             messages: localeData.messages,
-            key: locale
+            key: locale,
         })
     );
 }
@@ -586,7 +574,6 @@ function* selectLocale(action: actions.Action) {
 function* watchSelectedLocale() {
     yield takeEvery(actions.SELECTED_LOCALE, selectLocale);
 }
-
 
 // EXPORT
 
@@ -641,15 +628,13 @@ function* watchChangedSearchValue() {
 }
 
 function* searchTerm(action: actions.ChangedSearchValueAction) {
-const searchTerm=action.searchTerm
-yield put(actions.changedSearchValue(searchTerm))
+    const searchTerm = action.searchTerm;
+    yield put(actions.changedSearchValue(searchTerm));
 }
 
 function* watchChangedSearchTerm() {
     yield takeLatest(actions.CHANGED_SEARCH_TERM, searchTerm);
 }
-
-
 
 function* searchedText(action: actions.SearchedTextAction) {
     const results = yield call(
@@ -690,7 +675,7 @@ function* changedShowPageImages(action: actions.ChangedShowPageImagesAction) {
     const user = yield select(reducers.getUser);
     if (user.isLoggedIn) {
         yield call(api.setUserSettings, user, {
-            showPageImages: action.showPageImages
+            showPageImages: action.showPageImages,
         });
     }
 }
@@ -703,7 +688,7 @@ function* changedTextFontSize(action: actions.ChangedTextFontSizeAction) {
     const user = yield select(reducers.getUser);
     if (user.isLoggedIn) {
         yield call(api.setUserSettings, user, {
-            textFontSize: action.fontSize
+            textFontSize: action.fontSize,
         });
     }
 }
@@ -739,25 +724,24 @@ function* loadedTextUrl(action: actions.TextUrlAction) {
     if (action.payload.witnessId) {
         const textId = action.payload.textId;
         const witnessId = action.payload.witnessId;
-          
+
         let textData: api.TextData;
         do {
             textData = yield select(reducers.getText, textId, true);
             if (!textData) yield delay(100);
         } while (textData === null);
         const selectedTextAction = actions.selectedText(textData);
-        const selectedTextAction2= actions.selectedText2(textData)
-       
+        const selectedTextAction2 = actions.selectedText2(textData);
+
         yield put(selectedTextAction);
         yield put(selectedTextAction2);
         const selectedWitnessAction = actions.selectedTextWitness(
             textId,
             witnessId
         );
-        const witnesses = yield call(api.fetchTextWitnesses,textData);
+        const witnesses = yield call(api.fetchTextWitnesses, textData);
         yield put(actions.loadedWitnesses2(textData, witnesses));
-        
-        
+
         let textWitnesses: Array<Witness> = [];
         do {
             textWitnesses = yield select(reducers.getTextWitnesses, textId);
@@ -850,9 +834,8 @@ function* loadedTextUrl(action: actions.TextUrlAction) {
                 }
 
                 if (annotation) {
-                    let changedAnnotationAction = actions.changedActiveTextAnnotation(
-                        annotation
-                    );
+                    let changedAnnotationAction =
+                        actions.changedActiveTextAnnotation(annotation);
                     yield put(changedAnnotationAction);
                 }
             }
@@ -863,168 +846,159 @@ function* watchTextUrlActions() {
     yield takeEvery(actions.TEXT_URL, loadedTextUrl);
 }
 
-
-//URL to LOAD TEXTDATA AND AUTO WITNESS 
-function* loadedTextIdonlyUrl(action){
+//URL to LOAD TEXTDATA AND AUTO WITNESS
+function* loadedTextIdonlyUrl(action) {
     _loadedTextUrl = true;
-    
+
     if (action.payload) {
-    const textId = action.payload.textId; 
-    let textData: api.TextData;
-    do {
-        textData = yield select(reducers.getText, textId, true);
-        if (!textData) yield delay(100);
-    } while (textData === null);
+        const textId = action.payload.textId;
+        let textData: api.TextData;
+        do {
+            textData = yield select(reducers.getText, textId, true);
+            if (!textData) yield delay(100);
+        } while (textData === null);
 
         yield put(actions.loadingWitnesses(textData));
-        const witnesses = yield call(api.fetchTextWitnesses,textData);
+        const witnesses = yield call(api.fetchTextWitnesses, textData);
         const selectedTextAction = actions.selectedText(textData);
 
         yield put(actions.loadedWitnesses(textData, witnesses));
         yield put(actions.selectedText2(textData));
         yield put(actions.loadedWitnesses2(textData, witnesses));
 
-
         for (const witness of witnesses) {
             if (witness.is_working) {
-              var  workingWitnessData = witness;
+                var workingWitnessData = witness;
             }
             if (witness.is_base) {
-              var  baseWitnessData = witness;
+                var baseWitnessData = witness;
             }
         }
-     
+
         const selectedWitnessAction = actions.selectedTextWitness(
             textData.id,
             workingWitnessData.id
         );
         yield put(selectedTextAction);
         yield put(selectedWitnessAction);
-        
-}
+    }
 }
 
 function* watchTextIdonlyUrlActions() {
     yield takeEvery(actions.TEXTID_ONLY_URL, loadedTextIdonlyUrl);
 }
 
-
 //url /title/:title
 
-function* loadTextTitle(action){
-const changeLoaded=actions.changeIsLoaded(false);
-    yield put(changeLoaded)
+function* loadTextTitle(action) {
+    const changeLoaded = actions.changeIsLoaded(false);
+    yield put(changeLoaded);
 
     const textdata = yield select(reducers.getTextTitle);
-        
-    if(textdata.detail.length===0){
-        console.log('fetched')
+
+    if (textdata.detail.length === 0) {
+        console.log("fetched");
         const texts = yield call(api.fetchChapterDetail);
-        const setTextData=actions.setTextData(texts.data);
+        const setTextData = actions.setTextData(texts.data);
         yield put(setTextData);
     }
-    
 
- let {title}=action.payload;
- const selectedTextTitle=actions.selectTextTitle(title)
- yield put(selectedTextTitle)
+    let { title } = action.payload;
+    const selectedTextTitle = actions.selectTextTitle(title);
+    yield put(selectedTextTitle);
 
- const changeLoadedtoTrue=actions.changeIsLoaded(true);
- yield put(changeLoadedtoTrue)
+    const changeLoadedtoTrue = actions.changeIsLoaded(true);
+    yield put(changeLoadedtoTrue);
 }
 
-function* watchTextTitleUrlAction(){
+function* watchTextTitleUrlAction() {
     yield takeEvery(actions.TEXT_TITLE, loadTextTitle);
 }
 
 //url /title/:title/category/:category
 
-
-function* loadTextCategory(action){
+function* loadTextCategory(action) {
     const textdata = yield select(reducers.getTextTitle);
-        
-    if(textdata.detail.length===0){
+
+    if (textdata.detail.length === 0) {
         const texts = yield call(api.fetchChapterDetail);
-        const setTextData=actions.setTextData(texts.data);
+        const setTextData = actions.setTextData(texts.data);
         yield put(setTextData);
     }
-    
-    let {title,category}=action.payload;
-   const selectedTextTitle=actions.selectTextTitle(title)
-   const textlist=yield call(api.fetchTexts)
-   let data=textlist.filter(a=>a.id<10)
-   const selectedTextCategory=actions.selectActiveCategory(category)
-   yield put(selectedTextTitle)
-  yield put(selectedTextCategory)
-  }
-  
-  function* watchTextCategoryUrlAction(){
-      yield takeEvery(actions.TEXT_CATEGORY, loadTextCategory);
-  }
+
+    let { title, category } = action.payload;
+    const selectedTextTitle = actions.selectTextTitle(title);
+    const textlist = yield call(api.fetchTexts);
+    let data = textlist.filter((a) => a.id < 10);
+    const selectedTextCategory = actions.selectActiveCategory(category);
+    yield put(selectedTextTitle);
+    yield put(selectedTextCategory);
+}
+
+function* watchTextCategoryUrlAction() {
+    yield takeEvery(actions.TEXT_CATEGORY, loadTextCategory);
+}
 
 //url /title/:title/category/:category/chapter/:chapter
 
-function* loadTextChapter(action){
+function* loadTextChapter(action) {
     const textdata = yield select(reducers.getTextTitle);
-        
-    if(textdata.detail.length===0){
+
+    if (textdata.detail.length === 0) {
         const texts = yield call(api.fetchChapterDetail);
-        const setTextData=actions.setTextData(texts.data);
+        const setTextData = actions.setTextData(texts.data);
         yield put(setTextData);
     }
-    
-    
-    let {title,category}=action.payload;
-   const selectedTextTitle=actions.selectTextTitle(title)
-   const selectedTextCategory=actions.selectActiveCategory(category)
 
-    
-  
-   yield put(selectedTextTitle)
-  yield put(selectedTextCategory)
-  
-  }
-  
-  function* watchTextChapterUrlAction(){
-      yield takeEvery(actions.TEXT_CHAPTER, loadTextChapter);
-  }
+    let { title, category } = action.payload;
+    const selectedTextTitle = actions.selectTextTitle(title);
+    const selectedTextCategory = actions.selectActiveCategory(category);
+
+    yield put(selectedTextTitle);
+    yield put(selectedTextCategory);
+}
+
+function* watchTextChapterUrlAction() {
+    yield takeEvery(actions.TEXT_CHAPTER, loadTextChapter);
+}
 
 //Home
 
-
-function* selectTextUrl(action){
+function* selectTextUrl(action) {
     _loadedTextUrl = false;
     const falseLoaded = actions.changeIsLoaded(false);
     yield put(falseLoaded);
     const noSelectedTextAction = actions.noSelectedText(null);
     yield put(noSelectedTextAction);
-  
-    
-    
-    
-        const noTitleSelected=actions.selectTextTitle(null);
-        const noCategorySelected=actions.selectActiveCategory(null);
-        const noChapterSelected=actions.selectActiveChapter(null);
-        yield put(noCategorySelected)
-        yield put(noChapterSelected)
-        yield put(noTitleSelected);
-        yield delay(500)
-        const textdata = yield select(reducers.getTextTitle);
-
-        if(textdata.detail.length===0){
-            const texts = yield call(api.fetchChapterDetail);
-            const setTextData=actions.setTextData(texts.data);
-            yield put(setTextData);
+    const noTitleSelected = actions.selectTextTitle(null);
+    const noCategorySelected = actions.selectActiveCategory(null);
+    const noChapterSelected = actions.selectActiveChapter(null);
+    yield put(noCategorySelected);
+    yield put(noChapterSelected);
+    yield put(noTitleSelected);
+    yield delay(500);
+    const textdata = yield select(reducers.getTextTitle);
+    let texts;
+    let setTextData;
+    if (textdata.detail.length === 0) {
+        try {
+            texts = yield call(api.fetchChapterDetail);
+        } catch (e) {
+            console.log("error");
         }
-        
-  
+        if (texts) {
+            setTextData = actions.setTextData(texts.data);
+        } else {
+            setTextData = actions.setTextData([]);
+        }
+        yield put(setTextData);
+    }
+
     const trueLoaded = actions.changeIsLoaded(true);
     yield put(trueLoaded);
- 
-// }
+
+    // }
 }
-
-
 
 function* watchSelectTextUrlActions() {
     yield takeEvery(actions.TEXTS, selectTextUrl);
@@ -1032,39 +1006,37 @@ function* watchSelectTextUrlActions() {
 
 //editor
 
-function* editorUrl(action){
+function* editorUrl(action) {
     _loadedTextUrl = true;
-     
+
     if (action.payload) {
-    // const textId = action.payload.textId; 
-    const textId=2;
-    let textData: api.TextData;
-    do {
-        textData = yield select(reducers.getText, textId, true);
-        if (!textData) yield delay(100);
-    } while (textData === null);
+        // const textId = action.payload.textId;
+        const textId = 2;
+        let textData: api.TextData;
+        do {
+            textData = yield select(reducers.getText, textId, true);
+            if (!textData) yield delay(100);
+        } while (textData === null);
 
         yield put(actions.loadingWitnesses(textData));
         yield put(actions.loadingWitnesses2(textData));
 
-        const witnesses = yield call(api.fetchTextWitnesses,textData);
+        const witnesses = yield call(api.fetchTextWitnesses, textData);
         const selectedTextAction = actions.selectedText(textData);
         const selectedTextAction2 = actions.selectedText2(textData);
 
-
-     
         yield put(actions.loadedWitnesses(textData, witnesses));
         yield put(actions.loadedWitnesses2(textData, witnesses));
 
         for (const witness of witnesses) {
             if (witness.is_working) {
-              var  workingWitnessData = witness;
+                var workingWitnessData = witness;
             }
             if (witness.is_base) {
-              var  baseWitnessData = witness;
+                var baseWitnessData = witness;
             }
         }
-     
+
         const selectedWitnessAction = actions.selectedTextWitness(
             textData.id,
             workingWitnessData.id
@@ -1078,30 +1050,25 @@ function* editorUrl(action){
 
         yield put(selectedWitnessAction);
         yield put(selectedWitnessAction2);
-
-        
-}
+    }
 }
 
-function* watchEditorUrl(){
-    yield takeEvery(actions.EDITOR,editorUrl);
+function* watchEditorUrl() {
+    yield takeEvery(actions.EDITOR, editorUrl);
 }
-
 
 //search
 
-function* searchUrl(action){
-    const search=action.payload.search
-    yield put(actions.changedSearchTerm(search))
+function* searchUrl(action) {
+    const search = action.payload.search;
+    yield put(actions.changedSearchTerm(search));
 }
 
-
-function* watchSearchUrl(){
-    yield takeEvery(actions.SEARCH,searchUrl)
+function* watchSearchUrl() {
+    yield takeEvery(actions.SEARCH, searchUrl);
 }
 
 //notification
-
 
 /**
  * Stores functions by action type.
@@ -1131,12 +1098,12 @@ const typeCalls: { [string]: (any) => Saga<void> } = {
     [actions.CHANGED_TEXT_FONT_SIZE]: changedTextFontSize,
     [actions.USER_LOGGED_IN]: loadUserSettings,
     [actions.TEXT_URL]: loadedTextUrl,
-    [actions.TEXTID_ONLY_URL]:loadedTextIdonlyUrl,
-    [actions.TEXTS]:selectTextUrl,
+    [actions.TEXTID_ONLY_URL]: loadedTextIdonlyUrl,
+    [actions.TEXTS]: selectTextUrl,
     [actions.CREATED_QUESTION]: reqAction(createQuestion),
     [actions.LOAD_QUESTION]: loadQuestion,
-    [actions.EDITOR]:editorUrl,
-    [actions.SEARCH]:searchUrl,
+    [actions.EDITOR]: editorUrl,
+    [actions.SEARCH]: searchUrl,
 };
 
 /** Root **/
@@ -1177,6 +1144,6 @@ export default function* rootSaga(): Saga<void> {
         call(watchEditorUrl),
         call(watchSearchUrl),
         call(watchSelectedText2),
-        call(watchSelectedTextWitness2)
+        call(watchSelectedTextWitness2),
     ]);
 }

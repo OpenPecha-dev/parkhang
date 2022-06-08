@@ -132,12 +132,28 @@ function Options({ props }) {
 
 function ShareOption({props}){
 
+    const handleCopy=()=>{
+        let url=window.location.href;
+        let copyButton=document.getElementById('copyButton');
+        let inputForUrl=document.getElementById('inputForUrl');
+        navigator.clipboard.writeText(url)
+        .then(()=>{
+            console.log('text been copied')
+            inputForUrl.style.display='none';
+            copyButton.innerText='copied';
+            copyButton.disabled=true;
+        }).catch((e)=>console.log(e.message))
+        .finally(()=>console.log('you are copying the url '+ url))
+    }
+
+
     return <div  style={{position:'absolute',top:30,background:'white',
     width:240,right:10,boxShadow:'1px 1px 2px black',zIndex:9999,padding:10,
     borderRadius:10}}>
         <div style={{textAlign:'center',marginBottom:10}}>{props.selectedText.name}</div>
         <div style={{textAlign:'center'}}> 
-            <input type='text' defaultValue={window.location.href}></input>
+            <input type='text' defaultValue={window.location.href} id="inputForUrl"></input>
+            <button onClick={handleCopy} id='copyButton'>copy</button>
         </div>
     </div>
 }

@@ -205,6 +205,14 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         return span;
     }
 
+    scrolling(e){
+        let scrolldiv=document.querySelector('.SplitText---splitText .ReactVirtualized__Grid');
+        scrolldiv.scroll({
+            top: e.scrollTop,//scroll to the bottom of the element
+	        behavior: 'smooth' //auto, smooth, initial, inherit
+             })
+             console.log(e.scrollTop)
+    }
 
       
     updateId(id){
@@ -691,7 +699,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             width={width}
                             overscanRowCount={3}
                             deferredMeasurementCache={cache}
-                            // onScroll={this.updateId}
+                            // onScroll={this.scrolling}
 
                         >
                             </List>

@@ -478,7 +478,6 @@ export default class Text extends React.Component<Props, State> {
         if (!this._renderedHtml) {
             this._renderedHtml = html;
         }
-
         return (
             <div className={styles.textContainer} 
             >

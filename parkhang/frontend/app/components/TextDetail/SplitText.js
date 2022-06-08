@@ -129,7 +129,17 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         
         this.processProps(props);
     }
-    
+    scrolling(e){
+        let scrolldiv=document.querySelector('.SplitText---splitText2 .ReactVirtualized__Grid');
+        if(scrolldiv){
+            scrolldiv.scroll({
+                top: e.scrollTop,//scroll to the bottom of the element
+                behavior: 'smooth' //auto, smooth, initial, inherit
+                 })
+        }
+  
+    }
+
    
     updateId(id){
         if(id && id.includes('s')){
@@ -718,7 +728,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         const handler=
         ()=>{
             setTimeout(()=>{
-             this.updateList()
+             this.updateList(true)
             },200) 
          }
 
@@ -801,7 +811,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             >
                 <AutoSizer>
                     {({ height, width }) => (
-                        
+                    
                         <List
                             ref={list => (this.list = list)}
                             height={height}
@@ -811,9 +821,12 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             width={width}
                             overscanRowCount={3}
                             deferredMeasurementCache={cache}
-                            // onScroll={this.updateId}
+                            onScroll={this.scrolling}
+
+                         
                         >
                         </List>
+                       
                     )}
                 </AutoSizer>
             </div>

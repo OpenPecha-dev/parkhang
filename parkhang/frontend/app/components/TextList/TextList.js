@@ -186,7 +186,11 @@ class TextList extends React.Component<Props> {
                     >
                         {nameHtml} {resultsCount}
                     </div>}
-                    {textSearchResults.length > 0 && (
+                    
+ 
+
+
+                     {textSearchResults.length > 0 && (
                         <div className={styles.searchResults}>
                             {textSearchResultRows}
                         </div>
@@ -208,6 +212,7 @@ class TextList extends React.Component<Props> {
         let rowCount = texts.length;
         return (
             <div className={styles.textList}>
+
                 {this.props.texts && this.props.texts.length > 0 ? (
                     <AutoSizer>
                         {({ height,width }) => (

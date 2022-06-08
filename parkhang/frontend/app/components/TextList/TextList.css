@@ -52,8 +52,11 @@ content: '- ';
     flex-shrink: 0;
     padding:0 var(--padding-left);
     font-size: 16px;
-    background-color:rgb(80, 73, 73);
+    background-color:rgba(80, 73, 73,1);
     color:white;
+    position: sticky;
+    top:0;
+    z-index: 2;
 }
 
 .textName {
@@ -64,7 +67,7 @@ content: '- ';
 }
 
 .highlight {
-    background-color: #a07f00;
+    font-weight: bold;
 }
 
 .selectedRow .highlight {
