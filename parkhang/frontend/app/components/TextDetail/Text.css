@@ -23,7 +23,7 @@
     font-family: var(--tibetan-fonts);
     letter-spacing: 0.04em;
     background-color: white;
-    margin: 0px;
+    margin: 10px;
     min-width: 0;
     width: 100%;
     display: flex;

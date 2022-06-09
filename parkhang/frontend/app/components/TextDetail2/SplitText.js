@@ -808,7 +808,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         //     );
         // }
 
-
+        let newStyle={...style,height:style.height+10}
         return (
             <CellMeasurer
                 columnIndex={0}
@@ -817,7 +817,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                 rowIndex={index}
                 cache={cache}
             >
-                <div key={key} style={style} className={styles.splitTextRow}>
+                <div key={key} style={newStyle} className={styles.splitTextRow}>
                     <div className={styles.splitTextRowContent}>
                         
                         <Text2

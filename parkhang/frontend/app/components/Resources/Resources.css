@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
     width:100%;
-    padding:10px 0;
+    height:70px;
 }
 .ResourceIcon{
     flex: 1;
@@ -17,6 +17,7 @@
     justify-content: center;
     align-items: center; 
     cursor: pointer;
+    height: 100%;
 }
 .ResourceIcon:hover svg>path{
     fill:black;
@@ -28,11 +29,18 @@
 .ResourceDetail{
    background-color:white;
    flex:1;
-    margin-top:20px;
+   padding-top:20px;
 }
 .activeResource{
     background-color: #eee;
+    height: 100%;
 }
+
+
+.activeResource>.ResourceIcon{
+background-color: #cfcece;
+}
+
 .activeResource svg>path{
     fill:black;
 }

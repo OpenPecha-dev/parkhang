@@ -35,9 +35,10 @@ class LocaleSwitcher extends React.Component<Props> {
             );
         });
         return <div className={styles.locale} onClick={this.handleLocaleClick}>
-        <div className={styles.Globe}><Globe/>
-        <div>{activeLocale}</div>
-        </div>
+        {/* <div className={styles.Globe}> */}
+            {/* <Globe/> */}
+        <div style={{cursor:'pointer'}}>{activeLocale}</div>
+        {/* </div> */}
           <div className={styles.localeOptions}> {locales}
           </div>
         </div>;

@@ -3,7 +3,7 @@ import styles from "./textDetailHeading.css";
 import Left from "images/left.svg";
 import Tick from "images/Tick.svg";
 import Check from "images/checkmark.png";
-
+import Refresh from "images/Refresh.svg";
 import ApplyTooltip from "../UI/ApplyTooltip";
 import SelectVersion from "./SelectVersion";
 import Witness from "lib/Witness";
@@ -37,6 +37,13 @@ function TextDetailHeading(props: HeaderProps) {
     const handleClick = () => {
         setShowOption((prev) => !prev);
     };
+
+ const handleRefresh=()=>{
+     let updatelistBtn=document.getElementById('updateList');
+     
+     updatelistBtn.click();
+ }
+
     return (
         <div className={styles.textDetailHeading}>
             {/* <span className={styles.leftLogo} style={{transform:!textListIsVisible?'rotate(180deg)':null}}  onClick={props.navigationButtonClicked}><Left/> </span> */}
@@ -77,6 +84,13 @@ function TextDetailHeading(props: HeaderProps) {
                 {
                 showShare && <ShareOption props={props}/>
                 }
+            </div>
+            <div style={{position:'absolute',right:20,top:46}} >
+           <  ApplyTooltip tooltipName={'refresh'} effect={'float'}>
+            <button className={styles.buttonRefresh} onClick={handleRefresh}>
+                <Refresh />
+                </button> 
+                </ApplyTooltip>
             </div>
             {/* <span className={styles.rightLogo}   style={{transform:!menuListIsVisible?'rotate(0deg)':'rotate(180deg)',marginRight:10}} onClick={props.menuButtonClicked}><Left/> </span> */}
         </div>

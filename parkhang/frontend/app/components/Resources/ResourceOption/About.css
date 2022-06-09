@@ -1,0 +1,20 @@
+.Selection{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    background-color: #eee;
+    color:rgb(217, 202, 202);
+
+}
+.Btn{
+    /* background-color: white; */
+    cursor: pointer;
+}
+.active{
+    font-weight: bold;
+    color:black;
+}
+.selected{
+    padding-top:20px;
+    padding-inline:5px;
+}

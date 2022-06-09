@@ -129,6 +129,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         
         this.processProps(props);
     }
+
     scrolling(e){
         let scrolldiv=document.querySelector('.SplitText---splitText2 .ReactVirtualized__Grid');
         if(scrolldiv){
@@ -809,6 +810,9 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                 ref={div => (this.splitText = div)}
                 key={key}
             >
+                <button id='updateList' 
+                style={{display:'none'}}
+                onClick={()=>this.updateList(true)} ></button>
                 <AutoSizer>
                     {({ height, width }) => (
                     
@@ -962,7 +966,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         if (props.showImages && pechaImageClass && this.calculatedImageHeight) {
             pechaStyles["height"] = this.calculatedImageHeight + "px";
         }
-
+        let newStyle={...style,height:style.height+10}
         return (
             <CellMeasurer
                 columnIndex={0}
@@ -971,7 +975,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                 rowIndex={index}
                 cache={cache}
             >
-                <div key={key} style={style} className={styles.splitTextRow}>
+                <div key={key} style={newStyle} className={styles.splitTextRow}>
                     <div className={styles.splitTextRowContent}>
                         {props.showImages && (
                             <div
