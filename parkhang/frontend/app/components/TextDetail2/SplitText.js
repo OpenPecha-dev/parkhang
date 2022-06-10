@@ -688,6 +688,9 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                 ref={div => (this.splitText = div)}
                 key={key}
             >
+                  <button id='updateList2' 
+                style={{display:'none'}}
+                onClick={()=>this.updateList(true)} ></button>
                 <AutoSizer>
                     {({ height, width }) => (
                         <List

@@ -16,23 +16,7 @@ margin-left:15px;
     align-items: center;
     transition: .3s ease 0ms;
 } */
-.leftLogo svg:hover, .rightLogo svg:hover{
-    background-color: darkgray;
-    cursor: pointer;
-}
-.leftLogo svg, .rightLogo svg{
-    height: 100%;
-    width: 100%;
 
-}
-.leftLogo{
-    float:left;
-    margin-left:10px;   
-}
-.rightLogo{
-    transform: rotate(180deg);
-    float:right;
-}
 .selectVersion{
     display: flex;
     flex-direction: column;

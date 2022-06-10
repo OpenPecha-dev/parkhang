@@ -29,6 +29,8 @@
         "question.viewThread": "view thread",
         "annotation.share":"Share",
         "filter.category":"Category",
-        "filter.author":"Author"
+        "filter.author":"Author",
+        "header.texts":"Texts",
+        "header.editor":"Editor"
     }
 }

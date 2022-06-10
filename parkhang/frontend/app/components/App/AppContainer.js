@@ -13,9 +13,7 @@ const mapStateToProps = state => {
 return {
         title: reducers.getTranslation(state, "header.title"),
         textListIsVisible: reducers.getTextListVisible(state),
-        menuListIsVisible: reducers.getMenuListVisible(state),
         textListWidth: reducers.getTextListWidth(state),
-        menuListWidth: reducers.getMenuListWidth(state),
         state: state,
         page:state.page
     };
@@ -30,12 +28,6 @@ const matchDispatchToProps = dispatch => {
         onChangedTextListVisible: (isVisible: boolean) => {
             dispatch(actions.changedTextListVisible(isVisible));
         },
-        onChangedMenuWidth: (width: number) => {
-            dispatch(actions.changedMenuListWidth(width));
-        },
-        onChangedMenuListVisible: (isVisible: boolean) => {
-            dispatch(actions.changedMenuListVisible(isVisible));
-        },  
         onChangedNotification: (data) => {
             dispatch(actions.changedNotification(data));
         },                          

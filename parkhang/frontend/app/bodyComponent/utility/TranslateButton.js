@@ -3,17 +3,20 @@ import styles from './TranslateButton.css'
 import { connect } from "react-redux";
 import * as reducers from "reducers";
 import * as actions from "actions";
-
+import Om from 'images/om.png'
 const mapStateToProps = state => {
+    const locales = reducers.getLocales(state);
+    const activeLocale= reducers.getActiveLocale(state);
     return {
-        Textdata: reducers.getTextTitle(state)
+        locales: locales,
+        activeLocale
     };
 };
 
 const matchDispatchToProps = dispatch => {
     return {
-        onChangeLanguage: (selectedLanguage :string)=>{
-            dispatch(actions.changeLanguage(selectedLanguage));
+        onChangeLanguage: (locale :string)=>{
+            dispatch(actions.selectedLocale(locale));
         },
         dispatch
     };
@@ -23,20 +26,24 @@ const matchDispatchToProps = dispatch => {
 
 function TranslateButton(props) {
    let {onChangeLanguage}=props
-   let language=props.Textdata.language
+   let language=props.activeLocale
     const handleLanguage=()=>{
-        if(language==='en'){
-        onChangeLanguage('ti')
+        if(language==='bo'){
+        onChangeLanguage('en')
         }
         else{
-        onChangeLanguage('en')
-    
+        onChangeLanguage('bo')
         }
     }
   return (
-    <div className={styles.langSelection} onClick={()=>handleLanguage()}>
-                   {language==='en'?<span>E</span>:<span style={{paddingBottom:10}}>ཀ་</span>}
-                </div>
+    <div className={styles.langSelection} 
+    onClick={()=>handleLanguage()}
+    >
+{language!=='bo'?<div>A</div>:<div
+style={{paddingTop:'-10px',marginTop:'-10px'}}
+>ཀ</div>}
+
+  </div>
   )
 }
 

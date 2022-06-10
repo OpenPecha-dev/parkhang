@@ -888,79 +888,33 @@ function* watchTextIdonlyUrlActions() {
     yield takeEvery(actions.TEXTID_ONLY_URL, loadedTextIdonlyUrl);
 }
 
-//url /title/:title
+// //url /title/:title
 
-function* loadTextTitle(action) {
-    const changeLoaded = actions.changeIsLoaded(false);
-    yield put(changeLoaded);
+// function* loadTextTitle(action) {
+//     const changeLoaded = actions.changeIsLoaded(false);
+//     yield put(changeLoaded);
 
-    const textdata = yield select(reducers.getTextTitle);
+//     const textdata = yield select(reducers.getTextTitle);
 
-    if (textdata.detail.length === 0) {
-        console.log("fetched");
-        const texts = yield call(api.fetchChapterDetail);
-        const setTextData = actions.setTextData(texts.data);
-        yield put(setTextData);
-    }
+//     if (textdata.detail.length === 0) {
+//         console.log("fetched");
+//         const texts = yield call(api.fetchChapterDetail);
+//         const setTextData = actions.setTextData(texts.data);
+//         yield put(setTextData);
+//     }
 
-    let { title } = action.payload;
-    const selectedTextTitle = actions.selectTextTitle(title);
-    yield put(selectedTextTitle);
+//     let { title } = action.payload;
+//     const selectedTextTitle = actions.selectTextTitle(title);
+//     yield put(selectedTextTitle);
 
-    const changeLoadedtoTrue = actions.changeIsLoaded(true);
-    yield put(changeLoadedtoTrue);
-}
+//     const changeLoadedtoTrue = actions.changeIsLoaded(true);
+//     yield put(changeLoadedtoTrue);
+// }
 
-function* watchTextTitleUrlAction() {
-    yield takeEvery(actions.TEXT_TITLE, loadTextTitle);
-}
+// function* watchTextTitleUrlAction() {
+//     yield takeEvery(actions.TEXT_TITLE, loadTextTitle);
+// }
 
-//url /title/:title/category/:category
-
-function* loadTextCategory(action) {
-    const textdata = yield select(reducers.getTextTitle);
-
-    if (textdata.detail.length === 0) {
-        const texts = yield call(api.fetchChapterDetail);
-        const setTextData = actions.setTextData(texts.data);
-        yield put(setTextData);
-    }
-
-    let { title, category } = action.payload;
-    const selectedTextTitle = actions.selectTextTitle(title);
-    const textlist = yield call(api.fetchTexts);
-    let data = textlist.filter((a) => a.id < 10);
-    const selectedTextCategory = actions.selectActiveCategory(category);
-    yield put(selectedTextTitle);
-    yield put(selectedTextCategory);
-}
-
-function* watchTextCategoryUrlAction() {
-    yield takeEvery(actions.TEXT_CATEGORY, loadTextCategory);
-}
-
-//url /title/:title/category/:category/chapter/:chapter
-
-function* loadTextChapter(action) {
-    const textdata = yield select(reducers.getTextTitle);
-
-    if (textdata.detail.length === 0) {
-        const texts = yield call(api.fetchChapterDetail);
-        const setTextData = actions.setTextData(texts.data);
-        yield put(setTextData);
-    }
-
-    let { title, category } = action.payload;
-    const selectedTextTitle = actions.selectTextTitle(title);
-    const selectedTextCategory = actions.selectActiveCategory(category);
-
-    yield put(selectedTextTitle);
-    yield put(selectedTextCategory);
-}
-
-function* watchTextChapterUrlAction() {
-    yield takeEvery(actions.TEXT_CHAPTER, loadTextChapter);
-}
 
 //Home
 
@@ -971,10 +925,6 @@ function* selectTextUrl(action) {
     const noSelectedTextAction = actions.noSelectedText(null);
     yield put(noSelectedTextAction);
     const noTitleSelected = actions.selectTextTitle(null);
-    const noCategorySelected = actions.selectActiveCategory(null);
-    const noChapterSelected = actions.selectActiveChapter(null);
-    yield put(noCategorySelected);
-    yield put(noChapterSelected);
     yield put(noTitleSelected);
     yield delay(500);
     const textdata = yield select(reducers.getTextTitle);
@@ -1138,9 +1088,7 @@ export default function* rootSaga(): Saga<void> {
         call(watchCreatedQuestion),
         call(watchLoadQuestion),
         call(watchSelectTextUrlActions),
-        call(watchTextTitleUrlAction),
-        call(watchTextCategoryUrlAction),
-        call(watchTextChapterUrlAction),
+        // call(watchTextTitleUrlAction),
         call(watchEditorUrl),
         call(watchSearchUrl),
         call(watchSelectedText2),

@@ -24,9 +24,6 @@ const matchDispatchToProps = dispatch => {
         onChangedTextTitle:(title:string | null)=>{
           dispatch(actions.selectTextTitle(title))
         },
-        onChangeLanguage: (selectedLanguage :string)=>{
-            dispatch(actions.changeLanguage(selectedLanguage));
-        },
         dispatch
     };
 };

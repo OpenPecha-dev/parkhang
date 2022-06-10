@@ -45,7 +45,6 @@ import {
     getSelectedSearchResult,
     getSearchValue,
     getTextFontSize,
-    getMenuListVisible,
     isSecondWindowOpen
 
 } from "reducers";
@@ -299,7 +298,6 @@ const mapStateToProps = state => {
     }
 
     _selectedWitness = selectedWitness;
-    let menuListIsVisible= getMenuListVisible(state)
     return {
         text: selectedText,
         witnesses: witnesses,
@@ -322,7 +320,6 @@ const mapStateToProps = state => {
         selectedSearchResult,
         searchValue,
         fontSize,
-        menuListIsVisible,
         isSecondWindowOpen:isSecondWindowOpen(state)
 
     };

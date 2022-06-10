@@ -7,20 +7,15 @@ import * as reduxroute from 'redux-first-router'
 import useLocalStorage from "../../bodyComponent/utility/useLocalStorage";
 function Search(props) {
     const input=useRef('');
-    const [search,setSearch]=useState('')
+    const [search,setSearch]=useState(props.searchValue)
     const [inputEmpty,setInputEmpty]=useState('')
     const history=reduxroute.history()
     const handleSubmit = (e) => {
         e.preventDefault();
         props.changeSearchTerm(input.current.value)
-        if(input.current.value!==''){
-            history.push(`/search/${input.current.value}`);
-        }
-        if(input.current.value===''){
-            history.push('/')
-        }
-        input.current.value=''
+        props.searchChanged(input.current.value)
 
+        input.current.value=props.searchValue
 
     };
     const handleReset = (e) => {
@@ -46,6 +41,8 @@ function Search(props) {
                 onChange={(e)=>{
                     setInputEmpty(e.target.value);
                     setSearch(e.target.value)
+                    props.searchChanged(e.target.value)
+
                 }}
                 placeholder={
                     props.intl.formatMessage({id: "leftbar.search" })

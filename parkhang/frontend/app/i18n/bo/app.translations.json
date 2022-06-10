@@ -29,6 +29,8 @@
         "question.viewThread": "view thread",
         "annotation.share":"རྒྱུད་སྤེལ།",
         "filter.category":"ཚན་པ།",
-        "filter.author":"མཛད་པ་པོ།"
+        "filter.author":"མཛད་པ་པོ།",
+        "header.texts":"དཔེ་ཆ།",
+        "header.editor":"བཟོ་བཅོད་ཁང་།"
     }
 }

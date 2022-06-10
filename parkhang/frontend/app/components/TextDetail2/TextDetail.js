@@ -55,7 +55,6 @@ let key=12;
           // selectedSearchResult={this.props.selectedSearchResult}
           // searchValue={this.props.searchValue}
           fontSize={props.textFontSize}
-          // editMenuVisible={this.props.menuListIsVisible}
       ></SplitTextComponent>
   );
 }

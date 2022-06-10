@@ -11,8 +11,11 @@ import {redirect} from 'redux-first-router'
 
 const mapStateToProps = (state: AppState): {} => {
     const searchTerm=reducers.getSearchTerm(state);
+
     return {
-      searchTerm:searchTerm
+      searchTerm:searchTerm,
+      searchValue: state.ui.searchValue,
+
     };
 };
 
@@ -22,7 +25,10 @@ const mapDisptchToProps = dispatch =>{
   return {
     changeSearchTerm:(searchTerm)=>{ 
       dispatch(actions.changedSearchTerm(searchTerm))
-    }
+    },
+    searchChanged: (searchTerm: string) => {
+      dispatch(actions.changedSearchValue(searchTerm));
+  }
   }
 } 
 

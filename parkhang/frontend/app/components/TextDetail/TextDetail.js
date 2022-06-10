@@ -43,7 +43,6 @@ export type Props = {
     } | null,
     searchValue: string | null,
     fontSize: number,
-    menuListIsVisible:Boolean,
     isSecondWindowOpen:Boolean
 };
 
@@ -107,7 +106,6 @@ class TextDetail extends React.Component<Props> {
                     selectedSearchResult={this.props.selectedSearchResult}
                     searchValue={this.props.searchValue}
                     fontSize={this.props.fontSize}
-                    editMenuVisible={this.props.menuListIsVisible}
                     isSecondWindowOpen={this.props.isSecondWindowOpen}
                 ></SplitTextComponent>
             );

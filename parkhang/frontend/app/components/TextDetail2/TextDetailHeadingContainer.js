@@ -5,7 +5,7 @@ import TextDetailHeading from "./TextDetailHeading";
 import * as actions from "actions";
 import * as reducers from "reducers";
 import type { AppState } from "reducers";
-import { getTextListVisible, getAccountOverlayVisible, getMenuListVisible } from "reducers";
+import { getTextListVisible, getAccountOverlayVisible } from "reducers";
 
 
 
@@ -40,7 +40,6 @@ const mapStateToProps = (state: AppState): {} => {
         selectedText,   
         selectedWitness,
         textListIsVisible: getTextListVisible(state),
-        menuListIsVisible: getMenuListVisible(state),
         accountOverlayVisible: getAccountOverlayVisible(state),
         textFontSize,
 
@@ -54,12 +53,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         actions.changedTextListVisible(!stateProps.textListIsVisible)
     ); 
 } 
-const menuButtonClicked= () => {
-    dispatchProps.dispatch(
-        actions.changedMenuListVisible(!stateProps.menuListIsVisible)
-    );
-   
-};
+
 const { dispatch } = dispatchProps;
 const { selectedText } = stateProps;
 
@@ -67,7 +61,6 @@ return {
     ...ownProps,
     ...stateProps,
     navigationButtonClicked,
-    menuButtonClicked,
     onSelectedWitness: (witness: Witness) => {
         dispatch(actions.selectedTextWitness2(selectedText.id, witness.id));
     },

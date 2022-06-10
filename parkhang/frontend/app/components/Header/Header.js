@@ -17,6 +17,8 @@ import lopenlingLogo from "images/lopenling_logo.png";
 import UserIcon from "images/discourse_user.svg";
 import {NavLink} from 'redux-first-router-link'
 import Search from 'components/search'
+import TranslateButton from "bodyComponent/utility/TranslateButton";
+
 type LoginProps = {
     successRedirect: string,
     csrfToken: string
@@ -100,7 +102,8 @@ export const Header = (props: HeaderProps) => {
                 className={styles.navigationButton}
                 title={toggleTitle}
             /> */}
-        {
+      <div style={{display:'flex'}}>
+      {
    !window.location.href.includes('witnesses')
    &&  <NavLink to='/'>
            <div  className={styles.logo}>
@@ -110,17 +113,21 @@ export const Header = (props: HeaderProps) => {
            </NavLink> }
              <div className={styles.navlinks}>
                  <ul>
-                     <li><NavLink to='/textSelection'>Texts</NavLink></li>
-                     <li><NavLink to='/editor'>Editor</NavLink></li>
-                     <li><NavLink to='/#'>Topics</NavLink></li>
-                     <li><NavLink to='/#'>Community</NavLink></li>
-                     <li><NavLink to='/search/'>Search</NavLink></li>
-
+                     <li><NavLink to='/textSelection'><FormattedMessage id={'header.texts'}/></NavLink></li>
+                     <li><NavLink to='/editor'><FormattedMessage id={'header.editor'}/></NavLink></li>
+                     <li><NavLink to='/search/'><FormattedMessage id={'leftbar.search'}/></NavLink></li>
                  </ul>
              </div>
-            <LocaleSwitcher />
-            <Search/>
-            {controls}
+      </div>
+    
+             {
+   window.location.href.includes('witnesses') && <Search/>}      
+         
+         <div className={styles.loginSection}>  
+             {/* <LocaleSwitcher /> */}
+             <TranslateButton/>
+                 {controls}
+             </div> 
         </header>
     );
 };

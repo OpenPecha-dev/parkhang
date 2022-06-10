@@ -4,7 +4,6 @@ import TextListContainer from "containers/TextListContainer";
 import TextListTabContainer from "components/TextList/TextListTabContainer";
 import * as constants from "app_constants";
 import lopenlingLogo from "images/lopenling_logo.png";
-import SideMenuContainer from "../SideMenu/SideMenuContainer";
 import headerStyles from "components/Header/Header.css";
 import Resources from 'components/Resources'
 import isMobile from 'bodyComponent/utility/isMobile'
@@ -70,28 +69,9 @@ return (
                 {/* <TextsSearchContainer />
                 <TextListContainer />  */}
             </div>
-       {/* <SplitPane
-                split="vertical"
-                resizerClassName={classnames(styles.resizer)}
-                minSize={"96vw"}
-                maxSize={"100vw"}
-                defaultSize={props.menuListIsVisible ? "96%" : "100%"}
-                paneStyle={{
-                    display: "flex",
-                }}
-                onDragFinished={(width: number) => {
-                    if (width > 0) {
-                        props.onChangedMenuWidth(width);
-                        if (!props.textListIsVisible) {
-                            props.onChangedMenuListVisible(true);
-                        }
-                    }
-                    window.dispatchEvent(new Event("resize"));
-                }}
-            > */}
+    
                 <TextSheet bodyHeight={bodyHeight}/>
-                {/* <SideMenuContainer />
-            </SplitPane> */}
+             
         </SplitPane>
     </div>
     )

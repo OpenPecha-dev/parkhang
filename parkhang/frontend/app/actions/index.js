@@ -117,9 +117,6 @@ export const SELECTED_LOCALE = "i18n/SELECT_LOCALE";
 
 // HOMEPAGE
 export const SELECT_TEXTTITLE = "title/SELECT_TEXTTITLE";
-export const CHANGE_LANGUAGE = "title/CHANGE_LANGUAGE";
-export const SELECT_CATEGORY ="title/SELECT_CATEGORY";
-export const SELECT_CHAPTER ="title/SELECT_CHAPTER";
 export const SET_TEXTDATA="title/SET_TEXTDATA";
 export const IS_LOADED="title/IS_LOADED"
 
@@ -128,9 +125,6 @@ export const TEXTS = "urls/textSelection";
 export const TEXT_URL = "urls/TEXT";
 export const USER_URL = "urls/USER";
 export const TEXTID_ONLY_URL = "urls/TEXTID";
-export const TEXT_TITLE ="urls/title/TEXT";
-export const TEXT_CATEGORY = "urls/title/category";
-export const TEXT_CHAPTER= "urls/title/category/chapter";
 export const EDITOR="urls/editor";
 export const SEARCH="urls/search";
 /** Action creators **/
@@ -676,15 +670,6 @@ export function changedNotification(data) {
     };
 }
 
-export type ChangedMenuListWidth = Action & {
-    width: number
-};
-export function changedMenuListWidth(width: number): ChangedMenuListWidth {
-    return {
-        type: CHANGED_MENU_LIST_WIDTH,
-        width
-    };
-}
 
 export type ChangedShowPageImagesAction = Action & {
     showPageImages: boolean
@@ -818,17 +803,6 @@ export function changedTextListVisible(
 }
 
 
-export type ChangedMenuListVisibleAction = Action & {
-    isVisible: boolean
-};
-export function changedMenuListVisible(
-    isVisible: boolean
-): ChangedMenuListVisibleAction {
-    return {
-        type: CHANGED_MENU_LIST_VISIBLE,
-        isVisible
-    };
-}
 
 export type ChangedWitnessScrollPositionAction = Action & {
     witnessId: number,
@@ -932,27 +906,8 @@ export function selectTextTitle(textTitle:string){
     }
 }
 
-export function selectActiveCategory(selectedCategory){
-  
-    return {
-        type:SELECT_CATEGORY,
-        payload:selectedCategory
-    }
-}
 
-export function selectActiveChapter(selectedChapter){
-    return {
-        type:SELECT_CHAPTER,
-        payload:selectedChapter
-    }
-}
 
-export function changeLanguage(selectedLanguage){
-    return {
-        type:CHANGE_LANGUAGE,
-        payload:selectedLanguage
-    }
-}
 
 export function setTextData(originData){
     return {

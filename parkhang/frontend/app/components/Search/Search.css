@@ -1,5 +1,6 @@
 .searchContainer{
     position:relative;
+    flex: 1;
 }
 .Search{
     /* overflow: hidden; */
@@ -10,18 +11,22 @@
     background: #EDEDEC;
     border-radius: 100px;
     height: 30px;
-    margin-right:20px;
+    max-width: 250px;
+    margin:0 auto;
 }
 .Search input{
 background-color: transparent;
 outline: none;
 border:none ;
+width: 100%;
+
 }
-.Search:hover input {
-    width: 250px;
+.Search:hover{
+    width: 350px;
     }
 .Search input:focus {
-width: 250px;
+    width: 250px;
+
 }
 .submit{
     margin-top:6px;

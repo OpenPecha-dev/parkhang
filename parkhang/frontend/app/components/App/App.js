@@ -22,15 +22,11 @@ import Editor from 'components/Editors/EditorContainer'
 type Props = {
     title: string,
     textListIsVisible: boolean,
-    menuListIsVisible: Boolean,
     textListWidth: number,
-    menuListWidth: Number,
     state: AppState,
     dispatch: (action: actions.Action) => void,
     onChangedTextWidth: (width: number) => void,
     onChangedTextListVisible: (isVisible: boolean) => void,
-    onChangedMenuWidth: (width: number) => void,
-    onChangedMenuListVisible: (isVisible: boolean) => void,
     onChangedNotification:(data:Object)=>void
 };
 

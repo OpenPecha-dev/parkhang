@@ -938,7 +938,6 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     }): React.Element<CellMeasurer> {
         const props = this.props;
         const cache = this.cache;
-        // const menuVisible=this.props.menuListIsVisible
         const component = this;
         const pechaImageClass = props.showImages ? styles.pechaImage : null;
         let imageUrl = '';

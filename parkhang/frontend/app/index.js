@@ -78,10 +78,7 @@ const routesMap = {
     [actions.TEXT_URL]: "/texts/:textId/witnesses/:witnessId/:annotation?",
     USER: "/user/:id",
     [actions.TEXTID_ONLY_URL]: "/texts/:textId",
-    [actions.TEXTS]:"/textSelection",
-    [actions.TEXT_TITLE]: "/title/:title",
-    [actions.TEXT_CATEGORY]: "/title/:title/category/:category",
-    [actions.TEXT_CHAPTER]: "/title/:title/category/:category/chapter/:chapter", 
+    [actions.TEXTS]:"/textSelection", 
     [actions.EDITOR]:"/editor",
     [actions.SEARCH]:{
         path:"/search/:search",
