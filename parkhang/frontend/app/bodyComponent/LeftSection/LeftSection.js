@@ -34,8 +34,9 @@ function LeftSection(props) {
                                     </Link>
                                     <div className={styles.navBlockDescription}>
                                         {pechalist?.desc}
-                                        ksjdfijaosidjfoi ajsodifjoa sidjfoia
-                                        sdofijsaoidfjoiajdfoij
+                                        Taking a couple of stanzas from Metta or compassion meditation,
+                                         let us engage in the power of prayer that connect us - irrespective of religion -
+                                         
                                     </div>
                                 </div>
                             );

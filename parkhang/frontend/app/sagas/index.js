@@ -237,6 +237,7 @@ export function* watchLoadInitialData(): any {
 // SELECTED TEXT
 
 function* selectedText(action: actions.SelectedTextAction): Saga<void> {
+    
     yield put(actions.loadingWitnesses(action.text));
     yield all([call(loadInitialTextData, action)]);
 }
@@ -259,7 +260,6 @@ function* watchSelectedText2(): Saga<void> {
 function* loadInitialTextData(action: actions.TextDataAction) {
     try {
         const witnesses = yield call(api.fetchTextWitnesses, action.text);
-
         yield put(actions.loadedWitnesses(action.text, witnesses));
         let workingWitnessData: api.WitnessData | null = null;
         let baseWitnessData: api.WitnessData | null = null;
@@ -278,7 +278,6 @@ function* loadInitialTextData(action: actions.TextDataAction) {
             ): any);
 
             yield put(actions.loadingWitnessAnnotations(workingWitness.id));
-
             yield all([
                 call(loadAnnotations, workingWitness.id),
                 call(loadAnnotationOperations, workingWitness.id),
@@ -393,8 +392,10 @@ function* loadAnnotations(witnessId: number) {
 }
 function* loadAnnotations2(witnessId: number) {
     const witnessData = yield select(reducers.getWitnessData2, witnessId);
-    const annotations = yield call(api.fetchWitnessAnnotations, witnessData);
+    // const annotations = yield call(api.fetchWitnessAnnotations, witnessData);
 
+    const annotations =[]
+   
     yield put(actions.loadedWitnessAnnotations2(witnessId, annotations));
 }
 
@@ -450,6 +451,9 @@ function* loadWitnessAnnotations2(action: actions.WitnessAction) {
 
 function* watchLoadAnnotations() {
     yield takeEvery(actions.LOAD_WITNESS_ANNOTATIONS, loadWitnessAnnotations);
+}
+function* watchLoadAnnotations2() {
+    yield takeEvery(actions.LOAD_WITNESS_ANNOTATIONS2, loadWitnessAnnotations2);
 }
 
 function createAnnotation(action) {
@@ -727,7 +731,7 @@ function* loadedTextUrl(action: actions.TextUrlAction) {
     if (action.payload.witnessId) {
         const textId = action.payload.textId;
         const witnessId = action.payload.witnessId;
-        const textId2= _secondWindowTextId ? _secondWindowTextId : textId
+        const textId2= _secondWindowTextId ? _secondWindowTextId : 125
         let textData: api.TextData;
         let textData2: api.TextData;
         do {
@@ -857,8 +861,6 @@ function* watchTextUrlActions() {
 function* loadedTextUrl2(action){
 const textId=action.payload.textId;
 const textId2=action.payload.textId2;
-const witnessId=action.payload.witnessId;
-const witnessId2=action.payload.witnessId2;
 let textData: api.TextData;
 let textData2:api.TextData;
 do {
@@ -872,7 +874,6 @@ const selectedTextAction = actions.selectedText(textData);
 const selectedTextAction2 = actions.selectedText2(textData2);
 
 _secondWindowTextId=textId2
-_secondWindowWitnessId=witnessId2
 
 yield put(selectedTextAction);
 yield put(selectedTextAction2);
@@ -1066,6 +1067,7 @@ function* watchSearchUrl() {
 const typeCalls: { [string]: (any) => Saga<void> } = {
     [actions.LOAD_INITIAL_DATA]: loadInitialData,
     [actions.LOAD_WITNESS_ANNOTATIONS]: loadWitnessAnnotations,
+    [actions.LOAD_WITNESS_ANNOTATIONS2]: loadWitnessAnnotations2,
     [actions.APPLIED_ANNOTATION]: reqAction(applyAnnotation),
     [actions.REMOVED_APPLIED_ANNOTATION]: reqAction(removeAppliedAnnotation),
     [actions.APPLIED_DEFAULT_ANNOTATION]: reqAction(appliedDefaultAnnotation),
@@ -1100,6 +1102,7 @@ export default function* rootSaga(): Saga<void> {
         call(watchLoadInitialData),
         call(watchSelectedText),
         call(watchLoadAnnotations),
+        call(watchLoadAnnotations2),
         call(watchBatchedActions),
         call(watchAppliedAnnotation),
         call(watchRemovedAppliedAnnotation),

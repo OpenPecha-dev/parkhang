@@ -146,7 +146,7 @@ function ShareOption({props}){
     let textid2=props.selectedText2.id
     let witnessid=props.selectedWitness.id
     let witnessid2=props.selectedWitness2.id
-    let url=window.location.origin+`/texts/${textid}/witnesses/${witnessid}/texts2/${textid2}/witnesses2/${witnessid2}`
+    let url=window.location.origin+`/texts/${textid}/witnesses/${witnessid}/texts2/${textid2}`
 
     const handleCopy=()=>{
         let copyButton=document.getElementById('copyButton');

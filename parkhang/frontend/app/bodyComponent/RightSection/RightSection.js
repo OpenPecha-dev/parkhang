@@ -30,15 +30,14 @@ return <div className={styles.RightSection}>
        </div>
        <div className={styles.Discription}>
        <span >
-      loreདྶདངླlksdjaflaksjdfl;aksjdf;laksdjf;lksjdaflkjas
-      loreདྶདངླlksdjaflaksjdfl;aksjdf;laksdjf;lksjdaflkjas
-      loreདྶདངླlksdjaflaksjdfl;aksjdf;laksdjf;lksjdaflkjas
-      loreདྶདངླlksdjaflaksjdfl;aksjdf;laksdjf;lksjdaflkjas
+       An application that allow users to participate in creating critical editions
+        of texts, initially targeting the Tibetan language.
          </span>
          <a href="/about" className={styles.inTextLink}>Learn More </a>
 
        </div>
-</div><div className={styles.RightModule}>
+</div>
+<div className={styles.RightModule}>
       <div className={styles.RightTitle}>
           <h3>
         Our other web sites
@@ -46,10 +45,13 @@ return <div className={styles.RightSection}>
        </div>
        <div className={styles.Discription}>
        <span >
-       loreདྶདངླlksdjaflaksjdfl;aksjdf;laksdjf;lksjdaflkjas
-      loreདྶདངླlksdjaflaksjdfl;aksjdf;laksdjf;lksjdaflkjas
-      loreདྶདངླlksdjaflaksjdfl;aksjdf;laksdjf;lksjdaflkjas
-      loreདྶདངླlksdjaflaksjdfl;aksjdf;laksdjf;lksjdaflkjas   </span>
+      <ul className={styles.linkList}>
+        <li>Lopenling.org</li>
+        <li>Esukhia.org</li>
+        <li>Bdrc.org</li>
+        <li>OpenPecha .org</li>
+      </ul>
+        </span>
          <a href="/about" className={styles.inTextLink}>Learn More</a>
 
        </div>

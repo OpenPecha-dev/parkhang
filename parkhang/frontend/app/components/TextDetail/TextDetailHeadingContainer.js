@@ -38,7 +38,7 @@ const mapStateToProps = (state: AppState): {} => {
     }
 
     if (selectedText2) {
-        witnesses = reducers.getTextWitnesses2(state, selectedText2.id);
+        // witnesses = reducers.getTextWitnesses(state, selectedText2.id);
         const selectedWitnessId2 = reducers.getSelectedTextWitnessId2(
             state,
             selectedText2.id
@@ -46,7 +46,7 @@ const mapStateToProps = (state: AppState): {} => {
         if (selectedWitnessId2) {
             selectedWitness2 = reducers.getWitness2(state, selectedWitnessId2);
         } else {
-            selectedWitness2 = reducers.getWorkingWitness(
+            selectedWitness2 = reducers.getWorkingWitness2(
                 state,
                 selectedText2.id
             );
