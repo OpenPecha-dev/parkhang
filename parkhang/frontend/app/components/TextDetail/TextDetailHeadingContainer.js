@@ -11,9 +11,12 @@ import { getTextListVisible, getAccountOverlayVisible } from "reducers";
 
 const mapStateToProps = (state: AppState): {} => {
     const selectedText = reducers.getSelectedText(state);
+    const selectedText2 = reducers.getSelectedText2(state);
     let witnesses = [];
     let exportingWitness = false;
     let selectedWitness;
+    let selectedWitness2;
+
     if (selectedText) {
         witnesses = reducers.getTextWitnesses(state, selectedText.id);
         const selectedWitnessId = reducers.getSelectedTextWitnessId(
@@ -33,12 +36,31 @@ const mapStateToProps = (state: AppState): {} => {
             );
         }
     }
+
+    if (selectedText2) {
+        witnesses = reducers.getTextWitnesses2(state, selectedText2.id);
+        const selectedWitnessId2 = reducers.getSelectedTextWitnessId2(
+            state,
+            selectedText2.id
+        );
+        if (selectedWitnessId2) {
+            selectedWitness2 = reducers.getWitness2(state, selectedWitnessId2);
+        } else {
+            selectedWitness2 = reducers.getWorkingWitness(
+                state,
+                selectedText2.id
+            );
+        }
+    }
+
     let textFontSize = reducers.getTextFontSize(state);
     
     return {
         witnesses,
-        selectedText,   
+        selectedText,  
+        selectedText2,   
         selectedWitness,
+        selectedWitness2,
         textListIsVisible: getTextListVisible(state),
         accountOverlayVisible: getAccountOverlayVisible(state),
         textFontSize,

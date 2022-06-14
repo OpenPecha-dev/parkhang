@@ -123,6 +123,7 @@ export const IS_LOADED="title/IS_LOADED"
 // URLS
 export const TEXTS = "urls/textSelection";
 export const TEXT_URL = "urls/TEXT";
+export const TEXT_URL2 = "urls/TEXT2";
 export const USER_URL = "urls/USER";
 export const TEXTID_ONLY_URL = "urls/TEXTID";
 export const EDITOR="urls/editor";

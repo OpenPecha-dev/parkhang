@@ -18,3 +18,15 @@
     padding-top:20px;
     padding-inline:5px;
 }
+.ResourcesListed{
+    list-style: none;
+    cursor: pointer;
+    margin:10px !important;
+    padding:0;
+}
+.ResourcesListed li{
+    padding-top:10px;
+}
+.ResourcesListed li:hover{
+    background-color:#efe;
+}

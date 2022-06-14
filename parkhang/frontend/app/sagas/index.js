@@ -716,6 +716,9 @@ function* watchBatchedActions() {
 // URLS
 // loadedTextUrl should only be called when first loading
 let _loadedTextUrl = false;
+let _secondWindowTextId= null;
+let _secondWindowWitnessId= null;
+
 function* loadedTextUrl(action: actions.TextUrlAction) {
     if (_loadedTextUrl) {
         return;
@@ -724,14 +727,18 @@ function* loadedTextUrl(action: actions.TextUrlAction) {
     if (action.payload.witnessId) {
         const textId = action.payload.textId;
         const witnessId = action.payload.witnessId;
-
+        const textId2= _secondWindowTextId ? _secondWindowTextId : textId
         let textData: api.TextData;
+        let textData2: api.TextData;
         do {
             textData = yield select(reducers.getText, textId, true);
+            textData2= yield select(reducers.getText2,textId2,true);
             if (!textData) yield delay(100);
+            if (!textData2) yield delay(100);
+
         } while (textData === null);
         const selectedTextAction = actions.selectedText(textData);
-        const selectedTextAction2 = actions.selectedText2(textData);
+        const selectedTextAction2 = actions.selectedText2(textData2);
 
         yield put(selectedTextAction);
         yield put(selectedTextAction2);
@@ -739,8 +746,9 @@ function* loadedTextUrl(action: actions.TextUrlAction) {
             textId,
             witnessId
         );
+     
         const witnesses = yield call(api.fetchTextWitnesses, textData);
-        yield put(actions.loadedWitnesses2(textData, witnesses));
+        yield put(actions.loadedWitnesses(textData, witnesses));
 
         let textWitnesses: Array<Witness> = [];
         do {
@@ -846,6 +854,34 @@ function* watchTextUrlActions() {
     yield takeEvery(actions.TEXT_URL, loadedTextUrl);
 }
 
+function* loadedTextUrl2(action){
+const textId=action.payload.textId;
+const textId2=action.payload.textId2;
+const witnessId=action.payload.witnessId;
+const witnessId2=action.payload.witnessId2;
+let textData: api.TextData;
+let textData2:api.TextData;
+do {
+    textData = yield select(reducers.getText, textId, true);
+    textData2 =yield select(reducers.getText,textId2,true);
+        if (!textData) yield delay(100);
+        if (!textData2) yield delay(100);
+
+} while (textData === null || textData2 === null );
+const selectedTextAction = actions.selectedText(textData);
+const selectedTextAction2 = actions.selectedText2(textData2);
+
+_secondWindowTextId=textId2
+_secondWindowWitnessId=witnessId2
+
+yield put(selectedTextAction);
+yield put(selectedTextAction2);
+
+}
+
+function* watchTextUrlActions2() {
+    yield takeEvery(actions.TEXT_URL2, loadedTextUrl2);
+}
 //URL to LOAD TEXTDATA AND AUTO WITNESS
 function* loadedTextIdonlyUrl(action) {
     _loadedTextUrl = true;
@@ -1048,6 +1084,7 @@ const typeCalls: { [string]: (any) => Saga<void> } = {
     [actions.CHANGED_TEXT_FONT_SIZE]: changedTextFontSize,
     [actions.USER_LOGGED_IN]: loadUserSettings,
     [actions.TEXT_URL]: loadedTextUrl,
+    [actions.TEXT_URL2]: loadedTextUrl2,
     [actions.TEXTID_ONLY_URL]: loadedTextIdonlyUrl,
     [actions.TEXTS]: selectTextUrl,
     [actions.CREATED_QUESTION]: reqAction(createQuestion),
@@ -1088,7 +1125,7 @@ export default function* rootSaga(): Saga<void> {
         call(watchCreatedQuestion),
         call(watchLoadQuestion),
         call(watchSelectTextUrlActions),
-        // call(watchTextTitleUrlAction),
+        call(watchTextUrlActions2),
         call(watchEditorUrl),
         call(watchSearchUrl),
         call(watchSelectedText2),

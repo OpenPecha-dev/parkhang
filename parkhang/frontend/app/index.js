@@ -76,13 +76,18 @@ const routesMap = {
                 h.push('/textSelection')
            }},
     [actions.TEXT_URL]: "/texts/:textId/witnesses/:witnessId/:annotation?",
+    [actions.TEXT_URL2]: {
+        path:"/texts/:textId/witnesses/:witnessId/:annotation?/texts2/:textId2/witnesses2/:witnessId2",
+        thunk:(e)=>{
+            // console.log(e)
+        }
+    },
     USER: "/user/:id",
     [actions.TEXTID_ONLY_URL]: "/texts/:textId",
     [actions.TEXTS]:"/textSelection", 
     [actions.EDITOR]:"/editor",
     [actions.SEARCH]:{
         path:"/search/:search",
-        
     }
 };
 const routes = connectRoutes(routesMap, {

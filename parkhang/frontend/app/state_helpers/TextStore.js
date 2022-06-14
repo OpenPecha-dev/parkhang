@@ -268,6 +268,8 @@ const generateAnnotatedText = (
         workingWitness
     );
     let segmentedWorkingWitness = getSegmentedWitness(workingWitness);
+
+
     let annotatedText = new AnnotatedText(
         segmentedWorkingWitness,
         (Object.values(appliedAnnotations): any),
@@ -277,7 +279,6 @@ const generateAnnotatedText = (
         workingWitness,
         witness
     );
-
     return annotatedText;
 };
 

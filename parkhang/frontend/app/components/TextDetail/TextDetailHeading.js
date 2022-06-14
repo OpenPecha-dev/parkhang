@@ -142,9 +142,13 @@ function Options({ props }) {
 }
 
 function ShareOption({props}){
+    let textid=props.selectedText.id
+    let textid2=props.selectedText2.id
+    let witnessid=props.selectedWitness.id
+    let witnessid2=props.selectedWitness2.id
+    let url=window.location.origin+`/texts/${textid}/witnesses/${witnessid}/texts2/${textid2}/witnesses2/${witnessid2}`
 
     const handleCopy=()=>{
-        let url=window.location.href;
         let copyButton=document.getElementById('copyButton');
         let inputForUrl=document.getElementById('inputForUrl');
         navigator.clipboard.writeText(url)
@@ -163,7 +167,7 @@ function ShareOption({props}){
     borderRadius:10}}>
         <div style={{textAlign:'center',marginBottom:10}}>{props.selectedText.name}</div>
         <div style={{textAlign:'center'}}> 
-            <input type='text' defaultValue={window.location.href} id="inputForUrl"></input>
+            <input type='text' defaultValue={url} id="inputForUrl"></input>
             <button onClick={handleCopy} id='copyButton'>copy</button>
         </div>
     </div>
