@@ -951,13 +951,13 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         const component = this;
         const pechaImageClass = props.showImages ? styles.pechaImage : null;
         let imageUrl = '';
-
         if (
             props.selectedWitness &&
             props.selectedWitness.properties &&
             props.selectedWitness.properties.hasOwnProperty(IMAGE_START_PRE_KEY)
         ) {
             imageUrl = this.getImageUrl(index);
+
         }
 
         let searchStringPositions = {};
@@ -991,7 +991,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                                 className={pechaImageClass}
                                 style={pechaStyles}
                             >
-                                <img
+                          
+                                    <img
                                     alt="Text related Image"
                                     src={imageUrl}
                                     width="100%"
@@ -1015,6 +1016,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                                         }
                                     }}
                                 />
+                                  
+                               
                             </div>
                         )}
                         <Text

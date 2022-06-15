@@ -1,0 +1,45 @@
+.ThirdWindow{
+    position:absolute;
+    height: 100%;
+    width: 50%;
+    z-index: 9999;
+    right: 0;
+}
+.header{
+    position: inherit;
+    top:0;
+    height: 60px;
+    right:0;
+    left:0;
+    background-color: beige;
+    display: flex;
+    align-items: center;
+    padding-inline: 30px;
+}
+.closeBtn{
+    position: inherit;
+    right:10px;
+    top:10px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    padding:2px;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+}
+.closeBtn:hover{
+    background-color: gray;
+}
+.imageRender{
+    margin-top:60px;
+}
+.imageRender div{
+  width: 100%;
+}
+.imageRender img{
+    width: 100%;
+    object-fit: contain;
+}

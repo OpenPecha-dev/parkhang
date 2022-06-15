@@ -128,6 +128,8 @@ export const USER_URL = "urls/USER";
 export const TEXTID_ONLY_URL = "urls/TEXTID";
 export const EDITOR="urls/editor";
 export const SEARCH="urls/search";
+export const TEXT_TITLE="urls/textSelected";
+
 /** Action creators **/
 
 export type Action = {

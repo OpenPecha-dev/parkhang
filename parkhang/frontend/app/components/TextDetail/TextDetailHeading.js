@@ -42,6 +42,14 @@ function TextDetailHeading(props: HeaderProps) {
      updatelistBtn.click();
      updatelistBtn2.click();
  }
+ 
+ useEffect(()=>{
+ let timer=setTimeout(()=>{
+   handleRefresh();
+ },1000)
+
+ return ()=>clearTimeout(timer)
+ },[])
 
     return (
         <div className={styles.textDetailHeading}>
