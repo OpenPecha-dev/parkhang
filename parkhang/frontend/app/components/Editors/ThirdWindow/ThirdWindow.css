@@ -4,17 +4,20 @@
     width: 50%;
     z-index: 9999;
     right: 0;
+    background-color: gray;
 }
 .header{
     position: inherit;
     top:0;
-    height: 60px;
+    height: 70px;
     right:0;
     left:0;
     background-color: beige;
     display: flex;
     align-items: center;
     padding-inline: 30px;
+    margin:5px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .closeBtn{
     position: inherit;
@@ -34,12 +37,34 @@
     background-color: gray;
 }
 .imageRender{
-    margin-top:60px;
+    margin-top:80px;
+    border:2px solid black;
+    border-radius: 10px;
+    cursor: move;
+    overflow: hidden;
 }
 .imageRender div{
   width: 100%;
+
 }
 .imageRender img{
+    max-width: 100%;
     width: 100%;
     object-fit: contain;
+    max-height: 80vh;
+}
+.NavigationImage{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top:5px;
+    gap:20px;
+}
+.NavigationImage button{
+    background-color: black;
+    color:white;
+}
+.NavigationImage button:hover{
+    background-color: rgb(54, 52, 52);
+    color:gainsboro;
 }

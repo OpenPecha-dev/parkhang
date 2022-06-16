@@ -12,7 +12,7 @@ function TextSheet(props) {
   return (<div style={{display:'flex',width:'100%',height:props.bodyHeight,overflow:'hidden'}}>
             <TextDetailContainer />
           {props.isSecondWindowOpen && <TextDetailContainer2 />}
-          {props.isImageVisible &&  <ThirdWindow toggleImage={props.toggleImage}/>}
+          {props.isImageVisible && props.isSecondWindowOpen &&  <ThirdWindow toggleImage={props.toggleImage}/>}
          
       </div>)
 }

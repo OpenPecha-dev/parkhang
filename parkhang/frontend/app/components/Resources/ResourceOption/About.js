@@ -25,7 +25,8 @@ function About(props) {
 
 function SelectedAbout(){
   return <>
-  About
+  An application that allow users to participate in creating critical editions of texts,
+   initially targeting the Tibetan language.
   </>
 }
 

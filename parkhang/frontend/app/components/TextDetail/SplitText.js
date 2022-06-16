@@ -171,7 +171,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         resetRows: number | number[] | null = null
     ) {
         if (
-            ! this.props.showImages &&
+            !this.props.showImages &&
             !this.calculatedImageHeight &&
             this.imageHeight &&
             this.imageWidth
@@ -219,7 +219,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     handleSelection(e: Event) {
         if (!this._modifyingSelection) {
             this.activeSelection = document.getSelection();
-            let selectedId=this.activeSelection.anchorNode.parentElement.id
+            let selectedId=this.activeSelection?.anchorNode?.parentElement?.id
             this.updateId(selectedId)
 
             if (!this._mouseDown) {
@@ -986,7 +986,9 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             >
                 <div key={key} style={newStyle} className={styles.splitTextRow}>
                     <div className={styles.splitTextRowContent}>
-                        {props.showImages && (
+                        {
+                        props.showImages
+                         && (
                             <div
                                 className={pechaImageClass}
                                 style={pechaStyles}

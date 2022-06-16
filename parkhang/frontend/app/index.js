@@ -81,9 +81,7 @@ const routesMap = {
     [actions.TEXTID_ONLY_URL]: "/texts/:textId",
     [actions.TEXTS]:"/textSelection", 
     [actions.EDITOR]:"/editor",
-    [actions.SEARCH]:{
-        path:"/search/:search",
-    },
+    [actions.SEARCH]:"/search/:search",
     [actions.TEXT_TITLE]:'/title/:title'
 };
 const routes = connectRoutes(routesMap, {

@@ -306,7 +306,7 @@ const mapStateToProps = state => {
         annotations: annotations,
         loading: loading,
         paginated: paginated,
-        pageImagesVisible: pageImagesVisible,
+        pageImagesVisible: false,
         annotatedText: annotatedText,
         selectedAnnotatedSegments: selectedAnnotatedSegments,
         annotationPositions: annotationPositions,
