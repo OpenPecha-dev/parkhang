@@ -2,11 +2,12 @@
 
 
 .textDetail {
-    background-color: var(--text-bg);
+    background-color: var(--editor-bg);
     position: relative;
     flex-grow: 1;
-    border-right: 4px solid rgba(1,1,1,0.4);
-    padding:5px;
+    color:var(--text-color);
+    border: thick double var(--green);
+
 }
 
 .textContainer {

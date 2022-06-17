@@ -221,7 +221,9 @@ export const getTextFontSize2 = (state: AppState): number => {
 export const isSecondWindowOpen = (state: AppState): number => {
     return ui.isSecondWindowOpen(state.ui);
 };
-
+export const getSyncId = (state: AppState): number => {
+    return ui.getSyncId(state.ui);
+};
 // data
 
 export const getText = (

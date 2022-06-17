@@ -107,7 +107,8 @@ class TextDetail extends React.Component<Props> {
                     searchValue={this.props.searchValue}
                     fontSize={this.props.fontSize}
                     isSecondWindowOpen={this.props.isSecondWindowOpen}
-                ></SplitTextComponent>
+                    changeSyncId={this.props.changeSyncId}
+                    ></SplitTextComponent>
             );
         }
 

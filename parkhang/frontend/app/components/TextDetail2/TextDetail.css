@@ -2,11 +2,11 @@
 
 
 .textDetail2 {
-    background-color: var(--text-bg);
+    background-color: var(--editor-bg);
     position: relative;
-    height: 100%;
-    padding:5px;
-
+    width: 50%;
+    color:var(--text-color);
+    border: thick double var(--green);
 }
 
 .textContainer {

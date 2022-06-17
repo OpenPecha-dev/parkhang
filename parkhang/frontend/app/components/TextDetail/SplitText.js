@@ -70,7 +70,8 @@ export type Props = {
     } | null,
     searchValue: string | null,
     fontSize: number,
-    isSecondWindowOpen:Boolean
+    isSecondWindowOpen:Boolean,
+    changeSyncId:()=>void
 };
 
 export default class SplitTextComponent extends React.PureComponent<Props> {
@@ -104,6 +105,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     imageWidth: number | null;
     imageHeight: number | null;
     calculatedImageHeight: number | null;
+    changeSyncId:()=>void;
+    scrolling:()=>void;
 
     constructor(props: Props) {
         super(props);
@@ -126,23 +129,27 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         this.imageHeight = null;
         this.imageWidth = null;
         this.calculatedImageHeight = null;
-        
         this.processProps(props);
+        this.changeSyncId=props.changeSyncId;
     }
 
     scrolling(e){
-        let scrolldiv=document.querySelector('.SplitText---splitText2 .ReactVirtualized__Grid');
-        if(scrolldiv){
-            scrolldiv.scroll({
-                top: e.scrollTop,//scroll to the bottom of the element
-                behavior: 'smooth' //auto, smooth, initial, inherit
-                 })
-        }
+        let scrolldiv=document?.querySelector('.Text---textLine');
+        let scrollingId=scrolldiv?.firstElementChild.id.replace('s_',"");
+
+        this.props.changeSyncId(scrollingId)
+        // if(scrolldiv){
+        //     scrolldiv.scroll({
+        //         top: e.scrollTop,//scroll to the bottom of the element
+        //         behavior: 'smooth' //auto, smooth, initial, inherit
+        //          })
+        // }
   
     }
 
    
     updateId(id){
+
         if(id && id.includes('s')){
             let newId=id.replace('s','s2');
             if(document.getElementById(newId)){
@@ -671,7 +678,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
 
         document.addEventListener("mousedown", this.mouseDown.bind(this), true);
         document.addEventListener("mouseup", this.mouseUp.bind(this), true);
-   
+        this.scrolling.bind(this.props);
         this.processProps(this.props);
         this.componentDidUpdate();
     }
@@ -835,7 +842,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             width={width}
                             overscanRowCount={3}
                             deferredMeasurementCache={cache}
-                            onScroll={this.scrolling}
+                            onScroll={e=>this.scrolling(e)}
 
                          
                         >

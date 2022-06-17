@@ -1,10 +1,13 @@
+@import 'css/type.css';
+@import 'css/colour.css';
+
 .Resources{
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 .ResourcesHeader{
-    background-color: #EDEDED;
+    background-color: var(--resource-header-bgcolor);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,19 +23,19 @@
     height: 100%;
 }
 .ResourceIcon:hover svg>path{
-    fill:black;
+    fill:var(--text-color);
 }
 .ResourceIcon path{
-    fill:gray;
+    fill:var(--light-gray);
 }
 
 .ResourceDetail{
-   background-color:white;
+   background-color:var(--white);
    flex:1;
    padding-top:20px;
 }
 .activeResource{
-    background-color: #eee;
+    background-color: var(--white);
     height: 100%;
 }
 
@@ -42,7 +45,7 @@ background-color: #cfcece;
 }
 
 .activeResource svg>path{
-    fill:black;
+    fill:var(--text-color);
 }
 .ResourceFooter{
 margin-left: 20px;

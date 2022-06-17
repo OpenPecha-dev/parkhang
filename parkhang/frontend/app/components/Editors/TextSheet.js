@@ -12,17 +12,22 @@ function TextSheet(props) {
   return (<div style={{display:'flex',width:'100%',height:props.bodyHeight,overflow:'hidden'}}>
             <TextDetailContainer />
           {props.isSecondWindowOpen && <TextDetailContainer2 />}
-          {props.isImageVisible && props.isSecondWindowOpen &&  <ThirdWindow toggleImage={props.toggleImage}/>}
+          {props.isImageVisible && props.isSecondWindowOpen &&  <ThirdWindow
+           toggleImage={props.toggleImage}
+           syncId={props.syncId}
+           />}
          
       </div>)
 }
 
 const mapStateToProps = (state: AppState): { user: User } => {
  
+  const  syncId=reducers.getSyncId(state);
   const isSecondWindowOpen=reducers.isSecondWindowOpen(state);
   return {
     isSecondWindowOpen,
     isImageVisible:reducers.showPageImages(state),
+    syncId
   };
 };
 

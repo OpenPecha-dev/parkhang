@@ -22,12 +22,13 @@
     padding: 0 var(--paddingSide);
     font-family: var(--tibetan-fonts);
     letter-spacing: 0.04em;
-    background-color: white;
     margin: 0;
     min-width: 0;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    background-color: var(--text-bg);
+
 }
 
 .textFirstRow {
@@ -52,7 +53,6 @@
 
 .textContainer {
     overflow: auto;
-    background-color: var(--text-bg);
     flex-grow: 1;
     padding-left: 0;
     min-width: 200px;

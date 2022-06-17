@@ -1,7 +1,7 @@
 @import "css/type.css";
 @import "css/colour.css";
 
-@value header-height: 35px;
+@value header-height: 40px;
 
 :root {
     --header-height: header-height;
@@ -12,10 +12,10 @@
 }
 
 .header {
-    background-color: #ffffff;
+    background-color: var(--nav-bgcolor);
     font-family: var(--fonts);
     font-size: 30px;
-    color: #888;
+    color:var(--nav-text);
     padding: 0px 10px 0px 20px;
     height: var(--header-height);
     justify-content: space-between;
@@ -115,7 +115,7 @@
 .navlinks a {
     font-weight: bold;
     text-decoration: none;
-    color: rgb(102, 102, 102);
+    color: var(--nav-text);
     font-family: "Roboto", sans-serif;
     font-size: 13px;
     text-transform: uppercase;

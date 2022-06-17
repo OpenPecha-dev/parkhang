@@ -1,10 +1,15 @@
+
+@import 'css/colour.css';
+
 .ThirdWindow{
     position:absolute;
     height: 100%;
     width: 50%;
     z-index: 9999;
     right: 0;
-    background-color: gray;
+    background-color: var(--text-bg);
+    border: thick double var(--green);
+
 }
 .header{
     position: inherit;
@@ -12,11 +17,11 @@
     height: 70px;
     right:0;
     left:0;
-    background-color: beige;
+    background-color: var( --textDetail-heading);
+    border-bottom: 1px solid var(--dark-gray);
     display: flex;
     align-items: center;
     padding-inline: 30px;
-    margin:5px;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .closeBtn{
@@ -37,15 +42,14 @@
     background-color: gray;
 }
 .imageRender{
+    margin:5px;
     margin-top:80px;
-    border:2px solid black;
     border-radius: 10px;
     cursor: move;
     overflow: hidden;
 }
 .imageRender div{
   width: 100%;
-
 }
 .imageRender img{
     max-width: 100%;
@@ -53,18 +57,32 @@
     object-fit: contain;
     max-height: 80vh;
 }
-.NavigationImage{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top:5px;
-    gap:20px;
+[data-value='previousImage']{
+    background-color: red;
 }
-.NavigationImage button{
-    background-color: black;
-    color:white;
+[data-value='nextImage']{
+    background-color: red;
 }
 .NavigationImage button:hover{
     background-color: rgb(54, 52, 52);
     color:gainsboro;
+}
+.eachImage{
+    width: 40px;
+    height:40px;
+    background-color: rgba(1,2,2,0.4);
+    color:white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline:10px;
+}
+.eachImage>img{
+    max-width: 100%;
+    max-height: 100%;
+     object-fit: contain;
+}
+.selected{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }

@@ -40,7 +40,8 @@ export type UIState = {
         time:Number,
         type:String
     },
-    showSecondWindow:Boolean
+    showSecondWindow:Boolean,
+    SyncId:Number
 };
 
 export const initialUIState = {
@@ -68,7 +69,8 @@ export const initialUIState = {
         time:null,
         type:''
     },
-    showSecondWindow:true
+    showSecondWindow:true,
+    SyncId:0
 };
 
 function loadedUserSettings(
@@ -130,6 +132,18 @@ function selectedText2(
     ) {
         state = clearSearchResult(state);
     }
+
+    return state;
+}
+
+function changeSyncId(
+    state: UIState,
+    action: actions.SelectedTextAction
+): UIState {
+    state = {
+        ...state,
+        SyncId: action.payload
+    };
 
     return state;
 }
@@ -471,6 +485,7 @@ uiReducers[actions.LOADED_USER_SETTINGS] = loadedUserSettings;
 uiReducers[actions.SELECTED_TEXT] = selectedText;
 uiReducers[actions.SELECTED_TEXT2] = selectedText2;
 uiReducers[actions.NO_SELECTED_TEXT] = noSelectedText;
+uiReducers[actions.SYNC_ID]=changeSyncId;
 uiReducers[actions.SELECTED_WITNESS] = selectedTextWitness;
 uiReducers[actions.SELECTED_WITNESS2] = selectedTextWitness2;
 uiReducers[actions.CHANGED_SEARCH_VALUE] = changedSearchValue;
@@ -566,7 +581,9 @@ export const getTextListVisible = (state: UIState): boolean => {
 export const getTextListWidth = (state: UIState): number => {
     return state.textListWidth;
 };
-
+export const getSyncId = (state: UIState): number => {
+    return state.SyncId;
+};
 export const getTemporaryAnnotations = (
     state: UIState,
     witnessId: number,

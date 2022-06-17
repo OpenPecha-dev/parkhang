@@ -534,7 +534,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
                     }
                 }
             }
-        }
+        },
+        changeSyncId:(payload)=> dispatch(actions.changeSyncId(payload))
     };
 };
 

@@ -107,6 +107,7 @@ export const EXPORTED_WITNESS = "text/EXPORTED_WITNESS";
 
 export const CHANGED_ACCOUNT_OVERLAY = "account/SET_ACCOUNT_OVERLAY";
 
+export const SYNC_ID="imageSync/ID"
 // User
 export const USER_LOGGED_IN = "users/USER_LOGGED_IN";
 export const LOADED_USER_SETTINGS = "user/LOADED_USER_SETTINGS";
@@ -936,5 +937,12 @@ export function toggleSecondWindow(data){
     return {
       type:SECOND_WINDOW,
       payload:data
+    }
+}
+
+export function changeSyncId(payload){
+    return {
+        type:SYNC_ID,
+        payload:payload
     }
 }
