@@ -144,7 +144,11 @@ function Options({ props }) {
                 Hide sidebar
             </li>
             <hr />
-            <li>link panels</li>
+            <li
+             onClick={()=>props.onChangePanelLink(!props.isPanelLinked)}
+            >
+                 {props.isPanelLinked && <img src={Check}></img>}
+                 link panels</li>
         </ul>
     );
 }

@@ -66,7 +66,7 @@ const mapStateToProps = (state: AppState): {} => {
         textFontSize,
         isSecondWindowOpen:reducers.isSecondWindowOpen(state),
         exportingWitness,
-
+        isPanelLinked: reducers.isPanelLinked(state)
     };
 };
 
@@ -101,7 +101,10 @@ return {
             dispatch(
                 actions.changedTextListVisible(!stateProps.textListIsVisible)
             );
-        }
+        },
+    onChangePanelLink: (data:boolean)=>{
+        dispatch(actions.changePanelLink(data))
+    }
 };
 }
 

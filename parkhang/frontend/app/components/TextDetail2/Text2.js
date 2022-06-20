@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import classnames from "classnames";
-import styles from "./Text.css";
+import styles from "./Text2.css";
 import TextSegment from "lib/TextSegment";
 import {
     INSERTION_KEY,

@@ -1,27 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
-import styles from "./ThirdWindow.css";
-import HorizontalText from "images/exampleImage/horizontalText.jpg";
-import VerticalText from "images/exampleImage/verticalText.png";
+import styles from "./Image.css";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import classnames from 'classnames'
-function ThirdWindow(props) {
-    let [imagetoggle, setImagetoggle] = useState(true);
+import Draggable from 'react-draggable';
+
+function Image(props) {
+
     let [isPortraitImage, setIsPortrait] = useState(null);
     let ImageArea = useRef(null);
     let [imageSelected, SetSelected] = useState(0);
-    let imageList =
-     [{id:'0',url:HorizontalText},
-     {id:'1012',url:'https://images.unsplash.com/photo-1644982648791-a010e61aa845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60'},
-     {id:'2023',url:VerticalText},
-     {id:'3019',url:'https://images.unsplash.com/photo-1655329943539-1297fbd0923f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60'}];
+    let imageList = props.imageData.alignment || [];
     let syncId=props.syncId;
     useEffect(()=>{
-
-       let newList= imageList.filter(d=>d.id===syncId);
+       let newList= imageList.filter(d=>d.source_segment_id===syncId);
         let numberId=imageList.indexOf(newList[0])
-     if(numberId>0&& numberId<4){
+     if(numberId>=0&& numberId<4){
         SetSelected(numberId)
      }
+
     },[syncId])
 
     const isPortrait = ({ target: img }) => {
@@ -32,11 +28,20 @@ function ThirdWindow(props) {
         setIsPortrait(tempHeight >= tempWIdth);
     };
 
+
+    function HttpUrl(data){
+        if(data.includes('http')) return data
+        return 'http://'+data;
+    }
+
+
     return (
-        <div className={styles.ThirdWindow}>
-            <div className={styles.header}>
+  
+        <div className={isPortraitImage?styles.ThirdWindowPortrait:styles.ThirdWindow}>
+            <div className={styles.header} >
                 <div className={styles.ImageTitle}>
-                    Images :{/* {isPortraitImage?"portrait":"landscape"} */}
+                    Images :
+                    {/* {isPortraitImage?"portrait":"landscape"} */}
                 </div>
                 <button
                     data-value='previousImage'
@@ -47,17 +52,23 @@ function ThirdWindow(props) {
                 >
                     {'<'}
                 </button>
-                {imageList.map((list, key) => {
+                <div className={styles.listOfImages}>
+               
+                 {imageList.map((list, key) => {
                     return (
                         <div
                             key={`eachImage-${key}`}
                             className={key===imageSelected?classnames(styles.eachImage,styles.selected): styles.eachImage}
-                            onMouseOver={() => SetSelected(key)}
+                            id={`eachImage-${key}`}
+                            onClick={() => SetSelected(key)}
                         >
-                            <img src={list.url} alt={list} />
+                            <img src={HttpUrl(list.target_image_url)} alt={list} />
                         </div>
                     );
                 })}
+            
+                </div>
+       
 
 <button
                     data-value='nextImage'
@@ -70,7 +81,7 @@ function ThirdWindow(props) {
                 </button>
                 <div
                     className={styles.closeBtn}
-                    onClick={() => props.toggleImage(false)}
+                    onClick={() => props.changeMediaSelection(null)}
                 >
                     x
                 </div>
@@ -79,7 +90,7 @@ function ThirdWindow(props) {
                 <TransformWrapper>
                     <TransformComponent>
                         <img
-                            src={imageList[imageSelected].url}
+                            src={HttpUrl(imageList[imageSelected].target_image_url)}
                             onLoad={isPortrait}
                         />
                     </TransformComponent>
@@ -90,4 +101,4 @@ function ThirdWindow(props) {
     );
 }
 
-export default ThirdWindow;
+export default Image;

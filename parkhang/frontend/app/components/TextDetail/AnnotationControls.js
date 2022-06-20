@@ -222,9 +222,13 @@ const anchorPoints = {
                     selectedLeft - width - arrow.offsetWidth + "px";
             } else {
                 // right-side of selection
-                arrow.className = styles.arrowLeft;
-                arrow.style.left = -arrow.offsetWidth + "px";
-                controls.style.left = selectedLeft + selectedWidth + arrow.offsetWidth + "px";
+               
+                // arrow.className = styles.arrowLeft;
+                // arrow.style.left = -arrow.offsetWidth + "px";
+                // controls.style.left = selectedLeft + selectedWidth + arrow.offsetWidth + "px";
+
+                controls.style.right = 0 +'px';
+                
             }
 
             arrow.style.top =

@@ -19,6 +19,7 @@ import TextSegment from "lib/TextSegment";
 import TextDetailHeadingContainer from "./TextDetailHeadingContainer";
 
 
+
 export type Props = {
     paginated: boolean,
     pageImagesVisible: boolean,
@@ -43,7 +44,9 @@ export type Props = {
     } | null,
     searchValue: string | null,
     fontSize: number,
-    isSecondWindowOpen:Boolean
+    isSecondWindowOpen:Boolean,
+    imageData:{},
+    isPanelLinked:boolean
 };
 
 let textDetailId = 0;
@@ -108,7 +111,11 @@ class TextDetail extends React.Component<Props> {
                     fontSize={this.props.fontSize}
                     isSecondWindowOpen={this.props.isSecondWindowOpen}
                     changeSyncId={this.props.changeSyncId}
-                    ></SplitTextComponent>
+                    imageData={this.props.imageData}
+                    isPanelLinked={this.props.isPanelLinked}
+                    >
+                      
+                    </SplitTextComponent>
             );
         }
 
@@ -117,7 +124,7 @@ class TextDetail extends React.Component<Props> {
     
         return (
             <div
-                style={{ height: '100%' }}
+                style={this.props.pageImagesVisible?{height:'100%'}:{ height: '55%' }}
                 className={classnames(
                     styles.textDetail,
                     utilStyles.flex,
@@ -125,7 +132,7 @@ class TextDetail extends React.Component<Props> {
                 )}
                 key={this.key}
             >
-                
+            
                 <TextDetailHeadingContainer />
                 <Loader loaded={!this.props.loading} />
                     

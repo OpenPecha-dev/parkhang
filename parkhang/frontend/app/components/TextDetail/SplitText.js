@@ -31,6 +31,7 @@ import type { AnnotationUniqueId } from "lib/Annotation";
 import Witness from "lib/Witness";
 import GraphemeSplitter from "grapheme-splitter";
 
+
 const MIN_SPACE_RIGHT =
     parseInt(controlStyles.inlineWidth) + CONTROLS_MARGIN_LEFT;
 
@@ -71,7 +72,9 @@ export type Props = {
     searchValue: string | null,
     fontSize: number,
     isSecondWindowOpen:Boolean,
-    changeSyncId:()=>void
+    changeSyncId:()=>void,
+    imageData:{},
+    isPanelLinked:Boolean
 };
 
 export default class SplitTextComponent extends React.PureComponent<Props> {
@@ -107,9 +110,11 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     calculatedImageHeight: number | null;
     changeSyncId:()=>void;
     scrolling:()=>void;
-
+    spans:Node[] | null;
+    isPanelLinked:Boolean;
     constructor(props: Props) {
         super(props);
+        this.childRef=React.createRef('0');
 
         this.list = null;
         this.splitText = null;
@@ -120,6 +125,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         this.rowRenderer = this.rowRenderer.bind(this);
         this.textListVisible = props.textListVisible;
         this.editMenuVisible =props.editMenuVisible;
+        this.isPanelLinked =props.isPanelLinked;
         this.activeSelection = null;
         this.selectedNodes = null;
         this._mouseDown = false;
@@ -134,19 +140,29 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     }
 
     scrolling(e){
-        let scrolldiv=document?.querySelector('.Text---textLine');
-        let scrollingId=scrolldiv?.firstElementChild.id.replace('s_',"");
+        let newList=[]
+        let imageIdList=[]
 
-        this.props.changeSyncId(scrollingId)
-        // if(scrolldiv){
-        //     scrolldiv.scroll({
-        //         top: e.scrollTop,//scroll to the bottom of the element
-        //         behavior: 'smooth' //auto, smooth, initial, inherit
-        //          })
-        // }
-  
+        if(!_.isEmpty(this.props.imageData)){
+            imageIdList=this.props.imageData.alignment.map(l=>l.source_segment_id) 
     }
-
+    if(this.isPanelLinked){
+        if(this.spans){
+            this.spans.forEach(span=>{
+                 let position=span.getBoundingClientRect();
+                  let spanId=span.id.replace('s_','');
+                 if(position.top>100){
+                     newList.push(spanId)
+                 }
+             })
+         
+         }
+         const intersection = newList.filter(element => imageIdList.includes(element));
+        
+         this.changeSyncId(intersection[0])
+    }
+       
+    }
    
     updateId(id){
 
@@ -655,6 +671,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     }
 
     componentDidMount() {
+
+
         this.resizeHandler = _.throttle(() => {
             this.calculatedImageHeight = null;
             this.updateList();
@@ -684,7 +702,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
     }
 
     componentDidUpdate() {
-
+        this.spans= document.querySelectorAll('.Text---textContainer span')
+        this.isPanelLinked = this.props.isPanelLinked
         if (this.selectedNodes && this.selectedNodes.length > 0) {
             const selectedNodes = this.selectedNodes;
             const selectedSegments = this.props.selectedAnnotatedSegments;
@@ -739,7 +758,6 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
             }
             this._didSetInitialScrollPosition = true;
         }
-        
     }
 
     componentWillUnmount() {
@@ -820,7 +838,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         const rowRenderer = this.rowRenderer;
         const cache = this.cache;
         const key = props.selectedWitness ? props.selectedWitness.id : 0;
-  
+     
         return (
             <div
                 className={styles.splitText}
@@ -842,8 +860,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             width={width}
                             overscanRowCount={3}
                             deferredMeasurementCache={cache}
-                            onScroll={e=>this.scrolling(e)}
-
+                            onScroll={(e)=>this.scrolling(e)}
+                           
                          
                         >
                         </List>
@@ -957,6 +975,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
         const cache = this.cache;
         const component = this;
         const pechaImageClass = props.showImages ? styles.pechaImage : null;
+        
+
         let imageUrl = '';
         if (
             props.selectedWitness &&
@@ -1030,6 +1050,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
                             </div>
                         )}
                         <Text
+                            ref={this.childRef}
                             segmentedText={props.splitText.texts[index]}
                             annotations={props.annotations}
                             activeAnnotations={props.activeAnnotations}

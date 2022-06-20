@@ -4,6 +4,9 @@ import classnames from 'classnames'
 import { connect } from "react-redux";
 import * as actions from "actions";
 import * as reducers from 'reducers'
+
+import Check from "images/checkmark.png";
+
 function About(props) {
   const [activeSection,setActiveSection]=useState('about')
   return (
@@ -32,14 +35,22 @@ function SelectedAbout(){
 
 
 function SelectedResources({props}){
-  const handleImageToggle=()=>{
-    props.toggleImage(!props.showPageImages)
-  
+  const handleImageToggle=(data)=>{
+    props.changeMediaSelection(data)
   }
   return( 
     <ul className={styles.ResourcesListed}>
-      <li onClick={handleImageToggle} style={{fontWeight:props.showPageImages && 'bold'}}>Image</li>
-      <li>Video</li>
+      <li onClick={()=>handleImageToggle('IMAGE')} 
+      >Image {
+   props.selectedMedia.isImageVisible && <img src={Check}></img>
+      }</li>
+      <li onClick={()=>handleImageToggle('VIDEO')} 
+      >Video {props.selectedMedia.isVideoVisible && <img src={Check}></img>
+  }  </li>
+      <li onClick={()=>handleImageToggle('AUDIO')} 
+   >Audio {props.selectedMedia.isAudioVisible && <img src={Check}></img>
+   }</li>
+
     
     </ul>
   )
@@ -49,18 +60,18 @@ function SelectedResources({props}){
 
 
 const mapStateToProps = (state: AppState): {} => {
-let showPageImages=reducers.showPageImages(state)
+let selectedMedia =reducers.getMediaData(state)
   return {
-    showPageImages
+    selectedMedia
   };
  
 };
 
 
 const mapDispatchToProps = (dispatch) => {
-  const toggleImage=(data)=>dispatch(actions.changedShowPageImages(data))
+  const changeMediaSelection=(data)=>dispatch(actions.mediaSelection(data))
   return {
-    toggleImage
+    changeMediaSelection
   }
 }
 

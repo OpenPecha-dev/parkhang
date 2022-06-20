@@ -775,6 +775,9 @@ function* loadedTextUrl(action: actions.TextUrlAction) {
         );
 
         const witnesses = yield call(api.fetchTextWitnesses, textData);
+        const ImageData = yield call(api.fetchImageWithTextId,textId);
+        yield put(actions.changeImageData(ImageData));
+
         yield put(actions.loadedWitnesses(textData, witnesses));
 
         let textWitnesses: Array < Witness > = [];

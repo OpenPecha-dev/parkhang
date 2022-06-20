@@ -41,7 +41,8 @@ export type UIState = {
         type:String
     },
     showSecondWindow:Boolean,
-    SyncId:Number
+    SyncId:Number,
+    isPanelLinked:boolean
 };
 
 export const initialUIState = {
@@ -70,7 +71,8 @@ export const initialUIState = {
         type:''
     },
     showSecondWindow:true,
-    SyncId:0
+    SyncId:0,
+    isPanelLinked:true
 };
 
 function loadedUserSettings(
@@ -143,6 +145,18 @@ function changeSyncId(
     state = {
         ...state,
         SyncId: action.payload
+    };
+
+    return state;
+}
+
+function changeLinkPanel(
+    state: UIState,
+    action: actions.SelectedTextAction
+): UIState {
+    state = {
+        ...state,
+        isPanelLinked: action.payload
     };
 
     return state;
@@ -486,6 +500,7 @@ uiReducers[actions.SELECTED_TEXT] = selectedText;
 uiReducers[actions.SELECTED_TEXT2] = selectedText2;
 uiReducers[actions.NO_SELECTED_TEXT] = noSelectedText;
 uiReducers[actions.SYNC_ID]=changeSyncId;
+uiReducers[actions.LINK_PANEL]=changeLinkPanel;
 uiReducers[actions.SELECTED_WITNESS] = selectedTextWitness;
 uiReducers[actions.SELECTED_WITNESS2] = selectedTextWitness2;
 uiReducers[actions.CHANGED_SEARCH_VALUE] = changedSearchValue;
@@ -583,6 +598,9 @@ export const getTextListWidth = (state: UIState): number => {
 };
 export const getSyncId = (state: UIState): number => {
     return state.SyncId;
+};
+export const isPanelLinked = (state: UIState): number => {
+    return state.isPanelLinked;
 };
 export const getTemporaryAnnotations = (
     state: UIState,

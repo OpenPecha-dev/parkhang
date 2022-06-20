@@ -6,10 +6,14 @@ import Witness from "lib/Witness";
 import type { LocalesData } from "i18n";
 
 /** Actions types **/
+//Media
+
+export const ACTIVATE_MEDIA="MEDIA_SELECTION";
+
 
 // Data
 export const SEARCH_TERM="SEARCH_TERM"; 
-
+export const LOAD_IMAGE_DATA="LOAD_IMAGE_DATA";
 export const LOAD_INITIAL_DATA = "LOAD_INITIAL_DATA";
 export const LOADING_INITIAL_DATA = "LOADING_INITIAL_DATA";
 export const LOADED_INITIAL_DATA = "LOADED_INITIAL_DATA";
@@ -107,6 +111,7 @@ export const EXPORTED_WITNESS = "text/EXPORTED_WITNESS";
 
 export const CHANGED_ACCOUNT_OVERLAY = "account/SET_ACCOUNT_OVERLAY";
 
+export const LINK_PANEL="panel/LINKED";
 export const SYNC_ID="imageSync/ID"
 // User
 export const USER_LOGGED_IN = "users/USER_LOGGED_IN";
@@ -933,6 +938,7 @@ export function searchTerm(data){
       payload:data
     }
 }
+
 export function toggleSecondWindow(data){
     return {
       type:SECOND_WINDOW,
@@ -944,5 +950,25 @@ export function changeSyncId(payload){
     return {
         type:SYNC_ID,
         payload:payload
+    }
+}
+export function changePanelLink(payload){
+    return {
+        type:LINK_PANEL,
+        payload:payload
+    }
+}
+export function changeImageData(data){
+    return {
+        type:LOAD_IMAGE_DATA,
+        data:data
+    }
+}
+
+export function mediaSelection(data){
+    const payload=data
+    return {
+        type:ACTIVATE_MEDIA,
+        payload
     }
 }

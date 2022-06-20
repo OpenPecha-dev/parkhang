@@ -5,6 +5,7 @@ import dataReducers2, * as data2 from "./data2";
 import uiReducers, * as ui from "./ui";
 import userReducers, * as user from "./user";
 import categoryReducers,* as category from './category';
+import mediaReducers,* as media from './media';
 import * as actions from "actions";
 import * as api from "api";
 import Annotation, {
@@ -47,6 +48,7 @@ export const localesReducer = createReducer(
     localesReducers
 );
 export const categoryReducer =createReducer(category.initialCategoryState,categoryReducers);
+export const mediaReducer= createReducer(media.initialMediaState,mediaReducers)
 
 export type AppState = {
     data: data.DataState,
@@ -224,6 +226,18 @@ export const isSecondWindowOpen = (state: AppState): number => {
 export const getSyncId = (state: AppState): number => {
     return ui.getSyncId(state.ui);
 };
+export const isPanelLinked = (state: AppState): number => {
+    return ui.isPanelLinked(state.ui);
+};
+
+//media
+
+export const getMediaData =(state)=>{
+    return media.getMediaData(state.media);
+}
+
+
+
 // data
 
 export const getText = (
@@ -465,7 +479,11 @@ export const getQuestions = (
 ): Question[] | null => {
     return data.getQuestions(state.data, questionId);
 }
-
+export const getImageData = (
+    state: AppState
+): Question[] | null => {
+    return data.getImageData(state.data);
+}
 //data2
 
 export const getText2 = (
@@ -504,7 +522,8 @@ export const allReducers = {
     user: userReducer,
     intl: intlReducer,
     locales: localesReducer,
-    category: categoryReducer
+    category: categoryReducer,
+    media:mediaReducer
 };
 
 const rootReducer = combineReducers(allReducers);

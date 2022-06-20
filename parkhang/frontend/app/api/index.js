@@ -109,11 +109,14 @@ export function fetchChapterDetail(){
   const  url="https://api.npoint.io/bf0ceeb6cdae14e09a17"
    
 
-    return request(GET, url);
-   
-    
+    return request(GET, url); 
 }
 
+export function fetchImageWithTextId(id=0){
+    console.log(id);
+      const  url="https://api.npoint.io/760936be2b22b5744345"
+      return request(GET, url); 
+  }
 
 
 export type SourceData = {

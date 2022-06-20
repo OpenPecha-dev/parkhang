@@ -45,9 +45,10 @@ import {
     getSelectedSearchResult,
     getSearchValue,
     getTextFontSize,
-    isSecondWindowOpen
-
+    isSecondWindowOpen,
+    getImageData
 } from "reducers";
+import * as reducers from 'reducers'
 import _ from "lodash";
 
 import AnnotatedText from "lib/AnnotatedText";
@@ -153,6 +154,7 @@ const mapStateToProps = state => {
     const loading =
         state.data.loadingWitnesses || state.data.loadingAnnotations;
     const textListVisible = getTextListVisible(state);
+    const isPanelLinked= reducers.isPanelLinked(state);
     if (loading) {
         return {
             text: null,
@@ -170,8 +172,8 @@ const mapStateToProps = state => {
             user: user,
             textListVisible,
             fontSize: constants.DEFAULT_TEXT_FONT_SIZE,
-            isSecondWindowOpen:isSecondWindowOpen(state)
-
+            isSecondWindowOpen:isSecondWindowOpen(state),
+            isPanelLinked
         };
     }
 
@@ -320,8 +322,9 @@ const mapStateToProps = state => {
         selectedSearchResult,
         searchValue,
         fontSize,
-        isSecondWindowOpen:isSecondWindowOpen(state)
-
+        isSecondWindowOpen:isSecondWindowOpen(state),
+        imageData:getImageData(state),
+        isPanelLinked
     };
 };
 
