@@ -10,7 +10,12 @@ function MediaOptions(props) {
   return (<div className={styles.MediaOption}>
    <div className={styles.header} >
                 <div className={styles.ImageTitle}>
-                    Media
+                    {
+                    props.selectedMedia.isVideoVisible && 'VIDEO'
+                    }
+                    {
+                    props.selectedMedia.isAudioVisible && 'AUDIO'
+                    }
                     {/* {isPortraitImage?"portrait":"landscape"} */}
                 </div>
                 <div

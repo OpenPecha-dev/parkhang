@@ -12,29 +12,34 @@ function TextSheet(props) {
   return (<div style={{display:'flex',width:'100%',height:props.bodyHeight,overflow:'hidden'}}>
             <TextDetailContainer />
           {props.isSecondWindowOpen && <TextDetailContainer2 />}
-          {props.selectedMedia.selectedMediaType!==null && props.isSecondWindowOpen &&  
+          {props.Media.isPanelVisible
+           && props.isSecondWindowOpen 
+           &&  
           <MediaComponent
            toggleImage={props.toggleImage}
            syncId={props.syncId}
            imageData={props.imageData}
-           selectedMedia={props.selectedMedia}
+           videoData={props.videoData}
+           selectedMedia={props.Media}
            changeMediaSelection={props.changeMediaSelection}
            />}
-         
       </div>)
 }
 
 const mapStateToProps = (state: AppState): { user: User } => {
- 
+  
   const  syncId=reducers.getSyncId(state);
   const isSecondWindowOpen=reducers.isSecondWindowOpen(state);
-  let selectedMedia =reducers.getMediaData(state)
+  let Media =reducers.getMediaData(state)
   const imageData=reducers.getImageData(state);
+  const videoData=reducers.getVideoData(state);
+
   return {
     isSecondWindowOpen,
-    selectedMedia,
+    Media,
     syncId,
-    imageData
+    imageData,
+    videoData
   };
 };
 

@@ -236,8 +236,16 @@ export const getMediaData =(state)=>{
     return media.getMediaData(state.media);
 }
 
-
-
+export const getImageData = (
+    state: AppState
+)=> {
+    return media.getImageData(state.media);
+}
+export const getVideoData = (
+    state: AppState
+)=> {
+    return media.getVideoData(state.media);
+}
 // data
 
 export const getText = (
@@ -479,11 +487,7 @@ export const getQuestions = (
 ): Question[] | null => {
     return data.getQuestions(state.data, questionId);
 }
-export const getImageData = (
-    state: AppState
-): Question[] | null => {
-    return data.getImageData(state.data);
-}
+
 //data2
 
 export const getText2 = (

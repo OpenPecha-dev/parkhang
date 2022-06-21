@@ -141,11 +141,7 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
 
     scrolling(e){
         let newList=[]
-        let imageIdList=[]
-
-        if(!_.isEmpty(this.props.imageData)){
-            imageIdList=this.props.imageData.alignment.map(l=>l.source_segment_id) 
-    }
+        
     if(this.isPanelLinked){
         if(this.spans){
             this.spans.forEach(span=>{
@@ -157,9 +153,8 @@ export default class SplitTextComponent extends React.PureComponent<Props> {
              })
          
          }
-         const intersection = newList.filter(element => imageIdList.includes(element));
-        
-         this.changeSyncId(intersection[0])
+      
+         this.changeSyncId(newList)
     }
        
     }

@@ -9,11 +9,11 @@ import type { LocalesData } from "i18n";
 //Media
 
 export const ACTIVATE_MEDIA="MEDIA_SELECTION";
-
+export const LOAD_IMAGE_DATA="LOAD_IMAGE_DATA";
+export const LOAD_VIDEO_DATA="LOAD_VIDEO_DATA";
 
 // Data
 export const SEARCH_TERM="SEARCH_TERM"; 
-export const LOAD_IMAGE_DATA="LOAD_IMAGE_DATA";
 export const LOAD_INITIAL_DATA = "LOAD_INITIAL_DATA";
 export const LOADING_INITIAL_DATA = "LOADING_INITIAL_DATA";
 export const LOADED_INITIAL_DATA = "LOADED_INITIAL_DATA";
@@ -964,6 +964,13 @@ export function changeImageData(data){
         data:data
     }
 }
+export function changeVideoData(data){
+    return {
+        type:LOAD_VIDEO_DATA,
+        data:data
+    }
+}
+
 
 export function mediaSelection(data){
     const payload=data

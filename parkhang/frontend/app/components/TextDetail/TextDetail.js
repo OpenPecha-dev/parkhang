@@ -124,7 +124,7 @@ class TextDetail extends React.Component<Props> {
     
         return (
             <div
-                style={this.props.pageImagesVisible?{height:'100%'}:{ height: '55%' }}
+                style={{height:'100%'}}
                 className={classnames(
                     styles.textDetail,
                     utilStyles.flex,

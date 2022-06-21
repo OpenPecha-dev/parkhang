@@ -775,8 +775,13 @@ function* loadedTextUrl(action: actions.TextUrlAction) {
         );
 
         const witnesses = yield call(api.fetchTextWitnesses, textData);
-        const ImageData = yield call(api.fetchImageWithTextId,textId);
+        const AlignmentData=yield call(api.fetchAlignment,textId);
+
+        const ImageData = yield call(api.fetchImageWithAlignmentId,AlignmentData.alignments.image[0].alignment);
+        const VideoData =yield call(api.fetchVideoWithAlignmentId,AlignmentData.alignments.video[0].alignment);
+    //    console.log(AlignmentData)
         yield put(actions.changeImageData(ImageData));
+        yield put(actions.changeVideoData(VideoData));
 
         yield put(actions.loadedWitnesses(textData, witnesses));
 

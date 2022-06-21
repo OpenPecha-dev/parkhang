@@ -72,8 +72,7 @@ export type DataState = {
     },
     questionsLoading: {
         [annotationId: AnnotationUniqueId]: boolean
-    },
-    imageData:{}
+    }
 };
 
 // Data
@@ -101,8 +100,7 @@ export const initialDataState: DataState = {
     loadedAnnotationOperations: false,
     searchResults: {},
     questions: {},
-    questionsLoading: {},
-    imageData:{}
+    questionsLoading: {}
 };
 
 function loadingInitialData(state: DataState): DataState {
@@ -171,13 +169,6 @@ function loadingWitnesses(state: DataState): DataState {
     };
 }
 
-function loadImageData(state: DataState,action): DataState {
-    
-    return {
-        ...state,
-        imageData:action.data
-    };
-}
 
 function loadedWitnesses(
     state: DataState,
@@ -623,8 +614,6 @@ dataReducers[actions.LOADING_WITNESSES] = loadingWitnesses;
 dataReducers[actions.LOADED_WITNESSES] = loadedWitnesses;
 dataReducers[actions.LOADING_WITNESS_ANNOTATIONS] = loadingAnnotations;
 dataReducers[actions.LOADED_WITNESS_ANNOTATIONS] = loadedAnnotations;
-dataReducers[actions.LOAD_IMAGE_DATA]=loadImageData;
-
 dataReducers[
     actions.LOADED_WITNESS_ANNOTATION_OPERATIONS
 ] = loadedAnnotationOperations;
@@ -1089,12 +1078,6 @@ export const getSearchResults = (
         return null;
     }
 };
-
-export const getImageData = (
-    state: DataState,
-)=> {
-        return state.imageData;
- };
 
 export const questionIsLoading = (
     state: DataState,

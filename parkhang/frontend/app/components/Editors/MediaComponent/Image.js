@@ -3,17 +3,26 @@ import styles from "./Image.css";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import classnames from 'classnames'
 import Draggable from 'react-draggable';
-
+import _ from "lodash";
+ 
 function Image(props) {
 
     let [isPortraitImage, setIsPortrait] = useState(null);
     let ImageArea = useRef(null);
     let [imageSelected, SetSelected] = useState(0);
-    let imageList = props.imageData.alignment || [];
+    let imageList =props.imageData.alignment || ['1'];
+    let imageIdList=[]
     let syncId=props.syncId;
+
+    if(!_.isEmpty(imageList)){
+        imageIdList=imageList.map(l=>l.source_segment) 
+}
+
+    
     useEffect(()=>{
-       let newList= imageList.filter(d=>d.source_segment_id===syncId);
-        let numberId=imageList.indexOf(newList[0])
+    let intersection = syncId.filter(element => imageIdList.includes(element));
+    let newList= imageList.filter(d=>d.source_segment===intersection[0]);
+    let numberId=imageList.indexOf(newList[0])
      if(numberId>=0&& numberId<4){
         SetSelected(numberId)
      }
@@ -29,7 +38,7 @@ function Image(props) {
     };
 
 
-    function HttpUrl(data){
+    function HttpUrl(data=''){
         if(data.includes('http')) return data
         return 'http://'+data;
     }
@@ -41,7 +50,6 @@ function Image(props) {
             <div className={styles.header} >
                 <div className={styles.ImageTitle}>
                     Images :
-                    {/* {isPortraitImage?"portrait":"landscape"} */}
                 </div>
                 <button
                     data-value='previousImage'
@@ -62,7 +70,7 @@ function Image(props) {
                             id={`eachImage-${key}`}
                             onClick={() => SetSelected(key)}
                         >
-                            <img src={HttpUrl(list.target_image_url)} alt={list} />
+                            <img src={HttpUrl(list.target_segment)} alt={list} />
                         </div>
                     );
                 })}
@@ -90,7 +98,8 @@ function Image(props) {
                 <TransformWrapper>
                     <TransformComponent>
                         <img
-                            src={HttpUrl(imageList[imageSelected].target_image_url)}
+                            src={HttpUrl(imageList[imageSelected].target_segment)||''}
+                            alt='SyncImage'
                             onLoad={isPortrait}
                         />
                     </TransformComponent>
