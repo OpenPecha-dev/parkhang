@@ -6,27 +6,30 @@ import Draggable from 'react-draggable';
 import _ from "lodash";
  
 function Image(props) {
-
-    let [isPortraitImage, setIsPortrait] = useState(null);
+    let isPortraitImage=props.isImagePortrait;
     let ImageArea = useRef(null);
     let [imageSelected, SetSelected] = useState(0);
+    let [hide, SetHide] = useState(false);
+
     let imageList =props.imageData.alignment || ['1'];
     let imageIdList=[]
     let syncId=props.syncId;
-
+    let sourceId=parseInt(props.imageData.source);
     if(!_.isEmpty(imageList)){
         imageIdList=imageList.map(l=>l.source_segment) 
 }
 
     
     useEffect(()=>{
+           if(sourceId===props.selectedText.id){
     let intersection = syncId.filter(element => imageIdList.includes(element));
+   
     let newList= imageList.filter(d=>d.source_segment===intersection[0]);
     let numberId=imageList.indexOf(newList[0])
-     if(numberId>=0&& numberId<4){
+     if(numberId>=0){
         SetSelected(numberId)
      }
-
+    }
     },[syncId])
 
     const isPortrait = ({ target: img }) => {
@@ -34,7 +37,7 @@ function Image(props) {
         let tempHeight = img.naturalHeight;
         let tempWIdth = img.naturalWidth;
         if (tempHeight === 0 || tempWIdth === 0) return null;
-        setIsPortrait(tempHeight >= tempWIdth);
+        props.changeIsImagePortrait(tempHeight >= tempWIdth);
     };
 
 
@@ -46,7 +49,7 @@ function Image(props) {
 
     return (
   
-        <div className={isPortraitImage?styles.ThirdWindowPortrait:styles.ThirdWindow}>
+        <div className={isPortraitImage?styles.ThirdWindowPortrait:hide?classnames(styles.ThirdWindow,styles.hideWindow):styles.ThirdWindow}>
             <div className={styles.header} >
                 <div className={styles.ImageTitle}>
                     Images :
@@ -92,6 +95,12 @@ function Image(props) {
                     onClick={() => props.changeMediaSelection(null)}
                 >
                     x
+                </div>
+                <div
+                    className={styles.hideButton}
+                    onClick={() =>SetHide(prev=>!prev)}
+                >
+                   {hide?'Show':'Hide'}
                 </div>
             </div>
             <div className={styles.imageRender} ref={ImageArea}>

@@ -7,7 +7,6 @@ import * as actions from "actions";
 import { LocalesList } from "reducers/locales";
 import type { AppState } from "reducers";
 import styles from "./LocaleSwitcher.css";
-import Globe from 'images/globe.svg';
 type Props = {
     locales: LocalesList,
     selectLocale: (locale: string) => void

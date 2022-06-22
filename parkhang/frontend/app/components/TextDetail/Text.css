@@ -52,6 +52,7 @@
 }
 
 .textContainer {
+    background-color: white;
     overflow: auto;
     flex-grow: 1;
     padding-left: 0;

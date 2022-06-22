@@ -3,7 +3,6 @@ import styles from './TranslateButton.css'
 import { connect } from "react-redux";
 import * as reducers from "reducers";
 import * as actions from "actions";
-import Om from 'images/om.png'
 const mapStateToProps = state => {
     const locales = reducers.getLocales(state);
     const activeLocale= reducers.getActiveLocale(state);

@@ -4,8 +4,10 @@
     height: 40px;
     width: 40px;
      margin-right:30px;
-     cursor: pointer;
-     
+     cursor: pointer;padding-top:7px ;
+}
+.langSelection:hover{
+    background-color: rgb(181, 175, 175);
 }
 .langSelection div{
     width: 100%;

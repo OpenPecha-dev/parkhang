@@ -11,9 +11,9 @@ function TextSheet(props) {
 
   return (<div style={{display:'flex',width:'100%',height:props.bodyHeight,overflow:'hidden'}}>
             <TextDetailContainer />
-          {props.isSecondWindowOpen && <TextDetailContainer2 />}
+          {props.isSecondWindowOpen  && <TextDetailContainer2 />}
           {props.Media.isPanelVisible
-           && props.isSecondWindowOpen 
+          //  && props.isSecondWindowOpen 
            &&  
           <MediaComponent
            toggleImage={props.toggleImage}
@@ -22,7 +22,10 @@ function TextSheet(props) {
            videoData={props.videoData}
            selectedMedia={props.Media}
            changeMediaSelection={props.changeMediaSelection}
-           />}
+           selectedText={props.selectedText}
+           isImagePortrait={props.isImagePortrait}
+           changeIsImagePortrait={props.changeIsImagePortrait}
+          />}
       </div>)
 }
 
@@ -33,13 +36,16 @@ const mapStateToProps = (state: AppState): { user: User } => {
   let Media =reducers.getMediaData(state)
   const imageData=reducers.getImageData(state);
   const videoData=reducers.getVideoData(state);
-
+ const selectedText=reducers.getSelectedText(state);
+ const isImagePortrait=reducers.isImagePortrait(state);
   return {
     isSecondWindowOpen,
     Media,
     syncId,
     imageData,
-    videoData
+    videoData,
+    selectedText,
+    isImagePortrait
   };
 };
 
@@ -49,11 +55,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 const { dispatch } = dispatchProps;
 const toggleImage=(data)=>dispatch(actions.changedShowPageImages(data))
 const changeMediaSelection=(data)=>dispatch(actions.mediaSelection(data));
+const changeIsImagePortrait=(payload)=>dispatch(actions.setIsImagePortrait(payload));
 return {
     ...ownProps,
     ...stateProps,
      toggleImage,
-     changeMediaSelection
+     changeMediaSelection,
+     changeIsImagePortrait
 };
 }
 const TextSheetContainer=connect(mapStateToProps, null,mergeProps)(

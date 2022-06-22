@@ -23,9 +23,18 @@
     cursor: pointer;
     margin:10px !important;
     padding:0;
+    height: 30px;
+}
+.ResourcesListed svg{
+width: 20px;
+height: 20px;
 }
 .ResourcesListed li{
     padding-top:10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap:5px;
 }
 .ResourcesListed li:hover{
     background-color:#efe;

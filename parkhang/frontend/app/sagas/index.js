@@ -307,6 +307,17 @@ function* loadInitialTextData(action: actions.TextDataAction) {
                 actions.selectedTextWitness(action.text.id, workingWitness.id)
             );
         }
+        let textId= action.text.id; 
+        const AlignmentData=yield call(api.fetchAlignment,textId);
+
+        const ImageData = yield call(api.fetchImageWithAlignmentId,AlignmentData.alignments.image[0].alignment);
+        const VideoData =yield call(api.fetchVideoWithAlignmentId,AlignmentData.alignments.video[0].alignment);
+    //    console.log(AlignmentData)
+        yield put(actions.changeImageData(ImageData));
+        yield put(actions.changeVideoData(VideoData));
+
+
+
     } catch (e) {
         console.log("FAILED loadInitialTextData %o", e);
     }

@@ -14,7 +14,7 @@
 .header {
     background-color: var(--nav-bgcolor);
     font-family: var(--fonts);
-    font-size: 30px;
+    font-size: 1.5rem;
     color:var(--nav-text);
     padding: 0px 10px 0px 20px;
     height: var(--header-height);

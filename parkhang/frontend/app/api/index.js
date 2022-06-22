@@ -106,7 +106,6 @@ export function setUserSettings(
 // Alignment + Media
 export function fetchAlignment(textId=0)
 {
-    console.log(textId);
     const url="https://api.npoint.io/f73005415ff7a7f899df";
     return request(GET, url); 
 
@@ -118,13 +117,11 @@ export function fetchChapterDetail(){
 }
 
 export function fetchImageWithAlignmentId(AlignmentId=0){
-    console.log('image :' + AlignmentId)
       const  url="https://api.npoint.io/760936be2b22b5744345"
       return request(GET, url); 
   }
 
   export function fetchVideoWithAlignmentId(AlignmentId=0){
-    console.log('video :' + AlignmentId)
       const  url="https://api.npoint.io/a52c16e1ceeb6c44add3"
       return request(GET, url); 
   }

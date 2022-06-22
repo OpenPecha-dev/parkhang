@@ -1,10 +1,16 @@
 
 @import 'css/colour.css';
 
+:root{
+    --ThirdWindowHeight:35%;
+    --headerHeight:70px;
+}
+
 .ThirdWindow{
+    transition: bottom linear 1s;
     resize: both;
     position:absolute;
-    height: 45%;
+    height: fit-content;
     width: 100%;
     z-index: 99999;
     bottom: 0;
@@ -15,7 +21,7 @@
 .ThirdWindowPortrait{
     resize: both;
     overflow: auto;
-
+    transition: none;
     position:absolute;
     height: 100%;
     width: 50%;
@@ -27,7 +33,7 @@
 .header{
     position: inherit;
     top:0;
-    height: 70px;
+    height: var(--headerHeight);
     right:0;
     left:0;
     background-color: var( --textDetail-heading);
@@ -111,4 +117,18 @@
 }
 .selected{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.hideButton{
+    position: inherit;
+    right:10px;
+    bottom:10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: black;
+    padding:2px;
+    font-size: 0.6rem;
+    text-align: center;
+}
+.hideWindow{
+    bottom:calc(var(--headerHeight)+10px- var(--ThirdWindowHeight));
 }

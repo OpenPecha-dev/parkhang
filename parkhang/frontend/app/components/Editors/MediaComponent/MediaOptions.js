@@ -25,7 +25,7 @@ function MediaOptions(props) {
                     x
                 </div>
             </div>
-            <div style={{marginTop:80}}>
+            <div style={{marginTop:80,paddingInline:10}}>
             {props.selectedMedia.isVideoVisible && 
     <VideoComponent {...props}/>
   }

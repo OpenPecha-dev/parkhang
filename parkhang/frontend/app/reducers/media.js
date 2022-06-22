@@ -7,6 +7,7 @@ export type MediaState = {
     isImageVisible:Boolean,
     isVideoVisible:Boolean,
     isAudioVisible:Boolean,
+    isImagePortrait:Boolean,
     imageData:{},
     videoData:{},
     audioData:{}
@@ -17,6 +18,7 @@ export const initialMediaState:MediaState = {
     isImageVisible:false,
     isVideoVisible:false,
     isAudioVisible:false,
+    isImagePortrait:false,
     imageData:{},
     videoData:{},
     audioData:{}
@@ -60,7 +62,12 @@ function selectMedia(state,action){
     }
 }
 
-
+function changeIsImagePortrait(state:MediaState,action):MediaState{
+    return {
+        ...state,
+        isImagePortrait:action.payload
+    }
+}
 
 function loadImageData(state: MediaState,action): MediaState {
     
@@ -81,7 +88,7 @@ const mediaReducers = {
     [actions.ACTIVATE_MEDIA]: selectMedia,
     [actions.LOAD_IMAGE_DATA]: loadImageData,
     [actions.LOAD_VIDEO_DATA]: loadVideoData,
-
+    [actions.IS_IMAGE_PORTRAIT]:changeIsImagePortrait
 
 };
 
@@ -90,6 +97,11 @@ export const getMediaData = (state) => {
     return state;
 };
 
+export const isImagePortrait = (
+    state: DataState,
+)=> {
+        return state.isImagePortrait;
+ };
 
 export const getImageData = (
     state: DataState,

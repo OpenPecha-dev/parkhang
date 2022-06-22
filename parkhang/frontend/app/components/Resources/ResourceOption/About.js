@@ -4,6 +4,9 @@ import classnames from 'classnames'
 import { connect } from "react-redux";
 import * as actions from "actions";
 import * as reducers from 'reducers'
+import ImageSvg from 'images/image.svg'
+import VideoSvg from 'images/video.svg'
+import AudioSvg from 'images/audio.svg'
 
 import Check from "images/checkmark.png";
 
@@ -41,14 +44,17 @@ function SelectedResources({props}){
   return( 
     <ul className={styles.ResourcesListed}>
       <li onClick={()=>handleImageToggle('IMAGE')} 
-      >Image {
+      >
+      <ImageSvg/>  Image {
    props.selectedMedia.isImageVisible && <img src={Check}></img>
       }</li>
       <li onClick={()=>handleImageToggle('VIDEO')} 
-      >Video {props.selectedMedia.isVideoVisible && <img src={Check}></img>
+      >
+       <VideoSvg/>Video {props.selectedMedia.isVideoVisible && <img src={Check}></img>
   }  </li>
       <li onClick={()=>handleImageToggle('AUDIO')} 
-   >Audio {props.selectedMedia.isAudioVisible && <img src={Check}></img>
+   >
+    <AudioSvg/>Audio {props.selectedMedia.isAudioVisible && <img src={Check}></img>
    }</li>
 
     

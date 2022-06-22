@@ -11,7 +11,7 @@ import type { LocalesData } from "i18n";
 export const ACTIVATE_MEDIA="MEDIA_SELECTION";
 export const LOAD_IMAGE_DATA="LOAD_IMAGE_DATA";
 export const LOAD_VIDEO_DATA="LOAD_VIDEO_DATA";
-
+export const IS_IMAGE_PORTRAIT="IS_IMAGE_PORTRAIT"
 // Data
 export const SEARCH_TERM="SEARCH_TERM"; 
 export const LOAD_INITIAL_DATA = "LOAD_INITIAL_DATA";
@@ -976,6 +976,13 @@ export function mediaSelection(data){
     const payload=data
     return {
         type:ACTIVATE_MEDIA,
+        payload
+    }
+}
+
+export function setIsImagePortrait(payload){
+    return {
+        type:IS_IMAGE_PORTRAIT,
         payload
     }
 }

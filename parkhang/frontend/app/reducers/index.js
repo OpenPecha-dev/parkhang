@@ -246,6 +246,11 @@ export const getVideoData = (
 )=> {
     return media.getVideoData(state.media);
 }
+export const isImagePortrait = (
+    state: AppState
+)=> {
+    return media.isImagePortrait(state.media);
+}
 // data
 
 export const getText = (
