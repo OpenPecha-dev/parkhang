@@ -7,11 +7,11 @@ import * as reducers from 'reducers'
 import ImageSvg from 'images/image.svg'
 import VideoSvg from 'images/video.svg'
 import AudioSvg from 'images/audio.svg'
-
+import useLocalStorage from '../../../bodyComponent/utility/useLocalStorage';
 import Check from "images/checkmark.png";
 
 function About(props) {
-  const [activeSection,setActiveSection]=useState('about')
+  const [activeSection,setActiveSection]=useLocalStorage('ResourceSelection','about')
   return (
    <>
    <div className={styles.Selection}>
@@ -38,27 +38,53 @@ function SelectedAbout(){
 
 
 function SelectedResources({props}){
-  const handleImageToggle=(data)=>{
+  const handleMediaToggle=(data)=>{
     props.changeMediaSelection(data)
   }
   return( 
+    <>
     <ul className={styles.ResourcesListed}>
-      <li onClick={()=>handleImageToggle('IMAGE')} 
+      <li onClick={()=>handleMediaToggle('IMAGE')} 
       >
       <ImageSvg/>  Image {
    props.selectedMedia.isImageVisible && <img src={Check}></img>
       }</li>
-      <li onClick={()=>handleImageToggle('VIDEO')} 
+      <li onClick={()=>handleMediaToggle('VIDEO')} 
       >
        <VideoSvg/>Video {props.selectedMedia.isVideoVisible && <img src={Check}></img>
   }  </li>
-      <li onClick={()=>handleImageToggle('AUDIO')} 
+      <li onClick={()=>handleMediaToggle('AUDIO')} 
    >
     <AudioSvg/>Audio {props.selectedMedia.isAudioVisible && <img src={Check}></img>
    }</li>
 
-    
     </ul>
+<h2>Citation Lists:</h2>    
+    <details>
+  <summary>citation 1</summary>
+  <p>
+    
+    this is description for citation
+
+  </p>
+</details> 
+<details>
+  <summary>citation 2</summary>
+  <p>
+    
+    this is description for citation
+
+  </p>
+</details>    <details>
+  <summary>citation 3</summary>
+  <p>
+    
+    this is description for citation
+
+  </p>
+</details> 
+
+</>
   )
 }
 

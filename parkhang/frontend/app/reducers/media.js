@@ -38,21 +38,36 @@ function selectMedia(state,action){
 
 
     switch (action.payload){
-        case 'IMAGE' :  return {
+        case 'IMAGE' : 
+        if(state.isImageVisible===true){
+            return {...state,isImageVisible:false,
+                isPanelVisible:false,
+            }
+        }        
+        return {
             ...state,
             isPanelVisible:true,
             isVideoVisible:false,
             isAudioVisible:false,
             isImageVisible:true
         }
-        case 'VIDEO': return {
+        case 'VIDEO': 
+        if(state.isVideoVisible===true){
+            return {...state,isVideoVisible:false,
+                isPanelVisible:false,
+            }
+        }  return {
             ...state,
             isPanelVisible:true,
             isVideoVisible:true,
             isAudioVisible:false,
             isImageVisible:false
         }
-        case 'AUDIO':   return {
+        case 'AUDIO':   if(state.isAudioVisible===true){
+            return {...state,isAudioVisible:false,
+                isPanelVisible:false,
+            }
+        }    return {
             ...state,
             isVideoVisible:false,
             isPanelVisible:true,

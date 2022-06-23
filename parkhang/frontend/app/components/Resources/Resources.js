@@ -66,12 +66,12 @@ const image_location =lopenlingLogo
           {selectedOption ===3 && <Index.Question/>}
         </div>
         <div className={styles.ResourceFooter}>
-            <NavLink to='/'>
+            <a href='http://www.lopenling.org'>
                <div  className={styles.logo}>
                    <img src={image_location} height="30" />
               </div>
             
-           </NavLink> 
+           </a> 
         </div>
     </div>
   )

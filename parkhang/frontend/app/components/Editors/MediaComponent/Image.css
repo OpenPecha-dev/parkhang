@@ -7,7 +7,7 @@
 }
 
 .ThirdWindow{
-    transition: bottom linear 1s;
+    transition: 0.5s all linear;
     resize: both;
     position:absolute;
     height: fit-content;
@@ -129,6 +129,8 @@
     font-size: 0.6rem;
     text-align: center;
 }
-.hideWindow{
-    bottom:calc(var(--headerHeight)+10px- var(--ThirdWindowHeight));
+.hideWindow{  
+  transition: all linear 1s;
+    transform: translateY(100%);
+    bottom:var(--headerHeight);
 }

@@ -21,7 +21,7 @@ function Image(props) {
 
     
     useEffect(()=>{
-           if(sourceId===props.selectedText.id){
+        //    if(sourceId===props.selectedText.id){
     let intersection = syncId.filter(element => imageIdList.includes(element));
    
     let newList= imageList.filter(d=>d.source_segment===intersection[0]);
@@ -29,7 +29,7 @@ function Image(props) {
      if(numberId>=0){
         SetSelected(numberId)
      }
-    }
+    // }
     },[syncId])
 
     const isPortrait = ({ target: img }) => {
@@ -96,12 +96,14 @@ function Image(props) {
                 >
                     x
                 </div>
+
+                {!isPortraitImage &&
                 <div
                     className={styles.hideButton}
                     onClick={() =>SetHide(prev=>!prev)}
                 >
-                   {hide?'Show':'Hide'}
-                </div>
+                   { hide?'Show':'Hide'}
+                </div>}
             </div>
             <div className={styles.imageRender} ref={ImageArea}>
                 <TransformWrapper>

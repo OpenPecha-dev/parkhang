@@ -32,12 +32,12 @@ function Video(props) {
 }
     useEffect(() => {
         
-        if(sourceId===props.selectedText.id)
-        {
+        // if(sourceId===props.selectedText.id)
+        // {
             let intersection = syncId.filter(element => VideoIdList.includes(element));
             newList= VideoData.filter(d=>d.source_segment===intersection[0]);
             jumpTime(newList[0]?.target_segment.start)
-        }
+        // }
 
     }, [syncId]);
 
