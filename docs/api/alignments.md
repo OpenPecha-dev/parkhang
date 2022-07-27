@@ -24,21 +24,21 @@ Text All Alignments API
   "alignments": {
     "text": [
       { 
-        "witness": "111",
+        "soruce": "111",
         "target": "111",
         "alignment": "111"
       }
     ],
     "image": [
       {
-        "witness": "111",
+        "source": "111",
         "target": "111",
         "alignment": "222"
       }
     ],
     "video": [
       {
-        "witness": "111",
+        "source": "111",
         "target": "111",
         "alignment": "333"
       }

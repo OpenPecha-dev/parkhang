@@ -4,5 +4,6 @@ Documentation for Lopening API
 
 ### Table Of Content
 - [Alignments](/Lopenling-App/api/alignments)
+- [Featured Texts](/Lopenling-App/api/featured-texts)
 - Discourse
 - Texts
