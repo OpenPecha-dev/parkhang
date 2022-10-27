@@ -865,7 +865,7 @@ padding:2px;
 }
 
 .Text---text {
-    font-size: 24px;
+    font-size: 16px;
     line-height: 1.8;
     padding: 0 20px;
     font-family: "Tibetan",
@@ -882,12 +882,6 @@ padding:2px;
         flex-wrap: wrap;
     /* background-color: var(--text-bg); */
 
-}
-
-.Text---syncIdClass {
-    font-weight: 900;
-    font-size: 10px;
-    cursor: pointer;
 }
 
 .Text---textFirstRow {
@@ -1225,11 +1219,11 @@ background-color: rgba(190, 216, 248, 0.50196);
 
 .SplitText---anonymousMessage {
     background: rgba(175, 175, 175, .9);
-    color: #fff;
-    letter-spacing: 3px;
     font-weight: bold;
     font-size: 12.8px;
     font-size: 0.8rem;
+    padding-inline: 2px;
+    text-align: center;
 }
 
 .SplitText---anonymousMessage a:link,
@@ -1268,9 +1262,7 @@ blockquote {
     -webkit-box-flex: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
-    font-size: 24px;
     width: 100%; 
-
 }
 
 .SplitText---splitText * {
@@ -1968,11 +1960,11 @@ font-size: 0.7rem;
 
 .AnnotationControls---anonymousMessage {
     background: rgba(175, 175, 175, .9);
-    color: #fff;
-    letter-spacing: 3px;
     font-weight: bold;
     font-size: 12.8px;
     font-size: 0.8rem;
+    padding-inline: 2px;
+    text-align: center;
 }
 
 .AnnotationControls---anonymousMessage a:link,
@@ -2558,4 +2550,4 @@ blockquote {
     display: flex;
 }
 
-/*# sourceMappingURL=3.styles-a1b736b7bd5b98c4c278.css.map*/
+/*# sourceMappingURL=3.styles-1e37671beeb963435c39.css.map*/

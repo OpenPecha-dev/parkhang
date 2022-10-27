@@ -126,7 +126,6 @@ class TextDetail extends React.Component<Props> {
             } else {
                 splitter = lengthSplitter(1000, /^།[\s]+(?!།[\s]+)/, 2, 5);
             }
-
             splitText = new SplitText(this.props.annotatedText, splitter);
 
             inlineControls = true;

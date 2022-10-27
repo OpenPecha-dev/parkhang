@@ -7,7 +7,7 @@ import SegmentedText from "lib/SegmentedText";
 import TextSegment from "lib/TextSegment";
 import Witness from "lib/Witness";
 import Text from "lib/Text";
-import _ from "lodash";
+import _, { update } from "lodash";
 
 export const BASE_ANNOTATION_ID = -1;
 export const WORKING_VERSION_ANNOTATION_ID = -2;
@@ -386,7 +386,7 @@ export default class AnnotatedText {
             }, "");
         }
         if (origLength !== content.length) {
-            console.warn(
+            console.log(
                 "Base annotation has different content length to length"
             );
         }
@@ -621,7 +621,6 @@ export default class AnnotatedText {
                 }
             }
         }
-
         return segments;
     }
 
@@ -637,6 +636,7 @@ export default class AnnotatedText {
         let segments = [];
         if (this.segmenter !== null && !deleted) {
             let annotationSegments = this.segmenter(annotation.content);
+
             let annoSegStart = start;
             for (let j = 0; j < annotationSegments.length; j++) {
                 let annotationSegment = annotationSegments[j];
@@ -691,7 +691,7 @@ export default class AnnotatedText {
         annotations: Annotation[]
     ): SegmentedText {
         const segments = text.segments;
-        let newSegments = segments.slice();
+        const newSegments = segments.slice();
         let replacedSegments = {};
 
         for (let i = 0, len = annotations.length; i < len; i++) {
@@ -805,7 +805,6 @@ export default class AnnotatedText {
         }
         this._generatedTextLength = currentPosition;
         this._originalTextLength = originalPosition;
-
         return new SegmentedText(updatedSegments);
     }
 

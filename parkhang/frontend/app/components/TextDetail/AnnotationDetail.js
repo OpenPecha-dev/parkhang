@@ -56,7 +56,7 @@ const AnnotationDetail = (props: Props) => {
             <Box
                 className={styles.annotationHeader}
                 sx={{
-                    bgcolor: "links.main",
+                    bgcolor: "secondary.light",
                     color: "texts.main",
                 }}
             >

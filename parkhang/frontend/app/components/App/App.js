@@ -36,9 +36,10 @@ const App = (props: Props) => {
     } else if (props.page === "Editors") {
         setTitle(SelectedText?.name + "-" + props.title);
     }
-
+    const favicon = React.useMemo(() => <Favicon url={favimage} />, []);
     return (
         <ThemeProvider theme={theme}>
+            {favicon}
             <Box
                 sx={{
                     bgcolor: "background.default",
@@ -50,7 +51,6 @@ const App = (props: Props) => {
                     utilStyles.flexColumn
                 )}
             >
-                <Favicon url={favimage} />
                 <Suspense
                     fallback={
                         <Box

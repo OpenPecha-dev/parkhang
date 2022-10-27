@@ -3,67 +3,63 @@ import SegmentedText from "./SegmentedText";
 import TextSegment from "./TextSegment";
 
 export default function segmentTibetanText(text: string): SegmentedText {
-    const breaks = "།།";
-    const spaces = "་་ \n";
-
-    let segments = [];
+    const dot = "་";
+    const breaker = "། །";
+    var symbol = "།";
     let currentSegment = "";
     let currentStart = 0;
-    let inBreak = false;
-    let inSpace = false;
     let count = 0;
-    for (let char of text) {
-        if (breaks.includes(char)) {
-            if (count > 0) {
-                const newSegment = new TextSegment(
-                    currentStart,
-                    currentSegment
-                );
-                segments.push(newSegment);
-            }
-            inBreak = true;
-            inSpace = false;
-            currentSegment = char;
-            currentStart = count;
-        } else if (spaces.includes(char)) {
-            if (inSpace) {
-                currentSegment += char;
-            } else {
-                if (count > 0) {
-                    const newSegment = new TextSegment(
-                        currentStart,
-                        currentSegment
-                    );
-                    segments.push(newSegment);
-                }
+    let textSplitData = text.split(dot);
+    let r = [];
+    let segments = [];
+    textSplitData.forEach((text, index) => {
+        count = index;
+        var temp = text;
+        if (text.includes(breaker)) {
+            r = text.split(breaker);
+            r[2] = r[1];
+            r[1] = breaker;
+            if (r.length > 1) {
+                r.forEach((l, index) => {
+                    if (index === 2) {
+                        var currentSegment = l;
+                        var newSegment = new TextSegment(
+                            currentStart,
+                            currentSegment
+                        );
+                        segments.push(newSegment);
+                        currentStart += currentSegment.length;
 
-                inBreak = false;
-                inSpace = true;
-                currentSegment = char;
-                currentStart = count;
+                        if (!symbol.includes(currentSegment)) {
+                            newSegment = new TextSegment(currentStart, dot);
+                            segments.push(newSegment);
+                            currentStart += 1;
+                        }
+                    } else {
+                        var currentSegment = l;
+                        const newSegment = new TextSegment(
+                            currentStart,
+                            currentSegment
+                        );
+
+                        segments.push(newSegment);
+                        currentStart += currentSegment.length;
+                    }
+                });
             }
         } else {
-            if (inSpace || inBreak) {
-                if (count > 0) {
-                    const newSegment = new TextSegment(
-                        currentStart,
-                        currentSegment
-                    );
-
-                    segments.push(newSegment);
-                }
-                inBreak = false;
-                inSpace = false;
-                currentSegment = char;
-                currentStart = count;
-            } else {
-                currentSegment += char;
+            var currentSegment = temp;
+            var newSegment = new TextSegment(currentStart, currentSegment);
+            segments.push(newSegment);
+            currentStart += currentSegment.length;
+            if (textSplitData.length > 100) {
+                //only add dot on first text load
+                newSegment = new TextSegment(currentStart, dot);
+                segments.push(newSegment);
+                currentStart += 1;
             }
         }
-
-        count++;
-    }
-
+    });
     if (currentSegment) {
         const newSegment = new TextSegment(currentStart, currentSegment);
         segments.push(newSegment);

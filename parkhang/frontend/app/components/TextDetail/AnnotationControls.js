@@ -427,22 +427,14 @@ class AnnotationControls extends React.Component<Props> {
                 // NOTE: FormattedMessage cannot take a child when using
                 // the values option, so need to wrap it in a div
                 anonymousUserMessage = (
-                    <div
-                        className={styles.anonymousMessage}
-                        style={{
-                            position: "relative",
-                            width: "fit-content",
-                            border: "1px solid gray",
-                            paddingInline: 10,
-                        }}
-                    >
+                    <div className={styles.anonymousMessage}>
                         <FormattedMessage
                             id="annotations.loginMessage"
                             values={{
                                 loginLink: (
-                                    <>
+                                    <a href="/accounts/login/">
                                         <FormattedMessage id="annotations.loginLink" />
-                                    </>
+                                    </a>
                                 ),
                             }}
                         />
@@ -645,6 +637,7 @@ class AnnotationControls extends React.Component<Props> {
         if (anonymousUserMessage || breakSelected) showHeader = false;
         const annotationBody = ReactDom.createPortal(
             <div className={styles.annotationContent}>
+                {anonymousUserMessage}
                 {nothingSelected}
                 {!breakSelected && annotations}
                 {pageBreaksButton}
@@ -667,7 +660,6 @@ class AnnotationControls extends React.Component<Props> {
                 }
                 id="annotation-control"
             >
-                {anonymousUserMessage}
                 {showHeader && (
                     <AnnotationControlsHeader
                         addPageBreak={

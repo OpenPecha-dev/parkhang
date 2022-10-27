@@ -261,10 +261,14 @@ const mapStateToProps = (state) => {
             }
         }
         if (selectedWitness && baseWitness && annotatedText) {
-            let witnessPageBreaks =
-                annotatedText.getAnnotationsOfType(
-                    ANNOTATION_TYPES.pageBreak
-                ) || {};
+            var selectedWitnessAnnotaion =
+                state.data.witnessAnnotationsById[selectedWitness.id];
+            let newArray = Object.values(selectedWitnessAnnotaion);
+            let witnessPageBreaks = newArray;
+            // annotatedText.getAnnotationsOfType(
+            //     ANNOTATION_TYPES.pageBreak
+            // ) || {};
+
             let basePageBreaks = null;
             if (selectedWitness.id !== baseWitness.id) {
                 basePageBreaks = getAnnotationsForWitnessId(
@@ -274,7 +278,6 @@ const mapStateToProps = (state) => {
                     baseWitness.id
                 );
             }
-
             pageBreaks = getPageBreaks(witnessPageBreaks, basePageBreaks);
 
             for (let i = 0, len = pageBreaks.length; i < len; i++) {

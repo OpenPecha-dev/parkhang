@@ -187,7 +187,6 @@ class Text extends React.Component<Props, State> {
 
     generateHtml(renderProps: Props, renderState: State): { __html: string } {
         let segments = renderState.segmentedText.segments;
-
         let textLineClass = styles.textLine;
         let segmentHTML = '<p class="' + textLineClass + '">';
         if (segments.length === 0) return { __html: segmentHTML };

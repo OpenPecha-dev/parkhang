@@ -19,6 +19,18 @@ const theme = (mode) =>
             texts: {
                 main: mode !== "dark" ? "#303030" : "#d3d3d3",
             },
+            primary: {
+                light: "#757ce8",
+                main: "#3f50b5",
+                dark: "#002884",
+                contrastText: "#fff",
+            },
+            secondary: {
+                light: "#fffde7",
+                main: "#f44336",
+                dark: "#ba000d",
+                contrastText: "#000",
+            },
         },
         typography: {
             button: {
