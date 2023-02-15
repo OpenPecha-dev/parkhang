@@ -8,7 +8,7 @@ redis==4.2.2  # https://github.com/redis/redis-py
 
 # Django
 # -----------------------------------------------------------------------
-Django==3.2.12
+Django==3.2.18
 django-environ==0.8.1  # https://github.com/joke2k/django-environ
 django-webpack-loader==1.4.1
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
